@@ -18,7 +18,7 @@
               type="number"
               outlined
               bottom-slots
-              v-model="newAddCartons"
+              v-model="number"
               placeholder="Enter cartons purchased"
             >
             </q-input>
