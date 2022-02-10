@@ -12,26 +12,34 @@
               *Redemption is determined by purchases <br />
               within a single receipt
             </div>
-            <br />
-            <q-input
-              min="0"
-              type="number"
-              outlined
-              bottom-slots
-              v-model="number"
-              placeholder="Enter cartons purchased"
-            >
-            </q-input>
 
-            <div>
-              <q-btn
-                :disable="!newAddCartons"
-                push
-                color="primary"
-                label="Submit"
-                class="full-width"
-              />
-            </div>
+            <br />
+
+            <q-form @submit="onSubmit">
+              <q-input
+                min="0"
+                name="number"
+                type="number"
+                outlined
+                bottom-slots
+                v-model="newAddCartons"
+                placeholder="Enter cartons purchased"
+                clearable
+              >
+              </q-input>
+
+              <div>
+                <q-btn
+                  @click="addNewCarton"
+                  :disable="!newAddCartons"
+                  push
+                  color="primary"
+                  label="Submit"
+                  class="full-width"
+                  type="submit"
+                />
+              </div>
+            </q-form>
           </div>
         </q-card-section>
       </q-card>
@@ -49,6 +57,12 @@ export default defineComponent({
     return {
       newAddCartons: "",
     };
+  },
+
+  methods: {
+    addNewCarton() {
+      console.log("addNewCarton");
+    },
   },
 });
 </script>
