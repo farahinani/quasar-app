@@ -3,7 +3,7 @@
     <q-header elevated class="bg-primary text-white">
       <q-toolbar>
         <q-toolbar-title class="text-weight-bold">
-          Fresh Florida test deploy
+          Fresh Florida test
         </q-toolbar-title>
       </q-toolbar>
     </q-header>
