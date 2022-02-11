@@ -8,6 +8,7 @@
               Please enter how many <br />cartons you have purchased <br />in
               your receipt*.
             </div>
+
             <div class="text-subtitle1 text-center">
               *Redemption is determined by purchases <br />
               within a single receipt
@@ -15,26 +16,30 @@
 
             <br />
 
-            <q-input
-              min="0"
-              type="number"
-              outlined
-              bottom-slots
-              v-model="newAddCartons"
-              placeholder="Enter cartons purchased"
-            >
-            </q-input>
+            <q-form @submit="submitForm">
+              <q-input
+                min="0"
+                type="number"
+                outlined
+                bottom-slots
+                v-model="newAddCartons"
+                placeholder="Enter cartons purchased"
+                :rules="[(val) => !!val || 'Please enter your carton']"
+              >
+              </q-input>
 
-            <div>
-              <q-btn
-                :disable="!newAddCartons"
-                push
-                color="primary"
-                label="Submit"
-                class="full-width"
-                type="submit"
-              />
-            </div>
+              <div>
+                <q-btn
+                  :disable="!newAddCartons"
+                  push
+                  color="primary"
+                  label="Submit"
+                  class="full-width"
+                  type="submit"
+                  v-model="formData.numberInput"
+                />
+              </div>
+            </q-form>
           </div>
         </q-card-section>
       </q-card>
@@ -44,19 +49,26 @@
 
 <script>
 import { defineComponent } from "vue";
+import { ref } from "vue";
 
 export default defineComponent({
   name: "PageHome",
 
   data() {
     return {
-      newAddCartons: "",
+      newAddCartons: ref(null),
+      formData: {
+        numberInput: null,
+      },
     };
   },
 
   methods: {
     addNewCarton() {
       console.log("addNewCarton");
+    },
+    submitForm() {
+      alert("your no is: " + this.formData.numberInput);
     },
   },
 });
