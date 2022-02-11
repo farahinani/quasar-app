@@ -60,6 +60,7 @@ export default defineComponent({
       formData: {
         numberInput: null,
       },
+      count: 1,
     };
   },
 

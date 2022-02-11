@@ -6,6 +6,7 @@ const routes = [
     children: [
       { path: '', component: () => import('src/pages/PageIntro.vue') },
       { path: '/home', component: () => import('src/pages/PageHome.vue') },
+      { path: '/home/shake-and-win', component: () => import('src/pages/PageShakeWin.vue') }
     ]
   },
 
