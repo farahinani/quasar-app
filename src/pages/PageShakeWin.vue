@@ -12,7 +12,7 @@
             <div>
               <q-btn
                 color="primary"
-                label="Get Picture"
+                label="ask permission"
                 @click="captureImage"
               />
 
