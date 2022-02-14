@@ -9,7 +9,7 @@
               <q-badge color="teal-10" align="middle"> 1/2 </q-badge>
             </div>
 
-            <q-btn color="primary" label="Get Permission" @click="click" />
+            <q-btn color="primary" label="Get Permission" @click="myButton" />
           </div>
         </q-card-section>
       </q-card>
