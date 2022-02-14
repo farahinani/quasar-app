@@ -9,7 +9,7 @@
               <q-badge color="teal-10" align="middle"> 1/2 </q-badge>
             </div>
 
-            <q-btn color="primary" label="Get Permission" @click="myButton" />
+            <q-btn color="primary" label="Get Permission" @click="onClick" />
           </div>
         </q-card-section>
       </q-card>
@@ -26,31 +26,20 @@ export default defineComponent({
   name: "PageShakeWin",
 
   setup() {
-    myButton.addEventListener("click", async () => {
-      try {
-        await DeviceMotionEvent.requestPermission();
-      } catch (e) {
-        // Handle error
-        return;
+    function onClick() {
+      // feature detect
+      if (typeof DeviceMotionEvent.requestPermission === "function") {
+        DeviceMotionEvent.requestPermission()
+          .then((permissionState) => {
+            if (permissionState === "granted") {
+              window.addEventListener("devicemotion", () => {});
+            }
+          })
+          .catch(console.error);
+      } else {
+        // handle regular non iOS 13+ devices
       }
-
-      // Once the user approves, can start listening:
-      accelHandler = await Motion.addListener("accel", (event) => {
-        console.log("Device motion event:", event);
-      });
-    });
-
-    // Stop the acceleration listener
-    const stopAcceleration = () => {
-      if (accelHandler) {
-        accelHandler.remove();
-      }
-    };
-
-    // Remove all listeners
-    const removeListeners = () => {
-      Motion.removeAllListeners();
-    };
+    }
   },
 });
 </script>
