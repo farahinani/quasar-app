@@ -10,13 +10,8 @@
             </div>
 
             <div>
-              <q-btn
-                color="primary"
-                label="Get Picture"
-                @click="captureImage"
-              />
-
-              <img :src="imageSrc" />
+              <div>Model: {{ model }}</div>
+              <div>Manufacturer: {{ manufacturer }}</div>
             </div>
           </div>
         </q-card-section>
@@ -27,33 +22,38 @@
 
 <script>
 import { defineComponent } from "vue";
-import { ref } from "vue";
-import { Camera, CameraResultType } from "@capacitor/camera";
+import { PluginListenerHandle } from "@capacitor/core";
+import { Motion } from "@capacitor/motion";
 
 export default defineComponent({
   name: "PageShakeWin",
 
   setup() {
-    const imageSrc = ref("");
+    myButton.addEventListener("click", async () => {
+      try {
+        await DeviceMotionEvent.requestPermission();
+      } catch (e) {
+        //handle error
+        return;
+      }
 
-    async function captureImage() {
-      const image = await Camera.getPhoto({
-        quality: 90,
-        allowEditing: true,
-        resultType: CameraResultType.Uri,
+      //once the user approve can start listening
+      accelHandler = await Motion.addListener("accel", (event) => {
+        console.log("Device motion event:", event);
       });
 
-      // The result will vary on the value of the resultType option.
-      // CameraResultType.Uri - Get the result from image.webPath
-      // CameraResultType.Base64 - Get the result from image.base64String
-      // CameraResultType.DataUrl - Get the result from image.dataUrl
-      imageSrc.value = image.webPath;
-    }
+      //stop the acceleration listener
+      const stopAcceleration = () => {
+        if (accelHandler) {
+          accelHandler.remove();
+        }
+      };
 
-    return {
-      imageSrc,
-      captureImage,
-    };
+      //remove all listeners
+      const removeListeners = () => {
+        Motion.removeAllListeners();
+      };
+    });
   },
 });
 </script>
