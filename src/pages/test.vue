@@ -1,62 +1,40 @@
 <template>
   <div>
-    <q-btn color="primary" label="Get permission" @click="firstClick" />
+    <q-btn color="primary" label="Get Picture" @click="captureImage" />
+    <img :src="imageSrc" />
   </div>
 </template>
 
 <script>
 import { defineComponent } from "vue";
+import { Camera, CameraResultType } from "@capacitor/camera";
 
 export default defineComponent({
   name: "test",
 
   setup() {
-    function requestDeviceMotion(callback) {
-      if (window.DeviceMotionEvent == null) {
-        callback(new Error("DeviceMotion is not supported."));
-      } else if (DeviceMotionEvent.requestPermission) {
-        DeviceMotionEvent.requestPermission().then(
-          function (state) {
-            if (state == "granted") {
-              callback(null);
-            } else callback(new Error("Permission denied by user"));
-          },
-          function (err) {
-            callback(err);
-          }
-        );
-      } else {
-        // no need for permission
-        callback(null);
-      }
+    const imageSrc = ref("");
+
+    async function captureImage() {
+      const image = await Camera.getPhoto({
+        quality: 90,
+        allowEditing: true,
+        resultType: CameraResultType.Uri,
+      });
+
+      // The result will vary on the value of the resultType option.
+      // CameraResultType.Uri - Get the result from image.webPath
+      // CameraResultType.Base64 - Get the result from image.base64String
+      // CameraResultType.DataUrl - Get the result from image.dataUrl
+      imageSrc.value = image.webPath;
     }
 
-    function firstClick() {
-      requestDeviceMotion(function (err) {
-        if (err == null) {
-          window.removeEventListener("click", firstClick);
-          window.removeEventListener("touchend", firstClick);
-          window.addEventListener("devicemotion", function (e) {
-            // access e.acceleration, etc.
-          });
-        } else {
-          // failed; a JS error object is stored in `err`
-        }
-      });
-    }
-    window.addEventListener("click", firstClick);
-    window.addEventListener("touchend", firstClick);
+    return {
+      imageSrc,
+      captureImage,
+    };
   },
 });
 </script>
 
-<style>
-.indicatorDot {
-  width: 30px;
-  height: 30px;
-  background-color: #ffab56;
-  border-radius: 50%;
-  position: fixed;
-}
-</style>
 
