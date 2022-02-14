@@ -8,6 +8,16 @@
               You have 2 tries
               <q-badge color="teal-10" align="middle"> 1/2 </q-badge>
             </div>
+
+            <div>
+              <q-btn
+                color="primary"
+                label="Get Picture"
+                @click="captureImage"
+              />
+
+              <img :src="imageSrc" />
+            </div>
           </div>
         </q-card-section>
       </q-card>
@@ -17,29 +27,33 @@
 
 <script>
 import { defineComponent } from "vue";
+import { ref } from "vue";
+import { Camera, CameraResultType } from "@capacitor/camera";
 
 export default defineComponent({
   name: "PageShakeWin",
 
-  methods: {
-    function() {
-      //create a new instance of shake.js.
-      var myShakeEvent = new Shake({
-        threshold: 2,
+  setup() {
+    const imageSrc = ref("");
+
+    async function captureImage() {
+      const image = await Camera.getPhoto({
+        quality: 90,
+        allowEditing: true,
+        resultType: CameraResultType.Uri,
       });
 
-      // start listening to device motion
-      myShakeEvent.start();
+      // The result will vary on the value of the resultType option.
+      // CameraResultType.Uri - Get the result from image.webPath
+      // CameraResultType.Base64 - Get the result from image.base64String
+      // CameraResultType.DataUrl - Get the result from image.dataUrl
+      imageSrc.value = image.webPath;
+    }
 
-      // register a shake event
-      window.addEventListener("shake", shakeEventDidOccur, false);
-
-      //shake event callback
-      function shakeEventDidOccur() {
-        //put your own code here etc.
-        alert("Shake!");
-      }
-    },
+    return {
+      imageSrc,
+      captureImage,
+    };
   },
 });
 </script>
