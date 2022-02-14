@@ -1,12 +1,7 @@
 <template>
-  <q-page class="flex flex-center">
-    <div class="q-pa-md row items-start q-gutter-md">
-      <button id="accelPermsButton" style="height: 50px" onclick="getAccel()">
-        <h1>Get Accelerometer Permissions</h1>
-      </button>
-      <div class="indicatorDot" style="left: 30%; top: 30%"></div>
-    </div>
-  </q-page>
+  <div>
+    <q-btn color="primary" label="Get permission" @click="firstClick" />
+  </div>
 </template>
 
 <script>
@@ -16,47 +11,41 @@ export default defineComponent({
   name: "test",
 
   setup() {
-    var px = 50; // Position x and y
-    var py = 50;
-    var vx = 0.0; // Velocity x and y
-    var vy = 0.0;
-    var updateRate = 1 / 60; // Sensor refresh rate
+    function requestDeviceMotion(callback) {
+      if (window.DeviceMotionEvent == null) {
+        callback(new Error("DeviceMotion is not supported."));
+      } else if (DeviceMotionEvent.requestPermission) {
+        DeviceMotionEvent.requestPermission().then(
+          function (state) {
+            if (state == "granted") {
+              callback(null);
+            } else callback(new Error("Permission denied by user"));
+          },
+          function (err) {
+            callback(err);
+          }
+        );
+      } else {
+        // no need for permission
+        callback(null);
+      }
+    }
 
-    function getAccel() {
-      DeviceMotionEvent.requestPermission().then((response) => {
-        if (response == "granted") {
-          // Add a listener to get smartphone orientation
-          // in the alpha-beta-gamma axes (units in degrees)
-          window.addEventListener("deviceorientation", (event) => {
-            // Expose each orientation angle in a more readable way
-            rotation_degrees = event.alpha;
-            frontToBack_degrees = event.beta;
-            leftToRight_degrees = event.gamma;
-
-            // Update velocity according to how tilted the phone is
-            // Since phones are narrower than they are long, double the increase to the x velocity
-            vx = vx + leftToRight_degrees * updateRate * 2;
-            vy = vy + frontToBack_degrees * updateRate;
-
-            // Update position and clip it to bounds
-            px = px + vx * 0.5;
-            if (px > 98 || px < 0) {
-              px = Math.max(0, Math.min(98, px)); // Clip px between 0-98
-              vx = 0;
-            }
-
-            py = py + vy * 0.5;
-            if (py > 98 || py < 0) {
-              py = Math.max(0, Math.min(98, py)); // Clip py between 0-98
-              vy = 0;
-            }
-
-            dot = document.getElementsByClassName("indicatorDot")[0];
-            dot.setAttribute("style", "left:" + px + "%;" + "top:" + py + "%;");
+    function firstClick() {
+      requestDeviceMotion(function (err) {
+        if (err == null) {
+          window.removeEventListener("click", firstClick);
+          window.removeEventListener("touchend", firstClick);
+          window.addEventListener("devicemotion", function (e) {
+            // access e.acceleration, etc.
           });
+        } else {
+          // failed; a JS error object is stored in `err`
         }
       });
     }
+    window.addEventListener("click", firstClick);
+    window.addEventListener("touchend", firstClick);
   },
 });
 </script>
