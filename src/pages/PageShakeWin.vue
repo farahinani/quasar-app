@@ -9,15 +9,14 @@
               <q-badge color="teal-10" align="middle"> 1/2 </q-badge>
             </div>
 
-            <div>
-              <q-btn
-                color="primary"
-                label="ask permission"
-                @click="captureImage"
-              />
-
-              <img :src="imageSrc" />
-            </div>
+            <button
+              id="accelPermsButton"
+              style="height: 50px"
+              onclick="getAccel()"
+            >
+              <h1>Get Accelerometer Permissions</h1>
+            </button>
+            <div class="indicatorDot" style="left: 30%; top: 30%"></div>
           </div>
         </q-card-section>
       </q-card>
@@ -34,41 +33,22 @@ export default defineComponent({
   name: "PageShakeWin",
 
   setup() {
-    function requestDeviceMotion(callback) {
-      if (window.DeviceMotionEvent == null) {
-        callback(new Error("DeviceMotion is not supported"));
-      } else if (DeviceMotionEvent.requestPermission) {
-        DeviceMotionEvent.requestPermission().then(
-          function (state) {
-            if (state == "granted") {
-              callback(null);
-            } else callback(new Error("permission denied by user"));
-          },
-          function (err) {
-            callback(err);
-          }
-        );
-      } else {
-        callback(null);
-      }
-    }
-
-    function firstClick() {
-      requestDeviceMotion(function (err) {
-        if (err == null) {
-          window.removeEventListener("click", firstClick);
-          window.removeEventListener("touchend", firstClick);
-          window.addEventListener("devicemotion", function (e) {
-            // access e.acceleration, etc.
+    function getAccel() {
+      DeviceMotionEvent.requestPermission().then((response) => {
+        if (response == "granted") {
+          // Add a listener to get smartphone acceleration
+          // in the XYZ axes (units in m/s^2)
+          window.addEventListener("devicemotion", (event) => {
+            console.log(event);
           });
-        } else {
-          // failed; a JS error object is stored in `err`
+          // Add a listener to get smartphone orientation
+          // in the alpha-beta-gamma axes (units in degrees)
+          window.addEventListener("deviceorientation", (event) => {
+            console.log(event);
+          });
         }
       });
     }
-
-    window.addEventListener("click", firstClick);
-    window.addEventListener("touchend", firstClick);
   },
 });
 </script>
