@@ -23,27 +23,21 @@ export default defineComponent({
 
   methods: {
     function() {
-      var oldx = 0;
-      var oldy = 0;
-      var shakethreshold = 10;
+      //create a new instance of shake.js.
+      var myShakeEvent = new Shake({
+        threshold: 15,
+      });
 
-      if (window.DeviceMotionEvent) {
-        window.addEventListener(
-          "devicemotion",
-          function (event) {
-            if (
-              Math.abs(oldx - Math.round(event.acceleration.x)) >
-                shakethreshold ||
-              Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
-            ) {
-              // shaken, do something
-              alert("Shaken");
-            }
-            oldx = Math.round(accel.x);
-            oldy = Math.round(accel.y);
-          },
-          true
-        );
+      // start listening to device motion
+      myShakeEvent.start();
+
+      // register a shake event
+      window.addEventListener("shake", shakeEventDidOccur, false);
+
+      //shake event callback
+      function shakeEventDidOccur() {
+        //put your own code here etc.
+        alert("Shake!");
       }
     },
   },
