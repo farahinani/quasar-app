@@ -23,15 +23,28 @@ export default defineComponent({
 
   methods: {
     function() {
-      var myShakeEvent = new Shake({
-        threshold: 15,
-      });
+      var oldx = 0;
+      var oldy = 0;
+      var shakethreshold = 10;
 
-      myShakeEvent.start();
-
-      window.addEventListener("shake", shakeEventDidOccur, false);
-
-      alert("shake");
+      if (window.DeviceMotionEvent) {
+        window.addEventListener(
+          "devicemotion",
+          function () {
+            if (
+              Math.abs(oldx - Math.round(event.acceleration.x)) >
+                shakethreshold ||
+              Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
+            ) {
+              // shaken, do something
+              alert("Shaken");
+            }
+            oldx = Math.round(accel.x);
+            oldy = Math.round(accel.y);
+          },
+          true
+        );
+      }
     },
   },
 });
