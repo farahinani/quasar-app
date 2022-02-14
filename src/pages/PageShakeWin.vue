@@ -9,7 +9,14 @@
               <q-badge color="teal-10" align="middle"> 1/2 </q-badge>
             </div>
 
-            <q-btn color="primary" label="Get Permission" @click="onClick" />
+            <button
+              id="accelPermsButton"
+              style="height: 50px"
+              onclick="getAccel()"
+            >
+              <h1>Get Accelerometer Permissions</h1>
+            </button>
+            <div class="indicatorDot" style="left: 30%; top: 30%"></div>
           </div>
         </q-card-section>
       </q-card>
@@ -26,19 +33,21 @@ export default defineComponent({
   name: "PageShakeWin",
 
   setup() {
-    function onClick() {
-      // feature detect
-      if (typeof DeviceMotionEvent.requestPermission === "function") {
-        DeviceMotionEvent.requestPermission()
-          .then((permissionState) => {
-            if (permissionState === "granted") {
-              window.addEventListener("devicemotion", () => {});
-            }
-          })
-          .catch(console.error);
-      } else {
-        // handle regular non iOS 13+ devices
-      }
+    function getAccel() {
+      DeviceMotionEvent.requestPermission().then((response) => {
+        if (response == "granted") {
+          // Add a listener to get smartphone acceleration
+          // in the XYZ axes (units in m/s^2)
+          window.addEventListener("devicemotion", (event) => {
+            console.log(event);
+          });
+          // Add a listener to get smartphone orientation
+          // in the alpha-beta-gamma axes (units in degrees)
+          window.addEventListener("deviceorientation", (event) => {
+            console.log(event);
+          });
+        }
+      });
     }
   },
 });
