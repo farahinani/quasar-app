@@ -7,6 +7,7 @@
 
 <script>
 import { defineComponent } from "vue";
+import { ref } from "vue";
 import { Camera, CameraResultType } from "@capacitor/camera";
 
 export default defineComponent({
