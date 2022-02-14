@@ -10,7 +10,9 @@
             </div>
 
             <div>
-              <div>accelerometer: {{ accelerometer }}</div>
+              <q-btn color="primary" label="Get Picture" @click="click" />
+
+              <img :src="imageSrc" />
             </div>
           </div>
         </q-card-section>
@@ -28,8 +30,6 @@ export default defineComponent({
   name: "PageShakeWin",
 
   setup() {
-    const accelerometer = ref("determining...");
-
     myButton.addEventListener("click", async () => {
       try {
         await DeviceMotionEvent.requestPermission();
@@ -55,10 +55,6 @@ export default defineComponent({
         Motion.removeAllListeners();
       };
     });
-
-    return {
-      accelerometer,
-    };
   },
 });
 </script>
