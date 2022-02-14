@@ -30,7 +30,7 @@ export default defineComponent({
       if (window.DeviceMotionEvent) {
         window.addEventListener(
           "devicemotion",
-          function () {
+          function (event) {
             if (
               Math.abs(oldx - Math.round(event.acceleration.x)) >
                 shakethreshold ||
