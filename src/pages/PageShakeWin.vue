@@ -10,8 +10,7 @@
             </div>
 
             <div>
-              <div>Model: {{ model }}</div>
-              <div>Manufacturer: {{ manufacturer }}</div>
+              <div>accelerometer: {{ accelerometer }}</div>
             </div>
           </div>
         </q-card-section>
@@ -29,6 +28,8 @@ export default defineComponent({
   name: "PageShakeWin",
 
   setup() {
+    const accelerometer = ref("determining...");
+
     myButton.addEventListener("click", async () => {
       try {
         await DeviceMotionEvent.requestPermission();
@@ -54,6 +55,10 @@ export default defineComponent({
         Motion.removeAllListeners();
       };
     });
+
+    return {
+      accelerometer,
+    };
   },
 });
 </script>
