@@ -9,14 +9,7 @@
               <q-badge color="teal-10" align="middle"> 1/2 </q-badge>
             </div>
 
-            <button
-              id="accelPermsButton"
-              style="height: 50px"
-              onclick="getAccel()"
-            >
-              <h1>Get Accelerometer Permissions</h1>
-            </button>
-            <div class="indicatorDot" style="left: 30%; top: 30%"></div>
+            <q-btn color="primary" label="Get Permission" @click="click" />
           </div>
         </q-card-section>
       </q-card>
@@ -33,22 +26,31 @@ export default defineComponent({
   name: "PageShakeWin",
 
   setup() {
-    function getAccel() {
-      DeviceMotionEvent.requestPermission().then((response) => {
-        if (response == "granted") {
-          // Add a listener to get smartphone acceleration
-          // in the XYZ axes (units in m/s^2)
-          window.addEventListener("devicemotion", (event) => {
-            console.log(event);
-          });
-          // Add a listener to get smartphone orientation
-          // in the alpha-beta-gamma axes (units in degrees)
-          window.addEventListener("deviceorientation", (event) => {
-            console.log(event);
-          });
-        }
+    myButton.addEventListener("click", async () => {
+      try {
+        await DeviceMotionEvent.requestPermission();
+      } catch (e) {
+        // Handle error
+        return;
+      }
+
+      // Once the user approves, can start listening:
+      accelHandler = await Motion.addListener("accel", (event) => {
+        console.log("Device motion event:", event);
       });
-    }
+    });
+
+    // Stop the acceleration listener
+    const stopAcceleration = () => {
+      if (accelHandler) {
+        accelHandler.remove();
+      }
+    };
+
+    // Remove all listeners
+    const removeListeners = () => {
+      Motion.removeAllListeners();
+    };
   },
 });
 </script>
