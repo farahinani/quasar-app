@@ -10,7 +10,11 @@
             </div>
 
             <div>
-              <q-btn color="primary" label="Get Picture" @click="click" />
+              <q-btn
+                color="primary"
+                label="Get Picture"
+                @click="captureImage"
+              />
 
               <img :src="imageSrc" />
             </div>
@@ -30,31 +34,41 @@ export default defineComponent({
   name: "PageShakeWin",
 
   setup() {
-    myButton.addEventListener("click", async () => {
-      try {
-        await DeviceMotionEvent.requestPermission();
-      } catch (e) {
-        //handle error
-        return;
+    function requestDeviceMotion(callback) {
+      if (window.DeviceMotionEvent == null) {
+        callback(new Error("DeviceMotion is not supported"));
+      } else if (DeviceMotionEvent.requestPermission) {
+        DeviceMotionEvent.requestPermission().then(
+          function (state) {
+            if (state == "granted") {
+              callback(null);
+            } else callback(new Error("permission denied by user"));
+          },
+          function (err) {
+            callback(err);
+          }
+        );
+      } else {
+        callback(null);
       }
+    }
 
-      //once the user approve can start listening
-      accelHandler = await Motion.addListener("accel", (event) => {
-        console.log("Device motion event:", event);
-      });
-
-      //stop the acceleration listener
-      const stopAcceleration = () => {
-        if (accelHandler) {
-          accelHandler.remove();
+    function firstClick() {
+      requestDeviceMotion(function (err) {
+        if (err == null) {
+          window.removeEventListener("click", firstClick);
+          window.removeEventListener("touchend", firstClick);
+          window.addEventListener("devicemotion", function (e) {
+            // access e.acceleration, etc.
+          });
+        } else {
+          // failed; a JS error object is stored in `err`
         }
-      };
+      });
+    }
 
-      //remove all listeners
-      const removeListeners = () => {
-        Motion.removeAllListeners();
-      };
-    });
+    window.addEventListener("click", firstClick);
+    window.addEventListener("touchend", firstClick);
   },
 });
 </script>
