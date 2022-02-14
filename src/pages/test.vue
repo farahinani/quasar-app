@@ -21,6 +21,7 @@ export default defineComponent({
     var vx = 0.0; // Velocity x and y
     var vy = 0.0;
     var updateRate = 1 / 60; // Sensor refresh rate
+
     function getAccel() {
       DeviceMotionEvent.requestPermission().then((response) => {
         if (response == "granted") {
@@ -59,3 +60,14 @@ export default defineComponent({
   },
 });
 </script>
+
+<style>
+.indicatorDot {
+  width: 30px;
+  height: 30px;
+  background-color: #ffab56;
+  border-radius: 50%;
+  position: fixed;
+}
+</style>
+
