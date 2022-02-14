@@ -1,7 +1,10 @@
 <template>
   <div>
-    <q-btn color="primary" label="Get Picture" @click="captureImage" />
-    <img :src="imageSrc" />
+    <q-btn
+      color="primary"
+      label="Request permission"
+      @click="requestDeviceMotion"
+    />
   </div>
 </template>
 
@@ -14,26 +17,25 @@ export default defineComponent({
   name: "test",
 
   setup() {
-    const imageSrc = ref("");
-
-    async function captureImage() {
-      const image = await Camera.getPhoto({
-        quality: 90,
-        allowEditing: true,
-        resultType: CameraResultType.Uri,
-      });
-
-      // The result will vary on the value of the resultType option.
-      // CameraResultType.Uri - Get the result from image.webPath
-      // CameraResultType.Base64 - Get the result from image.base64String
-      // CameraResultType.DataUrl - Get the result from image.dataUrl
-      imageSrc.value = image.webPath;
+    function requestDeviceMotion(callback) {
+      if (window.DeviceMotionEvent == null) {
+        callback(new Error("DeviceMotion is not supported."));
+      } else if (DeviceMotionEvent.requestPermission) {
+        DeviceMotionEvent.requestPermission().then(
+          function (state) {
+            if (state == "granted") {
+              callback(null);
+            } else callback(new Error("Permission denied by user"));
+          },
+          function (err) {
+            callback(err);
+          }
+        );
+      } else {
+        // no need for permission
+        callback(null);
+      }
     }
-
-    return {
-      imageSrc,
-      captureImage,
-    };
   },
 });
 </script>
