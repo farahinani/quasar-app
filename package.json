@@ -10,6 +10,8 @@
     "build": "quasar build"
   },
   "dependencies": {
+    "@capacitor/camera": "^1.3.0",
+    "@capacitor/core": "^3.4.1",
     "@capacitor/motion": "^1.0.5",
     "@quasar/extras": "^1.0.0",
     "core-js": "^3.6.5",
