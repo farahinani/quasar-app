@@ -4,14 +4,28 @@
       id="accelPermsButton"
       color="primary"
       @click="getAccel()"
-      label="test getAccel()"
+      label="test @click getAccel()"
     >
     </q-btn>
     <q-btn
       id="accelPermsButton"
       color="primary"
       @click="getAccel"
-      label="test getAccel"
+      label="test @click getAccel"
+    >
+    </q-btn>
+    <q-btn
+      id="accelPermsButton"
+      color="primary"
+      onclick="getAccel"
+      label="test onclick getAccel"
+    >
+    </q-btn>
+    <q-btn
+      id="accelPermsButton"
+      color="primary"
+      onclick="getAccel()"
+      label="test onclick getAccel()"
     >
     </q-btn>
   </div>
