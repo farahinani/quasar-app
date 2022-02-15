@@ -7,9 +7,6 @@
       label="test btn 2"
     >
     </q-btn>
-    <button id="accelPermsButton" style="height: 50px" onclick="getAccel()">
-      test
-    </button>
   </div>
 </template>
 
@@ -23,8 +20,16 @@ export default defineComponent({
     getAccel() {
       DeviceMotionEvent.requestPermission().then((response) => {
         if (response == "granted") {
-          console.log("accelerometer permission granted");
-          // Do stuff here
+          // Add a listener to get smartphone acceleration
+          // in the XYZ axes (units in m/s^2)
+          window.addEventListener("devicemotion", (event) => {
+            console.log(event);
+          });
+          // Add a listener to get smartphone orientation
+          // in the alpha-beta-gamma axes (units in degrees)
+          window.addEventListener("deviceorientation", (event) => {
+            console.log(event);
+          });
         }
       });
     },
