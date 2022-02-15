@@ -1,32 +1,47 @@
 <template>
   <div>
-    <q-btn
-      color="primary"
-      label="Request permission"
-      @click="requestDeviceMotion()"
-    />
+    <q-btn color="primary" label="Request permission" @click="myButton" />
   </div>
-  <q-btn color="primary" label="Request permission 2" @click="getAccel()" />
 </template>
 
 <script>
 import { defineComponent } from "vue";
+import { PluginListenerHandle } from "@capacitor/core";
+import { Motion } from "@capacitor/motion";
 
 export default defineComponent({
   name: "test",
 
-  setup() {
-    function getAccel() {
-      DeviceMotionEvent.requestPermission().then((response) => {
-        if (response == "granted") {
-          console.log("accelerometer permission granted");
-          // Do stuff here
-        }
+  methods() {
+    myButton.addEventListener("click", async () => {
+      try {
+        await DeviceMotionEvent.requestPermission();
+      } catch (e) {
+        // Handle error
+        return;
+      }
+
+      // Once the user approves, can start listening:
+      accelHandler = await Motion.addListener("accel", (event) => {
+        console.log("Device motion event:", event);
       });
-    }
+    });
+
+    // Stop the acceleration listener
+    const stopAcceleration = () => {
+      if (accelHandler) {
+        accelHandler.remove();
+      }
+    };
+
+    // Remove all listeners
+    const removeListeners = () => {
+      Motion.removeAllListeners();
+    };
 
     return {
-      getAccel,
+      stopAcceleration,
+      removeListeners,
     };
   },
 });
