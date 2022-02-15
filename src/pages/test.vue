@@ -36,6 +36,9 @@ export default defineComponent({
         callback(null);
       }
     }
+    return {
+      requestDeviceMotion,
+    };
   },
 });
 </script>
