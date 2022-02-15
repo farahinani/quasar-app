@@ -3,12 +3,6 @@
     <q-btn
       id="accelPermsButton"
       color="primary"
-      label="test btn"
-      @click="getAccel"
-    />
-    <q-btn
-      id="accelPermsButton"
-      color="primary"
       onclick="getAccel()"
       label="test btn 2"
     >
@@ -30,13 +24,17 @@ export default defineComponent({
           window.addEventListener("devicemotion", (event) => {
             console.log(event);
           });
-          // Add a listener to get smartphone orientatio
+          // Add a listener to get smartphone orientation
           window.addEventListener("deviceorientation", (event) => {
             console.log(event);
           });
         }
       });
     }
+
+    return {
+      getAccel,
+    };
   },
 });
 </script>
