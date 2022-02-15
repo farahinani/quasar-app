@@ -25,7 +25,7 @@ export default defineComponent({
       var oldx = 0;
       var oldy = 0;
 
-      var shakethreshold = 10;
+      var shakethreshold = 30;
 
       // if (window.DeviceMotionEvent) {
       //   window.addEventListener("devicemotion", function () {
@@ -45,7 +45,7 @@ export default defineComponent({
       DeviceMotionEvent.requestPermission().then((response) => {
         if (response == "granted") {
           window.addEventListener("devicemotion", (event) => {
-            console.log(event);
+            // console.log(event);
 
             if (
               Math.abs(oldx - Math.round(event.acceleration.x)) >
