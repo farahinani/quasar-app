@@ -19,7 +19,7 @@ import { Motion } from "@capacitor/motion";
 export default defineComponent({
   name: "test",
 
-  setup() {
+  methods() {
     function getAccel() {
       DeviceMotionEvent.requestPermission().then((response) => {
         if (response == "granted") {
