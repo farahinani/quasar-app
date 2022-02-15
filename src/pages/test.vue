@@ -4,10 +4,16 @@
       id="accelPermsButton"
       color="primary"
       @click="getAccel()"
-      label="test btn"
+      label="test getAccel()"
     >
     </q-btn>
-    <q-btn color="primary" @click="myButton" label="test btn 2"> </q-btn>
+    <q-btn
+      id="accelPermsButton"
+      color="primary"
+      @click="myButton"
+      label="test myButton()"
+    >
+    </q-btn>
   </div>
 </template>
 
@@ -37,11 +43,10 @@ export default defineComponent({
       });
     }
 
-    myButton.addEventListener("click", async () => {
+    async function myButton() {
       try {
         await DeviceMotionEvent.requestPermission();
       } catch (e) {
-        // Handle error
         return;
       }
 
@@ -49,24 +54,23 @@ export default defineComponent({
       accelHandler = await Motion.addListener("accel", (event) => {
         console.log("Device motion event:", event);
       });
-    });
 
-    // Stop the acceleration listener
-    const stopAcceleration = () => {
-      if (accelHandler) {
-        accelHandler.remove();
-      }
-    };
+      // Stop the acceleration listener
+      const stopAcceleration = () => {
+        if (accelHandler) {
+          accelHandler.remove();
+        }
+      };
 
-    // Remove all listeners
-    const removeListeners = () => {
-      Motion.removeAllListeners();
-    };
+      // Remove all listeners
+      const removeListeners = () => {
+        Motion.removeAllListeners();
+      };
+    }
 
     return {
+      myButton,
       getAccel,
-      stopAcceleration,
-      removeListeners,
     };
   },
 });
