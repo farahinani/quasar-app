@@ -3,8 +3,8 @@
     <q-btn
       id="accelPermsButton"
       color="primary"
-      onclick="getAccel()"
-      label="test @click getAccel()"
+      @click="getAccel()"
+      label="test getAccel()"
     >
     </q-btn>
   </div>
@@ -21,9 +21,6 @@ export default defineComponent({
       DeviceMotionEvent.requestPermission().then((response) => {
         if (response == "granted") {
           // Add a listener to get smartphone acceleration
-
-          console.log("accelerometer permission granted");
-
           window.addEventListener("devicemotion", (event) => {
             console.log(event);
           });
