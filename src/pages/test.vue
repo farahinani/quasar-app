@@ -3,8 +3,14 @@
     <q-btn
       id="accelPermsButton"
       color="primary"
-      label="grant permission"
-      onclick="getAccel()"
+      label="btn onclick()"
+      @click="onClick"
+    />
+    <q-btn
+      id="accelPermsButton"
+      color="primary"
+      label="btn getAccel()"
+      @click="getAccel"
     />
   </div>
 </template>
@@ -16,6 +22,22 @@ export default defineComponent({
   name: "test",
 
   methods() {
+    function onClick() {
+      // feature detect
+      if (typeof DeviceMotionEvent.requestPermission === "function") {
+        DeviceMotionEvent.requestPermission()
+          .then((permissionState) => {
+            if (permissionState === "granted") {
+              window.addEventListener("devicemotion", () => {});
+            }
+          })
+          .catch(console.error);
+      } else {
+        // handle regular non iOS 13+ devices
+        console.log("test");
+      }
+    }
+
     function getAccel() {
       DeviceMotionEvent.requestPermission().then((response) => {
         if (response == "granted") {
@@ -27,6 +49,7 @@ export default defineComponent({
 
     return {
       getAccel,
+      onClick,
     };
   },
 });
