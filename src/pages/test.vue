@@ -1,6 +1,6 @@
 <template>
   <div>
-    <q-btn color="primary" label="Request permission" @click="getAccel()" />
+    <q-btn color="primary" label="Request permission" @click="onClick()" />
   </div>
 </template>
 
@@ -11,17 +11,23 @@ export default defineComponent({
   name: "test",
 
   setup() {
-    function getAccel() {
-      DeviceMotionEvent.requestPermission().then((response) => {
-        if (response == "granted") {
-          console.log("accelerometer permission granted");
-          // Do stuff here
-        }
-      });
+    function onClick() {
+      // feature detect
+      if (typeof DeviceMotionEvent.requestPermission === "function") {
+        DeviceMotionEvent.requestPermission()
+          .then((permissionState) => {
+            if (permissionState === "granted") {
+              window.addEventListener("devicemotion", () => {});
+            }
+          })
+          .catch(console.error);
+      } else {
+        // handle regular non iOS 13+ devices
+      }
     }
 
     return {
-      getAccel,
+      onClick,
     };
   },
 });
