@@ -1,7 +1,12 @@
 <template>
   <div>
-    <q-btn color="primary" label="Request permission" @click="onClick()" />
+    <q-btn
+      color="primary"
+      label="Request permission"
+      @click="requestDeviceMotion()"
+    />
   </div>
+  <q-btn color="primary" label="Request permission 2" @click="firstClick()" />
 </template>
 
 <script>
@@ -11,23 +16,45 @@ export default defineComponent({
   name: "test",
 
   setup() {
-    function onClick() {
-      // feature detect
-      if (typeof DeviceMotionEvent.requestPermission === "function") {
-        DeviceMotionEvent.requestPermission()
-          .then((permissionState) => {
-            if (permissionState === "granted") {
-              window.addEventListener("devicemotion", () => {});
-            }
-          })
-          .catch(console.error);
+    function requestDeviceMotion(callback) {
+      if (window.DeviceMotionEvent == null) {
+        callback(new Error("DeviceMotion is not supported."));
+      } else if (DeviceMotionEvent.requestPermission) {
+        DeviceMotionEvent.requestPermission().then(
+          function (state) {
+            if (state == "granted") {
+              callback(null);
+            } else callback(new Error("Permission denied by user"));
+          },
+          function (err) {
+            callback(err);
+          }
+        );
       } else {
-        // handle regular non iOS 13+ devices
+        // no need for permission
+        callback(null);
       }
     }
 
+    function firstClick() {
+      requestDeviceMotion(function (err) {
+        if (err == null) {
+          window.removeEventListener("click", firstClick);
+          window.removeEventListener("touchend", firstClick);
+          window.addEventListener("devicemotion", function (e) {
+            // access e.acceleration, etc.
+          });
+        } else {
+          // failed; a JS error object is stored in `err`
+        }
+      });
+    }
+    window.addEventListener("click", firstClick);
+    window.addEventListener("touchend", firstClick);
+
     return {
-      onClick,
+      requestDeviceMotion,
+      firstClick,
     };
   },
 });
