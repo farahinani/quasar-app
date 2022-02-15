@@ -1,6 +1,11 @@
 <template>
   <div>
-    <q-btn color="primary" label="grant permission" @click="getAccel()" />
+    <q-btn
+      id="accelPermsButton"
+      color="primary"
+      label="grant permission"
+      onclick="getAccel()"
+    />
   </div>
 </template>
 
@@ -19,6 +24,10 @@ export default defineComponent({
         }
       });
     }
+
+    return {
+      getAccel,
+    };
   },
 });
 </script>
