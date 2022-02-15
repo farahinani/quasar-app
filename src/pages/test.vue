@@ -3,7 +3,7 @@
     <q-btn
       id="accelPermsButton"
       color="primary"
-      onclick="getAccel()"
+      @click="getAccel()"
       label="test btn 2"
     >
     </q-btn>
@@ -16,8 +16,8 @@ import { defineComponent } from "vue";
 export default defineComponent({
   name: "test",
 
-  methods() {
-    function getAccel() {
+  methods: {
+    getAccel() {
       DeviceMotionEvent.requestPermission().then((response) => {
         if (response == "granted") {
           // Add a listener to get smartphone acceleration
@@ -32,7 +32,7 @@ export default defineComponent({
           });
         }
       });
-    }
+    },
   },
 });
 </script>
