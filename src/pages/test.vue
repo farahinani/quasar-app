@@ -10,8 +10,8 @@
     <q-btn
       id="accelPermsButton"
       color="primary"
-      @click="myButton"
-      label="test myButton()"
+      @click="getAccel"
+      label="test getAccel"
     >
     </q-btn>
   </div>
@@ -25,38 +25,25 @@ import { Motion } from "@capacitor/motion";
 export default defineComponent({
   name: "test",
 
-  methods: {
-    getAccel() {
+  methods() {
+    function getAccel() {
       DeviceMotionEvent.requestPermission().then((response) => {
         if (response == "granted") {
           // Add a listener to get smartphone acceleration
-          window.addEventListener("devicemotion", () => {
-            // console.log(event);
-
-            var myShakeEvent = new Shake({
-              threshold: 15,
-            });
-
-            // start listening to device motion
-            myShakeEvent.start();
-
-            // register a shake event
-            window.addEventListener("shake", shakeEventDidOccur, false);
+          window.addEventListener("devicemotion", (event) => {
+            console.log(event);
           });
-
           // Add a listener to get smartphone orientation
           window.addEventListener("deviceorientation", (event) => {
             console.log(event);
           });
-
-          //shake event callback
-          function shakeEventDidOccur() {
-            console.log("shake");
-            alert("Shake!");
-          }
         }
       });
-    },
+    }
+
+    return {
+      getAccel,
+    };
   },
 });
 </script>
