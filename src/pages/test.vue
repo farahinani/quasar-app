@@ -3,7 +3,7 @@
     <q-btn
       id="accelPermsButton"
       color="primary"
-      onclick="getAccel()"
+      @click="requestDeviceMotion"
       label="test btn 2"
     >
     </q-btn>
@@ -16,24 +16,32 @@ import { defineComponent } from "vue";
 export default defineComponent({
   name: "test",
 
-  setup() {
-    function getAccel() {
-      DeviceMotionEvent.requestPermission().then((response) => {
-        if (response == "granted") {
-          // Add a listener to get smartphone acceleration
-          window.addEventListener("devicemotion", (event) => {
-            console.log(event);
-          });
-          // Add a listener to get smartphone orientation
-          window.addEventListener("deviceorientation", (event) => {
-            console.log(event);
-          });
-        }
-      });
+  methods() {
+    function requestDeviceMotion(callback) {
+      if (window.DeviceMotionEvent == null) {
+        callback(new Error("DeviceMotion is not supported."));
+      } else if (DeviceMotionEvent.requestPermission) {
+        DeviceMotionEvent.requestPermission().then(
+          function (state) {
+            if (state == "granted") {
+              callback(null);
+              console.log("yay");
+            } else callback(new Error("Permission denied by user"));
+          },
+          function (err) {
+            callback(err);
+            console.log("yay");
+          }
+        );
+      } else {
+        // no need for permission
+        callback(null);
+        console.log("nay");
+      }
     }
 
     return {
-      getAccel,
+      requestDeviceMotion,
     };
   },
 });
