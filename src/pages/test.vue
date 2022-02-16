@@ -72,13 +72,10 @@ export default defineComponent({
 
       var myShakeEvent = new Shake({ threshold: 10, timeout: 1000 });
       myShakeEvent.start();
-      window.addEventListener(
-        "shake",
-        function () {
-          alert("shake!");
-        },
-        false
-      );
+      window.addEventListener("shake", shakeEventDidOccur, false);
+      function shakeEventDidOccur() {
+        alert("Shake!");
+      }
 
       // window.onload = function () {
       //   var myShakeEvent = new Shake({
