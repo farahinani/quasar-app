@@ -10,6 +10,14 @@
     <div v-if="$q.platform.is.desktop">I'm only rendered on desktop!</div>
 
     <div v-if="$q.platform.is.mobile">I'm only rendered on mobile!</div>
+
+    <div v-if="$q.platform.is.safari">I'm only rendered on safari!</div>
+
+    <div v-if="$q.platform.is.iphone">I'm only rendered on safari!</div>
+
+    <div v-if="$q.platform.is.ios">I'm only rendered on safari!</div>
+
+    <div v-if="$q.platform.is.android">I'm only rendered on safari!</div>
   </div>
 </template>
 
