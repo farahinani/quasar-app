@@ -33,7 +33,7 @@ export default defineComponent({
       var oldx = 0;
       var oldy = 0;
 
-      var shakethreshold = 30;
+      var shakethreshold = 10;
 
       DeviceMotionEvent.requestPermission().then((response) => {
         if (response == "granted") {
@@ -46,7 +46,7 @@ export default defineComponent({
               Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
             ) {
               //shaken, do something
-              alert("shaken");
+              alert("shaken !");
             }
             oldx = Math.round(accel.x);
             oldy = Math.round(accel.y);
