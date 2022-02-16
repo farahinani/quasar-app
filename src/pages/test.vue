@@ -70,27 +70,29 @@ export default defineComponent({
       //console.log("This is android");
       alert("This is android!");
 
-      window.onload = function () {
-        var myShakeEvent = new Shake({
-          threshold: 15,
-        });
-
-        return {
-          myShakeEvent,
-        };
-      };
-
-      // start listening to device motion
+      var myShakeEvent = new Shake({ threshold: 10, timeout: 1000 });
       myShakeEvent.start();
+      window.addEventListener(
+        "shake",
+        function () {
+          alert("shake!");
+        },
+        false
+      );
 
-      // register a shake event
-      window.addEventListener("shake", shakeEventDidOccur, false);
+      // window.onload = function () {
+      //   var myShakeEvent = new Shake({
+      //     threshold: 15,
+      //   });
+      // };
 
-      //shake event callback
-      function shakeEventDidOccur() {
-        //put your own code here etc.
-        alert("Shake!");
-      }
+      // myShakeEvent.start();
+
+      // window.addEventListener("shake", shakeEventDidOccur, false);
+
+      // function shakeEventDidOccur() {
+      //   alert("Shake!");
+      // }
     }
   },
 });
