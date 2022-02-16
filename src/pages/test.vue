@@ -1,8 +1,6 @@
 <template>
   <div class="q-pa-md">
-    <div v-if="$q.platform.is.desktop">rendered on Desktop!</div>
-    <!-- <div v-if="$q.platform.is.android">I'm only rendered on android!</div>
-    <div v-if="$q.platform.is.ios">I'm only rendered on ios!</div> -->
+    <!-- <div v-if="$q.platform.is.desktop">rendered on Desktop!</div>
     <div v-if="$q.platform.is.ios">
       Please press button "Start shake"<br />
       <q-btn
@@ -12,22 +10,78 @@
         label="Start Shake"
       >
       </q-btn>
-    </div>
+    </div> -->
+
+    <!-- <form>
+      Number of Cartons:
+      <input type="number" name="fname" id="packCount" /><br />
+      <input type="button" @click="myFunction()" value="Submit" />
+    </form> -->
+
+    <q-form @submit="submitForm">
+      <q-input
+        min="0"
+        type="number"
+        placeholder="Enter cartons purchased"
+        outlined
+        bottom-slots
+        clearable
+        v-model="formData.cartonInput"
+        :rules="[(val) => !!val || 'Field is required']"
+      />
+
+      <div>
+        <q-btn
+          type="submit"
+          label="Submit"
+          color="primary"
+          push
+          :disable="!formData.cartonInput"
+          @click="submitForm()"
+        />
+      </div>
+
+      <!-- <div>number of tries : {{ numPacks }}</div> -->
+    </q-form>
   </div>
 </template>
 
 <script>
 import { defineComponent } from "vue";
 import { useQuasar } from "quasar";
-import { computed } from "vue";
 
 export default defineComponent({
   name: "test",
 
+  data() {
+    return {
+      formData: {
+        cartonInput: "",
+      },
+    };
+  },
+
+  methods: {
+    submitForm() {
+      // alert("your carton : " + this.formData.cartonInput);
+      let numPacks = this.formData.cartonInput;
+
+      let numTries = numPacks / 2;
+
+      if (numTries < 1) {
+        alert("please purchase at least 2 packs");
+      } else if (numTries >= 1) {
+        let numTriesInt = Math.floor(numTries);
+
+        alert("Number of Tries:" + " " + numTriesInt);
+      }
+    },
+  },
+
   setup() {
     const $q = useQuasar();
 
-    $q.platform.is.desktop;
+    // $q.platform.is.desktop;
     $q.platform.is.android;
     $q.platform.is.ios;
 
@@ -72,14 +126,6 @@ export default defineComponent({
     } else if ($q.platform.is.android) {
       //console.log("This is android");
       alert("This is android!");
-
-      //----ALEXGIBSON SHAKE.JS CODE----//
-      // var myShakeEvent = new Shake({ threshold: 10, timeout: 1000 });
-      // myShakeEvent.start();
-      // window.addEventListener("shake", shakeEventDidOccur, false);
-      // function shakeEventDidOccur() {
-      //   alert("Shake!");
-      // }
 
       var oldx = 0;
       var oldy = 0;

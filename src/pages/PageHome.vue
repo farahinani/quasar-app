@@ -16,29 +16,30 @@
 
             <br />
 
-            <q-form @submit="submitForm">
+            <q-form @submit.prevent="submitForm">
               <q-input
                 min="0"
                 type="number"
+                placeholder="Enter cartons purchased"
                 outlined
                 bottom-slots
-                v-model="newAddCartons"
-                placeholder="Enter cartons purchased"
-                :rules="[(val) => !!val || 'Please enter your carton']"
-              >
-              </q-input>
+                clearable
+                v-model="formData.cartonInput"
+                :rules="[(val) => !!val || 'Please enter cartons']"
+              />
 
               <div>
                 <q-btn
-                  :disable="!newAddCartons"
-                  push
-                  color="primary"
-                  label="Submit"
-                  class="full-width"
                   type="submit"
-                  v-model="formData.numberInput"
+                  label="Submit"
+                  color="primary"
+                  class="full-width"
+                  push
+                  :disable="!formData.cartonInput"
+                  @click="submitForm()"
                 />
               </div>
+
               <br />
               <div>
                 <q-btn
@@ -46,9 +47,10 @@
                   color="primary"
                   label="Next"
                   class="full-width"
-                  type="submit"
                 />
               </div>
+
+              <div>tries: {{ formData.numTriesInt }}</div>
             </q-form>
           </div>
         </q-card-section>
@@ -66,20 +68,66 @@ export default defineComponent({
 
   data() {
     return {
-      newAddCartons: ref(null),
       formData: {
-        numberInput: null,
+        cartonInput: "",
       },
-      count: 1,
+
+      // submitForm() {
+      //   let numPacks = this.formData.cartonInput;
+
+      //   let numTries = numPacks / 2;
+
+      //   if (numTries < 1) {
+      //     alert("please purchase at least 2 packs");
+      //   } else if (numTries >= 1) {
+      //     let numTriesInt = Math.floor(numTries);
+
+      //     alert("Number of Tries:" + " " + numTriesInt);
+      //     console.log(numTriesInt);
+      //   }
+      // },
     };
   },
 
+  // setup() {
+  //   function submitForm() {
+  //     let numPacks = this.formData.cartonInput;
+
+  //     let numTries = numPacks / 2;
+
+  //     if (numTries < 1) {
+  //       alert("please purchase at least 2 packs");
+  //     } else if (numTries >= 1) {
+  //       let numTriesInt = Math.floor(numTries);
+
+  //       alert("Number of Tries:" + " " + numTriesInt);
+  //       console.log(numTriesInt);
+  //     }
+  //   }
+
+  //   return {
+  //     submitForm,
+  //   };
+  // },
+
   methods: {
-    addNewCarton() {
-      console.log("addNewCarton");
-    },
+    //CALCULATE NUMBER OF TRIES
     submitForm() {
-      alert("your no is: " + this.formData.numberInput);
+      // console.log("submit success");
+
+      let numPacks = this.formData.cartonInput;
+      let numTries = numPacks / 2;
+
+      if (numTries < 1) {
+        alert("please purchase at least 2 packs");
+      } else if (numTries >= 1) {
+        let numTriesInt = Math.floor(numTries);
+        alert("Number of Tries:" + " " + numTriesInt);
+      }
+
+      return {
+        numTriesInt,
+      };
     },
   },
 });
