@@ -1,9 +1,16 @@
 <template>
   <div class="q-pa-md">
     <div v-if="$q.platform.is.desktop">I'm only rendered on Desktop!</div>
-    <div v-if="$q.platform.is.android">I'm only rendered on mobile!</div>
-    <div v-if="$q.platform.is.ios">I'm only rendered on mobile!</div>
+    <div v-if="$q.platform.is.android">I'm only rendered on android!</div>
+    <div v-if="$q.platform.is.ios">I'm only rendered on ios!</div>
   </div>
+  <q-btn
+    id="accelPermsButton"
+    color="primary"
+    @click="getAccel()"
+    label="Start Shake"
+  >
+  </q-btn>
 </template>
 
 <script>
@@ -20,6 +27,49 @@ export default defineComponent({
     $q.platform.is.desktop;
     $q.platform.is.android;
     $q.platform.is.ios;
+
+    if ($q.platform.is.ios) {
+      alert("alert: this is desktop");
+      console.log("msg: this is desktop");
+
+      function getAccel() {
+        var oldx = 0;
+        var oldy = 0;
+
+        var shakethreshold = 20;
+
+        DeviceMotionEvent.requestPermission().then((response) => {
+          if (response == "granted") {
+            window.addEventListener("devicemotion", (event) => {
+              // console.log(event);
+
+              if (
+                Math.abs(oldx - Math.round(event.acceleration.x)) >
+                  shakethreshold ||
+                Math.abs(oldy - Math.round(event.acceleration.y)) >
+                  shakethreshold
+              ) {
+                //shaken, do something
+                alert("shaken !");
+              }
+              oldx = Math.round(accel.x);
+              oldy = Math.round(accel.y);
+            });
+
+            window.addEventListener("deviceorientation", (event) => {
+              console.log(event);
+            });
+          }
+        });
+      }
+
+      return {
+        getAccel,
+      };
+    } else {
+      console.log("oops.. ");
+      alert("oops.. ");
+    }
   },
 });
 </script>
