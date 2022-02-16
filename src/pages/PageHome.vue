@@ -39,6 +39,16 @@
                   v-model="formData.numberInput"
                 />
               </div>
+              <br />
+              <div>
+                <q-btn
+                  to="/home/shake-and-win"
+                  color="primary"
+                  label="Next"
+                  class="full-width"
+                  type="submit"
+                />
+              </div>
             </q-form>
           </div>
         </q-card-section>

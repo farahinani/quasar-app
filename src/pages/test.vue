@@ -4,7 +4,7 @@
     <!-- <div v-if="$q.platform.is.android">I'm only rendered on android!</div>
     <div v-if="$q.platform.is.ios">I'm only rendered on ios!</div> -->
     <div v-if="$q.platform.is.ios">
-      Please press button "Start shake"
+      Please press button "Start shake"<br />
       <q-btn
         id="accelPermsButton"
         color="primary"
