@@ -29,8 +29,8 @@ export default defineComponent({
     $q.platform.is.ios;
 
     if ($q.platform.is.ios) {
-      alert("alert: this is desktop");
-      console.log("msg: this is desktop");
+      alert("alert: this is ios");
+      //console.log("msg: this is desktop");
 
       function getAccel() {
         var oldx = 0;
@@ -67,8 +67,30 @@ export default defineComponent({
         getAccel,
       };
     } else {
-      console.log("oops.. ");
-      alert("oops.. ");
+      //console.log("This is android");
+      alert("This is android!");
+
+      window.onload = function () {
+        var myShakeEvent = new Shake({
+          threshold: 15,
+        });
+
+        return {
+          myShakeEvent,
+        };
+      };
+
+      // start listening to device motion
+      myShakeEvent.start();
+
+      // register a shake event
+      window.addEventListener("shake", shakeEventDidOccur, false);
+
+      //shake event callback
+      function shakeEventDidOccur() {
+        //put your own code here etc.
+        alert("Shake!");
+      }
     }
   },
 });
