@@ -33,7 +33,7 @@ export default defineComponent({
       var oldx = 0;
       var oldy = 0;
 
-      var shakethreshold = 10;
+      var shakethreshold = 20;
 
       DeviceMotionEvent.requestPermission().then((response) => {
         if (response == "granted") {
