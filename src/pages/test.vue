@@ -1,16 +1,19 @@
 <template>
   <div class="q-pa-md">
-    <div v-if="$q.platform.is.desktop">I'm only rendered on Desktop!</div>
-    <div v-if="$q.platform.is.android">I'm only rendered on android!</div>
-    <div v-if="$q.platform.is.ios">I'm only rendered on ios!</div>
+    <div v-if="$q.platform.is.desktop">rendered on Desktop!</div>
+    <!-- <div v-if="$q.platform.is.android">I'm only rendered on android!</div>
+    <div v-if="$q.platform.is.ios">I'm only rendered on ios!</div> -->
+    <div v-if="$q.platform.is.ios">
+      Please press button "Start shake"
+      <q-btn
+        id="accelPermsButton"
+        color="primary"
+        @click="getAccel()"
+        label="Start Shake"
+      >
+      </q-btn>
+    </div>
   </div>
-  <q-btn
-    id="accelPermsButton"
-    color="primary"
-    @click="getAccel()"
-    label="Start Shake"
-  >
-  </q-btn>
 </template>
 
 <script>
@@ -66,30 +69,37 @@ export default defineComponent({
       return {
         getAccel,
       };
-    } else {
+    } else if ($q.platform.is.android) {
       //console.log("This is android");
       alert("This is android!");
 
-      var myShakeEvent = new Shake({ threshold: 10, timeout: 1000 });
-      myShakeEvent.start();
-      window.addEventListener("shake", shakeEventDidOccur, false);
-      function shakeEventDidOccur() {
-        alert("Shake!");
-      }
-
-      // window.onload = function () {
-      //   var myShakeEvent = new Shake({
-      //     threshold: 15,
-      //   });
-      // };
-
+      //----ALEXGIBSON SHAKE.JS CODE----//
+      // var myShakeEvent = new Shake({ threshold: 10, timeout: 1000 });
       // myShakeEvent.start();
-
       // window.addEventListener("shake", shakeEventDidOccur, false);
-
       // function shakeEventDidOccur() {
       //   alert("Shake!");
       // }
+
+      var oldx = 0;
+      var oldy = 0;
+      var shakethreshold = 20;
+
+      window.addEventListener("devicemotion", (event) => {
+        // console.log(event);
+
+        if (
+          Math.abs(oldx - Math.round(event.acceleration.x)) > shakethreshold ||
+          Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
+        ) {
+          //shaken, do something
+          alert("shaken !");
+        }
+        oldx = Math.round(accel.x);
+        oldy = Math.round(accel.y);
+      });
+    } else {
+      alert("this is dekstop!");
     }
   },
 });
