@@ -76,7 +76,8 @@ export default defineComponent({
                   shakethreshold
               ) {
                 //shaken, do something
-                alert("shaken !");
+                // alert("shaken !");
+                shakeSuccess();
               }
               oldx = Math.round(accel.x);
               oldy = Math.round(accel.y);
