@@ -96,12 +96,7 @@ export default defineComponent({
           Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
         ) {
           // alert("shaken !"); // do something
-          if (this.$root.triesCount < this.$root.numTries) {
-            this.$root.triesCount++;
-            alert("shaken !! : try " + this.$root.triesCount);
-          } else {
-            alert("Last Shake");
-          }
+          shakeSuccess();
         }
         oldx = Math.round(accel.x);
         oldy = Math.round(accel.y);
@@ -115,22 +110,22 @@ export default defineComponent({
   methods: {
     shakeSuccess() {
       //JOANNE
-      // if (this.$root.triesCount < this.$root.numTries) {
-      //   this.$root.triesCount++;
-
-      //   if (this.$root.triesCount < this.$root.numTries) {
-      //     alert("shaken !! : try " + this.$root.triesCount);
-      //   } else {
-      //     alert("Last Shake");
-      //   }
-      // }
-
       if (this.$root.triesCount < this.$root.numTries) {
         this.$root.triesCount++;
-        alert("shaken !! : try " + this.$root.triesCount);
-      } else {
-        alert("Last Shake");
+
+        if (this.$root.triesCount < this.$root.numTries) {
+          alert("shaken !! : try " + this.$root.triesCount);
+        } else {
+          alert("Last Shake");
+        }
       }
+
+      // if (this.$root.triesCount < this.$root.numTries) {
+      //   this.$root.triesCount++;
+      //   alert("shaken !! : try " + this.$root.triesCount);
+      // } else {
+      //   alert("Last Shake");
+      // }
     },
   },
 });
