@@ -29,7 +29,7 @@
       <q-btn
         id="accelPermsButton"
         color="primary"
-        @click="requestPermission()"
+        @click="permission()"
         label="Start Shake"
       >
       </q-btn>
@@ -58,13 +58,27 @@ export default defineComponent({
     ) {
       if ($q.platform.is.ios) {
         // getAccel();
-        DeviceMotionEvent.requestPermission().then((response) => {
-          if (response == "granted") {
-            getAccel();
-          } else {
-            alert("response is not granted");
-          }
-        });
+        function permission() {
+          // console.log("click button permission");
+          DeviceMotionEvent.requestPermission().then((response) => {
+            if (response == "granted") {
+              getAccel();
+            } else {
+              alert("response is not granted");
+            }
+          });
+        }
+        return {
+          permission,
+        };
+
+        // DeviceMotionEvent.requestPermission().then((response) => {
+        //   if (response == "granted") {
+        //     getAccel();
+        //   } else {
+        //     alert("response is not granted");
+        //   }
+        // });
       } else if ($q.platform.is.android) {
         getAccel();
       } else {
