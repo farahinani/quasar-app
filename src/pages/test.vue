@@ -23,6 +23,17 @@
         />
       </div>
     </q-form> -->
+
+    <div v-if="$q.platform.is.ios">
+      Please press button "Start shake"<br />
+      <q-btn
+        id="accelPermsButton"
+        color="primary"
+        @click="getAccel()"
+        label="Start Shake"
+      >
+      </q-btn>
+    </div>
   </div>
 </template>
 
