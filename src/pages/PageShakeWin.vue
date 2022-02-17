@@ -80,24 +80,23 @@ export default defineComponent({
       var shakethreshold = 25;
 
       if (this.$root.triesCount < this.$root.numTries) {
-        window.addEventListener("devicemotion", (event) => {
-          if (
-            Math.abs(oldx - Math.round(event.acceleration.x)) >
-              shakethreshold ||
-            Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
-          ) {
-            // alert("shaken !");
-            this.$root.triesCount++;
+        this.$root.triesCount++;
 
-            if (this.$root.triesCount < this.$root.numTries) {
+        if (this.$root.triesCount < this.$root.numTries) {
+          window.addEventListener("devicemotion", (event) => {
+            if (
+              Math.abs(oldx - Math.round(event.acceleration.x)) >
+                shakethreshold ||
+              Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
+            ) {
               alert("shaken !! : try " + this.$root.triesCount);
             } else {
               alert("Last Shake");
             }
-          }
-          oldx = Math.round(accel.x);
-          oldy = Math.round(accel.y);
-        });
+            oldx = Math.round(accel.x);
+            oldy = Math.round(accel.y);
+          });
+        }
       }
 
       // window.addEventListener("devicemotion", (event) => {
