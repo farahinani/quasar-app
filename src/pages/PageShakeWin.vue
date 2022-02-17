@@ -25,13 +25,13 @@
             </q-btn>
           </div>
           <br />
-          <q-btn
+          <!-- <q-btn
             type="submit"
             label="SHAKE BUTTON"
             color="primary"
             class="full-width"
             @click="shakeSuccess()"
-          />
+          /> -->
 
           <div v-if="$q.platform.is.android">rendered on android</div>
         </q-card-section>
@@ -99,61 +99,7 @@ export default defineComponent({
           });
         }
 
-        //2ND CODE
-        // if (this.$root.triesCount < this.$root.numTries) {
-        //   DeviceMotionEvent.requestPermission().then((response) => {
-        //     if (response == "granted") {
-        //       window.addEventListener("devicemotion", (event) => {
-
-        //         if (
-        //           Math.abs(oldx - Math.round(event.acceleration.x)) >
-        //             shakethreshold ||
-        //           Math.abs(oldy - Math.round(event.acceleration.y)) >
-        //             shakethreshold
-        //         ) {
-        //           if (this.$root.triesCount < this.$root.numTries) {
-        //             alert("shaken !! : try " + this.$root.triesCount);
-
-        //           } else {
-        //             alert("Last Shake");
-        //           }
-        //           this.$root.triesCount++;
-        //         }
-        //         oldx = Math.round(accel.x);
-        //         oldy = Math.round(accel.y);
-        //       });
-        //     }
-        //   });
-        // }
-
-        // DeviceMotionEvent.requestPermission().then((response) => {
-        //   if (response == "granted") {
-        //     window.addEventListener("devicemotion", (event) => {
-        //       if (
-        //         Math.abs(oldx - Math.round(event.acceleration.x)) >
-        //           shakethreshold ||
-        //         Math.abs(oldy - Math.round(event.acceleration.y)) >
-        //           shakethreshold
-        //       ) {
-        //         // alert("shaken !");
-
-        //         if (this.$root.triesCount < this.$root.numTries) {
-        //           alert("shaken !! : try " + this.$root.triesCount);
-        //         } else {
-        //           alert("Last Shake");
-        //         }
-        //       }
-        //       oldx = Math.round(accel.x);
-        //       oldy = Math.round(accel.y);
-        //     });
-
-        //     window.addEventListener("deviceorientation", (event) => {
-        //       console.log(event);
-        //     });
-        //   }
-        // });
-
-        //original code here
+        //-------------------original code here---------------------------------//
         // DeviceMotionEvent.requestPermission().then((response) => {
 
         //   if (response == "granted") {
@@ -189,19 +135,27 @@ export default defineComponent({
       var shakethreshold = 25;
 
       window.addEventListener("devicemotion", (event) => {
+        // this.$root.triesCount++; //loop number like forever
+
         if (
           Math.abs(oldx - Math.round(event.acceleration.x)) > shakethreshold ||
           Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
         ) {
+          // alert("shaken !");
           if (this.$root.triesCount < this.$root.numTries) {
             alert("shaken !! : try " + this.$root.triesCount);
+            // this.$root.triesCount++; // this works fine but starting is try 0?
             this.$root.triesCount += 1;
           } else {
-            alert("should go home page"); // go to home
+            // alert("Last Shake");
+            this.$router.push(); // go to home
           }
+          // this.$root.triesCount++; //the count keep increasing when click shake
         }
         oldx = Math.round(accel.x);
         oldy = Math.round(accel.y);
+
+        // this.$root.triesCount++; //only display alert equals to numtries
       });
 
       // window.addEventListener("devicemotion", (event) => {
