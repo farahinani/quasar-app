@@ -89,32 +89,32 @@ export default defineComponent({
           });
         }
 
-        DeviceMotionEvent.requestPermission().then((response) => {
-          if (response == "granted") {
-            window.addEventListener("devicemotion", (event) => {
-              if (
-                Math.abs(oldx - Math.round(event.acceleration.x)) >
-                  shakethreshold ||
-                Math.abs(oldy - Math.round(event.acceleration.y)) >
-                  shakethreshold
-              ) {
-                // alert("shaken !");
+        // DeviceMotionEvent.requestPermission().then((response) => {
+        //   if (response == "granted") {
+        //     window.addEventListener("devicemotion", (event) => {
+        //       if (
+        //         Math.abs(oldx - Math.round(event.acceleration.x)) >
+        //           shakethreshold ||
+        //         Math.abs(oldy - Math.round(event.acceleration.y)) >
+        //           shakethreshold
+        //       ) {
+        //         // alert("shaken !");
 
-                if (this.$root.triesCount < this.$root.numTries) {
-                  alert("shaken !! : try " + this.$root.triesCount);
-                } else {
-                  alert("Last Shake");
-                }
-              }
-              oldx = Math.round(accel.x);
-              oldy = Math.round(accel.y);
-            });
+        //         if (this.$root.triesCount < this.$root.numTries) {
+        //           alert("shaken !! : try " + this.$root.triesCount);
+        //         } else {
+        //           alert("Last Shake");
+        //         }
+        //       }
+        //       oldx = Math.round(accel.x);
+        //       oldy = Math.round(accel.y);
+        //     });
 
-            window.addEventListener("deviceorientation", (event) => {
-              console.log(event);
-            });
-          }
-        });
+        //     window.addEventListener("deviceorientation", (event) => {
+        //       console.log(event);
+        //     });
+        //   }
+        // });
 
         //original code here
         // DeviceMotionEvent.requestPermission().then((response) => {
