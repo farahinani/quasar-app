@@ -80,11 +80,11 @@ export default defineComponent({
                   // alert("shaken !");
                   if (this.$root.triesCount < this.$root.numTries) {
                     alert("shaken !! : try " + this.$root.triesCount);
-                    this.$root.triesCount++; // this works fine but starting is try 0?
-                    // this.$root.triesCount += 1;
+                    // this.$root.triesCount++; // this works fine but starting is try 0?
+                    this.$root.triesCount += 1;
                   } else {
                     // alert("Last Shake");
-                    this.$router.push("PageHome");
+                    this.$router.push("home");
                   }
                   // this.$root.triesCount++; //the count keep increasing when click shake
                 }
