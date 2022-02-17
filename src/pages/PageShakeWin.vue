@@ -91,36 +91,22 @@ export default defineComponent({
       // });
 
       if (this.$root.triesCount < this.$root.numTries) {
-        this.$root.triesCount++;
+        // this.$root.triesCount++;
 
-        // window.addEventListener("devicemotion", (event) => {
-        //   if (
-        //     Math.abs(oldx - Math.round(event.acceleration.x)) >
-        //       shakethreshold ||
-        //     Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
-        //   ) {
-        //     alert("shaken !"); // do something
-        //   }
-        //   oldx = Math.round(accel.x);
-        //   oldy = Math.round(accel.y);
-        // });
-
-        if (this.$root.triesCount < this.$root.numTries) {
-          window.addEventListener("devicemotion", (event) => {
-            if (
-              Math.abs(oldx - Math.round(event.acceleration.x)) >
-                shakethreshold ||
-              Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
-            ) {
-              // alert("shaken !"); // do something
-              alert("shaken !! : try " + this.$root.triesCount);
-            }
-            oldx = Math.round(accel.x);
-            oldy = Math.round(accel.y);
-          });
-        } else {
-          alert("Last Shake");
-        }
+        window.addEventListener("devicemotion", (event) => {
+          if (
+            Math.abs(oldx - Math.round(event.acceleration.x)) >
+              shakethreshold ||
+            Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
+          ) {
+            // alert("shaken !"); // do something
+            this.$root.triesCount++;
+          }
+          oldx = Math.round(accel.x);
+          oldy = Math.round(accel.y);
+        });
+      } else {
+        alert("Last Shake");
       }
     }
     return {
@@ -130,14 +116,22 @@ export default defineComponent({
 
   methods: {
     shakeSuccess() {
+      //JOANNE
+      // if (this.$root.triesCount < this.$root.numTries) {
+      //   this.$root.triesCount++;
+
+      //   if (this.$root.triesCount < this.$root.numTries) {
+      //     alert("shaken !! : try " + this.$root.triesCount);
+      //   } else {
+      //     alert("Last Shake");
+      //   }
+      // }
+
       if (this.$root.triesCount < this.$root.numTries) {
         this.$root.triesCount++;
-
-        if (this.$root.triesCount < this.$root.numTries) {
-          alert("shaken !! : try " + this.$root.triesCount);
-        } else {
-          alert("Last Shake");
-        }
+        alert("shaken !! : try " + this.$root.triesCount);
+      } else {
+        alert("Last Shake");
       }
     },
   },
