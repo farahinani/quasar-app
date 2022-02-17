@@ -84,7 +84,7 @@ export default defineComponent({
                     this.$root.triesCount += 1;
                   } else {
                     // alert("Last Shake");
-                    this.$router.push(); // go to home
+                    alert("finish shake"); // go to home
                   }
                   // this.$root.triesCount++; //the count keep increasing when click shake
                 }
@@ -128,7 +128,7 @@ export default defineComponent({
         getAccel,
       };
     } else if ($q.platform.is.android) {
-      alert("This is android!");
+      alert("This is Android!");
 
       var oldx = 0;
       var oldy = 0;
@@ -145,7 +145,7 @@ export default defineComponent({
             this.$root.triesCount += 1;
           } else {
             // alert("Last Shake");
-            this.$router.push(); // go to home
+            alert("finish shake"); // go to home
           }
         }
         oldx = Math.round(accel.x);
