@@ -20,20 +20,18 @@
               id="accelPermsButton"
               color="primary"
               @click="getAccel()"
-              label="SHAKE PERMISSION IOS"
+              label="Start Shake"
             >
             </q-btn>
+            <br />
+            <q-btn
+              type="submit"
+              label="SHAKE BUTTON"
+              color="primary"
+              class="full-width"
+              @click="shakeSuccess()"
+            />
           </div>
-          <br />
-          <q-btn
-            type="submit"
-            label="SHAKE BUTTON"
-            color="primary"
-            class="full-width"
-            @click="shakeSuccess()"
-          />
-
-          <div v-if="$q.platform.is.android">android page</div>
         </q-card-section>
       </q-card>
     </div>
@@ -93,13 +91,16 @@ export default defineComponent({
         getAccel,
       };
     } else if ($q.platform.is.android) {
-      // alert("This is android!");
+      //console.log("This is android");
+      alert("This is android!");
 
       var oldx = 0;
       var oldy = 0;
       var shakethreshold = 25;
 
       window.addEventListener("devicemotion", (event) => {
+        // console.log(event);
+
         if (
           Math.abs(oldx - Math.round(event.acceleration.x)) > shakethreshold ||
           Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
@@ -115,19 +116,74 @@ export default defineComponent({
     }
   },
 
-  methods: {
-    shakeSuccess() {
-      //JOANNE's code
-      if (this.$root.triesCount < this.$root.numTries) {
-        this.$root.triesCount++;
+  // methods: {
+  //   getAccel() {
+  //     var oldx = 0;
+  //     var oldy = 0;
 
-        if (this.$root.triesCount < this.$root.numTries) {
-          alert("shaken !! : try " + this.$root.triesCount);
-        } else {
-          alert("Last Shake");
-        }
-      }
-    },
-  },
+  //     var shakethreshold = 20;
+
+  //     DeviceMotionEvent.requestPermission().then((response) => {
+  //       if (response == "granted") {
+  //         window.addEventListener("devicemotion", (event) => {
+  //           // console.log(event);
+
+  //           if (
+  //             Math.abs(oldx - Math.round(event.acceleration.x)) >
+  //               shakethreshold ||
+  //             Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
+  //           ) {
+  //             //shaken, do something
+  //             alert("shaken !");
+  //           }
+  //           oldx = Math.round(accel.x);
+  //           oldy = Math.round(accel.y);
+  //         });
+
+  //         window.addEventListener("deviceorientation", (event) => {
+  //           console.log(event);
+  //         });
+  //       }
+  //     });
+  //   },
+  // },
+
+  //DONT DELETE THIS. WORK IN PROGRESS//
+  // setup() {
+  //   var px = 50;
+  //   var py = 50;
+  //   var vx = 0.0;
+  //   var vy = 0.0;
+  //   var updateRate = 1 / 60;
+  //   function getAccel() {
+  //     DeviceMotionEvent.requestPermission().then((response) => {
+  //       if (response == "granted") {
+  //         window.addEventListener("deviceorientation", (event) => {
+  //           rotation_degrees = event.alpha;
+  //           frontToBack_degrees = event.beta;
+  //           leftToRight_degrees = event.gamma;
+
+  //           vx = vx + leftToRight_degrees * updateRate * 2;
+  //           vy = vy + frontToBack_degrees * updateRate;
+
+  //           px = px + vx * 0.5;
+  //           if (px > 98 || px < 0) {
+  //             px = Math.max(0, Math.min(98, px));
+  //             vx = 0;
+  //           }
+
+  //           py = py + vy * 0.5;
+  //           if (py > 98 || py < 0) {
+  //             py = Math.max(0, Math.min(98, py));
+  //             vy = 0;
+  //           }
+
+  //           dot = document.getElementsByClassName("indicatorDot")[0];
+  //           dot.setAttribute("style", "left:" + px + "%;" + "top:" + py + "%;");
+  //         });
+  //       }
+  //     });
+  //   }
+  // },
 });
 </script>
