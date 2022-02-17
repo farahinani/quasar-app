@@ -77,7 +77,6 @@ export default defineComponent({
 
   methods: {
     //CALCULATE NUMBER OF TRIES
-
     submitForm() {
       let numPacks = this.formData.cartonInput;
       let numTries = numPacks / 2;
