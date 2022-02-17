@@ -12,16 +12,19 @@
             </div>
           </div>
 
+          <div v-if="$q.platform.is.desktop">rendered on Desktop!</div>
+
           <div v-if="$q.platform.is.ios">
             Please press button "Start shake"<br />
             <q-btn
               id="accelPermsButton"
               color="primary"
               @click="permission()"
-              label="SHAKE PERMISSION"
+              label="SHAKE PERMISSION IOS"
             >
             </q-btn>
           </div>
+          <br />
           <q-btn
             type="submit"
             label="SHAKE BUTTON"
@@ -51,52 +54,66 @@ export default defineComponent({
     $q.platform.is.android;
     $q.platform.is.ios;
 
-    if (
-      $q.platform.is.ios ||
-      $q.platform.is.android ||
-      $q.platform.is.desktop
-    ) {
-      if ($q.platform.is.ios) {
-        function permission() {
-          DeviceMotionEvent.requestPermission().then((response) => {
-            if (response == "granted") {
-              getAccel();
-            } else {
-              alert("response is not granted");
-            }
-          });
-        }
-        return {
-          permission,
-        };
-      } else if ($q.platform.is.android) {
-        getAccel();
-        // console.log("this is android");
-      } else {
-        console.log("platform is desktop");
+    if ($q.platform.is.ios) {
+      function getAccel() {
+        var oldx = 0;
+        var oldy = 0;
+
+        var shakethreshold = 25;
+
+        DeviceMotionEvent.requestPermission().then((response) => {
+          if (response == "granted") {
+            window.addEventListener("devicemotion", (event) => {
+              if (
+                Math.abs(oldx - Math.round(event.acceleration.x)) >
+                  shakethreshold ||
+                Math.abs(oldy - Math.round(event.acceleration.y)) >
+                  shakethreshold
+              ) {
+                //shaken, do something
+                alert("shaken !");
+                if (this.$root.triesCount < this.$root.numTries) {
+                  this.$root.triesCount++;
+                  alert("shaken !! : try " + this.$root.triesCount);
+                }
+              }
+              oldx = Math.round(accel.x);
+              oldy = Math.round(accel.y);
+            });
+          }
+        });
       }
+
+      return {
+        getAccel,
+      };
+    } else if ($q.platform.is.android) {
+      // alert("This is android!");
+
+      var oldx = 0;
+      var oldy = 0;
+      var shakethreshold = 25;
+
+      window.addEventListener("devicemotion", (event) => {
+        // console.log(event);
+
+        if (
+          Math.abs(oldx - Math.round(event.acceleration.x)) > shakethreshold ||
+          Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
+        ) {
+          //shaken, do something
+          alert("shaken !");
+          if (this.$root.triesCount < this.$root.numTries) {
+            this.$root.triesCount++;
+            alert("shaken !! : try " + this.$root.triesCount);
+          }
+        }
+        oldx = Math.round(accel.x);
+        oldy = Math.round(accel.y);
+      });
+    } else {
+      alert("this is dekstop!");
     }
-
-    // function getAccel() {
-    //   var oldx = 0;
-    //   var oldy = 0;
-    //   var shakethreshold = 25;
-
-    //   window.addEventListener("devicemotion", (event) => {
-    //     if (
-    //       Math.abs(oldx - Math.round(event.acceleration.x)) > shakethreshold ||
-    //       Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
-    //     ) {
-    //       alert("shaken !"); // do something
-    //       // shakeSuccess();
-    //     }
-    //     oldx = Math.round(accel.x);
-    //     oldy = Math.round(accel.y);
-    //   });
-    // }
-    // return {
-    //   getAccel,
-    // };
   },
 
   methods: {
@@ -111,24 +128,6 @@ export default defineComponent({
           alert("Last Shake");
         }
       }
-    },
-
-    getAccel() {
-      var oldx = 0;
-      var oldy = 0;
-      var shakethreshold = 25;
-
-      window.addEventListener("devicemotion", (event) => {
-        if (
-          Math.abs(oldx - Math.round(event.acceleration.x)) > shakethreshold ||
-          Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
-        ) {
-          alert("shaken !!!!!"); // do something
-          // shakeSuccess();
-        }
-        oldx = Math.round(accel.x);
-        oldy = Math.round(accel.y);
-      });
     },
   },
 });
