@@ -64,20 +64,47 @@ export default defineComponent({
 
         var shakethreshold = 25;
 
+        if (this.$root.triesCount < this.$root.numTries) {
+          this.$root.triesCount++;
+
+          DeviceMotionEvent.requestPermission().then((response) => {
+            if (response == "granted") {
+              window.addEventListener("devicemotion", (event) => {
+                if (
+                  Math.abs(oldx - Math.round(event.acceleration.x)) >
+                    shakethreshold ||
+                  Math.abs(oldy - Math.round(event.acceleration.y)) >
+                    shakethreshold
+                ) {
+                  alert("shaken !");
+                }
+                oldx = Math.round(accel.x);
+                oldy = Math.round(accel.y);
+              });
+
+              window.addEventListener("deviceorientation", (event) => {
+                console.log(event);
+              });
+            }
+          });
+        }
+
         DeviceMotionEvent.requestPermission().then((response) => {
           if (response == "granted") {
             window.addEventListener("devicemotion", (event) => {
-              // console.log(event);
-
               if (
                 Math.abs(oldx - Math.round(event.acceleration.x)) >
                   shakethreshold ||
                 Math.abs(oldy - Math.round(event.acceleration.y)) >
                   shakethreshold
               ) {
-                //shaken, do something
                 // alert("shaken !");
-                shakeSuccess();
+
+                if (this.$root.triesCount < this.$root.numTries) {
+                  alert("shaken !! : try " + this.$root.triesCount);
+                } else {
+                  alert("Last Shake");
+                }
               }
               oldx = Math.round(accel.x);
               oldy = Math.round(accel.y);
@@ -88,6 +115,30 @@ export default defineComponent({
             });
           }
         });
+
+        //original code here
+        // DeviceMotionEvent.requestPermission().then((response) => {
+
+        //   if (response == "granted") {
+        //     window.addEventListener("devicemotion", (event) => {
+        //       if (
+        //         Math.abs(oldx - Math.round(event.acceleration.x)) >
+        //           shakethreshold ||
+        //         Math.abs(oldy - Math.round(event.acceleration.y)) >
+        //           shakethreshold
+        //       ) {
+        //         alert("shaken !");
+
+        //       }
+        //       oldx = Math.round(accel.x);
+        //       oldy = Math.round(accel.y);
+        //     });
+
+        //     window.addEventListener("deviceorientation", (event) => {
+        //       console.log(event);
+        //     });
+        //   }
+        // });
       }
 
       return {
