@@ -64,8 +64,6 @@ export default defineComponent({
 
         var shakethreshold = 25;
 
-        triesCount = 1;
-
         if (this.$root.triesCount < this.$root.numTries) {
           DeviceMotionEvent.requestPermission().then((response) => {
             if (response == "granted") {
