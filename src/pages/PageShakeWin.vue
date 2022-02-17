@@ -88,8 +88,9 @@ export default defineComponent({
 
                 // this.$root.triesCount++; //only display alert equals to numtries
               });
-              this.$root.triesCount++;
+              // this.$root.triesCount++; // need to press button everytime wants to shake
             }
+            this.$root.triesCount++;
           });
         }
 
