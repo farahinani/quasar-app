@@ -64,6 +64,7 @@ export default defineComponent({
 
         var shakethreshold = 25;
 
+        //3RD CODE
         if (this.$root.triesCount < this.$root.numTries) {
           DeviceMotionEvent.requestPermission().then((response) => {
             if (response == "granted") {
@@ -80,11 +81,11 @@ export default defineComponent({
                   if (this.$root.triesCount < this.$root.numTries) {
                     alert("shaken !! : try " + this.$root.triesCount);
 
-                    // this.$root.triesCount++; // this works fine but starting is 0?
+                    this.$root.triesCount++; // this works fine but starting is try 0?
                   } else {
                     alert("Last Shake");
                   }
-                  this.$root.triesCount++;
+                  // this.$root.triesCount++; //the count keep increasing when click shake
                 }
                 oldx = Math.round(accel.x);
                 oldy = Math.round(accel.y);
@@ -96,6 +97,33 @@ export default defineComponent({
             // this.$root.triesCount++; // need to press button if wants to shake
           });
         }
+
+        //2ND CODE
+        // if (this.$root.triesCount < this.$root.numTries) {
+        //   DeviceMotionEvent.requestPermission().then((response) => {
+        //     if (response == "granted") {
+        //       window.addEventListener("devicemotion", (event) => {
+
+        //         if (
+        //           Math.abs(oldx - Math.round(event.acceleration.x)) >
+        //             shakethreshold ||
+        //           Math.abs(oldy - Math.round(event.acceleration.y)) >
+        //             shakethreshold
+        //         ) {
+        //           if (this.$root.triesCount < this.$root.numTries) {
+        //             alert("shaken !! : try " + this.$root.triesCount);
+
+        //           } else {
+        //             alert("Last Shake");
+        //           }
+        //           this.$root.triesCount++;
+        //         }
+        //         oldx = Math.round(accel.x);
+        //         oldy = Math.round(accel.y);
+        //       });
+        //     }
+        //   });
+        // }
 
         // DeviceMotionEvent.requestPermission().then((response) => {
         //   if (response == "granted") {
@@ -181,14 +209,22 @@ export default defineComponent({
   methods: {
     shakeSuccess() {
       //JOANNE's code
-      if (this.$root.triesCount < this.$root.numTries) {
-        this.$root.triesCount++;
+      // if (this.$root.triesCount < this.$root.numTries) {
+      //   this.$root.triesCount++;
 
-        if (this.$root.triesCount < this.$root.numTries) {
-          alert("shaken !! : try " + this.$root.triesCount);
-        } else {
-          alert("Last Shake");
-        }
+      //   if (this.$root.triesCount < this.$root.numTries) {
+      //     alert("shaken !! : try " + this.$root.triesCount);
+      //   } else {
+      //     alert("Last Shake");
+      //   }
+      // }
+
+      for (
+        this.$root.triesCount = 0;
+        this.$root.triesCount < this.$root.numTries;
+        this.$root.triesCount++
+      ) {
+        console.log("shaken !! : try " + this.$root.triesCount);
       }
     },
   },
