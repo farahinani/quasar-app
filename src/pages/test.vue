@@ -29,7 +29,7 @@
       <q-btn
         id="accelPermsButton"
         color="primary"
-        @click="getAccel()"
+        @click="requestPermission()"
         label="Start Shake"
       >
       </q-btn>
