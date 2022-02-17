@@ -40,17 +40,53 @@ export default defineComponent({
     $q.platform.is.android;
     $q.platform.is.ios;
 
-    if ($q.platform.is.ios) {
-      alert("this is ios");
+    if (
+      $q.platform.is.ios ||
+      $q.platform.is.android ||
+      $q.platform.is.desktop
+    ) {
+      if ($q.platform.is.ios) {
+        // getAccel();
+        DeviceMotionEvent.requestPermission().then((response) => {
+          if (response == "granted") {
+            getAccel();
+          } else {
+            alert("response is not granted");
+          }
+        });
+      } else if ($q.platform.is.android) {
+        getAccel();
+      } else {
+        console.log("platform is desktop");
+      }
+    }
 
-      DeviceMotionEvent.requestPermission().then((response) => {
-        if (response == "granted") {
-          console.log("request granted");
-        } else {
-          console.log("request not granted");
+    function getAccel() {
+      var oldx = 0;
+      var oldy = 0;
+
+      var shakethreshold = 25;
+
+      window.addEventListener("devicemotion", (event) => {
+        if (
+          Math.abs(oldx - Math.round(event.acceleration.x)) > shakethreshold ||
+          Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
+        ) {
+          //shaken, do something
+          alert("shaken !");
+          if (this.$root.triesCount < this.$root.numTries) {
+            this.$root.triesCount++;
+            alert("shaken !! : try " + this.$root.triesCount);
+          }
         }
+        oldx = Math.round(accel.x);
+        oldy = Math.round(accel.y);
       });
     }
+
+    return {
+      getAccel,
+    };
   },
 
   // data() {
