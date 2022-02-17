@@ -19,7 +19,7 @@
             <q-btn
               id="accelPermsButton"
               color="primary"
-              @click="permission()"
+              @click="getAccel()"
               label="SHAKE PERMISSION IOS"
             >
             </q-btn>
