@@ -80,10 +80,11 @@ export default defineComponent({
                   if (this.$root.triesCount < this.$root.numTries) {
                     alert("shaken !! : try " + this.$root.triesCount);
 
-                    this.$root.triesCount++; // this works fine but starting is 0?
+                    // this.$root.triesCount++; // this works fine but starting is 0?
                   } else {
                     alert("Last Shake");
                   }
+                  this.$root.triesCount++;
                 }
                 oldx = Math.round(accel.x);
                 oldy = Math.round(accel.y);
