@@ -72,10 +72,6 @@ export default defineComponent({
               ) {
                 //shaken, do something
                 alert("shaken !");
-                if (this.$root.triesCount < this.$root.numTries) {
-                  this.$root.triesCount++;
-                  alert("shaken !! : try " + this.$root.triesCount);
-                }
               }
               oldx = Math.round(accel.x);
               oldy = Math.round(accel.y);
@@ -95,18 +91,12 @@ export default defineComponent({
       var shakethreshold = 25;
 
       window.addEventListener("devicemotion", (event) => {
-        // console.log(event);
-
         if (
           Math.abs(oldx - Math.round(event.acceleration.x)) > shakethreshold ||
           Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
         ) {
           //shaken, do something
           alert("shaken !");
-          if (this.$root.triesCount < this.$root.numTries) {
-            this.$root.triesCount++;
-            alert("shaken !! : try " + this.$root.triesCount);
-          }
         }
         oldx = Math.round(accel.x);
         oldy = Math.round(accel.y);
