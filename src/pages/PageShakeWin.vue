@@ -101,6 +101,8 @@ export default defineComponent({
           ) {
             // alert("shaken !"); // do something
             this.$root.triesCount++;
+
+            alert("shaken !! : try " + this.$root.triesCount);
           }
           oldx = Math.round(accel.x);
           oldy = Math.round(accel.y);
