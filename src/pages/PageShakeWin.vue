@@ -64,6 +64,8 @@ export default defineComponent({
 
         var shakethreshold = 25;
 
+        triesCount = 1;
+
         if (this.$root.triesCount < this.$root.numTries) {
           DeviceMotionEvent.requestPermission().then((response) => {
             if (response == "granted") {
@@ -80,15 +82,7 @@ export default defineComponent({
                   if (this.$root.triesCount < this.$root.numTries) {
                     alert("shaken !! : try " + this.$root.triesCount);
 
-                    // this.$root.triesCount++; // this works fine but starting is 0?
-
-                    for (
-                      let triesCount = 0;
-                      triesCount < numTries;
-                      triesCount++
-                    ) {
-                      this.$root.triesCount;
-                    }
+                    this.$root.triesCount++; // this works fine but starting is 0?
                   } else {
                     alert("Last Shake");
                   }
