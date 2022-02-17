@@ -68,6 +68,8 @@ export default defineComponent({
           DeviceMotionEvent.requestPermission().then((response) => {
             if (response == "granted") {
               window.addEventListener("devicemotion", (event) => {
+                // this.$root.triesCount++; //loop number like forever
+
                 if (
                   Math.abs(oldx - Math.round(event.acceleration.x)) >
                     shakethreshold ||
@@ -79,8 +81,9 @@ export default defineComponent({
                 oldx = Math.round(accel.x);
                 oldy = Math.round(accel.y);
 
-                this.$root.triesCount++;
+                // this.$root.triesCount++; //only display alert equals to numtries
               });
+              this.$root.triesCount++;
             }
           });
         }
