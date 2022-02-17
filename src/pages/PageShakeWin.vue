@@ -182,7 +182,6 @@ export default defineComponent({
         getAccel,
       };
     } else if ($q.platform.is.android) {
-      //console.log("This is android");
       alert("This is android!");
 
       var oldx = 0;
@@ -190,18 +189,33 @@ export default defineComponent({
       var shakethreshold = 25;
 
       window.addEventListener("devicemotion", (event) => {
-        // console.log(event);
+        // this.$root.triesCount++; //loop number like forever
 
         if (
           Math.abs(oldx - Math.round(event.acceleration.x)) > shakethreshold ||
           Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
         ) {
-          //shaken, do something
-          alert("shaken !");
+          if (this.$root.triesCount < this.$root.numTries) {
+            alert("shaken !! : try " + this.$root.triesCount);
+            this.$root.triesCount += 1;
+          } else {
+            alert("should go home page"); // go to home
+          }
         }
         oldx = Math.round(accel.x);
         oldy = Math.round(accel.y);
       });
+
+      // window.addEventListener("devicemotion", (event) => {
+      //   if (
+      //     Math.abs(oldx - Math.round(event.acceleration.x)) > shakethreshold ||
+      //     Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
+      //   ) {
+      //     alert("shaken !");
+      //   }
+      //   oldx = Math.round(accel.x);
+      //   oldy = Math.round(accel.y);
+      // });
     } else {
       alert("this is dekstop!");
     }
@@ -212,21 +226,19 @@ export default defineComponent({
       //JOANNE's code
       // if (this.$root.triesCount < this.$root.numTries) {
       //   this.$root.triesCount++;
-
       //   if (this.$root.triesCount < this.$root.numTries) {
       //     alert("shaken !! : try " + this.$root.triesCount);
       //   } else {
       //     alert("Last Shake");
       //   }
       // }
-
-      for (
-        this.$root.triesCount = 0;
-        this.$root.triesCount < this.$root.numTries;
-        this.$root.triesCount++
-      ) {
-        console.log("shaken !! : try " + this.$root.triesCount);
-      }
+      // for (
+      //   this.$root.triesCount = 0;
+      //   this.$root.triesCount < this.$root.numTries;
+      //   this.$root.triesCount++
+      // ) {
+      //   console.log("shaken !! : try " + this.$root.triesCount);
+      // }
     },
   },
 });
