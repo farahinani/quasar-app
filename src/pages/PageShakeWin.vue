@@ -79,6 +79,8 @@ export default defineComponent({
                   // alert("shaken !");
                   if (this.$root.triesCount < this.$root.numTries) {
                     alert("shaken !! : try " + this.$root.triesCount);
+
+                    this.$root.triesCount++;
                   } else {
                     alert("Last Shake");
                   }
@@ -90,7 +92,7 @@ export default defineComponent({
               });
               // this.$root.triesCount++; // need to press button everytime wants to shake
             }
-            this.$root.triesCount++;
+            // this.$root.triesCount++; // need to press button if wants to shake
           });
         }
 
