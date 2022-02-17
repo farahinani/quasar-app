@@ -30,6 +30,7 @@
 
               <div>
                 <q-btn
+                  to="/home/shake-and-win"
                   type="submit"
                   label="Submit"
                   color="primary"
@@ -41,16 +42,16 @@
               </div>
 
               <br />
-              <div>
+              <!-- <div>
                 <q-btn
                   to="/home/shake-and-win"
                   color="primary"
                   label="Next"
                   class="full-width"
                 />
-              </div>
+              </div> -->
 
-              <div>tries: {{ formData.numTriesInt }}</div>
+              <!-- <div>tries: {{ $root.numTries }}</div> -->
             </q-form>
           </div>
         </q-card-section>
@@ -61,7 +62,6 @@
 
 <script>
 import { defineComponent } from "vue";
-import { ref } from "vue";
 
 export default defineComponent({
   name: "PageHome",
@@ -71,50 +71,14 @@ export default defineComponent({
       formData: {
         cartonInput: "",
       },
-
-      // submitForm() {
-      //   let numPacks = this.formData.cartonInput;
-
-      //   let numTries = numPacks / 2;
-
-      //   if (numTries < 1) {
-      //     alert("please purchase at least 2 packs");
-      //   } else if (numTries >= 1) {
-      //     let numTriesInt = Math.floor(numTries);
-
-      //     alert("Number of Tries:" + " " + numTriesInt);
-      //     console.log(numTriesInt);
-      //   }
-      // },
+      numTries: "",
     };
   },
 
-  // setup() {
-  //   function submitForm() {
-  //     let numPacks = this.formData.cartonInput;
-
-  //     let numTries = numPacks / 2;
-
-  //     if (numTries < 1) {
-  //       alert("please purchase at least 2 packs");
-  //     } else if (numTries >= 1) {
-  //       let numTriesInt = Math.floor(numTries);
-
-  //       alert("Number of Tries:" + " " + numTriesInt);
-  //       console.log(numTriesInt);
-  //     }
-  //   }
-
-  //   return {
-  //     submitForm,
-  //   };
-  // },
-
   methods: {
     //CALCULATE NUMBER OF TRIES
-    submitForm() {
-      // console.log("submit success");
 
+    submitForm() {
       let numPacks = this.formData.cartonInput;
       let numTries = numPacks / 2;
 
@@ -122,12 +86,12 @@ export default defineComponent({
         alert("please purchase at least 2 packs");
       } else if (numTries >= 1) {
         let numTriesInt = Math.floor(numTries);
-        alert("Number of Tries:" + " " + numTriesInt);
+        // alert("Number of Tries:" + " " + numTriesInt);
+
+        this.$root.numTries = numTriesInt;
       }
 
-      return {
-        numTriesInt,
-      };
+      // return numTries;
     },
   },
 });

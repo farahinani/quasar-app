@@ -5,8 +5,10 @@
         <q-card-section>
           <div class="q-py-lg q-px-md">
             <div class="text-h5 text-center">
-              You have 2 tries
-              <q-badge color="teal-10" align="middle"> 1/2 </q-badge>
+              You have : {{ $root.numTries }} tries
+              <q-badge color="teal-10" align="middle">
+                1/{{ $root.numTries }}
+              </q-badge>
             </div>
           </div>
 
@@ -55,8 +57,6 @@ export default defineComponent({
         DeviceMotionEvent.requestPermission().then((response) => {
           if (response == "granted") {
             window.addEventListener("devicemotion", (event) => {
-              // console.log(event);
-
               if (
                 Math.abs(oldx - Math.round(event.acceleration.x)) >
                   shakethreshold ||
@@ -70,9 +70,9 @@ export default defineComponent({
               oldy = Math.round(accel.y);
             });
 
-            window.addEventListener("deviceorientation", (event) => {
-              console.log(event);
-            });
+            // window.addEventListener("deviceorientation", (event) => {
+            //   console.log(event);
+            // });
           }
         });
       }
@@ -81,7 +81,6 @@ export default defineComponent({
         getAccel,
       };
     } else if ($q.platform.is.android) {
-      //console.log("This is android");
       alert("This is android!");
 
       var oldx = 0;
@@ -97,6 +96,10 @@ export default defineComponent({
         ) {
           //shaken, do something
           alert("shaken !");
+          if (this.$root.triesCount < this.$root.numTries) {
+            this.$root.triesCount++;
+            alert("shaken !! : try " + this.$root.triesCount);
+          }
         }
         oldx = Math.round(accel.x);
         oldy = Math.round(accel.y);
