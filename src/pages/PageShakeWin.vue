@@ -5,10 +5,8 @@
         <q-card-section>
           <div class="q-py-lg q-px-md">
             <div class="text-h5 text-center">
-              You have : {{ $root.numTries }} tries
-              <q-badge color="teal-10" align="middle">
-                {{ $root.triesCount }}/{{ $root.numTries }}
-              </q-badge>
+              You have 2 tries
+              <q-badge color="teal-10" align="middle"> 1/2 </q-badge>
             </div>
           </div>
 
@@ -23,14 +21,6 @@
               label="Start Shake"
             >
             </q-btn>
-            <br />
-            <q-btn
-              type="submit"
-              label="SHAKE BUTTON"
-              color="primary"
-              class="full-width"
-              @click="shakeSuccess()"
-            />
           </div>
         </q-card-section>
       </q-card>
