@@ -80,23 +80,28 @@ export default defineComponent({
       var shakethreshold = 25;
 
       window.addEventListener("devicemotion", (event) => {
-        if (this.$root.triesCount < this.$root.numTries) {
-          this.$root.triesCount++;
-          if (
-            Math.abs(oldx - Math.round(event.acceleration.x)) >
-              shakethreshold ||
-            Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
-          ) {
-            // alert("shaken !"); // do something
-            alert("shaken !! : try " + this.$root.triesCount);
-          } else {
-            alert("Last Shake");
-          }
+        if (
+          Math.abs(oldx - Math.round(event.acceleration.x)) > shakethreshold ||
+          Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
+        ) {
+          // alert("shaken !"); // do something
+          shakeSuccess();
         }
-
         oldx = Math.round(accel.x);
         oldy = Math.round(accel.y);
       });
+
+      //original
+      // window.addEventListener("devicemotion", (event) => {
+      //   if (
+      //     Math.abs(oldx - Math.round(event.acceleration.x)) > shakethreshold ||
+      //     Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
+      //   ) {
+      //     alert("shaken !");
+      //   }
+      //   oldx = Math.round(accel.x);
+      //   oldy = Math.round(accel.y);
+      // });
     }
     return {
       getAccel,
@@ -105,7 +110,7 @@ export default defineComponent({
 
   methods: {
     shakeSuccess() {
-      //JOANNE
+      //JOANNE's code
       if (this.$root.triesCount < this.$root.numTries) {
         this.$root.triesCount++;
 
