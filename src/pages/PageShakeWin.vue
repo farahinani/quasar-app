@@ -55,6 +55,9 @@ export default defineComponent({
     $q.platform.is.ios;
 
     if ($q.platform.is.ios) {
+      alert("alert: this is ios");
+      //console.log("msg: this is desktop");
+
       function getAccel() {
         var oldx = 0;
         var oldy = 0;
@@ -64,6 +67,8 @@ export default defineComponent({
         DeviceMotionEvent.requestPermission().then((response) => {
           if (response == "granted") {
             window.addEventListener("devicemotion", (event) => {
+              // console.log(event);
+
               if (
                 Math.abs(oldx - Math.round(event.acceleration.x)) >
                   shakethreshold ||
@@ -75,6 +80,10 @@ export default defineComponent({
               }
               oldx = Math.round(accel.x);
               oldy = Math.round(accel.y);
+            });
+
+            window.addEventListener("deviceorientation", (event) => {
+              console.log(event);
             });
           }
         });
