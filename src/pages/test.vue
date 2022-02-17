@@ -57,9 +57,7 @@ export default defineComponent({
       $q.platform.is.desktop
     ) {
       if ($q.platform.is.ios) {
-        // getAccel();
         function permission() {
-          // console.log("click button permission");
           DeviceMotionEvent.requestPermission().then((response) => {
             if (response == "granted") {
               getAccel();
@@ -71,14 +69,6 @@ export default defineComponent({
         return {
           permission,
         };
-
-        // DeviceMotionEvent.requestPermission().then((response) => {
-        //   if (response == "granted") {
-        //     getAccel();
-        //   } else {
-        //     alert("response is not granted");
-        //   }
-        // });
       } else if ($q.platform.is.android) {
         getAccel();
       } else {

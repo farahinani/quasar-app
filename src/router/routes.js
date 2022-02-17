@@ -7,7 +7,8 @@ const routes = [
       { path: '', component: () => import('src/pages/PageIntro.vue') },
       { path: '/home', component: () => import('src/pages/PageHome.vue') },
       { path: '/home/shake-and-win', component: () => import('src/pages/PageShakeWin.vue') },
-      { path: '/test', component: () => import('src/pages/test.vue') }
+      { path: '/test', component: () => import('src/pages/test.vue') },
+      { path: '/test2', component: () => import('src/pages/test2.vue') }
     ]
   },
 
