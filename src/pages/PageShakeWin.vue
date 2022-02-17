@@ -132,11 +132,9 @@ export default defineComponent({
 
       var oldx = 0;
       var oldy = 0;
-      var shakethreshold = 25;
+      var shakethreshold = 20;
 
       window.addEventListener("devicemotion", (event) => {
-        // this.$root.triesCount++; //loop number like forever
-
         if (
           Math.abs(oldx - Math.round(event.acceleration.x)) > shakethreshold ||
           Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
@@ -144,30 +142,15 @@ export default defineComponent({
           // alert("shaken !");
           if (this.$root.triesCount < this.$root.numTries) {
             alert("shaken !! : try " + this.$root.triesCount);
-            // this.$root.triesCount++; // this works fine but starting is try 0?
             this.$root.triesCount += 1;
           } else {
             // alert("Last Shake");
             this.$router.push(); // go to home
           }
-          // this.$root.triesCount++; //the count keep increasing when click shake
         }
         oldx = Math.round(accel.x);
         oldy = Math.round(accel.y);
-
-        // this.$root.triesCount++; //only display alert equals to numtries
       });
-
-      // window.addEventListener("devicemotion", (event) => {
-      //   if (
-      //     Math.abs(oldx - Math.round(event.acceleration.x)) > shakethreshold ||
-      //     Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
-      //   ) {
-      //     alert("shaken !");
-      //   }
-      //   oldx = Math.round(accel.x);
-      //   oldy = Math.round(accel.y);
-      // });
     } else {
       alert("this is dekstop!");
     }
