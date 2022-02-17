@@ -32,6 +32,8 @@
             class="full-width"
             @click="shakeSuccess()"
           />
+
+          <div v-if="$q.platform.is.android">rendered on android</div>
         </q-card-section>
       </q-card>
     </div>
