@@ -29,6 +29,8 @@
             class="full-width"
             @click="shakeSuccess()"
           />
+
+          <div v-if="$q.platform.is.android">android page</div>
         </q-card-section>
       </q-card>
     </div>
@@ -69,43 +71,32 @@ export default defineComponent({
         };
       } else if ($q.platform.is.android) {
         getAccel();
+        // console.log("this is android");
       } else {
         console.log("platform is desktop");
       }
     }
 
-    function getAccel() {
-      var oldx = 0;
-      var oldy = 0;
-      var shakethreshold = 25;
+    // function getAccel() {
+    //   var oldx = 0;
+    //   var oldy = 0;
+    //   var shakethreshold = 25;
 
-      window.addEventListener("devicemotion", (event) => {
-        if (
-          Math.abs(oldx - Math.round(event.acceleration.x)) > shakethreshold ||
-          Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
-        ) {
-          alert("shaken !"); // do something
-          // shakeSuccess();
-        }
-        oldx = Math.round(accel.x);
-        oldy = Math.round(accel.y);
-      });
-
-      //original
-      // window.addEventListener("devicemotion", (event) => {
-      //   if (
-      //     Math.abs(oldx - Math.round(event.acceleration.x)) > shakethreshold ||
-      //     Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
-      //   ) {
-      //     alert("shaken !");
-      //   }
-      //   oldx = Math.round(accel.x);
-      //   oldy = Math.round(accel.y);
-      // });
-    }
-    return {
-      getAccel,
-    };
+    //   window.addEventListener("devicemotion", (event) => {
+    //     if (
+    //       Math.abs(oldx - Math.round(event.acceleration.x)) > shakethreshold ||
+    //       Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
+    //     ) {
+    //       alert("shaken !"); // do something
+    //       // shakeSuccess();
+    //     }
+    //     oldx = Math.round(accel.x);
+    //     oldy = Math.round(accel.y);
+    //   });
+    // }
+    // return {
+    //   getAccel,
+    // };
   },
 
   methods: {
@@ -120,13 +111,24 @@ export default defineComponent({
           alert("Last Shake");
         }
       }
+    },
 
-      // if (this.$root.triesCount < this.$root.numTries) {
-      //   this.$root.triesCount++;
-      //   alert("shaken !! : try " + this.$root.triesCount);
-      // } else {
-      //   alert("Last Shake");
-      // }
+    getAccel() {
+      var oldx = 0;
+      var oldy = 0;
+      var shakethreshold = 25;
+
+      window.addEventListener("devicemotion", (event) => {
+        if (
+          Math.abs(oldx - Math.round(event.acceleration.x)) > shakethreshold ||
+          Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
+        ) {
+          alert("shaken !!!!!"); // do something
+          // shakeSuccess();
+        }
+        oldx = Math.round(accel.x);
+        oldy = Math.round(accel.y);
+      });
     },
   },
 });
