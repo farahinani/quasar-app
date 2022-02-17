@@ -10,6 +10,7 @@ export default defineComponent({
   data() {
     return {
       numTries: 0,
+      triesCount: 0,
     };
   },
 });

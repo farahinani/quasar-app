@@ -90,8 +90,6 @@ export default defineComponent({
 
         this.$root.numTries = numTriesInt;
       }
-
-      // return numTries;
     },
   },
 });
