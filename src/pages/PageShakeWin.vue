@@ -84,7 +84,7 @@ export default defineComponent({
                     this.$root.triesCount += 1;
                   } else {
                     // alert("Last Shake");
-                    this.$router.push("home");
+                    this.$router.push(); // go to home
                   }
                   // this.$root.triesCount++; //the count keep increasing when click shake
                 }
