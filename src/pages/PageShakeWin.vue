@@ -169,12 +169,10 @@ export default defineComponent({
             Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
           ) {
             // alert("shaken!");
-            if (this.$root.triesCount < this.$root.numTries) {
-              alert("shaken !! : try " + this.$root.triesCount);
-            } else {
-              alert("finish shake");
-            }
+            alert("shaken !! : try " + this.$root.triesCount);
           }
+        } else {
+          alert("finish shake");
         }
 
         oldx = Math.round(accel.x);
