@@ -3,6 +3,13 @@
     <div class="q-pa-md row items-start q-gutter-md">
       <q-card class="my-card">
         <q-card-section>
+          <div class="text-center">
+            <span class="text-h4"
+              >SHAKE & WIN <br />
+              <span class="text-h5">WITH FLORIDA'S NATURAL</span>
+            </span>
+            <hr />
+          </div>
           <div class="q-py-lg q-px-md">
             <div class="text-h6 text-center">
               Please approach our <br />promoter and
@@ -12,7 +19,7 @@
               ><br />
               collect your prizes*
             </div>
-            <hr />
+            <br />
             <q-icon name="print" color="teal" size="6em" />
             <q-icon name="today" class="text-orange" size="6em" />
             <q-icon name="style" size="6em" />

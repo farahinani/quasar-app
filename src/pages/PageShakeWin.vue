@@ -3,19 +3,31 @@
     <div class="q-pa-md row items-start q-gutter-md">
       <q-card class="my-card">
         <q-card-section>
+          <div class="text-center">
+            <span class="text-h4"
+              >SHAKE & WIN <br />
+              <span class="text-h5">WITH FLORIDA'S NATURAL</span>
+            </span>
+            <hr />
+            <br />
+          </div>
           <div class="q-py-lg q-px-md">
             <div class="text-h5 text-center">
-              You have : {{ $root.numTries }} tries
+              You have {{ $root.numTries }} tries
               <q-badge color="teal-10" align="middle">
                 {{ $root.triesCount }}/{{ $root.numTries }}
               </q-badge>
             </div>
+            <br />
+            <div class="text-h5 text-center">
+              <b>Try {{ $root.triesCount }}</b>
+            </div>
+            <br />
+            <div class="body-text1 text-center">
+              Shake your device <br />
+              to see what you get!
+            </div>
           </div>
-          <!-- DISPLAY FOR DESKTOP -->
-          <div v-if="$q.platform.is.desktop">rendered on Desktop!</div>
-
-          <!-- DISPLAY FOR ANDROID -->
-          <div v-if="$q.platform.is.android">rendered on android</div>
 
           <!-- DISPLAY BUTTON FOR IOS -->
           <div v-if="$q.platform.is.ios">
@@ -23,6 +35,7 @@
             <div v-on:click="hide = !hide">
               <p>
                 <q-btn
+                  class="full-width"
                   v-if="hide"
                   id="accelPermsButton"
                   color="primary"
@@ -44,8 +57,6 @@
             >
             </q-btn> -->
           </div>
-
-          <br />
 
           <!-- BUTTON FOR SHAKESUCCESS CODE -->
           <!-- <q-btn
@@ -92,7 +103,7 @@ export default defineComponent({
     $q.platform.is.ios;
 
     if ($q.platform.is.ios) {
-      alert("alert: this is ios");
+      // alert("alert: this is ios");
 
       function getAccel() {
         var oldx = 0;
@@ -164,7 +175,7 @@ export default defineComponent({
         getAccel,
       };
     } else if ($q.platform.is.android) {
-      alert("This is Android!");
+      // alert("This is Android!");
 
       var oldx = 0;
       var oldy = 0;
@@ -204,7 +215,7 @@ export default defineComponent({
       //   oldy = Math.round(accel.y);
       // });
     } else {
-      alert("this is dekstop!");
+      // alert("this is dekstop!");
     }
   },
 

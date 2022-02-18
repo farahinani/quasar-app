@@ -3,7 +3,7 @@
     <q-header elevated class="bg-primary text-white">
       <q-toolbar>
         <q-toolbar-title class="text-weight-bold">
-          Fresh Florida test
+          Fresh From Florida: <br />Shake & Win Test
         </q-toolbar-title>
         <q-btn
           @click="reloadPage"

@@ -3,15 +3,21 @@
     <div class="q-pa-md row items-start q-gutter-md">
       <q-card class="my-card">
         <q-card-section>
+          <div class="text-center">
+            <span class="text-h4"
+              >SHAKE & WIN <br />
+              <span class="text-h5">WITH FLORIDA'S NATURAL</span>
+            </span>
+            <hr />
+          </div>
           <div class="q-py-lg q-px-md">
             <div class="text-h5 text-center">
-              Please enter how many <br />cartons you have purchased <br />in
-              your receipt*.
+              Please enter how many cartons you have purchased in
+              your&nbsp;receipt*
             </div>
 
             <div class="text-subtitle1 text-center">
-              *Redemption is determined by purchases <br />
-              within a single receipt
+              *Redemption is determined by purchases within a single receipt
             </div>
 
             <br />
