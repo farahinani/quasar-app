@@ -190,7 +190,7 @@ export default defineComponent({
           Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
         ) {
           // alert("shake");
-          shakeSuccess();
+          this.shakeSuccess();
         }
         oldx = Math.round(accel.x);
         oldy = Math.round(accel.y);
