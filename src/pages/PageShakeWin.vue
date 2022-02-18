@@ -19,6 +19,20 @@
 
           <!-- DISPLAY BUTTON FOR IOS -->
           <div v-if="$q.platform.is.ios">
+            <!-- NEW HIDE CODE -->
+            <div v-on:click="hide = !hide">
+              <p>
+                <q-btn
+                  v-if="hide"
+                  id="accelPermsButton"
+                  color="primary"
+                  @click="getAccel()"
+                  label="Start Shake"
+                >
+                </q-btn>
+              </p>
+            </div>
+
             <!-- ORIGINAL CODE -->
             <!-- Please press button "Start shake"<br />
             <q-btn
@@ -29,37 +43,6 @@
               label="Start Shake"
             >
             </q-btn> -->
-
-            <!-- NEW HIDE CODE -->
-            <div v-on:click="hide = !hide">
-              <p>
-                <q-btn
-                  v-if="hide"
-                  id="accelPermsButton"
-                  color="primary"
-                  @click="getAccel()"
-                  label="Start Shake"
-                >
-                </q-btn>
-              </p>
-            </div>
-          </div>
-
-          <!-- DISPLAY BUTTON FOR ANDROID -->
-          <div v-if="$q.platform.is.android">
-            <!-- NEW HIDE CODE -->
-            <div v-on:click="hide = !hide">
-              <p>
-                <q-btn
-                  v-if="hide"
-                  id="accelPermsButton"
-                  color="primary"
-                  @click="getAccel()"
-                  label="Start Shake"
-                >
-                </q-btn>
-              </p>
-            </div>
           </div>
 
           <br />
@@ -178,18 +161,22 @@ export default defineComponent({
       var shakethreshold = 20;
 
       window.addEventListener("devicemotion", (event) => {
-        if (
-          Math.abs(oldx - Math.round(event.acceleration.x)) > shakethreshold ||
-          Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
-        ) {
-          // alert("shaken!");
-          if (this.$root.triesCount < this.$root.numTries) {
-            this.$root.triesCount++;
-            alert("shaken !! : try " + this.$root.triesCount);
-          } else {
-            alert("finish shake");
+        if (this.$root.triesCount < this.$root.numTries) {
+          this.$root.triesCount++;
+          if (
+            Math.abs(oldx - Math.round(event.acceleration.x)) >
+              shakethreshold ||
+            Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
+          ) {
+            // alert("shaken!");
+            if (this.$root.triesCount < this.$root.numTries) {
+              alert("shaken !! : try " + this.$root.triesCount);
+            } else {
+              alert("finish shake");
+            }
           }
         }
+
         oldx = Math.round(accel.x);
         oldy = Math.round(accel.y);
       });
