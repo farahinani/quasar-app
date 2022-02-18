@@ -160,69 +160,43 @@ export default defineComponent({
       var oldy = 0;
       var shakethreshold = 20;
 
-      //2nd code
-
-      window.addEventListener("devicemotion", (event) => {
-        if (this.$root.triesCount < this.$root.numTries) {
-          if (
-            Math.abs(oldx - Math.round(event.acceleration.x)) >
-              shakethreshold ||
-            Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
-          ) {
-            if (this.$root.triesCount < this.$root.numTries) {
-              alert("shaken !! : try " + this.$root.triesCount);
-              this.$root.triesCount += 1;
-            } else {
-              alert("finish shake");
-            }
-          }
-          oldx = Math.round(accel.x);
-          oldy = Math.round(accel.y);
-        }
-      });
-
       //1st code
 
-      // if (this.$root.triesCount < this.$root.numTries) {
-      //   window.addEventListener("devicemotion", (event) => {
-      //     if (
-      //       Math.abs(oldx - Math.round(event.acceleration.x)) >
-      //         shakethreshold ||
-      //       Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
-      //     ) {
-      //       if (this.$root.triesCount < this.$root.numTries) {
-      //         alert("shaken !! : try " + this.$root.triesCount);
-      //         this.$root.triesCount += 1;
-      //       } else {
-      //         alert("finish shake");
+      //   if (this.$root.triesCount < this.$root.numTries) {
+      //     window.addEventListener("devicemotion", (event) => {
+      //       if (
+      //         Math.abs(oldx - Math.round(event.acceleration.x)) >
+      //           shakethreshold ||
+      //         Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
+      //       ) {
+      //         if (this.$root.triesCount < this.$root.numTries) {
+      //           alert("shaken !! : try " + this.$root.triesCount);
+      //           this.$root.triesCount += 1;
+      //         } else {
+      //           alert("finish shake");
+      //         }
       //       }
-      //     }
-      //     oldx = Math.round(accel.x);
-      //     oldy = Math.round(accel.y);
-      //   });
+      //       oldx = Math.round(accel.x);
+      //       oldy = Math.round(accel.y);
+      //     });
+      //   }
+      // } else {
+      //   alert("this is dekstop!");
       // }
+
+      window.addEventListener("devicemotion", (event) => {
+        if (
+          Math.abs(oldx - Math.round(event.acceleration.x)) > shakethreshold ||
+          Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
+        ) {
+          alert("shaken!");
+        }
+        oldx = Math.round(accel.x);
+        oldy = Math.round(accel.y);
+      });
     } else {
       alert("this is dekstop!");
     }
-
-    //   window.addEventListener("devicemotion", (event) => {
-    //     if (
-    //       Math.abs(oldx - Math.round(event.acceleration.x)) > shakethreshold ||
-    //       Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
-    //     ) {
-    //       if (this.$root.triesCount < this.$root.numTries) {
-    //         alert("shaken !! : try " + this.$root.triesCount);
-    //         this.$root.triesCount += 1;
-    //       } else {
-    //         alert("finish shake");
-    //       }
-    //     }
-    //     oldx = Math.round(accel.x);
-    //     oldy = Math.round(accel.y);
-    //   });
-    // } else {
-    //   alert("this is dekstop!");
-    // }
   },
 
   methods: {
