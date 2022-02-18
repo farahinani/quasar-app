@@ -162,7 +162,6 @@ export default defineComponent({
 
       window.addEventListener("devicemotion", (event) => {
         if (this.$root.triesCount < this.$root.numTries) {
-          this.$root.triesCount++;
           if (
             Math.abs(oldx - Math.round(event.acceleration.x)) >
               shakethreshold ||
@@ -170,6 +169,7 @@ export default defineComponent({
           ) {
             // alert("shaken!");
             alert("shaken !! : try " + this.$root.triesCount);
+            this.$root.triesCount += 1;
           }
         } else {
           alert("finish shake");
