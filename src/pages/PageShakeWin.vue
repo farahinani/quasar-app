@@ -160,24 +160,6 @@ export default defineComponent({
       var oldy = 0;
       var shakethreshold = 20;
 
-      if (this.$root.triesCount < this.$root.numTries) {
-        window.addEventListener("devicemotion", (event) => {
-          if (
-            Math.abs(oldx - Math.round(event.acceleration.x)) >
-              shakethreshold ||
-            Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
-          ) {
-            alert("shaken !! : try ");
-          } else {
-            alert("not shaken");
-          }
-          oldx = Math.round(accel.x);
-          oldy = Math.round(accel.y);
-        });
-
-        this.$root.triesCount += 1;
-      }
-
       //-------------------2nd CODE HERE---------------------------------//
       // if (this.$root.triesCount < this.$root.numTries) {
       //   window.addEventListener("devicemotion", (event) => {
@@ -202,16 +184,16 @@ export default defineComponent({
       // }
 
       //-------------------ORIGINAL CODE HERE---------------------------------//
-      // window.addEventListener("devicemotion", (event) => {
-      //   if (
-      //     Math.abs(oldx - Math.round(event.acceleration.x)) > shakethreshold ||
-      //     Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
-      //   ) {
-      //     alert("shaken!");
-      //   }
-      //   oldx = Math.round(accel.x);
-      //   oldy = Math.round(accel.y);
-      // });
+      window.addEventListener("devicemotion", (event) => {
+        if (
+          Math.abs(oldx - Math.round(event.acceleration.x)) > shakethreshold ||
+          Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
+        ) {
+          alert("shaken!");
+        }
+        oldx = Math.round(accel.x);
+        oldy = Math.round(accel.y);
+      });
     } else {
       alert("this is dekstop!");
     }
