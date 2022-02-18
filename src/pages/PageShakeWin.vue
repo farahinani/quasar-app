@@ -218,16 +218,16 @@ export default defineComponent({
       // }
 
       //-------------------ORIGINAL CODE HERE---------------------------------//
-      window.addEventListener("devicemotion", (event) => {
-        if (
-          Math.abs(oldx - Math.round(event.acceleration.x)) > shakethreshold ||
-          Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
-        ) {
-          alert("shaken!");
-        }
-        oldx = Math.round(accel.x);
-        oldy = Math.round(accel.y);
-      });
+      // window.addEventListener("devicemotion", (event) => {
+      //   if (
+      //     Math.abs(oldx - Math.round(event.acceleration.x)) > shakethreshold ||
+      //     Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
+      //   ) {
+      //     alert("shaken!");
+      //   }
+      //   oldx = Math.round(accel.x);
+      //   oldy = Math.round(accel.y);
+      // });
     } else {
       alert("this is dekstop!");
     }
