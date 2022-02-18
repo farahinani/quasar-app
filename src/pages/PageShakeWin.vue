@@ -45,6 +45,23 @@
             </div>
           </div>
 
+          <!-- DISPLAY BUTTON FOR ANDROID -->
+          <div v-if="$q.platform.is.android">
+            <!-- NEW HIDE CODE -->
+            <div v-on:click="hide = !hide">
+              <p>
+                <q-btn
+                  v-if="hide"
+                  id="accelPermsButton"
+                  color="primary"
+                  @click="getAccel()"
+                  label="Start Shake"
+                >
+                </q-btn>
+              </p>
+            </div>
+          </div>
+
           <br />
 
           <!-- BUTTON FOR SHAKESUCCESS CODE -->
@@ -154,38 +171,81 @@ export default defineComponent({
         getAccel,
       };
     } else if ($q.platform.is.android) {
-      alert("This is Android!");
+      function getAccel() {
+        alert("This is Android!");
+        var oldx = 0;
+        var oldy = 0;
+        var shakethreshold = 20;
 
-      var oldx = 0;
-      var oldy = 0;
-      var shakethreshold = 20;
-
-      //-------------------3RD CODE HERE---------------------------------//
-
-      //CALCULATE TRIESCOUNT THEN SHAKE
-      if (this.$root.triesCount < this.$root.numTries) {
-        //LISTEN TO SHAKE MOTION
-        window.addEventListener("devicemotion", (event) => {
-          // this.$root.triesCount++; //loop number like forever
-
-          if (
-            Math.abs(oldx - Math.round(event.acceleration.x)) >
-              shakethreshold ||
-            Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
-          ) {
-            // alert("shaken !");
-            if (this.$root.triesCount < this.$root.numTries) {
-              alert("shaken !! : try " + this.$root.triesCount);
-              this.$root.triesCount += 1;
-            } else {
-              // alert("Last Shake");
-              alert("finish shake"); // go to home
+        //CALCULATE TRIESCOUNT THEN SHAKE
+        if (this.$root.triesCount < this.$root.numTries) {
+          //DETECT PERMISSION FOR DEVICE MOTION WHEN CLICK BUTTON 'START SHAKE'
+          DeviceMotionEvent.requestPermission().then((response) => {
+            //IF PERMISSION IS GRANTED, LISTEN TO SHAKE
+            if (response == "granted") {
+              //LISTEN TO SHAKE MOTION
+              window.addEventListener("devicemotion", (event) => {
+                if (
+                  Math.abs(oldx - Math.round(event.acceleration.x)) >
+                    shakethreshold ||
+                  Math.abs(oldy - Math.round(event.acceleration.y)) >
+                    shakethreshold
+                ) {
+                  // alert("shaken !");
+                  if (this.$root.triesCount < this.$root.numTries) {
+                    alert("shaken !! : try " + this.$root.triesCount);
+                    this.$root.triesCount += 1;
+                  } else {
+                    // alert("Last Shake");
+                    alert("finish shake"); // go to home
+                  }
+                }
+                oldx = Math.round(accel.x);
+                oldy = Math.round(accel.y);
+              });
             }
-          }
-          oldx = Math.round(accel.x);
-          oldy = Math.round(accel.y);
-        });
+          });
+        }
       }
+      return {
+        getAccel,
+      };
+
+      // alert("This is Android!");
+
+      // var oldx = 0;
+      // var oldy = 0;
+      // var shakethreshold = 20;
+
+      // //CALCULATE TRIESCOUNT THEN SHAKE
+      // if (this.$root.triesCount < this.$root.numTries) {
+      //   //DETECT PERMISSION FOR DEVICE MOTION WHEN CLICK BUTTON 'START SHAKE'
+      //   DeviceMotionEvent.requestPermission().then((response) => {
+      //     //IF PERMISSION IS GRANTED, LISTEN TO SHAKE
+      //     if (response == "granted") {
+      //       //LISTEN TO SHAKE MOTION
+      //       window.addEventListener("devicemotion", (event) => {
+      //         if (
+      //           Math.abs(oldx - Math.round(event.acceleration.x)) >
+      //             shakethreshold ||
+      //           Math.abs(oldy - Math.round(event.acceleration.y)) >
+      //             shakethreshold
+      //         ) {
+      //           // alert("shaken !");
+      //           if (this.$root.triesCount < this.$root.numTries) {
+      //             alert("shaken !! : try " + this.$root.triesCount);
+      //             this.$root.triesCount += 1;
+      //           } else {
+      //             // alert("Last Shake");
+      //             alert("finish shake"); // go to home
+      //           }
+      //         }
+      //         oldx = Math.round(accel.x);
+      //         oldy = Math.round(accel.y);
+      //       });
+      //     }
+      //   });
+      // }
 
       //-------------------2nd CODE HERE---------------------------------//
       // if (this.$root.triesCount < this.$root.numTries) {
