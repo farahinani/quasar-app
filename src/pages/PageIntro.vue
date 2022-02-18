@@ -19,10 +19,16 @@
             <div class="text-h5 text-center">Purchase, Play and Win !</div>
           </div>
           <br />
+          <p class="text-center">
+            It's simple, every purchase of 2<br />
+            1.5l packs of Florida's Natural<br />
+            Not From Concentrate Juices<br />
+            gives you a chance to win great prizes!
+          </p>
 
           <!-- DISPLAY FOR DESKTOP -->
           <div
-            class="q-py-lg q-px-md text-center"
+            class="q-py-lg q-px-md text-center text-weight-thin text-body2"
             v-if="$q.platform.is.desktop"
           >
             shake function is not support for desktop yet, <br />please try on

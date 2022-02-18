@@ -181,39 +181,38 @@ export default defineComponent({
       var oldy = 0;
       var shakethreshold = 20;
 
-      //-------------------2nd CODE HERE. CURRENTLY FARAH IS WORKING ON THIS [alexgibson]---------------------------------//
+      //-------------------NEW CODE HERE. CURRENTLY FARAH IS WORKING ON THIS [alexgibson code]---------------------------------//
 
-      window.onload = function () {
-        //create a new instance of shake.js.
-        var myShakeEvent = new Shake({
-          threshold: 15,
-        });
+      // window.onload = function () {
+      //   //create a new instance of shake.js.
+      //   var myShakeEvent = new Shake({
+      //     threshold: 15,
+      //   });
 
-        // start listening to device motion
-        myShakeEvent.start();
+      //   // start listening to device motion
+      //   myShakeEvent.start();
 
-        // register a shake event
-        window.addEventListener("shake", shakeEventDidOccur, false);
+      //   // register a shake event
+      //   window.addEventListener("shake", shakeEventDidOccur, false);
 
-        //shake event callback
-        function shakeEventDidOccur() {
-          //put your own code here etc.
-          alert("Shake!");
-        }
-      };
+      //   //shake event callback
+      //   function shakeEventDidOccur() {
+      //     //put your own code here etc.
+      //     alert("Shake!");
+      //   }
+      // };
 
       //-------------------ORIGINAL CODE HERE---------------------------------//
-      // window.addEventListener("devicemotion", (event) => {
-      //   alert("shaken !! : try " + this.$root.triesCount);
-      //   if (
-      //     Math.abs(oldx - Math.round(event.acceleration.x)) > shakethreshold ||
-      //     Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
-      //   ) {
-      //     alert("shaken !! : try " + this.$root.triesCount);
-      //   }
-      //   oldx = Math.round(accel.x);
-      //   oldy = Math.round(accel.y);
-      // });
+      window.addEventListener("devicemotion", (event) => {
+        if (
+          Math.abs(oldx - Math.round(event.acceleration.x)) > shakethreshold ||
+          Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
+        ) {
+          alert("just shaken !! ");
+        }
+        oldx = Math.round(accel.x);
+        oldy = Math.round(accel.y);
+      });
     } else {
       // alert("this is dekstop!");
     }
