@@ -16,7 +16,8 @@
           <div v-if="$q.platform.is.android">rendered on android</div>
 
           <div v-if="$q.platform.is.ios">
-            Please press button "Start shake"<br />
+            <!-- ORIGINAL CODE -->
+            <!-- Please press button "Start shake"<br />
             <q-btn
               v-if="hide"
               id="accelPermsButton"
@@ -24,10 +25,25 @@
               @click="getAccel()"
               label="Start Shake"
             >
-            </q-btn>
+            </q-btn> -->
+
+            <!-- NEW HIDE CODE -->
+            <div v-on:click="hide = !hide">
+              <p>
+                <q-btn
+                  v-if="hide"
+                  id="accelPermsButton"
+                  color="primary"
+                  @click="getAccel()"
+                  label="Start Shake"
+                >
+                </q-btn>
+              </p>
+            </div>
           </div>
 
           <br />
+
           <!-- <q-btn
             type="submit"
             label="SHAKE BUTTON"
@@ -36,7 +52,7 @@
             @click="shakeSuccess()"
           /> -->
 
-          <div v-on:click="hide = !hide">
+          <!-- <div v-on:click="hide = !hide">
             <p>
               <q-btn
                 v-if="hide"
@@ -47,7 +63,7 @@
               >
               </q-btn>
             </p>
-          </div>
+          </div> -->
 
           <!-- <div v-if="hide">
             <p>hide me</p>
