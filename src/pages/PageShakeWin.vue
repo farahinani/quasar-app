@@ -33,7 +33,7 @@
               </p>
             </div>
 
-            <!-- ORIGINAL CODE -->
+            <!-- ORIGINAL BTN CODE FOR IOS-->
             <!-- Please press button "Start shake"<br />
             <q-btn
               v-if="hide"
@@ -55,6 +55,16 @@
             class="full-width"
             @click="shakeSuccess()"
           /> -->
+
+          <!-- BUTTON FOR NEXT PAGE CODE -->
+          <q-btn
+            to="/home/shake-and-win/prizes"
+            type="submit"
+            fullwidth
+            label="NEXT"
+            color="primary"
+            class="full-width"
+          />
         </q-card-section>
       </q-card>
     </div>
@@ -160,7 +170,7 @@ export default defineComponent({
       var oldy = 0;
       var shakethreshold = 20;
 
-      //-------------------2nd CODE HERE---------------------------------//
+      //-------------------2nd CODE HERE. CURRENTLY FARAH IS WORKING ON THIS---------------------------------//
       // if (this.$root.triesCount < this.$root.numTries) {
       //   window.addEventListener("devicemotion", (event) => {
       //     if (
@@ -190,16 +200,7 @@ export default defineComponent({
           Math.abs(oldx - Math.round(event.acceleration.x)) > shakethreshold ||
           Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
         ) {
-          // alert("shaken !! : try " + this.$root.triesCount);
-          //alert('shaken')
-          // if (this.$root.triesCount < this.$root.numTries) {
-          //   this.$root.triesCount++;
-          //   if (this.$root.triesCount < this.$root.numTries) {
-          //     alert("shaken !! : try " + this.$root.triesCount);
-          //   } else {
-          //     alert("Last Shake");
-          //   }
-          // }
+          alert("shaken !! : try " + this.$root.triesCount);
         }
         oldx = Math.round(accel.x);
         oldy = Math.round(accel.y);
@@ -220,14 +221,6 @@ export default defineComponent({
       //   } else {
       //     alert("Last Shake");
       //   }
-      // }
-
-      // for (
-      //   this.$root.triesCount = 0;
-      //   this.$root.triesCount < this.$root.numTries;
-      //   this.$root.triesCount++
-      // ) {
-      //   console.log("shaken !! : try " + this.$root.triesCount);
       // }
     },
   },

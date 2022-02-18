@@ -8,7 +8,9 @@ const routes = [
       { path: '/home', component: () => import('src/pages/PageHome.vue') },
       { path: '/home/shake-and-win', component: () => import('src/pages/PageShakeWin.vue') },
       { path: '/test', component: () => import('src/pages/test.vue') },
-      { path: '/test2', component: () => import('src/pages/test2.vue') }
+      { path: '/test2', component: () => import('src/pages/test2.vue') },
+      { path: '/home/shake-and-win/prizes', component: () => import('src/pages/prizes.vue') },
+      { path: '/home/shake-and-win/prizes/collect-prizes', component: () => import('src/pages/collect-prizes.vue') }
     ]
   },
 
