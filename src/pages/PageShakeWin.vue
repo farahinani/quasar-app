@@ -11,10 +11,13 @@
               </q-badge>
             </div>
           </div>
-
+          <!-- DISPLAY FOR DESKTOP -->
           <div v-if="$q.platform.is.desktop">rendered on Desktop!</div>
+
+          <!-- DISPLAY FOR ANDROID -->
           <div v-if="$q.platform.is.android">rendered on android</div>
 
+          <!-- DISPLAY BUTTON FOR IOS -->
           <div v-if="$q.platform.is.ios">
             <!-- ORIGINAL CODE -->
             <!-- Please press button "Start shake"<br />
@@ -44,6 +47,7 @@
 
           <br />
 
+          <!-- BUTTON FOR SHAKESUCCESS CODE -->
           <!-- <q-btn
             type="submit"
             label="SHAKE BUTTON"
@@ -51,23 +55,6 @@
             class="full-width"
             @click="shakeSuccess()"
           /> -->
-
-          <!-- <div v-on:click="hide = !hide">
-            <p>
-              <q-btn
-                v-if="hide"
-                id="accelPermsButton"
-                color="primary"
-                @click="getAccel()"
-                label="Start Shake"
-              >
-              </q-btn>
-            </p>
-          </div> -->
-
-          <!-- <div v-if="hide">
-            <p>hide me</p>
-          </div> -->
         </q-card-section>
       </q-card>
     </div>
@@ -96,7 +83,6 @@ export default defineComponent({
 
     if ($q.platform.is.ios) {
       alert("alert: this is ios");
-      //console.log("msg: this is desktop");
 
       function getAccel() {
         var oldx = 0;
@@ -104,10 +90,13 @@ export default defineComponent({
 
         var shakethreshold = 25;
 
-        //3RD CODE
+        //CALCULATE TRIESCOUNT THEN SHAKE
         if (this.$root.triesCount < this.$root.numTries) {
+          //DETECT PERMISSION FOR DEVICE MOTION WHEN CLICK BUTTON 'START SHAKE'
           DeviceMotionEvent.requestPermission().then((response) => {
+            //IF PERMISSION IS GRANTED, LISTEN TO SHAKE
             if (response == "granted") {
+              //LISTEN TO SHAKE MOTION
               window.addEventListener("devicemotion", (event) => {
                 // this.$root.triesCount++; //loop number like forever
 
@@ -141,7 +130,6 @@ export default defineComponent({
 
         //-------------------original code here---------------------------------//
         // DeviceMotionEvent.requestPermission().then((response) => {
-
         //   if (response == "granted") {
         //     window.addEventListener("devicemotion", (event) => {
         //       if (
@@ -151,12 +139,10 @@ export default defineComponent({
         //           shakethreshold
         //       ) {
         //         alert("shaken !");
-
         //       }
         //       oldx = Math.round(accel.x);
         //       oldy = Math.round(accel.y);
         //     });
-
         //     window.addEventListener("deviceorientation", (event) => {
         //       console.log(event);
         //     });
