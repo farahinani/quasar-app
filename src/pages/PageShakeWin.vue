@@ -170,28 +170,21 @@ export default defineComponent({
       var oldy = 0;
       var shakethreshold = 20;
 
-      //-------------------2nd CODE HERE. CURRENTLY FARAH IS WORKING ON THIS---------------------------------//
-      // if (this.$root.triesCount < this.$root.numTries) {
-      //   window.addEventListener("devicemotion", (event) => {
-      //     if (
-      //       Math.abs(oldx - Math.round(event.acceleration.x)) >
-      //         shakethreshold ||
-      //       Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
-      //     ) {
-      //       if (this.$root.triesCount < this.$root.numTries) {
-      //         alert("shaken !");
-      //         // alert("shaken !! : try " + this.$root.triesCount);
-      //         // this.$root.triesCount += 1;
-      //       } else {
-      //         alert("finish shake");
-      //       }
-      //     } else {
-      //       alert("no shake count");
-      //     }
-      //     oldx = Math.round(accel.x);
-      //     oldy = Math.round(accel.y);
-      //   });
-      // }
+      //-------------------2nd CODE HERE. CURRENTLY FARAH IS WORKING ON THIS [alexgibson]---------------------------------//
+      window.onload = function () {
+        var myShakeEvent = new Shake({
+          threshold: 20,
+        });
+
+        //start listening to device motion
+        myShakeEvent.start();
+
+        window.addEventListener("shake", shakeEventDidOccur, false);
+
+        function shakeEventDidOccur() {
+          alert("shaken");
+        }
+      };
 
       //-------------------ORIGINAL CODE HERE---------------------------------//
       window.addEventListener("devicemotion", (event) => {
