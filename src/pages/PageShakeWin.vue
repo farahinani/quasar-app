@@ -160,28 +160,39 @@ export default defineComponent({
       var oldy = 0;
       var shakethreshold = 20;
 
-      //-------------------ORIGINAL CODE HERE---------------------------------//
-      window.addEventListener("devicemotion", (event) => {
-        if (
-          Math.abs(oldx - Math.round(event.acceleration.x)) > shakethreshold ||
-          Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
-        ) {
-          // alert("shaken!");
-          if (this.$root.triesCount < this.$root.numTries) {
-            this.$root.triesCount++;
+      if (this.$root.triesCount < this.$root.numTries) {
+        window.addEventListener("devicemotion", (event) => {
+          if (
+            Math.abs(oldx - Math.round(event.acceleration.x)) >
+              shakethreshold ||
+            Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
+          ) {
             if (this.$root.triesCount < this.$root.numTries) {
+              // alert("shaken !")
               alert("shaken !! : try " + this.$root.triesCount);
+              this.$root.triesCount += 1;
             } else {
-              alert("Finish Shake");
+              alert("finish shake");
             }
+          } else {
+            alert("no shake count");
           }
-        } else {
-          alert("not shake");
-        }
+          oldx = Math.round(accel.x);
+          oldy = Math.round(accel.y);
+        });
+      }
 
-        oldx = Math.round(accel.x);
-        oldy = Math.round(accel.y);
-      });
+      //-------------------ORIGINAL CODE HERE---------------------------------//
+      // window.addEventListener("devicemotion", (event) => {
+      //   if (
+      //     Math.abs(oldx - Math.round(event.acceleration.x)) > shakethreshold ||
+      //     Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
+      //   ) {
+      //     alert("shaken!");
+      //   }
+      //   oldx = Math.round(accel.x);
+      //   oldy = Math.round(accel.y);
+      // });
     } else {
       alert("this is dekstop!");
     }
