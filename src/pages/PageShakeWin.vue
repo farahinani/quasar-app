@@ -189,7 +189,8 @@ export default defineComponent({
           Math.abs(oldx - Math.round(event.acceleration.x)) > shakethreshold ||
           Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
         ) {
-          alert("shaken!");
+          // alert("shake");
+          shakeSuccess();
         }
         oldx = Math.round(accel.x);
         oldy = Math.round(accel.y);
@@ -201,6 +202,7 @@ export default defineComponent({
 
   methods: {
     shakeSuccess() {
+      alert("test function");
       //JOANNE's code
       // if (this.$root.triesCount < this.$root.numTries) {
       //   this.$root.triesCount++;
