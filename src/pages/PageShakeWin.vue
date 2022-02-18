@@ -160,27 +160,51 @@ export default defineComponent({
       var oldy = 0;
       var shakethreshold = 20;
 
-      if (this.$root.triesCount < this.$root.numTries) {
-        window.addEventListener("devicemotion", (event) => {
+      //-------------------3RD CODE HERE---------------------------------//
+
+      window.addEventListener("devicemotion", (event) => {
+        if (this.$root.triesCount < this.$root.numTries) {
           if (
             Math.abs(oldx - Math.round(event.acceleration.x)) >
               shakethreshold ||
             Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
           ) {
             if (this.$root.triesCount < this.$root.numTries) {
-              alert("shaken !");
-              // alert("shaken !! : try " + this.$root.triesCount);
-              // this.$root.triesCount += 1;
+              alert("shaken !! : try " + this.$root.triesCount);
+              this.$root.triesCount += 1;
             } else {
               alert("finish shake");
             }
           } else {
-            alert("no shake count");
+            alert("not shake");
           }
           oldx = Math.round(accel.x);
           oldy = Math.round(accel.y);
-        });
-      }
+        }
+      });
+
+      //-------------------2nd CODE HERE---------------------------------//
+      // if (this.$root.triesCount < this.$root.numTries) {
+      //   window.addEventListener("devicemotion", (event) => {
+      //     if (
+      //       Math.abs(oldx - Math.round(event.acceleration.x)) >
+      //         shakethreshold ||
+      //       Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
+      //     ) {
+      //       if (this.$root.triesCount < this.$root.numTries) {
+      //         alert("shaken !");
+      //         // alert("shaken !! : try " + this.$root.triesCount);
+      //         // this.$root.triesCount += 1;
+      //       } else {
+      //         alert("finish shake");
+      //       }
+      //     } else {
+      //       alert("no shake count");
+      //     }
+      //     oldx = Math.round(accel.x);
+      //     oldy = Math.round(accel.y);
+      //   });
+      // }
 
       //-------------------ORIGINAL CODE HERE---------------------------------//
       // window.addEventListener("devicemotion", (event) => {
