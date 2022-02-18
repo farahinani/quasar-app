@@ -172,9 +172,9 @@ export default defineComponent({
             } else {
               alert("Last Shake");
             }
+          } else {
+            alert("shaken without count");
           }
-        } else {
-          alert("shaken");
         }
         oldx = Math.round(accel.x);
         oldy = Math.round(accel.y);
