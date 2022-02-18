@@ -169,7 +169,7 @@ export default defineComponent({
           ) {
             // alert("shaken!");
             alert("shaken !! : try " + this.$root.triesCount);
-            this.$root.triesCount += 1;
+            // this.$root.triesCount += 1;
           }
         } else {
           alert("finish shake");
