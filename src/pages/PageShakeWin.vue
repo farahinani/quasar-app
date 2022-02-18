@@ -13,17 +13,34 @@
           </div>
 
           <div v-if="$q.platform.is.desktop">rendered on Desktop!</div>
+          <div v-if="$q.platform.is.android">rendered on android</div>
 
           <div v-if="$q.platform.is.ios">
-            Please press button "Start shake"<br />
+            <!-- Please press button "Start shake"<br />
             <q-btn
               id="accelPermsButton"
               color="primary"
               @click="getAccel()"
               label="Start Shake"
             >
-            </q-btn>
+            </q-btn> -->
+            <div v-on:click="hide = !hide">
+              <p>
+                <q-btn
+                  v-if="hide"
+                  id="accelPermsButton"
+                  color="primary"
+                  @click="getAccel()"
+                  label="Start Shake"
+                >
+                </q-btn>
+              </p>
+            </div>
+            <div v-if="hide">
+              <p>hide me</p>
+            </div>
           </div>
+
           <br />
           <!-- <q-btn
             type="submit"
@@ -33,7 +50,21 @@
             @click="shakeSuccess()"
           /> -->
 
-          <div v-if="$q.platform.is.android">rendered on android</div>
+          <!-- <div v-on:click="hide = !hide">
+            <p>
+              <q-btn
+                v-if="hide"
+                id="accelPermsButton"
+                color="primary"
+                @click="getAccel()"
+                label="Start Shake"
+              >
+              </q-btn>
+            </p>
+          </div>
+          <div v-if="hide">
+            <p>hide me</p>
+          </div> -->
         </q-card-section>
       </q-card>
     </div>
@@ -46,6 +77,12 @@ import { useQuasar } from "quasar";
 
 export default defineComponent({
   name: "PageShakeWin",
+
+  data() {
+    return {
+      hide: true,
+    };
+  },
 
   setup() {
     const $q = useQuasar();
