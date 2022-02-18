@@ -169,8 +169,8 @@ export default defineComponent({
         ) {
           // alert("shaken");
           if (this.$root.triesCount < this.$root.numTries) {
+            this.$root.triesCount++;
             alert("shaken !! : try " + this.$root.triesCount);
-            this.$root.triesCount += 1;
           } else {
             alert("finish shake");
           }
