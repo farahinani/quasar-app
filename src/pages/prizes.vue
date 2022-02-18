@@ -22,16 +22,14 @@
               outlined
               v-model="name"
               label="Name"
-              lazy-rules
-              :rules="[(val) => (val && val.length > 0) || 'Enter your name']"
+              :rules="[(val) => (val && val.length > 0) || 'Enter receipt No.']"
             />
 
             <div>
               <q-input
                 outlined
-                v-model="age"
+                v-model="receipt"
                 label="Receipt No."
-                lazy-rules
                 :rules="[
                   (val) => (val && val.length > 0) || 'Enter receipt No.',
                 ]"
@@ -70,9 +68,17 @@
 <script>
 import { defineComponent } from "vue";
 import { useQuasar } from "quasar";
+import { ref } from "vue";
 
 export default defineComponent({
   name: "test2",
+
+  data() {
+    return {
+      name: ref(""),
+      receipt: ref(""),
+    };
+  },
 
   setup() {
     const $q = useQuasar();
