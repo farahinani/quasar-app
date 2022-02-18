@@ -5,6 +5,13 @@
         <q-toolbar-title class="text-weight-bold">
           Fresh Florida test
         </q-toolbar-title>
+        <q-btn
+          @click="reloadPage"
+          label="Reset"
+          type="reset"
+          color="secondary"
+          class="q-ml-sm"
+        />
       </q-toolbar>
     </q-header>
 
@@ -13,3 +20,13 @@
     </q-page-container>
   </q-layout>
 </template>
+
+<script>
+export default {
+  methods: {
+    reloadPage() {
+      window.location.replace("/");
+    },
+  },
+};
+</script>
