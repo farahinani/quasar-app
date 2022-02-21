@@ -1,10 +1,4 @@
 <template>
-  <!-- <q-page>
-    <h5>Purchase, Play and win !</h5>
-    <div>
-      <q-btn to="/home" push color="primary" label="Home" type="submit" />
-    </div>
-  </q-page> -->
   <q-page class="flex flex-center">
     <div class="q-pa-md row items-start q-gutter-md">
       <q-card class="my-card">
