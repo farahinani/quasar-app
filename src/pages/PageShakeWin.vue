@@ -67,7 +67,7 @@
                   v-if="hide"
                   id="accelPermsButton"
                   color="primary"
-                  @click="getAccel()"
+                  @click="getAccel2()"
                   label="Start Shake"
                 >
                 </q-btn>
@@ -200,7 +200,7 @@ export default defineComponent({
 
       //-------------------NEW CODE HERE. CURRENTLY FARAH IS WORKING ON THIS ---------------------------------//
 
-      function getAccel() {
+      function getAccel2() {
         var oldx = 0;
         var oldy = 0;
 
@@ -231,7 +231,7 @@ export default defineComponent({
         }
       }
       return {
-        getAccel,
+        getAccel2,
       };
 
       //-------------------ORIGINAL CODE HERE---------------------------------//
