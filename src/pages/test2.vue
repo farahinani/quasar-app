@@ -4,7 +4,7 @@
       <q-card class="my-card">
         <q-card-section>
           <div class="q-py-lg q-px-md">test 2 page</div>
-          <q-btn @click="shakeTest()">test shake</q-btn>
+          <q-btn @click="getAccel()">test shake</q-btn>
         </q-card-section>
       </q-card>
     </div>
@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import { event } from "quasar";
 import { defineComponent } from "vue";
 
 export default defineComponent({
@@ -20,44 +21,47 @@ export default defineComponent({
   data() {},
 
   setup() {
-    window.onload = function () {
-      var myShakeEvent = new Shake({
-        shakethreshold: 15,
-      });
+    const $q = useQuasar();
 
-      myShakeEvent.start();
+    $q.platform.is.android;
 
-      window.addEventListener("shake", shakeEventDidOccur, false);
-      function shakeEventDidOccur() {
-        alert("shaken");
+    if ($q.platform.is.android) {
+      function getAccel() {
+        var oldx = 0;
+        var oldy = 0;
+
+        var shakethreshold = 25;
+
+        if (this.$root.triesCount < this.$root.numTries) {
+          DeviceMotionEvent.requestPermission().then((response) => {
+            if (response == "granted") {
+              window.addEventListener("devicemotion", (event) => {
+                if (
+                  Math.abs(oldx - Math.round(event.acceleration.x)) >
+                    shakethreshold ||
+                  Math.abs(oldy - Math.round(event.acceleration.y)) >
+                    shakethreshold
+                ) {
+                  if (this.$root.triesCount < this.$root.numTries) {
+                    alert("shaken !! : try " + this.$root.triesCount);
+                    this.$root.triesCount += 1;
+                  } else {
+                    alert("finish shake");
+                  }
+                }
+                oldx = Math.round(accel.x);
+                oldy = Math.round(accel.y);
+              });
+            }
+          });
+        }
       }
-    };
+      return {
+        getAccel,
+      };
+    }
   },
 
-  methods: {
-    shakeTest() {
-      // alert("test shake 1");
-      // window.onload = function () {
-      //   var myShakeEvent = new Shake({
-      //     threshold: 15,
-      //   });
-      //   myShakeEvent.start();
-      //   window.addEventListener("devicemotion", shakeEventDidOccur, false);
-      //   function shakeEventDidOccur() {
-      //     console.log("test shake 2");
-      //   }
-      // };
-      // window.onload = function () {
-      //   var myShakeEvent = new Shake({
-      //     threshold: 15,
-      //   });
-      //   myShakeEvent.start();
-      //   window.addEventListener("shake", shakeEventDidOccur, false);
-      //   function shakeEventDidOccur() {
-      //     console.log("test shake 2");
-      //   }
-      // };
-    },
-  },
+  methods: {},
 });
 </script>

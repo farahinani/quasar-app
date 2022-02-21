@@ -58,6 +58,23 @@
             </q-btn> -->
           </div>
 
+          <!-- DISPLAY BUTTON FOR ANDROID -->
+          <div v-if="$q.platform.is.android">
+            <div v-on:click="hide = !hide">
+              <p>
+                <q-btn
+                  class="full-width"
+                  v-if="hide"
+                  id="accelPermsButton"
+                  color="primary"
+                  @click="getAccel()"
+                  label="Start Shake"
+                >
+                </q-btn>
+              </p>
+            </div>
+          </div>
+
           <!-- BUTTON FOR SHAKESUCCESS CODE -->
           <!-- <q-btn
             type="submit"
@@ -181,38 +198,53 @@ export default defineComponent({
       var oldy = 0;
       var shakethreshold = 20;
 
-      //-------------------NEW CODE HERE. CURRENTLY FARAH IS WORKING ON THIS [alexgibson code]---------------------------------//
+      //-------------------NEW CODE HERE. CURRENTLY FARAH IS WORKING ON THIS ---------------------------------//
 
-      // window.onload = function () {
-      //   //create a new instance of shake.js.
-      //   var myShakeEvent = new Shake({
-      //     threshold: 15,
-      //   });
+      function getAccel() {
+        var oldx = 0;
+        var oldy = 0;
 
-      //   // start listening to device motion
-      //   myShakeEvent.start();
+        var shakethreshold = 25;
 
-      //   // register a shake event
-      //   window.addEventListener("shake", shakeEventDidOccur, false);
-
-      //   //shake event callback
-      //   function shakeEventDidOccur() {
-      //     //put your own code here etc.
-      //     alert("Shake!");
-      //   }
-      // };
+        if (this.$root.triesCount < this.$root.numTries) {
+          DeviceMotionEvent.requestPermission().then((response) => {
+            if (response == "granted") {
+              window.addEventListener("devicemotion", (event) => {
+                if (
+                  Math.abs(oldx - Math.round(event.acceleration.x)) >
+                    shakethreshold ||
+                  Math.abs(oldy - Math.round(event.acceleration.y)) >
+                    shakethreshold
+                ) {
+                  if (this.$root.triesCount < this.$root.numTries) {
+                    alert("shaken !! : try " + this.$root.triesCount);
+                    this.$root.triesCount += 1;
+                  } else {
+                    alert("finish shake");
+                  }
+                }
+                oldx = Math.round(accel.x);
+                oldy = Math.round(accel.y);
+              });
+            }
+          });
+        }
+      }
+      return {
+        getAccel,
+      };
 
       //-------------------ORIGINAL CODE HERE---------------------------------//
-      window.addEventListener("devicemotion", (event) => {
-        if (
-          Math.abs(oldx - Math.round(event.acceleration.x)) > shakethreshold ||
-          Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
-        ) {
-          alert("just shaken !! ");
-        }
-        oldx = Math.round(accel.x);
-        oldy = Math.round(accel.y);
-      });
+      // window.addEventListener("devicemotion", (event) => {
+      //   if (
+      //     Math.abs(oldx - Math.round(event.acceleration.x)) > shakethreshold ||
+      //     Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
+      //   ) {
+      //     alert("just shaken !! ");
+      //   }
+      //   oldx = Math.round(accel.x);
+      //   oldy = Math.round(accel.y);
+      // });
     } else {
       // alert("this is dekstop!");
     }
