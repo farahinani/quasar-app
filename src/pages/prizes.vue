@@ -67,7 +67,7 @@ import { useQuasar } from "quasar";
 import { ref } from "vue";
 
 export default defineComponent({
-  name: "test2",
+  name: "prizes",
 
   data() {
     return {

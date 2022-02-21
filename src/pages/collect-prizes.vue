@@ -43,6 +43,6 @@ import { defineComponent } from "vue";
 import { useQuasar } from "quasar";
 
 export default defineComponent({
-  name: "test2",
+  name: "collect-prizes",
 });
 </script>
