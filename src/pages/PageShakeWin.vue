@@ -192,7 +192,7 @@ export default defineComponent({
         getAccel,
       };
     } else if ($q.platform.is.android) {
-      //alert("This is Android!");
+      alert("This is Android!");
       //-------------------NEW CODE HERE. CURRENTLY FARAH IS WORKING ON THIS ---------------------------------//
       // window.onload = function () {
       //   var myShakeEvent = new Shake({
