@@ -195,7 +195,7 @@ export default defineComponent({
       // alert("This is Android!");
 
       //-------------------NEW CODE HERE. CURRENTLY FARAH IS WORKING ON THIS ---------------------------------//
-      function shaketest() {
+      function getAccel2() {
         window.onload = function () {
           //create a new instance of shake.js.
           var myShakeEvent = new Shake({
@@ -217,7 +217,7 @@ export default defineComponent({
       }
 
       return {
-        shaketest,
+        getAccel2,
       };
 
       //-------------------ORIGINAL CODE HERE---------------------------------//
