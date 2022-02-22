@@ -192,48 +192,8 @@ export default defineComponent({
         getAccel,
       };
     } else if ($q.platform.is.android) {
-      // alert("This is Android!");
-
-      var oldx = 0;
-      var oldy = 0;
-      var shakethreshold = 20;
-
+      alert("This is Android!");
       //-------------------NEW CODE HERE. CURRENTLY FARAH IS WORKING ON THIS ---------------------------------//
-
-      function getAccel2() {
-        var oldx = 0;
-        var oldy = 0;
-
-        var shakethreshold = 25;
-
-        if (this.$root.triesCount < this.$root.numTries) {
-          DeviceMotionEvent.requestPermission().then((response) => {
-            if (response == "granted") {
-              window.addEventListener("devicemotion", (event) => {
-                if (
-                  Math.abs(oldx - Math.round(event.acceleration.x)) >
-                    shakethreshold ||
-                  Math.abs(oldy - Math.round(event.acceleration.y)) >
-                    shakethreshold
-                ) {
-                  if (this.$root.triesCount < this.$root.numTries) {
-                    alert("shaken !! : try " + this.$root.triesCount);
-                    this.$root.triesCount += 1;
-                  } else {
-                    alert("finish shake");
-                  }
-                }
-                oldx = Math.round(accel.x);
-                oldy = Math.round(accel.y);
-              });
-            }
-          });
-        }
-      }
-      return {
-        getAccel2,
-      };
-
       //-------------------ORIGINAL CODE HERE---------------------------------//
       // window.addEventListener("devicemotion", (event) => {
       //   if (
@@ -246,7 +206,7 @@ export default defineComponent({
       //   oldy = Math.round(accel.y);
       // });
     } else {
-      // alert("this is dekstop!");
+      //alert("this is dekstop!");
     }
   },
 
