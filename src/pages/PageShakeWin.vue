@@ -195,24 +195,27 @@ export default defineComponent({
       // alert("This is Android!");
       //-------------------NEW CODE HERE. CURRENTLY FARAH IS WORKING ON THIS ---------------------------------//
 
-      var myShakeEvent = new Shake({
-        threshold: 15, // optional shake strength threshold
-        timeout: 1000, // optional, determines the frequency of event generation
+      var oldx = 0;
+      var oldy = 0;
+
+      var shakethreshold = 25;
+
+      window.addEventListener("devicemotion", (event) => {
+        if (
+          Math.abs(oldx - Math.round(event.acceleration.x)) > shakethreshold ||
+          Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
+        ) {
+          alert("shaken !");
+          // if (this.$root.triesCount < this.$root.numTries) {
+          //   alert("shaken !! : try " + this.$root.triesCount);
+          //   this.$root.triesCount += 1;
+          // } else {
+          //   alert("finish shake");
+          // }
+        }
+        oldx = Math.round(accel.x);
+        oldy = Math.round(accel.y);
       });
-
-      myShakeEvent.start();
-
-      window.addEventListener("shake", shakeEventDidOccur, false);
-
-      //function to call when shake occurs
-      function shakeEventDidOccur() {
-        //put your own code here etc.
-        alert("shake!");
-      }
-
-      window.removeEventListener("shake", shakeEventDidOccur, false);
-
-      myShakeEvent.stop();
 
       //-------------------ORIGINAL CODE HERE---------------------------------//
       // window.addEventListener("devicemotion", (event) => {
