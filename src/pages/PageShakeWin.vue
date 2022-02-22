@@ -192,8 +192,20 @@ export default defineComponent({
         getAccel,
       };
     } else if ($q.platform.is.android) {
-      alert("This is Android!");
+      // alert("This is Android!");
+
       //-------------------NEW CODE HERE. CURRENTLY FARAH IS WORKING ON THIS ---------------------------------//
+      window.addEventListener("devicemotion", (event) => {
+        if (
+          Math.abs(oldx - Math.round(event.acceleration.x)) > shakethreshold ||
+          Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
+        ) {
+          alert("just shaken !! ");
+        }
+        oldx = Math.round(accel.x);
+        oldy = Math.round(accel.y);
+      });
+
       //-------------------ORIGINAL CODE HERE---------------------------------//
       // window.addEventListener("devicemotion", (event) => {
       //   if (
