@@ -195,26 +195,15 @@ export default defineComponent({
       // alert("This is Android!");
       //-------------------NEW CODE HERE. CURRENTLY FARAH IS WORKING ON THIS ---------------------------------//
 
-      var oldx = 0;
-      var oldy = 0;
-
-      var shakethreshold = 25;
-
-      if (this.$root.triesCount < this.$root.numTries) {
-        window.addEventListener("devicemotion", (event) => {
-          if (
-            Math.abs(oldx - Math.round(event.acceleration.x)) >
-              shakethreshold ||
-            Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
-          ) {
-            //alert("shaken !");
-            alert("shaken !! : try ");
-            this.$root.triesCount++;
-          }
-          oldx = Math.round(accel.x);
-          oldy = Math.round(accel.y);
-        });
-      }
+      var myShakeEvent = new Shake({ threshold: 15, timeout: 1000 });
+      myShakeEvent.start();
+      window.addEventListener(
+        "shake",
+        function () {
+          alert("shake!");
+        },
+        false
+      );
 
       //-------------------ORIGINAL CODE HERE---------------------------------//
       // window.addEventListener("devicemotion", (event) => {
