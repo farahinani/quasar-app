@@ -192,18 +192,19 @@ export default defineComponent({
         getAccel,
       };
     } else if ($q.platform.is.android) {
-      alert("This is Android!");
+      // alert("This is Android!");
       //-------------------NEW CODE HERE. CURRENTLY FARAH IS WORKING ON THIS ---------------------------------//
-      // window.onload = function () {
-      //   var myShakeEvent = new Shake({
-      //     threshold: 15,
-      //   });
-      //   myShakeEvent.start();
-      //   window.addEventListener("shake", shakeEventDidOccur, false);
-      //   function shakeEventDidOccur() {
-      //     alert("Shake!");
-      //   }
-      // };
+      window.onload = function () {
+        var myShakeEvent = new Shake({
+          threshold: 15,
+        });
+        myShakeEvent.start();
+        window.addEventListener("shake", shakeEventDidOccur, false);
+        function shakeEventDidOccur() {
+          alert("Shake!");
+        }
+      };
+
       //-------------------ORIGINAL CODE HERE---------------------------------//
       // window.addEventListener("devicemotion", (event) => {
       //   if (
