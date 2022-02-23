@@ -17,27 +17,30 @@ import { defineComponent } from "vue";
 export default defineComponent({
   name: "test",
 
-  setup() {},
+  setup() {
+    var oldx = 0;
+    var oldy = 0;
+    var shakethreshold = 10;
 
-  method() {
-    var myShakeEvent = new Shake({
-      threshold: 10, // optional shake strength threshold
-      timeout: 1000, // optional, determines the frequency of event generation
-    });
-    myShakeEvent.start();
-
-    window.addEventListener("shake", shakeEventDidOccur, false);
-
-    //function to call when shake occurs
-    function shakeEventDidOccur() {
-      //put your own code here etc.
-      alert("shake!");
+    if (window.DeviceMotionEvent) {
+      window.addEventListener(
+        "devicemotion",
+        function () {
+          if (
+            Math.abs(oldx - Math.round(acceleration.x)) > shakethreshold ||
+            Math.abs(oldy - Math.round(acceleration.y)) > shakethreshold
+          ) {
+            alert("shaken");
+          }
+          oldx = Math.round(accel.x);
+          oldy = Math.round(accel.y);
+        },
+        true
+      );
     }
-
-    window.removeEventListener("shake", shakeEventDidOccur, false);
-
-    myShakeEvent.stop();
   },
+
+  method() {},
 });
 </script>
 
