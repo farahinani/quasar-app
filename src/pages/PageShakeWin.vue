@@ -245,26 +245,25 @@ export default defineComponent({
     //   //   }
     //   // }
     // },
-    if ($q.platform.is.android) {
-      window.onload = function () {
-        //create a new instance of shake.js.
-        var myShakeEvent = new Shake({
-          threshold: 15,
-        });
 
-        // start listening to device motion
-        myShakeEvent.start();
+    window.onload = function () {
+      //create a new instance of shake.js.
+      var myShakeEvent = new Shake({
+        threshold: 15,
+      });
 
-        // register a shake event
-        window.addEventListener("shake", shakeEventDidOccur, false);
+      // start listening to device motion
+      myShakeEvent.start();
 
-        //shake event callback
-        function shakeEventDidOccur() {
-          //put your own code here etc.
-          alert("Shake!");
-        }
-      };
-    }
+      // register a shake event
+      window.addEventListener("shake", shakeEventDidOccur, false);
+
+      //shake event callback
+      function shakeEventDidOccur() {
+        //put your own code here etc.
+        alert("Shake!");
+      }
+    };
   },
 });
 </script>
