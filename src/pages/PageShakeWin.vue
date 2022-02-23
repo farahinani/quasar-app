@@ -195,6 +195,12 @@ export default defineComponent({
       // alert("This is Android!");
       //-------------------NEW CODE HERE. CURRENTLY FARAH IS WORKING ON THIS ---------------------------------//
       //-------------------ORIGINAL CODE HERE---------------------------------//
+
+      var oldx = 0;
+      var oldy = 0;
+
+      var shakethreshold = 25;
+
       window.addEventListener("devicemotion", (event) => {
         if (
           Math.abs(oldx - Math.round(event.acceleration.x)) > shakethreshold ||
