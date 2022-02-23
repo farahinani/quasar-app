@@ -17,35 +17,24 @@ export default defineComponent({
   name: "test",
 
   setup() {
-    var oldx = 0;
-    var oldy = 0;
+    window.onload = function () {
+      //create a new instance of shake.js.
+      var myShakeEvent = new Shake({
+        threshold: 15,
+      });
 
-    var shakethreshold = 25;
+      // start listening to device motion
+      myShakeEvent.start();
 
-    if (this.$root.triesCount < this.$root.numTries) {
-      this.$root.triesCount++;
-      window.addEventListener(
-        "devicemotion",
-        (event) => {
-          if (
-            Math.abs(oldx - Math.round(event.acceleration.x)) >
-              shakethreshold ||
-            Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
-          ) {
-            if (this.$root.triesCount < this.$root.numTries) {
-              alert("shaken !! : try ");
-            } else {
-              alert("finish shake");
-            }
-          }
-          oldx = Math.round(accel.x);
-          oldy = Math.round(accel.y);
-        },
-        true
-      );
-    } else {
-      alert("not shake"); // go to home
-    }
+      // register a shake event
+      window.addEventListener("shake", shakeEventDidOccur, false);
+
+      //shake event callback
+      function shakeEventDidOccur() {
+        //put your own code here etc.
+        alert("Shake!");
+      }
+    };
   },
 
   method() {},
