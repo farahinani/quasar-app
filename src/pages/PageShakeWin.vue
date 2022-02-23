@@ -195,25 +195,23 @@ export default defineComponent({
       // alert("This is Android!");
       //-------------------NEW CODE HERE. CURRENTLY FARAH IS WORKING ON THIS ---------------------------------//
 
-      var shakeEvent = new Shake({ threshold: 15 });
-      shakeEvent.start();
-      window.addEventListener(
-        "shake",
-        function () {
-          alert("Shaked");
-        },
-        false
-      );
+      window.onload = function () {
+        // console.log("test");
 
-      //stop listening
-      function stopShake() {
-        shakeEvent.stop();
-      }
+        var myShakeEvent = new Shake({
+          threshold: 15,
+        });
 
-      //check if shake is supported or not.
-      if (!("ondevicemotion" in window)) {
-        alert("Not Supported");
-      }
+        myShakeEvent.start();
+
+        window.addEventListener("shake", shakeEventDidOccur, false);
+
+        function shakeEventDidOccur() {
+          //put your own code here etc.
+          alert("Shake!");
+          console.log("shake");
+        }
+      };
 
       //-------------------ORIGINAL CODE HERE---------------------------------//
 
