@@ -202,19 +202,25 @@ export default defineComponent({
       var shakethreshold = 25;
 
       if (this.$root.triesCount < this.$root.numTries) {
-        this.$root.triesCount++;
-
         window.addEventListener("devicemotion", (event) => {
           if (
             Math.abs(oldx - Math.round(event.acceleration.x)) >
               shakethreshold ||
             Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
           ) {
-            alert("just shaken !! ");
+            // alert("just shaken !! ");
+            if (this.$root.triesCount < this.$root.numTries) {
+              alert("shaken !! : try " + this.$root.triesCount);
+              this.$root.triesCount += 1;
+            } else {
+              alert("Finish Shake");
+            }
           }
           oldx = Math.round(accel.x);
           oldy = Math.round(accel.y);
         });
+      } else {
+        alert("not shake");
       }
     } else {
       console.log("this is dekstop!");
