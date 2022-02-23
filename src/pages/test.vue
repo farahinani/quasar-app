@@ -17,9 +17,11 @@ import { defineComponent } from "vue";
 export default defineComponent({
   name: "test",
 
-  setup() {
+  setup() {},
+
+  method() {
     var myShakeEvent = new Shake({
-      threshold: 15, // optional shake strength threshold
+      threshold: 10, // optional shake strength threshold
       timeout: 1000, // optional, determines the frequency of event generation
     });
     myShakeEvent.start();
@@ -36,8 +38,6 @@ export default defineComponent({
 
     myShakeEvent.stop();
   },
-
-  method() {},
 });
 </script>
 
