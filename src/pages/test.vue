@@ -19,7 +19,7 @@
 
 <script>
 import { defineComponent } from "vue";
-import { Shake } from "src/router/shake.js";
+// import { Shake } from "src/router/shake.js";
 
 export default defineComponent({
   name: "test",
@@ -28,9 +28,9 @@ export default defineComponent({
     return {};
   },
 
-  mounted() {
-    // execute A when components is rendered
-    //A();
+  setup() {
+    var Shake = require("shake.js");
+
     var myShakeEvent = new Shake({
       threshold: 15, // optional shake strength threshold
       timeout: 1000, // optional, determines the frequency of event generation
@@ -50,27 +50,6 @@ export default defineComponent({
 
     myShakeEvent.stop();
   },
-
-  // setup() {
-  //   var myShakeEvent = new Shake({
-  //     threshold: 15, // optional shake strength threshold
-  //     timeout: 1000, // optional, determines the frequency of event generation
-  //   });
-
-  //   myShakeEvent.start();
-
-  //   window.addEventListener("shake", shakeEventDidOccur, false);
-
-  //   //function to call when shake occurs
-  //   function shakeEventDidOccur() {
-  //     //put your own code here etc.
-  //     alert("shake!");
-  //   }
-
-  //   window.removeEventListener("shake", shakeEventDidOccur, false);
-
-  //   myShakeEvent.stop();
-  // },
 });
 </script>
 
