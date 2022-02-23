@@ -194,24 +194,27 @@ export default defineComponent({
     } else if ($q.platform.is.android) {
       // alert("This is Android!");
       //-------------------NEW CODE HERE. CURRENTLY FARAH IS WORKING ON THIS ---------------------------------//
+      var oldx = 0;
+      var oldy = 0;
+      var shakethreshold = 10;
 
-      window.onload = function () {
-        // console.log("test");
-
-        var myShakeEvent = new Shake({
-          threshold: 15,
-        });
-
-        myShakeEvent.start();
-
-        window.addEventListener("shake", shakeEventDidOccur, false);
-
-        function shakeEventDidOccur() {
-          //put your own code here etc.
-          alert("Shake!");
-          console.log("shake");
-        }
-      };
+      if (window.DeviceMotionEvent) {
+        window.addEventListener(
+          "devicemotion",
+          function () {
+            if (
+              Math.abs(oldx - Math.round(event.acceleration.x)) >
+                shakethreshold ||
+              Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
+            ) {
+              alert("shaken");
+            }
+            oldx = Math.round(accel.x);
+            oldy = Math.round(accel.y);
+          },
+          true
+        );
+      }
 
       //-------------------ORIGINAL CODE HERE---------------------------------//
 
