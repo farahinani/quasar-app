@@ -201,21 +201,21 @@ export default defineComponent({
 
       var shakethreshold = 25;
 
-      window.addEventListener("devicemotion", (event) => {
-        if (
-          Math.abs(oldx - Math.round(event.acceleration.x)) > shakethreshold ||
-          Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
-        ) {
-          // alert("just shaken !! ");
-          if (this.$root.triesCount < this.$root.numTries) {
-            alert("shaken !! : try " + this.$root.triesCount);
-          } else {
-            alert("Last Shake");
+      if (this.$root.triesCount < this.$root.numTries) {
+        this.$root.triesCount++;
+
+        window.addEventListener("devicemotion", (event) => {
+          if (
+            Math.abs(oldx - Math.round(event.acceleration.x)) >
+              shakethreshold ||
+            Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
+          ) {
+            alert("just shaken !! ");
           }
-        }
-        oldx = Math.round(accel.x);
-        oldy = Math.round(accel.y);
-      });
+          oldx = Math.round(accel.x);
+          oldy = Math.round(accel.y);
+        });
+      }
     } else {
       console.log("this is dekstop!");
     }
