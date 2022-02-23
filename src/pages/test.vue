@@ -12,6 +12,7 @@
 
 <script>
 import { defineComponent } from "vue";
+import { Shake } from "src/router/shake.js";
 
 export default defineComponent({
   name: "test",
