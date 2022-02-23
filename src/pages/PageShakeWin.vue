@@ -198,31 +198,30 @@ export default defineComponent({
       var oldy = 0;
       var shakethreshold = 10;
 
-      if (this.$root.triesCount < this.$root.numTries) {
-        if (window.DeviceMotionEvent) {
-          window.addEventListener(
-            "devicemotion",
-            function () {
-              if (
-                Math.abs(oldx - Math.round(event.acceleration.x)) >
-                  shakethreshold ||
-                Math.abs(oldy - Math.round(event.acceleration.y)) >
-                  shakethreshold
-              ) {
-                // alert("shaken");
+      if (window.DeviceMotionEvent) {
+        window.addEventListener(
+          "devicemotion",
+          function () {
+            if (
+              Math.abs(oldx - Math.round(event.acceleration.x)) >
+                shakethreshold ||
+              Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
+            ) {
+              // alert("shaken");
+              if (this.$root.triesCount < this.$root.numTries) {
                 alert("shaken !! : try " + this.$root.triesCount);
                 this.$root.triesCount += 1;
               } else {
                 alert("Last Shake");
               }
-              oldx = Math.round(accel.x);
-              oldy = Math.round(accel.y);
-            },
-            true
-          );
-        } else {
-          alert("no shake");
-        }
+            }
+            oldx = Math.round(accel.x);
+            oldy = Math.round(accel.y);
+          },
+          true
+        );
+      } else {
+        alert("no shake");
       }
 
       //-------------------ORIGINAL CODE HERE---------------------------------//
