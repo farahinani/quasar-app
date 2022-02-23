@@ -60,7 +60,7 @@
 
           <!-- DISPLAY BUTTON FOR ANDROID -->
           <div v-if="$q.platform.is.android">
-            <div v-on:click="hide = !hide">
+            <!-- <div v-on:click="hide = !hide">
               <p>
                 <q-btn
                   class="full-width"
@@ -72,7 +72,7 @@
                 >
                 </q-btn>
               </p>
-            </div>
+            </div> -->
           </div>
 
           <!-- BUTTON FOR SHAKESUCCESS CODE -->
@@ -194,30 +194,44 @@ export default defineComponent({
     } else if ($q.platform.is.android) {
       // alert("This is Android!");
       //-------------------NEW CODE HERE. CURRENTLY FARAH IS WORKING ON THIS ---------------------------------//
+
+      var shakeEvent = new Shake({ threshold: 15 });
+      shakeEvent.start();
+      window.addEventListener(
+        "shake",
+        function () {
+          alert("Shaked");
+        },
+        false
+      );
+
+      //stop listening
+      function stopShake() {
+        shakeEvent.stop();
+      }
+
+      //check if shake is supported or not.
+      if (!("ondevicemotion" in window)) {
+        alert("Not Supported");
+      }
+
       //-------------------ORIGINAL CODE HERE---------------------------------//
 
-      var oldx = 0;
-      var oldy = 0;
+      // var oldx = 0;
+      // var oldy = 0;
 
-      var shakethreshold = 25;
+      // var shakethreshold = 25;
 
-      if (this.$root.triesCount < this.$root.numTries) {
-        window.addEventListener("devicemotion", (event) => {
-          if (
-            Math.abs(oldx - Math.round(event.acceleration.x)) >
-              shakethreshold ||
-            Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
-          ) {
-            // alert("just shaken !! ");
-            alert("shaken !! : try " + this.$root.triesCount);
-            this.$root.triesCount += 1;
-          }
-          oldx = Math.round(accel.x);
-          oldy = Math.round(accel.y);
-        });
-      } else {
-        alert("not shake");
-      }
+      // window.addEventListener("devicemotion", (event) => {
+      //   if (
+      //     Math.abs(oldx - Math.round(event.acceleration.x)) > shakethreshold ||
+      //     Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
+      //   ) {
+      //     // alert("just shaken !! ");
+      //   }
+      //   oldx = Math.round(accel.x);
+      //   oldy = Math.round(accel.y);
+      // });
     } else {
       console.log("this is dekstop!");
     }
