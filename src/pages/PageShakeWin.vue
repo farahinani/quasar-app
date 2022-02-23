@@ -199,8 +199,6 @@ export default defineComponent({
       var shakethreshold = 10;
 
       if (this.$root.triesCount < this.$root.numTries) {
-        this.$root.triesCount++;
-
         if (window.DeviceMotionEvent) {
           window.addEventListener(
             "devicemotion",
@@ -213,6 +211,7 @@ export default defineComponent({
               ) {
                 // alert("shaken");
                 alert("shaken !! : try " + this.$root.triesCount);
+                this.$root.triesCount += 1;
               } else {
                 alert("Last Shake");
               }
