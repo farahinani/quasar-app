@@ -1,77 +1,142 @@
-function createEvent(type, detail) {
-    return new CustomEvent(type, { detail });
-}
-function getMaxAcceleration(event) {
-    let max = 0;
-    if (event.acceleration) {
-        for (const key of ['x', 'y', 'z']) {
-            const value = Math.abs(event.acceleration[key] ?? 0);
-            if (value > max)
-                max = value;
+/*
+ * Author: Alex Gibson
+ * https://github.com/alexgibson/shake.js
+ * License: MIT license
+ */
+
+export const Shake = () => {
+    (function(global, factory) {
+        if (typeof define === 'function' && define.amd) {
+            define(function() {
+                return factory(global, global.document);
+            });
+        } else if (typeof module !== 'undefined' && module.exports) {
+            module.exports = factory(global, global.document);
+        } else {
+            global.Shake = factory(global, global.document);
         }
-    }
-    return max;
-}
-export class Shake extends EventTarget {
-    constructor(options) {
-        super();
-        this.#handleDeviceMotion = (event) => {
-            const diff = event.timeStamp - this.#timeStamp;
-            if (diff < this.#timeout)
-                return;
-            const accel = getMaxAcceleration(event);
-            if (accel < this.#threshold)
-                return;
-            this.#timeStamp = event.timeStamp;
-            this.dispatchEvent(createEvent('shake', event));
-        };
-        const { threshold = 15, timeout = 1000, } = options ?? {};
-        this.#threshold = threshold;
-        this.#timeout = timeout;
-        this.#timeStamp = timeout * -1;
-    }
-    #approved;
-    #threshold;
-    #timeout;
-    #timeStamp;
-    // @ts-ignore
-    addEventListener(type, listener, options) {
-        super.addEventListener(type, listener, options);
-    }
-    dispatchEvent(event) {
-        return super.dispatchEvent(event);
-    }
-    // @ts-ignore
-    removeEventListener(type, callback, options) {
-        super.removeEventListener(type, callback, options);
-    }
-    async approve() {
-        if (typeof this.#approved === 'undefined') {
-            if (!('DeviceMotionEvent' in window))
-                return this.#approved = false;
-            try {
-                if (typeof DeviceMotionEvent.requestPermission === 'function') {
-                    const permissionState = await DeviceMotionEvent.requestPermission();
-                    this.#approved = permissionState === 'granted';
+    } (typeof window !== 'undefined' ? window : this, function (window, document) {
+    
+        'use strict';
+    
+        function Shake(options) {
+            //feature detect
+            this.hasDeviceMotion = 'ondevicemotion' in window;
+    
+            this.options = {
+                threshold: 15, //default velocity threshold for shake to register
+                timeout: 1000 //default interval between events
+            };
+    
+            if (typeof options === 'object') {
+                for (var i in options) {
+                    if (options.hasOwnProperty(i)) {
+                        this.options[i] = options[i];
+                    }
                 }
-                else
-                    this.#approved = true;
             }
-            catch {
-                this.#approved = false;
+    
+            //use date to prevent multiple shakes firing
+            this.lastTime = new Date();
+    
+            //accelerometer values
+            this.lastX = null;
+            this.lastY = null;
+            this.lastZ = null;
+    
+            //create custom event
+            if (typeof document.CustomEvent === 'function') {
+                this.event = new document.CustomEvent('shake', {
+                    bubbles: true,
+                    cancelable: true
+                });
+            } else if (typeof document.createEvent === 'function') {
+                this.event = document.createEvent('Event');
+                this.event.initEvent('shake', true, true);
+            } else {
+                return false;
             }
         }
-        return this.#approved;
-    }
-    #handleDeviceMotion;
-    async start() {
-        const approved = await this.approve();
-        if (!approved)
-            return false;
-        window.addEventListener('devicemotion', this.#handleDeviceMotion);
-        return true;
-    }
-    stop() {
-        window.removeEventListener('devicemotion', this.#handleDeviceMotion);
-    }
+    
+        //reset timer values
+        Shake.prototype.reset = function () {
+            this.lastTime = new Date();
+            this.lastX = null;
+            this.lastY = null;
+            this.lastZ = null;
+        };
+    
+        //start listening for devicemotion
+        Shake.prototype.start = function () {
+            this.reset();
+            if (this.hasDeviceMotion) {
+                window.addEventListener('devicemotion', this, false);
+            }
+        };
+    
+        //stop listening for devicemotion
+        Shake.prototype.stop = function () {
+            if (this.hasDeviceMotion) {
+                window.removeEventListener('devicemotion', this, false);
+            }
+            this.reset();
+        };
+    
+        //calculates if shake did occur
+        Shake.prototype.devicemotion = function (e) {
+            var current = e.accelerationIncludingGravity;
+            var currentTime;
+            var timeDifference;
+            var deltaX = 0;
+            var deltaY = 0;
+            var deltaZ = 0;
+    
+            if ((this.lastX === null) && (this.lastY === null) && (this.lastZ === null)) {
+                this.lastX = current.x;
+                this.lastY = current.y;
+                this.lastZ = current.z;
+                return;
+            }
+    
+            deltaX = Math.abs(this.lastX - current.x);
+            deltaY = Math.abs(this.lastY - current.y);
+            deltaZ = Math.abs(this.lastZ - current.z);
+    
+            if (((deltaX > this.options.threshold) && (deltaY > this.options.threshold)) || ((deltaX > this.options.threshold) && (deltaZ > this.options.threshold)) || ((deltaY > this.options.threshold) && (deltaZ > this.options.threshold))) {
+                //calculate time in milliseconds since last shake registered
+                currentTime = new Date();
+                timeDifference = currentTime.getTime() - this.lastTime.getTime();
+    
+                if (timeDifference > this.options.timeout) {
+                    window.dispatchEvent(this.event);
+                    this.lastTime = new Date();
+                }
+            }
+    
+            this.lastX = current.x;
+            this.lastY = current.y;
+            this.lastZ = current.z;
+    
+        };
+    
+        //event handler
+        Shake.prototype.handleEvent = function (e) {
+            if (typeof (this[e.type]) === 'function') {
+                return this[e.type](e);
+            }
+        };
+    
+        return Shake;
+    
+        
+    }));
 }
+
+
+
+
+// export const A = () => {
+//     alert("this is A")
+// }
+
+
