@@ -195,15 +195,36 @@ export default defineComponent({
       // alert("This is Android!");
       //-------------------NEW CODE HERE. CURRENTLY FARAH IS WORKING ON THIS ---------------------------------//
 
-      var myShakeEvent = new Shake({ threshold: 15, timeout: 1000 });
-      myShakeEvent.start();
-      window.addEventListener(
-        "shake",
-        function () {
-          alert("shake!");
-        },
-        false
-      );
+      window.onload = function () {
+        //create a new instance of shake.js.
+        var myShakeEvent = new Shake({
+          shakethreshold: 15,
+        });
+
+        // start listening to device motion
+        myShakeEvent.start();
+
+        // register a shake event
+        // window.addEventListener("shake", shakeEventDidOccur, false);
+
+        // //shake event callback
+        // function shakeEventDidOccur() {
+        //   //put your own code here etc.
+        //   alert("Shake!");
+        // }
+
+        window.addEventListener("shake", (event) => {
+          if (
+            Math.abs(oldx - Math.round(event.acceleration.x)) >
+              shakethreshold ||
+            Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
+          ) {
+            alert("shaken");
+          }
+          oldx = Math.round(accel.x);
+          oldy = Math.round(accel.y);
+        });
+      };
 
       //-------------------ORIGINAL CODE HERE---------------------------------//
       // window.addEventListener("devicemotion", (event) => {
@@ -217,7 +238,7 @@ export default defineComponent({
       //   oldy = Math.round(accel.y);
       // });
     } else {
-      //alert("this is dekstop!");
+      console.log("this is dekstop!");
     }
   },
 
