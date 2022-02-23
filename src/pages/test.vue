@@ -4,6 +4,13 @@
       <q-card class="my-card">
         <q-card-section>
           <div class="q-py-lg q-px-md">test page</div>
+          <q-btn
+            type="submit"
+            label="SHAKE"
+            color="primary"
+            class="full-width"
+            @click="shakeSuccess()"
+          />
         </q-card-section>
       </q-card>
     </div>
@@ -18,34 +25,27 @@ export default defineComponent({
   name: "test",
 
   setup() {
-    var myShakeEvent = new Shake({ threshold: 15, timeout: 1000 });
+    var myShakeEvent = new Shake({
+      threshold: 15, // optional shake strength threshold
+      timeout: 1000, // optional, determines the frequency of event generation
+    });
+
     myShakeEvent.start();
-    window.addEventListener(
-      "shake",
-      function () {
-        alert("shake!!!!");
-      },
-      false
-    );
+
+    window.addEventListener("shake", shakeEventDidOccur, false);
+
+    //function to call when shake occurs
+    function shakeEventDidOccur() {
+      //put your own code here etc.
+      alert("shake!");
+    }
+
+    window.removeEventListener("shake", shakeEventDidOccur, false);
+
+    myShakeEvent.stop();
   },
 
-  method() {
-    // window.onload = function () {
-    //   //create a new instance of shake.js.
-    //   var myShakeEvent = new Shake({
-    //     threshold: 10,
-    //   });
-    //   // start listening to device motion
-    //   myShakeEvent.start();
-    //   // register a shake event
-    //   window.addEventListener("shake", shakeEventDidOccur, false);
-    //   //shake event callback
-    //   function shakeEventDidOccur() {
-    //     //put your own code here etc.
-    //     alert("Shake!");
-    //   }
-    // };
-  },
+  methods: {},
 });
 </script>
 
