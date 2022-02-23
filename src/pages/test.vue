@@ -19,32 +19,30 @@
 
 <script>
 import { defineComponent } from "vue";
-// import { Shake } from "src/router/shake.js";
+import { Shake } from "src/router/shake.js";
 
 export default defineComponent({
   name: "test",
 
   setup() {
-    var Shake = require("shake.js");
+    window.onload = function () {
+      //create a new instance of shake.js.
+      var myShakeEvent = new Shake({
+        threshold: 15,
+      });
 
-    var myShakeEvent = new Shake({
-      threshold: 15, // optional shake strength threshold
-      timeout: 1000, // optional, determines the frequency of event generation
-    });
+      // start listening to device motion
+      myShakeEvent.start();
 
-    myShakeEvent.start();
+      // register a shake event
+      window.addEventListener("shake", shakeEventDidOccur, false);
 
-    window.addEventListener("shake", shakeEventDidOccur, false);
-
-    //function to call when shake occurs
-    function shakeEventDidOccur() {
-      //put your own code here etc.
-      alert("shake!");
-    }
-
-    window.removeEventListener("shake", shakeEventDidOccur, false);
-
-    myShakeEvent.stop();
+      //shake event callback
+      function shakeEventDidOccur() {
+        //put your own code here etc.
+        alert("Shake!");
+      }
+    };
   },
 });
 </script>
