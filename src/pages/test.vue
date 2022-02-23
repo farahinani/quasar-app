@@ -26,18 +26,24 @@ export default defineComponent({
     window.addEventListener(
       "devicemotion",
       (event) => {
-        if (
-          Math.abs(oldx - Math.round(event.acceleration.x)) > shakethreshold ||
-          Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
-        ) {
-          alert("shaken!");
-          // if (this.$root.triesCount < this.$root.numTries) {
-          //   alert("shaken !! : try " + this.$root.triesCount);
-          //   this.$root.triesCount += 1;
-          // } else {
-          //   alert("finish shake");
-          // }
+        if (this.$root.triesCount < this.$root.numTries) {
+          if (
+            Math.abs(oldx - Math.round(event.acceleration.x)) >
+              shakethreshold ||
+            Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
+          ) {
+            //alert("shaken!");
+            if (this.$root.triesCount < this.$root.numTries) {
+              alert("shaken !! : try ");
+              this.$root.triesCount += 1;
+            } else {
+              alert("finish shake");
+            }
+          } else {
+            alert("not shaken");
+          }
         }
+
         oldx = Math.round(accel.x);
         oldy = Math.round(accel.y);
       },
