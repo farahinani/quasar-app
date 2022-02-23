@@ -17,11 +17,13 @@ import { Shake } from "src/router/shake.js";
 export default defineComponent({
   name: "test",
 
-  setup() {
+  setup() {},
+
+  method() {
     window.onload = function () {
       //create a new instance of shake.js.
       var myShakeEvent = new Shake({
-        threshold: 15,
+        threshold: 10,
       });
 
       // start listening to device motion
@@ -37,8 +39,6 @@ export default defineComponent({
       }
     };
   },
-
-  method() {},
 });
 </script>
 
