@@ -4,6 +4,7 @@
       <q-card class="my-card">
         <q-card-section>
           <div class="q-py-lg q-px-md">test page</div>
+          <button id="start">Approve</button>
         </q-card-section>
       </q-card>
     </div>
@@ -16,7 +17,25 @@ import { defineComponent } from "vue";
 export default defineComponent({
   name: "test",
 
-  setup() {},
+  setup() {
+    var myShakeEvent = new Shake({
+      threshold: 15, // optional shake strength threshold
+      timeout: 1000, // optional, determines the frequency of event generation
+    });
+    myShakeEvent.start();
+
+    window.addEventListener("shake", shakeEventDidOccur, false);
+
+    //function to call when shake occurs
+    function shakeEventDidOccur() {
+      //put your own code here etc.
+      alert("shake!");
+    }
+
+    window.removeEventListener("shake", shakeEventDidOccur, false);
+
+    myShakeEvent.stop();
+  },
 
   method() {},
 });
