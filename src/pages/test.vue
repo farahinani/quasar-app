@@ -4,13 +4,14 @@
       <q-card class="my-card">
         <q-card-section>
           <div class="q-py-lg q-px-md">test page</div>
-          <q-btn
+          <!-- <q-btn
             type="submit"
             label="SHAKE"
             color="primary"
             class="full-width"
             @click="shakeSuccess()"
-          />
+          /> -->
+          <button id="start">Approve</button>
         </q-card-section>
       </q-card>
     </div>
@@ -25,24 +26,23 @@ export default defineComponent({
   name: "test",
 
   setup() {
-    window.onload = function () {
-      //create a new instance of shake.js.
-      var myShakeEvent = new Shake({
-        threshold: 15,
-      });
-
-      // start listening to device motion
-      myShakeEvent.start();
-
-      // register a shake event
-      window.addEventListener("shake", shakeEventDidOccur, false);
-
-      //shake event callback
-      function shakeEventDidOccur() {
-        //put your own code here etc.
-        alert("Shake!");
-      }
-    };
+    const shake = new Shake({ threshold: 15, timeout: 1000 });
+    shake.addEventListener("shake", (ev) => {
+      console.log("Shake!", ev.detail.timeStamp, ev.detail.acceleration);
+    });
+    const button = document.getElementById("start");
+    if (button) {
+      button.addEventListener(
+        "click",
+        async () => {
+          const approved = await shake.start();
+          const div = document.body.appendChild(document.createElement("div"));
+          div.textContent = `Approved: ${String(approved)}`;
+          button.remove();
+        },
+        { once: true }
+      );
+    }
   },
 });
 </script>
