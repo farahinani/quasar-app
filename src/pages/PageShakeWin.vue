@@ -39,7 +39,7 @@
                   v-if="hide"
                   id="accelPermsButton"
                   color="primary"
-                  @click="getAccel()"
+                  @click="getPermission()"
                   label="Start Shake"
                 >
                 </q-btn>
