@@ -30,8 +30,7 @@
           </div>
 
           <!-- DISPLAY BUTTON FOR IOS -->
-          <div v-if="$q.platform.is.ios">
-            <!-- NEW HIDE CODE -->
+          <!-- <div v-if="$q.platform.is.ios">
             <div v-on:click="hide = !hide">
               <p>
                 <q-btn
@@ -44,44 +43,19 @@
                 </q-btn>
               </p>
             </div>
-
-            <!-- ORIGINAL BTN CODE FOR IOS-->
-            <!-- Please press button "Start shake"<br />
-            <q-btn
-              v-if="hide"
-              id="accelPermsButton"
-              color="primary"
-              @click="getAccel()"
-              label="Start Shake"
-            >
-            </q-btn> -->
+          </div> -->
+          <div v-on:click="hide = !hide">
+            <p>
+              <q-btn
+                class="full-width"
+                v-if="hide"
+                color="primary"
+                @click="this.$mounted.getPermission()"
+                label="Start Shake"
+              >
+              </q-btn>
+            </p>
           </div>
-
-          <!-- DISPLAY BUTTON FOR ANDROID -->
-          <div v-if="$q.platform.is.android">
-            <!-- <div v-on:click="hide = !hide">
-              <p>
-                <q-btn
-                  class="full-width"
-                  v-if="hide"
-                  id="accelPermsButton"
-                  color="primary"
-                  @click="getAccel2()"
-                  label="Start Shake"
-                >
-                </q-btn>
-              </p>
-            </div> -->
-          </div>
-
-          <!-- BUTTON FOR SHAKESUCCESS CODE -->
-          <!-- <q-btn
-            type="submit"
-            label="SHAKE BUTTON"
-            color="primary"
-            class="full-width"
-            @click="shakeSuccess()"
-          /> -->
 
           <!-- BUTTON FOR NEXT PAGE CODE -->
           <q-btn
@@ -114,156 +88,134 @@ export default defineComponent({
   },
 
   setup() {
-    // const $q = useQuasar();
-    // $q.platform.is.desktop;
-    // $q.platform.is.android;
-    // $q.platform.is.ios;
-    // if ($q.platform.is.ios) {
-    //   // alert("alert: this is ios");
-    //   function getAccel() {
-    //     var oldx = 0;
-    //     var oldy = 0;
-    //     var shakethreshold = 25;
-    //     //CALCULATE TRIESCOUNT THEN SHAKE
-    //     if (this.$root.triesCount < this.$root.numTries) {
-    //       //DETECT PERMISSION FOR DEVICE MOTION WHEN CLICK BUTTON 'START SHAKE'
-    //       DeviceMotionEvent.requestPermission().then((response) => {
-    //         //IF PERMISSION IS GRANTED, LISTEN TO SHAKE
-    //         if (response == "granted") {
-    //           //LISTEN TO SHAKE MOTION
-    //           window.addEventListener(
-    //             "devicemotion",
-    //             (event) => {
-    //               // this.$root.triesCount++; //loop number like forever
-    //               if (
-    //                 Math.abs(oldx - Math.round(event.acceleration.x)) >
-    //                   shakethreshold ||
-    //                 Math.abs(oldy - Math.round(event.acceleration.y)) >
-    //                   shakethreshold
-    //               ) {
-    //                 // alert("shaken !");
-    //                 if (this.$root.triesCount < this.$root.numTries) {
-    //                   alert("shaken !! : try " + this.$root.triesCount);
-    //                   // this.$root.triesCount++; // this works fine but starting is try 0?
-    //                   this.$root.triesCount += 1;
-    //                 } else {
-    //                   // alert("Last Shake");
-    //                   alert("finish shake"); // go to home
-    //                 }
-    //                 // this.$root.triesCount++; //the count keep increasing when click shake
-    //               }
-    //               oldx = Math.round(accel.x);
-    //               oldy = Math.round(accel.y);
-    //               // this.$root.triesCount++; //only display alert equals to numtries
-    //             },
-    //             true
-    //           );
-    //           // this.$root.triesCount++; // need to press button everytime wants to shake
-    //         }
-    //         // this.$root.triesCount++; // need to press button if wants to shake
-    //       });
-    //     }
-    //     //-------------------ORIGINAL CODE HERE---------------------------------//
-    //     // DeviceMotionEvent.requestPermission().then((response) => {
-    //     //   if (response == "granted") {
-    //     //     window.addEventListener("devicemotion", (event) => {
-    //     //       if (
-    //     //         Math.abs(oldx - Math.round(event.acceleration.x)) >
-    //     //           shakethreshold ||
-    //     //         Math.abs(oldy - Math.round(event.acceleration.y)) >
-    //     //           shakethreshold
-    //     //       ) {
-    //     //         alert("shaken !");
-    //     //       }
-    //     //       oldx = Math.round(accel.x);
-    //     //       oldy = Math.round(accel.y);
-    //     //     });
-    //     //     window.addEventListener("deviceorientation", (event) => {
-    //     //       console.log(event);
-    //     //     });
-    //     //   }
-    //     // });
-    //   }
-    //   return {
-    //     getAccel,
-    //   };
-    // } else if ($q.platform.is.android) {
-    //   //-------------------NEW CODE HERE. CURRENTLY FARAH IS WORKING ON THIS ---------------------------------//
-    //   //-------------------ORIGINAL CODE HERE---------------------------------//
-    //   var oldx = 0;
-    //   var oldy = 0;
-    //   var shakethreshold = 25;
-    //   window.addEventListener("devicemotion", (event) => {
-    //     if (
-    //       Math.abs(oldx - Math.round(event.acceleration.x)) > shakethreshold ||
-    //       Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
-    //     ) {
-    //       // alert("just shaken !! ");
-    //     }
-    //     oldx = Math.round(accel.x);
-    //     oldy = Math.round(accel.y);
-    //   });
-    // } else {
-    //   console.log("this is dekstop!");
-    // }
-  },
-
-  mounted() {
-    const $q = useQuasar();
-
-    $q.platform.is.desktop;
-    $q.platform.is.android;
-    $q.platform.is.ios;
-
     if ($q.platform.is.ios) {
-      alert("ios");
-    } else if ($q.platform.is.android) {
-      this.onShake();
-    } else {
-      alert("desktop");
+      // alert("alert: this is ios");
+      function getAccel() {
+        var oldx = 0;
+        var oldy = 0;
+        var shakethreshold = 25;
+        //CALCULATE TRIESCOUNT THEN SHAKE
+        if (this.$root.triesCount < this.$root.numTries) {
+          //DETECT PERMISSION FOR DEVICE MOTION WHEN CLICK BUTTON 'START SHAKE'
+          DeviceMotionEvent.requestPermission().then((response) => {
+            //IF PERMISSION IS GRANTED, LISTEN TO SHAKE
+            if (response == "granted") {
+              //LISTEN TO SHAKE MOTION
+              window.addEventListener(
+                "devicemotion",
+                (event) => {
+                  // this.$root.triesCount++; //loop number like forever
+                  if (
+                    Math.abs(oldx - Math.round(event.acceleration.x)) >
+                      shakethreshold ||
+                    Math.abs(oldy - Math.round(event.acceleration.y)) >
+                      shakethreshold
+                  ) {
+                    // alert("shaken !");
+                    if (this.$root.triesCount < this.$root.numTries) {
+                      alert("shaken !! : try " + this.$root.triesCount);
+                      // this.$root.triesCount++; // this works fine but starting is try 0?
+                      this.$root.triesCount += 1;
+                    } else {
+                      // alert("Last Shake");
+                      alert("finish shake"); // go to home
+                    }
+                    // this.$root.triesCount++; //the count keep increasing when click shake
+                  }
+                  oldx = Math.round(accel.x);
+                  oldy = Math.round(accel.y);
+                  // this.$root.triesCount++; //only display alert equals to numtries
+                },
+                true
+              );
+              // this.$root.triesCount++; // need to press button everytime wants to shake
+            }
+            // this.$root.triesCount++; // need to press button if wants to shake
+          });
+        }
+        //-------------------ORIGINAL CODE HERE---------------------------------//
+        // DeviceMotionEvent.requestPermission().then((response) => {
+        //   if (response == "granted") {
+        //     window.addEventListener("devicemotion", (event) => {
+        //       if (
+        //         Math.abs(oldx - Math.round(event.acceleration.x)) >
+        //           shakethreshold ||
+        //         Math.abs(oldy - Math.round(event.acceleration.y)) >
+        //           shakethreshold
+        //       ) {
+        //         alert("shaken !");
+        //       }
+        //       oldx = Math.round(accel.x);
+        //       oldy = Math.round(accel.y);
+        //     });
+        //     window.addEventListener("deviceorientation", (event) => {
+        //       console.log(event);
+        //     });
+        //   }
+        // });
+      }
+      return {
+        getAccel,
+      };
     }
   },
 
-  methods: {
-    // shakeSuccess() {
-    //   alert("test function");
-    //   //JOANNE's code
-    //   if (this.$root.triesCount < this.$root.numTries) {
-    //     this.$root.triesCount++;
-    //     if (this.$root.triesCount < this.$root.numTries) {
-    //       alert("shaken !! : try " + this.$root.triesCount);
-    //     } else {
-    //       alert("Last Shake");
-    //     }
-    //   }
-    // },
+  // mounted() {
+  //   const $q = useQuasar();
 
-    onShake() {
-      //create a new instance of shake.js.
-      var myShakeEvent = new Shake({
-        threshold: 15,
-      });
+  //   $q.platform.is.desktop;
+  //   $q.platform.is.android;
+  //   $q.platform.is.ios;
 
-      // start listening to device motion
-      myShakeEvent.start();
+  //   if ($q.platform.is.ios) {
+  //     alert("ios");
+  //   } else if ($q.platform.is.android) {
+  //     this.onShake();
+  //   } else {
+  //     alert("desktop");
+  //   }
+  // },
 
-      // register a shake event
-      window.addEventListener("shake", shakeEventDidOccur, false);
+  // methods: {
+  //   // shakeSuccess() {
+  //   //   alert("test function");
+  //   //   //JOANNE's code
+  //   //   if (this.$root.triesCount < this.$root.numTries) {
+  //   //     this.$root.triesCount++;
+  //   //     if (this.$root.triesCount < this.$root.numTries) {
+  //   //       alert("shaken !! : try " + this.$root.triesCount);
+  //   //     } else {
+  //   //       alert("Last Shake");
+  //   //     }
+  //   //   }
+  //   // },
 
-      //shake event callback
-      function shakeEventDidOccur() {
-        // alert("shaken");
-        if (this.$root.triesCount < this.$root.numTries) {
-          this.$root.triesCount++;
-          if (this.$root.triesCount < this.$root.numTries) {
-            alert("shaken !! : try ");
-          } else {
-            alert("Last Shake");
-          }
-        }
-      }
-    },
-  },
+  //   onShake() {
+  //     //create a new instance of shake.js.
+  //     var myShakeEvent = new Shake({
+  //       threshold: 15,
+  //     });
+
+  //     // start listening to device motion
+  //     myShakeEvent.start();
+
+  //     // register a shake event
+  //     window.addEventListener("shake", shakeEventDidOccur, false);
+
+  //     //shake event callback
+  //     function shakeEventDidOccur() {
+  //       // alert("shaken");
+  //       if (this.$root.triesCount < this.$root.numTries) {
+  //         this.$root.triesCount++;
+  //         if (this.$root.triesCount < this.$root.numTries) {
+  //           alert("shaken !! : try ");
+  //         } else {
+  //           alert("Last Shake");
+  //         }
+  //       }
+  //     }
+  //   },
+  // },
 });
 </script>
 
