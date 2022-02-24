@@ -261,11 +261,7 @@ export default defineComponent({
 
       //shake event callback
       function shakeEventDidOccur() {
-        if (this.$root.triesCount < this.$root.numTries) {
-          alert("shaken !! : try " + this.$root.triesCount);
-        } else {
-          alert("Last Shake !!");
-        }
+        alert("shaken !! : try " + this.$root.triesCount);
       }
     },
   },
