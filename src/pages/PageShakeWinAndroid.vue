@@ -28,6 +28,18 @@
               to see what you get!
             </div>
           </div>
+          <div v-on:click="hide = !hide">
+            <p>
+              <q-btn
+                class="full-width"
+                v-if="hide"
+                color="primary"
+                @click="getAccel()"
+                label="Start Shake"
+              >
+              </q-btn>
+            </p>
+          </div>
 
           <!-- BUTTON FOR NEXT PAGE CODE -->
           <q-btn
@@ -60,6 +72,37 @@ export default defineComponent({
   },
 
   setup() {
+    function getAccel() {
+      var oldx = 0;
+      var oldy = 0;
+      var shakethreshold = 25;
+      if (this.$root.triesCount < this.$root.numTries) {
+        window.addEventListener(
+          "devicemotion",
+          (event) => {
+            if (
+              Math.abs(oldx - Math.round(event.acceleration.x)) >
+                shakethreshold ||
+              Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
+            ) {
+              if (this.$root.triesCount < this.$root.numTries) {
+                alert("shaken !! : try " + this.$root.triesCount);
+                this.$root.triesCount += 1;
+              } else {
+                alert("finish shake");
+              }
+            }
+            oldx = Math.round(accel.x);
+            oldy = Math.round(accel.y);
+          },
+          true
+        );
+      }
+    }
+    return {
+      getAccel,
+    };
+
     // var oldx = 0;
     // var oldy = 0;
     // var shakethreshold = 10;
@@ -105,30 +148,28 @@ export default defineComponent({
     //     }
     //   }
     // },
-
-    onShake() {
-      //create a new instance of shake.js.
-      var myShakeEvent = new Shake({
-        threshold: 10,
-      });
-      // start listening to device motion
-      myShakeEvent.start();
-
-      if (this.$root.triesCount < this.$root.numTries) {
-        // register a shake event
-        window.addEventListener("shake", shakeEventDidOccur, false);
-        //shake event callback
-        function shakeEventDidOccur() {
-          // alert("shaken");
-          this.$root.triesCount++;
-          if (this.$root.triesCount < this.$root.numTries) {
-            alert("shaken !! : try ");
-          } else {
-            alert("Last Shake");
-          }
-        }
-      }
-    },
+    // onShake() {
+    //   //create a new instance of shake.js.
+    //   var myShakeEvent = new Shake({
+    //     threshold: 10,
+    //   });
+    //   // start listening to device motion
+    //   myShakeEvent.start();
+    //   if (this.$root.triesCount < this.$root.numTries) {
+    //     // register a shake event
+    //     window.addEventListener("shake", shakeEventDidOccur, false);
+    //     //shake event callback
+    //     function shakeEventDidOccur() {
+    //       // alert("shaken");
+    //       this.$root.triesCount++;
+    //       if (this.$root.triesCount < this.$root.numTries) {
+    //         alert("shaken !! : try ");
+    //       } else {
+    //         alert("Last Shake");
+    //       }
+    //     }
+    //   }
+    // },
   },
 });
 </script>
