@@ -244,12 +244,14 @@ export default defineComponent({
         threshold: 15,
       });
 
+      // start listening to device motion
+      myShakeEvent.start();
+
+      //shake event callback
       if (this.$root.triesCount < this.$root.numTries) {
-        // start listening to device motion
-        myShakeEvent.start();
         // register a shake event
         window.addEventListener("shake", shakeEventDidOccur, false);
-        //shake event callback
+
         function shakeEventDidOccur() {
           if (this.$root.triesCount < this.$root.numTries) {
             alert("shaken !! : try " + this.$root.triesCount);
