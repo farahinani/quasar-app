@@ -103,6 +103,7 @@
 import { defineComponent } from "vue";
 import { useQuasar } from "quasar";
 import { event } from "quasar";
+var Shake = require("shake.js");
 
 export default defineComponent({
   name: "PageShakeWin",
