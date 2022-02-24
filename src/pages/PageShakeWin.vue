@@ -96,35 +96,24 @@ export default defineComponent({
     $q.platform.is.ios;
 
     if ($q.platform.is.ios) {
-      DeviceMotionEvent.requestPermission().then((response) => {
-        if (response == "granted") {
-          this.getAccel();
-        } else {
-          alert("permission denied");
-        }
-      });
+      function getAccel() {
+        DeviceMotionEvent.requestPermission().then((response) => {
+          if (response == "granted") {
+            this.getAccel();
+          } else {
+            alert("permission denied");
+          }
+        });
+      }
+      return {
+        getAccel,
+      };
     } else if ($q.platform.is.android) {
       this.getAccel();
     } else {
       console.log("this is dekstop!");
     }
   },
-
-  // mounted() {
-  //   const $q = useQuasar();
-
-  //   $q.platform.is.desktop;
-  //   $q.platform.is.android;
-  //   $q.platform.is.ios;
-
-  //   if ($q.platform.is.ios) {
-  //     alert("ios");
-  //   } else if ($q.platform.is.android) {
-  //     this.onShake();
-  //   } else {
-  //     alert("desktop");
-  //   }
-  // },
 
   methods: {
     getAccel() {
