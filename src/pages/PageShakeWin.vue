@@ -241,7 +241,6 @@ export default defineComponent({
 
     onLoad() {
       if (this.$root.triesCount < this.$root.numTries) {
-        this.$root.triesCount++;
         //create a new instance of shake.js.
         var myShakeEvent = new Shake({
           threshold: 15,
@@ -253,6 +252,7 @@ export default defineComponent({
         //shake event callback
         function shakeEventDidOccur() {
           alert("shaken !! : try " + this.$root.triesCount);
+          this.$root.triesCount += 1;
         }
       } else {
         alert("Last Shake");
