@@ -136,31 +136,35 @@ export default defineComponent({
             //IF PERMISSION IS GRANTED, LISTEN TO SHAKE
             if (response == "granted") {
               //LISTEN TO SHAKE MOTION
-              window.addEventListener("devicemotion", (event) => {
-                // this.$root.triesCount++; //loop number like forever
+              window.addEventListener(
+                "devicemotion",
+                (event) => {
+                  // this.$root.triesCount++; //loop number like forever
 
-                if (
-                  Math.abs(oldx - Math.round(event.acceleration.x)) >
-                    shakethreshold ||
-                  Math.abs(oldy - Math.round(event.acceleration.y)) >
-                    shakethreshold
-                ) {
-                  // alert("shaken !");
-                  if (this.$root.triesCount < this.$root.numTries) {
-                    alert("shaken !! : try " + this.$root.triesCount);
-                    // this.$root.triesCount++; // this works fine but starting is try 0?
-                    this.$root.triesCount += 1;
-                  } else {
-                    // alert("Last Shake");
-                    alert("finish shake"); // go to home
+                  if (
+                    Math.abs(oldx - Math.round(event.acceleration.x)) >
+                      shakethreshold ||
+                    Math.abs(oldy - Math.round(event.acceleration.y)) >
+                      shakethreshold
+                  ) {
+                    // alert("shaken !");
+                    if (this.$root.triesCount < this.$root.numTries) {
+                      alert("shaken !! : try " + this.$root.triesCount);
+                      // this.$root.triesCount++; // this works fine but starting is try 0?
+                      this.$root.triesCount += 1;
+                    } else {
+                      // alert("Last Shake");
+                      alert("finish shake"); // go to home
+                    }
+                    // this.$root.triesCount++; //the count keep increasing when click shake
                   }
-                  // this.$root.triesCount++; //the count keep increasing when click shake
-                }
-                oldx = Math.round(accel.x);
-                oldy = Math.round(accel.y);
+                  oldx = Math.round(accel.x);
+                  oldy = Math.round(accel.y);
 
-                // this.$root.triesCount++; //only display alert equals to numtries
-              });
+                  // this.$root.triesCount++; //only display alert equals to numtries
+                },
+                true
+              );
               // this.$root.triesCount++; // need to press button everytime wants to shake
             }
             // this.$root.triesCount++; // need to press button if wants to shake
@@ -199,16 +203,32 @@ export default defineComponent({
       var oldx = 0;
       var oldy = 0;
       var shakethreshold = 25;
-      window.addEventListener("devicemotion", (event) => {
-        if (
-          Math.abs(oldx - Math.round(event.acceleration.x)) > shakethreshold ||
-          Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
-        ) {
-          alert("just shaken !! ");
-        }
-        oldx = Math.round(accel.x);
-        oldy = Math.round(accel.y);
-      });
+
+      if (this.$root.triesCount < this.$root.numTries) {
+        window.addEventListener(
+          "devicemotion",
+          (event) => {
+            if (
+              Math.abs(oldx - Math.round(event.acceleration.x)) >
+                shakethreshold ||
+              Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
+            ) {
+              // alert("just shaken !! ");
+              if (this.$root.triesCount < this.$root.numTries) {
+                alert("shaken !! : try " + this.$root.triesCount);
+                this.$root.triesCount += 1;
+              } else {
+                // alert("Last Shake");
+                alert("finish shake"); // go to home
+              }
+            }
+            oldx = Math.round(accel.x);
+            oldy = Math.round(accel.y);
+          },
+          true
+        );
+      }
+
       //-------------------ORIGINAL CODE HERE---------------------------------//
       // var oldx = 0;
       // var oldy = 0;
