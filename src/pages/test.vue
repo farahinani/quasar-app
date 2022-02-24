@@ -45,8 +45,13 @@ export default defineComponent({
     // };
   },
 
-  methods() {
-    window.onload = function () {
+  mounted() {
+    this.onLoad();
+  },
+
+  methods: {
+    onLoad() {
+      // alert("test");
       //create a new instance of shake.js.
       var myShakeEvent = new Shake({
         threshold: 15,
@@ -58,10 +63,9 @@ export default defineComponent({
       //shake event callback
       function shakeEventDidOccur() {
         //put your own code here etc.
-        // add();
         alert("Shake!");
       }
-    };
+    },
   },
 });
 </script>
