@@ -37,9 +37,8 @@
                 <q-btn
                   class="full-width"
                   v-if="hide"
-                  id="accelPermsButton"
                   color="primary"
-                  @click="getPermission()"
+                  @click="this.$mounted.getPermission()"
                   label="Start Shake"
                 >
                 </q-btn>
@@ -217,19 +216,7 @@ export default defineComponent({
     $q.platform.is.ios;
 
     if ($q.platform.is.ios) {
-      // alert("ios");
-      function getPermission() {
-        DeviceMotionEvent.requestPermission().then((response) => {
-          if (response == "granted") {
-            alert("permission granted");
-          } else {
-            alert("permission denied");
-          }
-        });
-      }
-      return {
-        getPermission,
-      };
+      alert("ios");
     } else if ($q.platform.is.android) {
       this.onLoad();
     } else {
@@ -256,14 +243,21 @@ export default defineComponent({
       var myShakeEvent = new Shake({
         threshold: 15,
       });
-      // start listening to device motion
-      myShakeEvent.start();
-      // register a shake event
-      window.addEventListener("shake", shakeEventDidOccur, false);
-      //shake event callback
-      function shakeEventDidOccur() {
-        alert("shaken !! : try " + this.$root.triesCount);
-        this.$root.triesCount += 1;
+
+      if (this.$root.triesCount < this.$root.numTries) {
+        // start listening to device motion
+        myShakeEvent.start();
+        // register a shake event
+        window.addEventListener("shake", shakeEventDidOccur, false);
+        //shake event callback
+        function shakeEventDidOccur() {
+          if (this.$root.triesCount < this.$root.numTries) {
+            alert("shaken !! : try " + this.$root.triesCount);
+            this.$root.triesCount += 1;
+          } else {
+            alert("Finish Shake");
+          }
+        }
       }
     },
   },
