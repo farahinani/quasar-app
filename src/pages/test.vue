@@ -20,7 +20,8 @@
 
 <script>
 import { defineComponent } from "vue";
-import { Shake } from "src/router/shake.js";
+// import { Shake } from "src/router/shake.js";
+var Shake = require("shake.js");
 
 export default defineComponent({
   name: "test",
