@@ -35,8 +35,30 @@
               />
 
               <div>
-                <q-btn
+                <!-- <q-btn
                   to="/home/shake-and-win"
+                  type="submit"
+                  label="Submit"
+                  color="primary"
+                  class="full-width"
+                  push
+                  :disable="!formData.cartonInput"
+                  @click="submitForm()"
+                /> -->
+                <q-btn
+                  v-if="$q.platform.is.ios"
+                  to="/home/shake-and-win-ios"
+                  type="submit"
+                  label="Submit"
+                  color="primary"
+                  class="full-width"
+                  push
+                  :disable="!formData.cartonInput"
+                  @click="submitForm()"
+                />
+                <q-btn
+                  v-if="$q.platform.is.android"
+                  to="/home/shake-and-win-android"
                   type="submit"
                   label="Submit"
                   color="primary"

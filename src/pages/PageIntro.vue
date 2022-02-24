@@ -28,6 +28,7 @@
             shake function is not support for desktop yet, <br />please try on
             iOS/android
           </div>
+          <br />
 
           <!-- BUTTON FOR NEXT PAGE CODE -->
           <!-- <q-btn
@@ -38,10 +39,9 @@
             color="primary"
             class="full-width"
           /> -->
-          <br />
           <q-btn
             v-if="$q.platform.is.ios"
-            to="/home/shake-and-win-ios"
+            to="/home"
             type="submit"
             fullwidth
             label="I have made my purchase & have my receipt ready"
@@ -50,7 +50,7 @@
           />
           <q-btn
             v-if="$q.platform.is.android"
-            to="/home/shake-and-win-android"
+            to="/home"
             type="submit"
             fullwidth
             label="I have made my purchase & have my receipt ready"
