@@ -64,20 +64,29 @@ export default defineComponent({
     var oldy = 0;
     var shakethreshold = 25;
 
-    window.addEventListener(
-      "devicemotion",
-      (event) => {
-        if (
-          Math.abs(oldx - Math.round(event.acceleration.x)) > shakethreshold ||
-          Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
-        ) {
-          alert("shaken!");
-        }
-        oldx = Math.round(accel.x);
-        oldy = Math.round(accel.y);
-      },
-      true
-    );
+    if (this.$root.triesCount < this.$root.numTries) {
+      window.addEventListener(
+        "devicemotion",
+        (event) => {
+          if (
+            Math.abs(oldx - Math.round(event.acceleration.x)) >
+              shakethreshold ||
+            Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
+          ) {
+            // alert("shaken!");
+            if (this.$root.triesCount < this.$root.numTries) {
+              alert("shaken !! : try " + this.$root.triesCount);
+              this.$root.triesCount += 1;
+            } else {
+              alert("finish shake");
+            }
+          }
+          oldx = Math.round(accel.x);
+          oldy = Math.round(accel.y);
+        },
+        true
+      );
+    }
   },
 
   // mounted() {

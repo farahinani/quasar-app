@@ -26,7 +26,7 @@
             v-if="$q.platform.is.desktop"
           >
             shake function is not support for desktop yet, <br />please try on
-            iOS/android<br />
+            iOS/android
           </div>
 
           <!-- BUTTON FOR NEXT PAGE CODE -->
