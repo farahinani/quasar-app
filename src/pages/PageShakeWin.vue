@@ -191,36 +191,6 @@ export default defineComponent({
       // };
     } else if ($q.platform.is.android) {
       //-------------------NEW CODE HERE. CURRENTLY FARAH IS WORKING ON THIS ---------------------------------//
-
-      var oldx = 0;
-      var oldy = 0;
-      var shakethreshold = 25;
-
-      if (this.$root.triesCount < this.$root.numTries) {
-        window.addEventListener(
-          "devicemotion",
-          (event) => {
-            if (
-              Math.abs(oldx - Math.round(event.acceleration.x)) >
-                shakethreshold ||
-              Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
-            ) {
-              // alert("just shaken !! ");
-              if (this.$root.triesCount < this.$root.numTries) {
-                alert("shaken !! : try " + this.$root.triesCount);
-                this.$root.triesCount += 1;
-              } else {
-                // alert("Last Shake");
-                alert("finish shake"); // go to home
-              }
-            }
-            oldx = Math.round(accel.x);
-            oldy = Math.round(accel.y);
-          },
-          true
-        );
-      }
-
       //-------------------ORIGINAL CODE HERE---------------------------------//
       // var oldx = 0;
       // var oldy = 0;
@@ -240,6 +210,14 @@ export default defineComponent({
     }
   },
 
+  mounted() {
+    if ($q.platform.is.android) {
+      this.onLoad();
+    } else {
+      alert("nothing");
+    }
+  },
+
   methods: {
     shakeSuccess() {
       alert("test function");
@@ -252,6 +230,22 @@ export default defineComponent({
       //     alert("Last Shake");
       //   }
       // }
+    },
+
+    onLoad() {
+      //create a new instance of shake.js.
+      var myShakeEvent = new Shake({
+        threshold: 15,
+      });
+      // start listening to device motion
+      myShakeEvent.start();
+      // register a shake event
+      window.addEventListener("shake", shakeEventDidOccur, false);
+      //shake event callback
+      function shakeEventDidOccur() {
+        //put your own code here etc.
+        alert("Shake! alexgibson");
+      }
     },
   },
 });
