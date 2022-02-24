@@ -11,40 +11,40 @@
             class="full-width"
             @click="shakeSuccess()"
           /> -->
-          <button id="start" onclick="button">Approve</button>
+          <!-- <button id="start" onclick="button">Approve</button> -->
         </q-card-section>
       </q-card>
     </div>
   </q-page>
 </template>
 
-<script>
+<script type="text/javascript" src="shake.js">
 import { defineComponent } from "vue";
-// import { Shake } from "src/router/shake.js";
-var Shake = require("shake.js");
+//import { Shake } from "src/router/shake.js";
+// var Shake = require("shake.js");
 
 export default defineComponent({
   name: "test",
 
   setup() {
-    var myShakeEvent = new Shake({
-      threshold: 15, // optional shake strength threshold
-      timeout: 1000, // optional, determines the frequency of event generation
-    });
+    window.onload = function () {
+      //create a new instance of shake.js.
+      var myShakeEvent = new Shake({
+        threshold: 15,
+      });
 
-    myShakeEvent.start();
+      // start listening to device motion
+      myShakeEvent.start();
 
-    window.addEventListener("shake", shakeEventDidOccur, false);
+      // register a shake event
+      window.addEventListener("shake", shakeEventDidOccur, false);
 
-    //function to call when shake occurs
-    function shakeEventDidOccur() {
-      //put your own code here etc.
-      alert("shake!");
-    }
-
-    window.removeEventListener("shake", shakeEventDidOccur, false);
-
-    myShakeEvent.stop();
+      //shake event callback
+      function shakeEventDidOccur() {
+        //put your own code here etc.
+        alert("Shake!");
+      }
+    };
   },
 });
 </script>
