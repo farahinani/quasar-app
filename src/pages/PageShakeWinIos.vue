@@ -5,7 +5,7 @@
         <q-card-section>
           <div class="text-center">
             <span class="text-h4"
-              >SHAKE & WIN <br />
+              >SHAKE & WIN IOS <br />
               <span class="text-h5">WITH FLORIDA'S NATURAL</span>
             </span>
             <hr />
@@ -105,7 +105,7 @@ import { event } from "quasar";
 var Shake = require("shake.js");
 
 export default defineComponent({
-  name: "PageShakeWin",
+  name: "PageShakeWinAndroid",
 
   data() {
     return {

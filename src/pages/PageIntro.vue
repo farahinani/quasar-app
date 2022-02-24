@@ -30,8 +30,27 @@
           </div>
 
           <!-- BUTTON FOR NEXT PAGE CODE -->
-          <q-btn
+          <!-- <q-btn
             to="/home"
+            type="submit"
+            fullwidth
+            label="I have made my purchase & have my receipt ready"
+            color="primary"
+            class="full-width"
+          /> -->
+          <br />
+          <q-btn
+            v-if="$q.platform.is.ios"
+            to="/home/shake-and-win-ios"
+            type="submit"
+            fullwidth
+            label="I have made my purchase & have my receipt ready"
+            color="primary"
+            class="full-width"
+          />
+          <q-btn
+            v-if="$q.platform.is.android"
+            to="/home/shake-and-win-android"
             type="submit"
             fullwidth
             label="I have made my purchase & have my receipt ready"
