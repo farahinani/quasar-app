@@ -102,6 +102,7 @@
 <script>
 import { defineComponent } from "vue";
 import { useQuasar } from "quasar";
+import { event } from "quasar";
 
 export default defineComponent({
   name: "PageShakeWin",
@@ -194,26 +195,20 @@ export default defineComponent({
     } else if ($q.platform.is.android) {
       // alert("This is Android!");
       //-------------------NEW CODE HERE. CURRENTLY FARAH IS WORKING ON THIS ---------------------------------//
+
       var oldx = 0;
       var oldy = 0;
-      var shakethreshold = 10;
-
-      if (window.DeviceMotionEvent) {
-        window.addEventListener(
-          "devicemotion",
-          function () {
-            if (
-              Math.abs(oldx - Math.round(acceleration.x)) > shakethreshold ||
-              Math.abs(oldy - Math.round(acceleration.y)) > shakethreshold
-            ) {
-              alert("shaken");
-            }
-            oldx = Math.round(accel.x);
-            oldy = Math.round(accel.y);
-          },
-          true
-        );
-      }
+      var shakethreshold = 25;
+      window.addEventListener("devicemotion", (event) => {
+        if (
+          Math.abs(oldx - Math.round(event.acceleration.x)) > shakethreshold ||
+          Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
+        ) {
+          alert("just shaken !! ");
+        }
+        oldx = Math.round(accel.x);
+        oldy = Math.round(accel.y);
+      });
       //-------------------ORIGINAL CODE HERE---------------------------------//
       // var oldx = 0;
       // var oldy = 0;
