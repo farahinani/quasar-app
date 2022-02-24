@@ -217,7 +217,19 @@ export default defineComponent({
     $q.platform.is.ios;
 
     if ($q.platform.is.ios) {
-      alert("ios");
+      // alert("ios");
+      function getPermission() {
+        DeviceMotionEvent.requestPermission().then((response) => {
+          if (response == "granted") {
+            alert("permission granted");
+          } else {
+            alert("permission denied");
+          }
+        });
+      }
+      return {
+        getPermission,
+      };
     } else if ($q.platform.is.android) {
       this.onLoad();
     } else {
