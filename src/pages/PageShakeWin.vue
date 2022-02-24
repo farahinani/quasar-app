@@ -218,7 +218,15 @@ export default defineComponent({
     if ($q.platform.is.ios) {
       alert("ios");
     } else if ($q.platform.is.android) {
-      this.onLoad();
+      // this.onLoad();
+      if (this.$root.triesCount < this.$root.numTries) {
+        this.$root.triesCount++;
+        if (this.$root.triesCount < this.$root.numTries) {
+          this.onLoad();
+        } else {
+          alert("Last Shake");
+        }
+      }
     } else {
       alert("desktop");
     }
@@ -252,7 +260,7 @@ export default defineComponent({
 
       //shake event callback
       function shakeEventDidOccur() {
-        alert("shake" + this.$root.triesCount);
+        alert("shaken !! : try " + this.$root.triesCount);
       }
     },
   },
