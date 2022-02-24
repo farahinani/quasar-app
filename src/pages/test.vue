@@ -26,23 +26,24 @@ export default defineComponent({
   name: "test",
 
   setup() {
-    const shake = new Shake({ threshold: 15, timeout: 1000 });
-    shake.addEventListener("shake", (ev) => {
-      console.log("Shake!", ev.detail.timeStamp, ev.detail.acceleration);
+    var myShakeEvent = new Shake({
+      threshold: 15, // optional shake strength threshold
+      timeout: 1000, // optional, determines the frequency of event generation
     });
-    const button = document.getElementById("start");
-    if (button) {
-      button.addEventListener(
-        "click",
-        async () => {
-          const approved = await shake.start();
-          const div = document.body.appendChild(document.createElement("div"));
-          div.textContent = `Approved: ${String(approved)}`;
-          button.remove();
-        },
-        { once: true }
-      );
+
+    myShakeEvent.start();
+
+    window.addEventListener("shake", shakeEventDidOccur, false);
+
+    //function to call when shake occurs
+    function shakeEventDidOccur() {
+      //put your own code here etc.
+      alert("shake!");
     }
+
+    window.removeEventListener("shake", shakeEventDidOccur, false);
+
+    myShakeEvent.stop();
   },
 });
 </script>
