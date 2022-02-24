@@ -21,12 +21,13 @@
 <script type="text/javascript" src="shake.js">
 import { defineComponent } from "vue";
 //import { Shake } from "src/router/shake.js";
-// var Shake = require("shake.js");
+var Shake = require("shake.js");
 
 export default defineComponent({
   name: "test",
 
   setup() {
+    // var Shake = require("shake.js");
     window.onload = function () {
       //create a new instance of shake.js.
       var myShakeEvent = new Shake({
