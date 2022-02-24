@@ -220,9 +220,10 @@ export default defineComponent({
     } else if ($q.platform.is.android) {
       // this.onLoad();
       if (this.$root.triesCount < this.$root.numTries) {
-        this.$root.triesCount++;
+        // this.$root.triesCount++;
         if (this.$root.triesCount < this.$root.numTries) {
           this.onLoad();
+          this.$root.triesCount += 1;
         } else {
           alert("Last Shake");
         }
@@ -260,7 +261,7 @@ export default defineComponent({
 
       //shake event callback
       function shakeEventDidOccur() {
-        alert("shaken !! : try " + this.$root.triesCount);
+        alert("shaken !! : try ");
       }
     },
   },
