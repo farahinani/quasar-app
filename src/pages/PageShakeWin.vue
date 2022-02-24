@@ -240,28 +240,20 @@ export default defineComponent({
     // },
 
     onLoad() {
-      if (this.$root.triesCount < this.$root.numTries) {
-        this.$root.triesCount++;
+      //create a new instance of shake.js.
+      var myShakeEvent = new Shake({
+        threshold: 15,
+      });
 
-        //create a new instance of shake.js.
-        var myShakeEvent = new Shake({
-          threshold: 15,
-        });
+      // start listening to device motion
+      myShakeEvent.start();
 
-        // start listening to device motion
-        myShakeEvent.start();
+      // register a shake event
+      window.addEventListener("shake", shakeEventDidOccur, false);
 
-        // register a shake event
-        window.addEventListener("shake", shakeEventDidOccur, false);
-
-        //shake event callback
-        function shakeEventDidOccur() {
-          if (this.$root.triesCount < this.$root.numTries) {
-            alert("shaken !! : try " + this.$root.triesCount);
-          } else {
-            alert("Last Shake");
-          }
-        }
+      //shake event callback
+      function shakeEventDidOccur() {
+        alert("shaken!");
       }
     },
   },
