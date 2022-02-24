@@ -11,7 +11,7 @@
             class="full-width"
             @click="shakeSuccess()"
           /> -->
-          <button id="start">Approve</button>
+          <button id="start" onclick="button">Approve</button>
         </q-card-section>
       </q-card>
     </div>
