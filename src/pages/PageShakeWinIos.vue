@@ -50,7 +50,7 @@
                 class="full-width"
                 v-if="hide"
                 color="primary"
-                @click="this.$mounted.getPermission()"
+                @click="getAccel()"
                 label="Start Shake"
               >
               </q-btn>
