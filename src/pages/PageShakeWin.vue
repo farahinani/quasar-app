@@ -45,8 +45,22 @@
             </div>
           </div> -->
 
-          <!-- START SHAKE BUTTON -->
-          <div v-on:click="hide = !hide">
+          <!-- START SHAKE IOS BUTTON -->
+          <div v-if="$q.platform.is.ios" v-on:click="hide = !hide">
+            <p>
+              <q-btn
+                class="full-width"
+                v-if="hide"
+                color="primary"
+                @click="requestPermission()"
+                label="Start Shake"
+              >
+              </q-btn>
+            </p>
+          </div>
+
+          <!-- START SHAKE ANDROID BUTTON -->
+          <div v-if="$q.platform.is.android" v-on:click="hide = !hide">
             <p>
               <q-btn
                 class="full-width"
@@ -96,17 +110,15 @@ export default defineComponent({
     $q.platform.is.ios;
 
     if ($q.platform.is.ios) {
-      function getAccel() {
+      function requestPermission() {
         DeviceMotionEvent.requestPermission().then((response) => {
           if (response == "granted") {
             this.getAccel();
-          } else {
-            alert("permission denied");
           }
         });
       }
       return {
-        getAccel,
+        requestPermission,
       };
     } else if ($q.platform.is.android) {
       this.getAccel();
