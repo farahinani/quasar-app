@@ -245,21 +245,24 @@ export default defineComponent({
       });
       // start listening to device motion
       myShakeEvent.start();
+
       // register a shake event
       window.addEventListener("shake", shakeEventDidOccur, false);
-      //shake event callback
-      function shakeEventDidOccur() {
-        //put your own code here etc.
-        alert("Shake! alexgibson");
 
-        if (this.$root.triesCount < this.$root.numTries) {
-          this.$root.triesCount++;
+      if (this.$root.triesCount < this.$root.numTries) {
+        this.$root.triesCount++;
+
+        function shakeEventDidOccur() {
           if (this.$root.triesCount < this.$root.numTries) {
             alert("shaken !! : try " + this.$root.triesCount);
           } else {
             alert("Last Shake");
           }
         }
+
+        return {
+          shakeEventDidOccur,
+        };
       }
     },
   },
