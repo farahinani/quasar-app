@@ -29,22 +29,6 @@
             </div>
           </div>
 
-          <!-- DISPLAY BUTTON FOR IOS -->
-          <!-- <div v-if="$q.platform.is.ios">
-            <div v-on:click="hide = !hide">
-              <p>
-                <q-btn
-                  class="full-width"
-                  v-if="hide"
-                  color="primary"
-                  @click="this.$mounted.getPermission()"
-                  label="Start Shake"
-                >
-                </q-btn>
-              </p>
-            </div>
-          </div> -->
-
           <!-- START SHAKE IOS BUTTON -->
           <div v-if="$q.platform.is.ios" v-on:click="hide = !hide">
             <p>
@@ -66,14 +50,14 @@
                 class="full-width"
                 v-if="hide"
                 color="primary"
-                @click="getAccel()"
+                @click="shakeDetector()"
                 label="Start Shake"
               >
               </q-btn>
             </p>
           </div>
 
-          <!-- BUTTON FOR NEXT PAGE CODE -->
+          <!-- NEXT BUTTON -->
           <q-btn
             to="/home/shake-and-win/prizes"
             type="submit"
@@ -110,10 +94,12 @@ export default defineComponent({
     $q.platform.is.ios;
 
     if ($q.platform.is.ios) {
+      //DETECT PERMISSION FOR DEVICE MOTION WHEN CLICK BUTTON 'START SHAKE'
       function requestPermission() {
+        //IF PERMISSION IS GRANTED, EXECUTE getAccel()
         DeviceMotionEvent.requestPermission().then((response) => {
           if (response == "granted") {
-            this.getAccel();
+            this.shakeDetector();
           }
         });
       }
@@ -121,18 +107,22 @@ export default defineComponent({
         requestPermission,
       };
     } else if ($q.platform.is.android) {
-      this.getAccel();
+      this.shakeDetector();
     } else {
       console.log("this is dekstop!");
     }
   },
 
   methods: {
-    getAccel() {
+    //old name is getAccel()
+    shakeDetector() {
       var oldx = 0;
       var oldy = 0;
       var shakethreshold = 25;
+
+      //CALCULATE TRIESCOUNT THEN SHAKE
       if (this.$root.triesCount < this.$root.numTries) {
+        //LISTEN TO SHAKE MOTION
         window.addEventListener(
           "devicemotion",
           (event) => {
