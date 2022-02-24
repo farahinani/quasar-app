@@ -31,15 +31,16 @@
           <br />
 
           <!-- BUTTON FOR NEXT PAGE CODE -->
-          <!-- <q-btn
+          <q-btn
+            v-if="$q.platform.is.ios || $q.platform.is.android"
             to="/home"
             type="submit"
             fullwidth
             label="I have made my purchase & have my receipt ready"
             color="primary"
             class="full-width"
-          /> -->
-          <q-btn
+          />
+          <!-- <q-btn
             v-if="$q.platform.is.ios"
             to="/home"
             type="submit"
@@ -56,7 +57,7 @@
             label="I have made my purchase & have my receipt ready"
             color="primary"
             class="full-width"
-          />
+          /> -->
         </q-card-section>
       </q-card>
     </div>

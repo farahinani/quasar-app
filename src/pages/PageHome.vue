@@ -35,7 +35,7 @@
               />
 
               <div>
-                <!-- <q-btn
+                <q-btn
                   to="/home/shake-and-win"
                   type="submit"
                   label="Submit"
@@ -44,8 +44,8 @@
                   push
                   :disable="!formData.cartonInput"
                   @click="submitForm()"
-                /> -->
-                <q-btn
+                />
+                <!-- <q-btn
                   v-if="$q.platform.is.ios"
                   to="/home/shake-and-win-ios"
                   type="submit"
@@ -66,18 +66,8 @@
                   push
                   :disable="!formData.cartonInput"
                   @click="submitForm()"
-                />
+                /> -->
               </div>
-
-              <br />
-              <!-- <div>
-                <q-btn
-                  to="/home/shake-and-win"
-                  color="primary"
-                  label="Next"
-                  class="full-width"
-                />
-              </div> -->
 
               <!-- <div>tries: {{ $root.numTries }}</div> -->
             </q-form>

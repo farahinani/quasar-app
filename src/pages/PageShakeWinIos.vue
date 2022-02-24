@@ -30,20 +30,6 @@
           </div>
 
           <!-- DISPLAY BUTTON FOR IOS -->
-          <!-- <div v-if="$q.platform.is.ios">
-            <div v-on:click="hide = !hide">
-              <p>
-                <q-btn
-                  class="full-width"
-                  v-if="hide"
-                  color="primary"
-                  @click="this.$mounted.getPermission()"
-                  label="Start Shake"
-                >
-                </q-btn>
-              </p>
-            </div>
-          </div> -->
           <div v-on:click="hide = !hide">
             <p>
               <q-btn

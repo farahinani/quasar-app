@@ -28,6 +28,7 @@
               to see what you get!
             </div>
           </div>
+          <!-- DISPLAY BUTTON FOR ANDROID -->
           <div v-on:click="hide = !hide">
             <p>
               <q-btn
@@ -102,38 +103,11 @@ export default defineComponent({
     return {
       getAccel,
     };
-
-    // var oldx = 0;
-    // var oldy = 0;
-    // var shakethreshold = 10;
-    // if (this.$root.triesCount < this.$root.numTries) {
-    //   window.addEventListener(
-    //     "devicemotion",
-    //     (event) => {
-    //       if (
-    //         Math.abs(oldx - Math.round(event.acceleration.x)) >
-    //           shakethreshold ||
-    //         Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
-    //       ) {
-    //         // alert("shaken!");
-    //         if (this.$root.triesCount < this.$root.numTries) {
-    //           alert("shaken !! : try " + this.$root.triesCount);
-    //           this.$root.triesCount += 1;
-    //         } else {
-    //           alert("finish shake");
-    //         }
-    //       }
-    //       oldx = Math.round(accel.x);
-    //       oldy = Math.round(accel.y);
-    //     },
-    //     true
-    //   );
-    // }
   },
 
-  mounted() {
-    this.onShake();
-  },
+  // mounted() {
+  //   this.onShake();
+  // },
 
   methods: {
     // shakeSuccess() {
@@ -148,6 +122,7 @@ export default defineComponent({
     //     }
     //   }
     // },
+    //////////////////////////////////////////
     // onShake() {
     //   //create a new instance of shake.js.
     //   var myShakeEvent = new Shake({
