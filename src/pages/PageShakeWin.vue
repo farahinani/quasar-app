@@ -87,6 +87,7 @@ export default defineComponent({
     };
   },
 
+  // ---------------- OLD CODE [WORKING INSIDE SETUP()] --------------------- //
   // setup() {
   //   const $q = useQuasar();
   //   $q.platform.is.desktop;
@@ -157,8 +158,9 @@ export default defineComponent({
               Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
             ) {
               if (this.$root.triesCount < this.$root.numTries) {
+                this.$root.triesCount++;
                 alert("shaken !! : try " + this.$root.triesCount);
-                this.$root.triesCount += 1;
+                // this.$root.triesCount += 1; //try start from 0
               } else {
                 alert("finish shake");
               }
