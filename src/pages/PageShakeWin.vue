@@ -71,13 +71,13 @@ export default defineComponent({
   data() {
     return {
       hide: true,
-      displayTriesNum: 1,
+      displayTriesNum: 0,
     };
   },
 
   computed: {
     trialNumber() {
-      return this.displayTriesNum;
+      return (this.displayTriesNum = 1);
     },
     // trialNumber: function () {
     //   if (this.triesNum > $root.triesCount) {
@@ -165,9 +165,9 @@ export default defineComponent({
                 // this.$root.triesCount += 1; // no update
                 alert("shaken !! : try " + this.$root.triesCount);
                 // this.$root.triesCount += 1; // no update
-                // this.displayTriesNum++; // display until try 4
+                this.displayTriesNum++; // display until try 4
                 // ++this.displayTriesNum; // display until try 4
-                this.displayTriesNum + 1;
+                // this.displayTriesNum + 1; // no update
                 // this.$root.triesCount += 1; //try start from 0
               } else {
                 alert("finish shake");
