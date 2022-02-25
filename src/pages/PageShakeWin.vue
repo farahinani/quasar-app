@@ -163,7 +163,7 @@ export default defineComponent({
                 // this.$root.triesCount += 1; //try start from 0
               } else {
                 alert("finish shake");
-                router.push("/home/shake-and-win/prizes");
+                this.$router.push("/home/shake-and-win/prizes");
               }
             }
             oldx = Math.round(accel.x);
