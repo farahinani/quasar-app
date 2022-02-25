@@ -21,7 +21,8 @@
             <br />
             <div class="text-h5 text-center">
               <!-- <b>Try {{ this.$root.triesCount }}</b> -->
-              <b>Try {{ displayTriesNum }}</b>
+              <!-- <b>Try {{ displayTriesNum }}</b> -->
+              <b>Try {{ trialNumber }}</b>
             </div>
             <br />
             <div class="body-text1 text-center">
@@ -71,15 +72,15 @@ export default defineComponent({
   data() {
     return {
       hide: true,
-      displayTriesNum: 1,
+      //displayTriesNum: 1,
     };
   },
 
-  // computed: {
-  //   trialNumber() {
-  //     return this.displayTriesNum + 1;
-  //   }
-  // },
+  computed: {
+    trialNumber() {
+      return this.$root.triesCount + 1;
+    },
+  },
 
   // ---------------- OLD CODE [WORKING INSIDE SETUP()] --------------------- //
   // setup() {
@@ -152,8 +153,8 @@ export default defineComponent({
               Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
             ) {
               if (this.$root.triesCount < this.$root.numTries) {
-                this.$root.triesCount++; //try start from 1 [alert]
-                this.displayTriesNum++; // display until try 4
+                this.$root.triesCount++;
+                //this.displayTriesNum++; // display until try 4
                 alert("shaken !! : try " + this.$root.triesCount);
                 // this.$root.triesCount += 1; //try start from 0
               } else {
