@@ -78,7 +78,7 @@ export default defineComponent({
 
   computed: {
     trialNumber() {
-      return this.$root.triesCount + 1;
+      return this.$root.triesCount;
     },
   },
 
