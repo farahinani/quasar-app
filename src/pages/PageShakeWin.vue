@@ -44,7 +44,7 @@
           </div>
 
           <!-- START SHAKE ANDROID BUTTON -->
-          <div v-if="$q.platform.is.android" v-on:click="hide = !hide">
+          <!-- <div v-if="$q.platform.is.android" v-on:click="hide = !hide">
             <p>
               <q-btn
                 class="full-width"
@@ -55,7 +55,7 @@
               >
               </q-btn>
             </p>
-          </div>
+          </div> -->
 
           <!-- NEXT BUTTON -->
           <q-btn
@@ -87,7 +87,33 @@ export default defineComponent({
     };
   },
 
-  setup() {
+  // setup() {
+  //   const $q = useQuasar();
+  //   $q.platform.is.desktop;
+  //   $q.platform.is.android;
+  //   $q.platform.is.ios;
+
+  //   if ($q.platform.is.ios) {
+  //     //DETECT PERMISSION FOR DEVICE MOTION WHEN CLICK BUTTON 'START SHAKE'
+  //     function requestPermission() {
+  //       //IF PERMISSION IS GRANTED, EXECUTE getAccel()
+  //       DeviceMotionEvent.requestPermission().then((response) => {
+  //         if (response == "granted") {
+  //           this.shakeDetector();
+  //         }
+  //       });
+  //     }
+  //     return {
+  //       requestPermission,
+  //     };
+  //   } else if ($q.platform.is.android) {
+  //     this.shakeDetector();
+  //   } else {
+  //     console.log("this is dekstop!");
+  //   }
+  // },
+
+  mounted() {
     const $q = useQuasar();
     $q.platform.is.desktop;
     $q.platform.is.android;

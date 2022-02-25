@@ -30,7 +30,7 @@
           </div>
           <br />
 
-          <!-- BUTTON FOR NEXT PAGE CODE -->
+          <!-- NEXT BUTTON -->
           <q-btn
             v-if="$q.platform.is.ios || $q.platform.is.android"
             to="/home"
