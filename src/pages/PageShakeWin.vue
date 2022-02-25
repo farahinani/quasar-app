@@ -13,16 +13,16 @@
           </div>
           <div class="q-py-lg q-px-md">
             <div class="text-h5 text-center">
-              You have {{ $root.numTries }} tries
+              You have {{ this.$root.numTries }} tries
               <q-badge color="teal-10" align="middle">
-                {{ $root.triesCount }}/{{ $root.numTries }}
+                {{ this.$root.triesCount }}/{{ this.$root.numTries }}
               </q-badge>
             </div>
             <br />
             <div class="text-h5 text-center">
               <!-- <b>Try {{ this.$root.triesCount }}</b> -->
               <!-- <b>Try {{ displayTriesNum }}</b> -->
-              <b>Try {{ trialNumber }}</b>
+              <b>Try {{ this.$root.triesCount }}</b>
             </div>
             <br />
             <div class="body-text1 text-center">
@@ -76,10 +76,11 @@ export default defineComponent({
     };
   },
 
-  computed: {
-    trialNumber() {
-      return this.$root.triesCount;
-    },
+  computed() {
+    // trialNumber() {
+    //   return this.$root.triesCount;
+    // },
+    return this.$root.triesCount;
   },
 
   // ---------------- OLD CODE [WORKING INSIDE SETUP()] --------------------- //
