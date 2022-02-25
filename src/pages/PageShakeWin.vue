@@ -77,7 +77,7 @@ export default defineComponent({
 
   computed: {
     trialNumber() {
-      return (this.displayTriesNum = 1);
+      return this.displayTriesNum + 1;
     },
     // trialNumber: function () {
     //   if (this.triesNum > $root.triesCount) {
