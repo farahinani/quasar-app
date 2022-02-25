@@ -113,6 +113,10 @@ export default defineComponent({
   //   }
   // },
 
+  created() {
+    this.requestPermission(); // Run the button's method when created
+  },
+
   mounted() {
     const $q = useQuasar();
     $q.platform.is.desktop;
@@ -120,12 +124,18 @@ export default defineComponent({
     $q.platform.is.ios;
 
     if ($q.platform.is.ios) {
-      //IF PERMISSION IS GRANTED, EXECUTE getAccel()
-      DeviceMotionEvent.requestPermission().then((response) => {
-        if (response == "granted") {
-          this.shakeDetector();
-        }
-      });
+      //DETECT PERMISSION FOR DEVICE MOTION WHEN CLICK BUTTON 'START SHAKE'
+      function requestPermission() {
+        //IF PERMISSION IS GRANTED, EXECUTE getAccel()
+        DeviceMotionEvent.requestPermission().then((response) => {
+          if (response == "granted") {
+            this.shakeDetector();
+          }
+        });
+      }
+      return {
+        requestPermission,
+      };
     } else if ($q.platform.is.android) {
       this.shakeDetector();
     } else {
