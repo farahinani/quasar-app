@@ -153,10 +153,10 @@ export default defineComponent({
               Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
             ) {
               if (this.$root.triesCount < this.$root.numTries) {
-                this.$root.triesCount++;
+                // this.$root.triesCount++;
                 //this.displayTriesNum++; // display until try 4
                 alert("shaken !! : try " + this.$root.triesCount);
-                // this.$root.triesCount += 1; //try start from 0
+                this.$root.triesCount += 1; //try start from 0
               } else {
                 alert("finish shake");
                 this.$router.push("/home/shake-and-win/prizes");
