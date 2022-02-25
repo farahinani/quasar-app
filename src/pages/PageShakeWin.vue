@@ -162,8 +162,9 @@ export default defineComponent({
                 this.$root.triesCount++; //try start from 1 [alert]
                 // this.displayTriesNum++; // display until try 4
                 // this.displayTriesNum += 0; // not update the display
-                this.$root.triesCount += 1;
+                // this.$root.triesCount += 1; // no update
                 alert("shaken !! : try " + this.$root.triesCount);
+                this.$root.triesCount += 1;
                 // this.displayTriesNum++; // display: try 4
                 //
                 // this.$root.triesCount += 1; //try start from 0
