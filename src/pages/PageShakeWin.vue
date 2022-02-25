@@ -21,7 +21,7 @@
             <br />
             <div class="text-h5 text-center">
               <!-- <b>Try {{ this.$root.triesCount }}</b> -->
-              <b>Try {{ trialNumber }}</b>
+              <b>Try {{ trialNumber++ }}</b>
             </div>
             <br />
             <div class="body-text1 text-center">
@@ -91,7 +91,7 @@ export default defineComponent({
 
   computed: {
     trialNumber() {
-      return this.triesNum++;
+      return this.triesNum;
     },
   },
 
