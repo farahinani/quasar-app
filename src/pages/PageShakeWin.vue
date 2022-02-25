@@ -157,10 +157,9 @@ export default defineComponent({
                 //this.displayTriesNum++; // display until try 4
                 alert("shaken !! : try " + this.$root.triesCount);
                 // this.$root.triesCount += 1; //try start from 0
-                this.$router.push("/home/shake-and-win/prizes");
               } else {
                 alert("finish shake");
-                // this.$router.push("/home/shake-and-win/prizes");
+                this.$router.push("/home/shake-and-win/prizes");
               }
             }
             oldx = Math.round(accel.x);
