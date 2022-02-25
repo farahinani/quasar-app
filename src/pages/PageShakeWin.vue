@@ -166,7 +166,8 @@ export default defineComponent({
                 alert("shaken !! : try " + this.$root.triesCount);
                 // this.$root.triesCount += 1; // no update
                 // this.displayTriesNum++; // display until try 4
-                ++this.displayTriesNum;
+                // ++this.displayTriesNum; // display until try 4
+                this.displayTriesNum + 1;
                 // this.$root.triesCount += 1; //try start from 0
               } else {
                 alert("finish shake");
