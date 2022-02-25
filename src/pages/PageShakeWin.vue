@@ -21,7 +21,7 @@
             <br />
             <div class="text-h5 text-center">
               <!-- <b>Try {{ this.$root.triesCount }}</b> -->
-              <b>Try {{ trialNumber }}</b>
+              <b>Try {{ displayTriesNum }}</b>
             </div>
             <br />
             <div class="body-text1 text-center">
@@ -71,22 +71,15 @@ export default defineComponent({
   data() {
     return {
       hide: true,
-      displayTriesNum: 0,
+      displayTriesNum: 1,
     };
   },
 
-  computed: {
-    trialNumber() {
-      return this.displayTriesNum + 1;
-    },
-    // trialNumber: function () {
-    //   if (this.triesNum > $root.triesCount) {
-    //     this.triesNum;
-    //   } else {
-    //     return this.triesNum;
-    //   }
-    // },
-  },
+  // computed: {
+  //   trialNumber() {
+  //     return this.displayTriesNum + 1;
+  //   }
+  // },
 
   // ---------------- OLD CODE [WORKING INSIDE SETUP()] --------------------- //
   // setup() {
@@ -165,7 +158,7 @@ export default defineComponent({
                 //this.$root.triesCount += 1; // no update
                 alert("shaken !! : try " + this.$root.triesCount);
                 // this.$root.triesCount += 1; // no update
-                this.displayTriesNum + -1; // display until try 4
+                this.displayTriesNum++; // display until try 4
                 // ++this.displayTriesNum; // display until try 4
                 // this.displayTriesNum + 1; // no update
                 // this.$root.triesCount += 1; //try start from 0
