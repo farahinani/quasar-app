@@ -15,13 +15,13 @@
             <div class="text-h5 text-center">
               You have {{ $root.numTries }} tries
               <q-badge color="teal-10" align="middle">
-                {{ $root.triesCount - triesNum }}/{{ $root.numTries }}
+                {{ $root.triesCount }}/{{ $root.numTries }}
               </q-badge>
             </div>
             <br />
             <div class="text-h5 text-center">
-              <b>Try {{ (this.$root.triesCount = this.triesNum) }}</b>
-              <!-- <b>Try {{ trialNumber }}</b> -->
+              <!-- <b>Try {{ this.$root.triesCount }}</b> -->
+              <b>Try {{ trialNumber }}</b>
             </div>
             <br />
             <div class="body-text1 text-center">
@@ -83,11 +83,16 @@ export default defineComponent({
   name: "PageShakeWin",
 
   data() {
-    var triesNum = 1;
     return {
       hide: true,
-      triesNum,
+      triesNum: 1,
     };
+  },
+
+  computed: {
+    trialNumber() {
+      return this.triesNum++;
+    },
   },
 
   // ---------------- OLD CODE [WORKING INSIDE SETUP()] --------------------- //
@@ -115,12 +120,6 @@ export default defineComponent({
   //   } else {
   //     console.log("this is dekstop!");
   //   }
-  // },
-
-  // computed: {
-  //   trialNumber() {
-  //     return (this.$root.triesCount = 1);
-  //   },
   // },
 
   mounted() {
