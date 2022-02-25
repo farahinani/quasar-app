@@ -120,18 +120,12 @@ export default defineComponent({
     $q.platform.is.ios;
 
     if ($q.platform.is.ios) {
-      //DETECT PERMISSION FOR DEVICE MOTION WHEN CLICK BUTTON 'START SHAKE'
-      function requestPermission() {
-        //IF PERMISSION IS GRANTED, EXECUTE getAccel()
-        DeviceMotionEvent.requestPermission().then((response) => {
-          if (response == "granted") {
-            this.shakeDetector();
-          }
-        });
-      }
-      return {
-        requestPermission,
-      };
+      //IF PERMISSION IS GRANTED, EXECUTE getAccel()
+      DeviceMotionEvent.requestPermission().then((response) => {
+        if (response == "granted") {
+          this.shakeDetector();
+        }
+      });
     } else if ($q.platform.is.android) {
       this.shakeDetector();
     } else {
