@@ -21,7 +21,7 @@
             <br />
             <div class="text-h5 text-center">
               <!-- <b>Try {{ this.$root.triesCount }}</b> -->
-              <b>Try {{ trialNumber++ }}</b>
+              <b>Try {{ trialNumber }}</b>
             </div>
             <br />
             <div class="body-text1 text-center">
@@ -43,20 +43,6 @@
               </q-btn>
             </p>
           </div>
-
-          <!-- START SHAKE ANDROID BUTTON -->
-          <!-- <div v-if="$q.platform.is.android" v-on:click="hide = !hide">
-            <p>
-              <q-btn
-                class="full-width"
-                v-if="hide"
-                color="primary"
-                @click="shakeDetector()"
-                label="Start Shake"
-              >
-              </q-btn>
-            </p>
-          </div> -->
 
           <!-- NEXT BUTTON -->
           <q-btn
@@ -85,14 +71,21 @@ export default defineComponent({
   data() {
     return {
       hide: true,
-      triesNum: 1,
+      displayTriesNum: 1,
     };
   },
 
   computed: {
     trialNumber() {
-      return this.triesNum;
+      return this.displayTriesNum;
     },
+    // trialNumber: function () {
+    //   if (this.triesNum > $root.triesCount) {
+    //     this.triesNum;
+    //   } else {
+    //     return this.triesNum;
+    //   }
+    // },
   },
 
   // ---------------- OLD CODE [WORKING INSIDE SETUP()] --------------------- //
@@ -168,6 +161,7 @@ export default defineComponent({
               if (this.$root.triesCount < this.$root.numTries) {
                 this.$root.triesCount++; //try start from 1
                 alert("shaken !! : try " + this.$root.triesCount);
+                this.displayTriesNum++;
                 // this.$root.triesCount += 1; //try start from 0
               } else {
                 alert("finish shake");
