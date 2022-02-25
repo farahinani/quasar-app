@@ -83,7 +83,7 @@ export default defineComponent({
   name: "PageShakeWin",
 
   data() {
-    var triesNum = "";
+    var triesNum = 1;
     return {
       hide: true,
       triesNum,
