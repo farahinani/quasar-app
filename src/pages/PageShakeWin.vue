@@ -20,7 +20,7 @@
             </div>
             <br />
             <div class="text-h5 text-center">
-              <b>Try {{ $root.triesCount }}</b>
+              <b>Try {{ trialNumber }}</b>
             </div>
             <br />
             <div class="body-text1 text-center">
@@ -113,6 +113,12 @@ export default defineComponent({
   //     console.log("this is dekstop!");
   //   }
   // },
+
+  computed: {
+    trialNumber() {
+      return (this.$root.triesCount = 1);
+    },
+  },
 
   mounted() {
     const $q = useQuasar();
