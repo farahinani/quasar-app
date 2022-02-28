@@ -21,8 +21,8 @@
             <br />
             <div class="text-h5 text-center">
               <!-- <b>Try {{ this.$root.triesCount }}</b> -->
-              <!-- <b>Try {{ displayTriesNum }}</b> -->
-              <b>Try {{ this.$root.triesCount }}</b>
+              <b>Try {{ displayTriesNum }}</b>
+              <!-- <b>Try {{ this.$root.triesCount }}</b> -->
             </div>
             <br />
             <div class="body-text1 text-center">
@@ -75,11 +75,11 @@ export default defineComponent({
     };
   },
 
-  computed() {
-    // trialNumber() {
-    //   return this.$root.triesCount;
-    // },
-    return this.$root.triesCount;
+  computed: {
+    trialNumber() {
+      return this.$root.triesCount;
+    },
+    // return this.$root.triesCount;
   },
 
   // ---------------- OLD CODE [WORKING INSIDE SETUP()] --------------------- //
