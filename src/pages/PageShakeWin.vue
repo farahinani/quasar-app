@@ -13,9 +13,9 @@
           </div>
           <div class="q-py-lg q-px-md">
             <div class="text-h5 text-center">
-              You have {{ $root.numTries }} tries
+              You have {{ this.$root.numTries }} tries
               <q-badge color="teal-10" align="middle">
-                {{ $root.triesCount }}/{{ $root.numTries }}
+                {{ this.$root.triesCount }}/{{ this.$root.numTries }}
               </q-badge>
             </div>
             <br />
@@ -63,8 +63,8 @@
 <script>
 import { defineComponent } from "vue";
 import { useQuasar } from "quasar";
-import { event } from "quasar";
-var Shake = require("shake.js");
+// import { event } from "quasar";
+// var Shake = require("shake.js");
 
 export default defineComponent({
   name: "PageShakeWin",

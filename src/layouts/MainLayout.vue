@@ -25,7 +25,8 @@
 export default {
   methods: {
     reloadPage() {
-      window.location.replace("/");
+      //window.location.replace("/");
+      this.$router.reload("/");
     },
   },
 };
