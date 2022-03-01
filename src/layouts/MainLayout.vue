@@ -11,6 +11,7 @@
           type="reset"
           color="secondary"
           class="q-ml-sm"
+          value="restart"
         />
       </q-toolbar>
     </q-header>
@@ -22,11 +23,14 @@
 </template>
 
 <script>
+import Vue from "vue";
+
 export default {
   methods: {
     reloadPage() {
-      //window.location.replace("/");
-      this.$router.reload();
+      // window.location.replace("/");
+      location.reload.push("/");
+      // this.$forceUpdate();
     },
   },
 };
