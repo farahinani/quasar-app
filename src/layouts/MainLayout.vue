@@ -28,8 +28,8 @@ import Vue from "vue";
 export default {
   methods: {
     reloadPage() {
-      // window.location.replace("/");
-      location.reload.push("/");
+      window.location.replace("/");
+      // location.reload.push("/");
       // this.$forceUpdate();
     },
   },
