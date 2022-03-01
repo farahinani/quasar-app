@@ -54,6 +54,16 @@
             color="primary"
             class="full-width"
           />
+          <br /><br />
+          <!-- SHAKESUCCESS() BUTTON -->
+          <!-- <q-btn
+            type="submit"
+            fullwidth
+            label="shakeSuccess()"
+            color="secondary"
+            class="full-width"
+            @click="shakeSuccess()"
+          /> -->
         </q-card-section>
       </q-card>
     </div>
@@ -153,11 +163,9 @@ export default defineComponent({
               Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
             ) {
               if (this.$root.triesCount < this.$root.numTries) {
-                if (this.$root.triesCount++)
-                  alert("shaken !! : try " + this.$root.triesCount);
-                else {
-                  alert("repeat shake");
-                }
+                this.$root.triesCount++;
+                alert("shaken !! : try " + this.$root.triesCount);
+                this.$router.push("/home/shake-and-win/animation");
                 //this.displayTriesNum++; // display until try 4
                 // this.$root.triesCount += 1; //try start from 0
                 // this.$router.push("/test");
@@ -173,6 +181,20 @@ export default defineComponent({
         );
       }
     },
+
+    //TEST BUTTON FOR SHAKE
+    // shakeSuccess() {
+    //   if (this.$root.triesCount < this.$root.numTries) {
+    //     if (this.$root.triesCount < this.$root.numTries) {
+    //       this.$root.triesCount++;
+    //       alert("shaken !! : try " + this.$root.triesCount);
+    //       // this.$router.push("/home/shake-and-win/animation");
+    //       this.$router.push("/home/shake-and-win/animation");
+    //     } else {
+    //       alert("Last Shake");
+    //     }
+    //   }
+    // },
   },
 });
 </script>

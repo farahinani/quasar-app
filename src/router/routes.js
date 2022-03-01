@@ -9,10 +9,11 @@ const routes = [
       { path: '/home/shake-and-win', component: () => import('src/pages/PageShakeWin.vue') },
       { path: '/home/shake-and-win-ios', component: () => import('src/pages/PageShakeWinIos.vue') },
       { path: '/home/shake-and-win-android', component: () => import('src/pages/PageShakeWinAndroid.vue') },
+      { path: '/home/shake-and-win/animation', component: () => import('src/pages/PageAnimation.vue') },
+      { path: '/home/shake-and-win/prizes', component: () => import('src/pages/prizes.vue') },
+      { path: '/home/shake-and-win/prizes/collect-prizes', component: () => import('src/pages/collect-prizes.vue') },
       { path: '/test', component: () => import('src/pages/test.vue') },
       { path: '/test2', component: () => import('src/pages/test2.vue') },
-      { path: '/home/shake-and-win/prizes', component: () => import('src/pages/prizes.vue') },
-      { path: '/home/shake-and-win/prizes/collect-prizes', component: () => import('src/pages/collect-prizes.vue') }
     ]
   },
 
