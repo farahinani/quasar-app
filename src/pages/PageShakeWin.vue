@@ -73,7 +73,7 @@
 <script>
 import { defineComponent } from "vue";
 import { useQuasar } from "quasar";
-// import { event } from "quasar";
+import { event } from "quasar";
 // var Shake = require("shake.js");
 
 export default defineComponent({
@@ -163,8 +163,12 @@ export default defineComponent({
               Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
             ) {
               if (this.$root.triesCount < this.$root.numTries) {
-                this.$root.triesCount++;
-                alert("shaken !! : try " + this.$root.triesCount);
+                if (this.$root.triesCount++) {
+                  alert("shaken !! : try " + this.$root.triesCount);
+                  this.$router.push("/home/shake-and-win/animation");
+                }
+                // this.$root.triesCount++;
+                // alert("shaken !! : try " + this.$root.triesCount);
                 // this.$router.push("/home/shake-and-win/animation");
 
                 //this.displayTriesNum++; // display until try 4
@@ -184,17 +188,17 @@ export default defineComponent({
 
     //TEST BUTTON FOR SHAKE
     shakeSuccess() {
+      //if (this.$root.triesCount < this.$root.numTries) {
       if (this.$root.triesCount < this.$root.numTries) {
-        if (this.$root.triesCount < this.$root.numTries) {
-          this.$root.triesCount++;
+        if (this.$root.triesCount++) {
           alert("shaken !! : try " + this.$root.triesCount);
           this.$router.push("/home/shake-and-win/animation");
-          // this.$root.triesCount++;
-        } else {
-          alert("finish shake");
-          this.$router.push("/home/shake-and-win/prizes");
         }
+      } else {
+        alert("finish shake");
+        this.$router.push("/home/shake-and-win/prizes");
       }
+      //}
     },
   },
 });
