@@ -191,7 +191,6 @@ export default defineComponent({
           this.$router.push("/home/shake-and-win/animation");
         } else {
           alert("Last Shake");
-
           this.$router.push("/home/shake-and-win/prizes");
         }
       }

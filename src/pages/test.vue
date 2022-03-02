@@ -21,7 +21,6 @@
       label="Show / Hide"
       v-on:click="show = !show"
     />
-    <!-- Now obviously not like this : ) but how ? -->
     <transition-group
       appear
       enter-active-class="animated bounceInDown"

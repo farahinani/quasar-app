@@ -4,14 +4,38 @@
       <q-card class="my-card">
         <q-card-section>
           <div class="text-center">
-            <span class="text-h4"
-              >SHAKE & WIN ANIMATION<br />
-              <span class="text-h5">WITH FLORIDA'S NATURAL</span>
-            </span>
+            <span class="text-h4">SHAKE & WIN ANIMATION </span>
             <hr />
-            <br />
-            <div class="text-h5 text-center">Purchase, Play and Win !</div>
           </div>
+
+          <transition-group
+            appear
+            enter-active-class="animated bounceInDown"
+            leave-active-class="animated flipOutY"
+            :duration="9000"
+          >
+            <q-card
+              key="text"
+              v-show="show"
+              style="
+                position: absolute;
+                top: 50px;
+                background-color: Salmon;
+                width: 50px;
+                height: 50px;
+                border-radius: 100px;
+              "
+              >Hello</q-card
+            >
+          </transition-group>
+          <q-btn
+            type="submit"
+            fullwidth
+            class="full-width"
+            color="secondary"
+            label="Show / Hide"
+            v-on:click="show = !show"
+          /><br /><br />
 
           <!-- BACK BUTTON -->
           <!-- router.go(n) where n can be + or -   -->
@@ -34,5 +58,41 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "PageAnimation",
+
+  data() {
+    return {
+      show: true,
+    };
+  },
+
+  methods() {
+    function makeEaseOut(timing) {
+      return function (timeFraction) {
+        return 1 - timing(1 - timeFraction);
+      };
+    }
+
+    function bounce(timeFraction) {
+      for (let a = 0, b = 1; 1; a += b, b /= 2) {
+        if (timeFraction >= (7 - 4 * a) / 11) {
+          return (
+            -Math.pow((11 - 6 * a - 11 * timeFraction) / 4, 2) + Math.pow(b, 2)
+          );
+        }
+      }
+    }
+
+    ball.onclick = function () {
+      let to = field.clientHeight - ball.clientHeight;
+
+      animate({
+        duration: 2000,
+        timing: makeEaseOut(bounce),
+        draw(progress) {
+          ball.style.top = to * progress + "px";
+        },
+      });
+    };
+  },
 });
 </script>
