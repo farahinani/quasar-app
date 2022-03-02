@@ -153,7 +153,6 @@ export default defineComponent({
 
       //CALCULATE TRIESCOUNT THEN SHAKE
       //if (this.$root.triesCount < this.$root.numTries) {
-
       //LISTEN TO SHAKE MOTION
       window.addEventListener(
         "devicemotion",
@@ -165,11 +164,8 @@ export default defineComponent({
           ) {
             if (this.$root.triesCount < this.$root.numTries) {
               this.$root.triesCount++;
-              //alert("shaken !! : try " + this.$root.triesCount);
-              this.$router.push("/home/shake-and-win/animation");
-
-              //this.displayTriesNum++; // display until try 4
-              // this.$root.triesCount += 1; //try start from 0
+              alert("shaken !! : try " + this.$root.triesCount);
+              //this.$router.push("/home/shake-and-win/animation");
             } else {
               alert("finish shake");
               this.$router.push("/home/shake-and-win/prizes");
@@ -191,7 +187,7 @@ export default defineComponent({
         alert("shaken !! : try " + this.$root.triesCount);
         this.$router.push("/home/shake-and-win/animation");
       } else {
-        alert("finish shake");
+        alert("Finish shake");
         this.$router.push("/home/shake-and-win/prizes");
       }
       //}
