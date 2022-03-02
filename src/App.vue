@@ -11,7 +11,7 @@ export default defineComponent({
     return {
       numTries: 0, // customer's trial
       // triesCount: 1,
-      triesCount: 0,
+      triesCount: 1,
     };
   },
 });
