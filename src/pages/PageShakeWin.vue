@@ -154,31 +154,54 @@ export default defineComponent({
       //CALCULATE TRIESCOUNT THEN SHAKE
       // if (this.$root.triesCount < this.$root.numTries) {
       //LISTEN TO SHAKE MOTION
-      window.addEventListener(
-        "devicemotion",
-        (event) => {
-          if (
-            Math.abs(oldx - Math.round(event.acceleration.x)) >
-              shakethreshold ||
-            Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
-          ) {
-            if (this.$root.triesCount < this.$root.numTries) {
+      // window.addEventListener(
+      //   "devicemotion",
+      //   (event) => {
+      //     if (
+      //       Math.abs(oldx - Math.round(event.acceleration.x)) >
+      //         shakethreshold ||
+      //       Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
+      //     ) {
+      //       if (this.$root.triesCount < this.$root.numTries) {
+      //         alert("shaken !! : try " + this.$root.triesCount);
+      //         this.$router.push("/home/shake-and-win/animation");
+      //         this.$root.triesCount++;
+      //         //this.displayTriesNum++; // display until try 4
+      //         // this.$root.triesCount += 1; //try start from 0
+      //       } else {
+      //         alert("finish shake");
+      //         this.$router.push("/home/shake-and-win/prizes");
+      //       }
+      //     }
+      //     oldx = Math.round(accel.x);
+      //     oldy = Math.round(accel.y);
+      //   },
+      //   true
+      // );
+      //}
+
+      if (this.$root.triesCount < this.$root.numTries) {
+        window.addEventListener(
+          "devicemotion",
+          (event) => {
+            if (
+              Math.abs(oldx - Math.round(event.acceleration.x)) >
+                shakethreshold ||
+              Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
+            ) {
               alert("shaken !! : try " + this.$root.triesCount);
               this.$router.push("/home/shake-and-win/animation");
               this.$root.triesCount++;
-              //this.displayTriesNum++; // display until try 4
-              // this.$root.triesCount += 1; //try start from 0
-            } else {
-              alert("finish shake");
-              this.$router.push("/home/shake-and-win/prizes");
             }
-          }
-          oldx = Math.round(accel.x);
-          oldy = Math.round(accel.y);
-        },
-        true
-      );
-      //}
+            oldx = Math.round(accel.x);
+            oldy = Math.round(accel.y);
+          },
+          true
+        );
+      } else {
+        alert("finish shake");
+        this.$router.push("/home/shake-and-win/prizes");
+      }
     },
 
     //TEST BUTTON FOR SHAKE
