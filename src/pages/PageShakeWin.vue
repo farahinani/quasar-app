@@ -181,6 +181,7 @@ export default defineComponent({
       //}
 
       if (this.$root.triesCount < this.$root.numTries) {
+        this.$root.triesCount++;
         window.addEventListener(
           "devicemotion",
           (event) => {
@@ -197,8 +198,6 @@ export default defineComponent({
           },
           true
         );
-
-        this.$root.triesCount++;
       } else {
         alert("finish shake");
         this.$router.push("/home/shake-and-win/prizes");
