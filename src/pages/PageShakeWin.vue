@@ -56,14 +56,14 @@
           />
           <br /><br />
           <!-- SHAKESUCCESS() BUTTON -->
-          <!-- <q-btn
+          <q-btn
             type="submit"
             fullwidth
             label="shakeSuccess()"
             color="secondary"
             class="full-width"
             @click="shakeSuccess()"
-          /> -->
+          />
         </q-card-section>
       </q-card>
     </div>
@@ -183,18 +183,18 @@ export default defineComponent({
     },
 
     //TEST BUTTON FOR SHAKE
-    // shakeSuccess() {
-    //   if (this.$root.triesCount < this.$root.numTries) {
-    //     if (this.$root.triesCount < this.$root.numTries) {
-    //       this.$root.triesCount++;
-    //       alert("shaken !! : try " + this.$root.triesCount);
-    //       // this.$router.push("/home/shake-and-win/animation");
-    //       this.$router.push("/home/shake-and-win/animation");
-    //     } else {
-    //       alert("Last Shake");
-    //     }
-    //   }
-    // },
+    shakeSuccess() {
+      if (this.$root.triesCount < this.$root.numTries) {
+        if (this.$root.triesCount < this.$root.numTries) {
+          this.$root.triesCount++;
+          alert("shaken !! : try " + this.$root.triesCount);
+          // this.$router.push("/home/shake-and-win/animation");
+          this.$router.push("/home/shake-and-win/animation");
+        } else {
+          alert("Last Shake");
+        }
+      }
+    },
   },
 });
 </script>
