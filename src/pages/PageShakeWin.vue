@@ -174,8 +174,8 @@ export default defineComponent({
               this.$router.push("/home/shake-and-win/prizes");
             }
           }
-          // oldx = Math.round(accel.x);
-          // oldy = Math.round(accel.y);
+          oldx = Math.round(accel.x);
+          oldy = Math.round(accel.y);
         },
         true
       );

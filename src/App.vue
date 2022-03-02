@@ -10,7 +10,7 @@ export default defineComponent({
   data() {
     return {
       numTries: 0, // customer's trial
-      triesCount: 1,
+      triesCount: 0,
     };
   },
 });
