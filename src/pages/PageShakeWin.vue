@@ -153,7 +153,6 @@ export default defineComponent({
 
       //CALCULATE TRIESCOUNT THEN SHAKE
       if (this.$root.triesCount < this.$root.numTries) {
-        this.$root.triesCount++;
         //LISTEN TO SHAKE MOTION
         window.addEventListener(
           "devicemotion",
@@ -164,7 +163,7 @@ export default defineComponent({
               Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
             ) {
               if (this.$root.triesCount < this.$root.numTries) {
-                // this.$root.triesCount++; //original count is here
+                this.$root.triesCount++; //original count is here
                 alert("shaken !! : try " + this.$root.triesCount);
                 this.$router.push("/home/shake-and-win/animation");
                 //this.displayTriesNum++; // display until try 4
@@ -186,8 +185,8 @@ export default defineComponent({
     //TEST BUTTON FOR SHAKE
     shakeSuccess() {
       if (this.$root.triesCount < this.$root.numTries) {
-        this.$root.triesCount++;
         if (this.$root.triesCount < this.$root.numTries) {
+          this.$root.triesCount++;
           alert("shaken !! : try " + this.$root.triesCount);
           this.$router.push("/home/shake-and-win/animation");
         } else {
