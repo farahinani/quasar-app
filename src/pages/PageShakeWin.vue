@@ -152,7 +152,7 @@ export default defineComponent({
       var shakethreshold = 25;
 
       //CALCULATE TRIESCOUNT THEN SHAKE
-      if (this.$root.triesCount < this.$root.numTries) {
+      if (this.$root.triesCount <= this.$root.numTries) {
         //LISTEN TO SHAKE MOTION
         window.addEventListener(
           "devicemotion",
@@ -185,7 +185,7 @@ export default defineComponent({
 
     //TEST BUTTON FOR SHAKE
     shakeSuccess() {
-      if (this.$root.triesCount < this.$root.numTries) {
+      if (this.$root.triesCount <= this.$root.numTries) {
         if (this.$root.triesCount <= this.$root.numTries) {
           // this.$root.triesCount++;
           alert("shaken !! : try " + this.$root.triesCount);
