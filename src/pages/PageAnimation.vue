@@ -11,7 +11,7 @@
           <transition-group
             appear
             enter-active-class="animated bounceInDown"
-            leave-active-class="animated flipOutY"
+            leave-active-class="animated zoomOutDown"
           >
             <q-card
               key="ball-card"
@@ -20,8 +20,8 @@
                 position: absolute;
                 top: 50px;
                 background-color: Salmon;
-                width: 50px;
-                height: 50px;
+                width: 60px;
+                height: 60px;
                 border-radius: 100px;
               "
               >Hello</q-card
@@ -36,6 +36,7 @@
             />
           </transition-group>
           <br /><br />
+          <!-- MODAL POPUP -->
 
           <!-- BACK BUTTON -->
           <!-- router.go(n) where n can be + or -   -->
@@ -62,6 +63,7 @@ export default defineComponent({
   data() {
     return {
       show: true,
+      opened: false,
     };
   },
 
