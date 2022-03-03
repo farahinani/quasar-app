@@ -46,15 +46,16 @@
           </div>
 
           <!-- NEXT BUTTON -->
-          <q-btn
+          <!-- <q-btn
             to="/home/shake-and-win/prizes"
             type="submit"
             fullwidth
             label="NEXT"
             color="primary"
             class="full-width"
-          />
+          /> -->
           <br /><br />
+
           <!-- SHAKESUCCESS() BUTTON -->
           <q-btn
             type="submit"
