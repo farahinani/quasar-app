@@ -6,49 +6,44 @@
           <div class="text-center">
             <span class="text-h4">SHAKE & WIN ANIMATION </span>
             <hr />
-            <div style="margin-top: 22em">
+            <div class="flex flex-center" style="height: 250px">
               <transition-group
                 appear
                 enter-active-class="animated bounceInDown"
                 leave-active-class="animated zoomOutDown"
               >
-                <q-card
+                <!-- <q-card
                   key="ball-card"
                   v-show="show"
                   style="
-                    position: absolute;
-                    top: 186px;
-                    left: 126px;
+                    margin: auto;
+                    display: block;
                     background-color: Salmon;
                     width: 60px;
                     height: 60px;
                     border-radius: 100px;
                   "
                   >Hello</q-card
-                >
-                <q-btn
-                  type="submit"
-                  fullwidth
-                  class="full-width"
-                  color="secondary"
-                  label="Show / Hide"
-                  v-on:click="show = !show"
+                > -->
+                <q-img
+                  width="30%"
+                  key="ball-card"
+                  v-show="show"
+                  src="~assets/orange.png"
                 />
               </transition-group>
             </div>
           </div>
 
-          <!-- <div id="field">
-            <img
-              src="https://js.cx/clipart/ball.svg"
-              width="40"
-              height="40"
-              id="ball"
-              @click="ball"
-            />
-          </div> -->
-
           <br />
+          <q-btn
+            type="submit"
+            fullwidth
+            class="full-width"
+            color="secondary"
+            label="Show / Hide"
+            v-on:click="show = !show"
+          /><br /><br />
           <!-- MODAL POPUP -->
 
           <!-- BACK BUTTON -->
