@@ -89,7 +89,7 @@ export default defineComponent({
     // trialNumber() {
     //   return (this.$root.triesCount = 1);
     // },
-    return this.$root.triesCount;
+    return (this.$root.triesCount = 1);
   },
 
   // ---------------- OLD CODE [WORKING INSIDE SETUP()] --------------------- //
@@ -165,7 +165,7 @@ export default defineComponent({
             if (this.$root.triesCount < this.$root.numTries) {
               this.$root.triesCount++;
               alert("shaken !! : try " + this.$root.triesCount);
-              this.$router.push("/home/shake-and-win/animation");
+              // this.$router.push("/home/shake-and-win/animation");
             } else {
               alert("finish shake");
               this.$router.push("/home/shake-and-win/prizes");
