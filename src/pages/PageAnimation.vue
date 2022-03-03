@@ -49,7 +49,7 @@
           <!-- BACK BUTTON -->
           <!-- router.go(n) where n can be + or -   -->
           <q-btn
-            @click="$router.go(-1)"
+            to="/home/shake-and-win"
             type="submit"
             fullwidth
             label="back"

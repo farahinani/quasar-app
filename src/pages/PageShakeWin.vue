@@ -137,7 +137,7 @@ export default defineComponent({
   methods: {
     //DETECT PERMISSION FOR DEVICE MOTION WHEN CLICK BUTTON 'START SHAKE'
     requestPermission() {
-      //IF PERMISSION IS GRANTED, EXECUTE getAccel()
+      //IF PERMISSION IS GRANTED, EXECUTE shakeDetector()
       DeviceMotionEvent.requestPermission().then((response) => {
         if (response == "granted") {
           this.shakeDetector();
@@ -164,10 +164,10 @@ export default defineComponent({
           ) {
             if (this.$root.triesCount < this.$root.numTries) {
               this.$root.triesCount++;
-              alert("shaken !! : try " + this.$root.triesCount);
-              this.$router.push("/home/shake-and-win/animation");
+              //alert("shaken !! : try " + this.$root.triesCount);
+              //this.$router.push("/home/shake-and-win/animation");
             } else {
-              alert("finish shake");
+              //alert("finish shake");
               this.$router.push("/home/shake-and-win/prizes");
             }
           }
