@@ -165,10 +165,12 @@ export default defineComponent({
             if (this.$root.triesCount < this.$root.numTries) {
               this.$root.triesCount++;
               alert("shaken !! : try " + this.$root.triesCount);
-              //this.$router.push("/home/shake-and-win/animation");
-            } else {
+              this.$router.push("/home/shake-and-win/animation");
+            } else if (this.$root.triesCount == this.$root.numTries) {
               alert("finish shake");
-              this.$router.push("/home/shake-and-win/prizes");
+              this.$router.push("/home/shake-and-win/animation");
+            } else {
+              alert("No shake left");
             }
           }
           oldx = Math.round(accel.x);
@@ -186,9 +188,12 @@ export default defineComponent({
         this.$root.triesCount++;
         alert("shaken !! : try " + this.$root.triesCount);
         this.$router.push("/home/shake-and-win/animation");
-      } else {
+      } else if (this.$root.triesCount == this.$root.numTries) {
+        this.$root.triesCount++;
         alert("Finish shake");
-        this.$router.push("/home/shake-and-win/prizes");
+        this.$router.push("/home/shake-and-win/animation");
+      } else {
+        alert("No shake left");
       }
       //}
     },
