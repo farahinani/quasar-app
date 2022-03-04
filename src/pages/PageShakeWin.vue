@@ -173,7 +173,7 @@ export default defineComponent({
               this.$router.push("/home/shake-and-win/animation");
             } else {
               alert("No shake left");
-              this.$router.push("/home/shake-and-win/prizes");
+              this.$router.replace("/home/shake-and-win/prizes");
             }
           }
           oldx = Math.round(accel.x);
@@ -213,11 +213,6 @@ export default defineComponent({
       //   this.$router.push("/home/shake-and-win/prizes");
       // }
     },
-  },
-
-  destroyed() {
-    shakeSuccess();
-    shakeDetector();
   },
 });
 </script>
