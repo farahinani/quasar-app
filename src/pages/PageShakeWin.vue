@@ -179,14 +179,16 @@ export default defineComponent({
         true
       );
 
+      window.removeEventListener("devicemotion", shakeDetector, false);
+      shakeDetector.stop();
       //}
     },
 
-    stopShake() {
-      window.removeEventListener("devicemotion", shakeDetector, false);
+    // stopShake() {
+    //   window.removeEventListener("devicemotion", shakeDetector, false);
 
-      shakeDetector.stop();
-    },
+    //   shakeDetector.stop();
+    // },
 
     //TEST BUTTON FOR SHAKE
     shakeSuccess() {
