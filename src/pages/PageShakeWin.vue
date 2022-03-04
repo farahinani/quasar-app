@@ -110,11 +110,26 @@ export default defineComponent({
     },
 
     shakeDetector() {
-      const shake = new Shake({ threshold: 15 });
-
-      shake.addEventListener("shake", (ev) => {
-        console.log("Shake!", ev.detail.timeStamp, ev.detail.acceleration);
+      //create a new instance of shake.js.
+      var myShakeEvent = new Shake({
+        threshold: 15,
       });
+
+      if (this.$root.triesCount < this.$root.numTries) {
+        // start listening to device motion
+        myShakeEvent.start();
+        // register a shake event
+        window.addEventListener("shake", shakeEventDidOccur, false);
+
+        function shakeEventDidOccur() {
+          alert("shaken !! : try ");
+        }
+        this.$root.triesCount++;
+      }
+
+      // window.removeEventListener("shake", shakeEventDidOccur, false);
+
+      // myShakeEvent.stop();
     },
 
     //TEST BUTTON FOR SHAKE
