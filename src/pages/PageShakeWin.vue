@@ -64,7 +64,9 @@
             @click="shakeSuccess()"
           />
 
-          test: {{ this.$root.triesCount }}
+          test: {{ this.$root.triesCount }} <br />
+          question: {{ this.question }} <br />
+          shake Count: {{ this.shakeCount }}
         </q-card-section>
       </q-card>
     </div>
@@ -83,11 +85,17 @@ export default defineComponent({
   data() {
     return {
       hide: true,
+      question: 0,
+      shakeCount: 0,
     };
   },
 
-  computed() {
-    return this.$root.triesCount;
+  watch: {
+    // whenever question changes, this function will run
+    question: function () {
+      //alert("test");
+      this.question++;
+    },
   },
 
   // ---------------- OLD CODE [WORKING INSIDE SETUP()] --------------------- //
@@ -161,7 +169,7 @@ export default defineComponent({
           ) {
             // this.$router.push("/home/shake-and-win/animation");
             // this.$root.triesCount++;
-
+            this.question++;
             this.$root.triesCount++;
 
             // if (this.$root.triesCount < this.$root.numTries) {
