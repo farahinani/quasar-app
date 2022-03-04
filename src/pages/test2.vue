@@ -51,9 +51,6 @@ export default defineComponent({
   //       console.log("Called on OK or Cancel");
   //     });
   // },
-  // mounted() {
-  //   shakeAlex();
-  // },
 
   mounted() {
     shakeAlex();
@@ -77,6 +74,7 @@ export default defineComponent({
         function shakeEventDidOccur() {
           //put your own code here etc.
           alert("Shake!");
+          cnosole.log("Shake");
         }
       };
     },
