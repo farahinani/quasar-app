@@ -175,13 +175,9 @@ export default defineComponent({
               alert("No shake left");
               this.$router.push("/home/shake-and-win/prizes");
             }
-
-            return;
           }
           oldx = Math.round(accel.x);
           oldy = Math.round(accel.y);
-
-          return;
         },
         true
       );
@@ -193,9 +189,9 @@ export default defineComponent({
       //if (this.$root.triesCount < this.$root.numTries) {
       if (this.$root.triesCount < this.$root.numTries) {
         // this.$root.triesCount++;
+        this.$root.triesCount += 1;
         alert("shaken !! : try " + this.$root.triesCount);
         this.$router.push("/home/shake-and-win/animation");
-        this.$root.triesCount += 1;
       } else if (this.$root.triesCount <= this.$root.numTries) {
         this.$root.triesCount = 0;
         this.$root.numTries = 0;
