@@ -164,12 +164,12 @@ export default defineComponent({
               this.$router.push("/home/shake-and-win/animation");
               // this.$root.triesCount += 1;
             } else if (this.$root.triesCount <= this.$root.numTries) {
-              this.$root.triesCount = 0;
-              this.$root.numTries = 0;
+              // this.$root.triesCount = 0;
+              // this.$root.numTries = 0;
               //alert("Finish shake");
               this.$router.push("/home/shake-and-win/animation");
             } else {
-              alert("No shake left");
+              //alert("No shake left");
               this.$router.replace("/home/shake-and-win/prizes");
             }
           }
@@ -179,7 +179,7 @@ export default defineComponent({
         true
       );
 
-      window.removeEventListener("devicemotion", event, false);
+      // window.removeEventListener("devicemotion", event, false);
       // shakeDetector.stop();
       //}
     },
