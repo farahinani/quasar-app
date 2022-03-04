@@ -179,7 +179,7 @@ export default defineComponent({
         true
       );
 
-      // window.removeEventListener("devicemotion", event, false);
+      //window.removeEventListener("devicemotion", event, false);
       // shakeDetector.stop();
       //}
     },
@@ -192,21 +192,21 @@ export default defineComponent({
 
     //TEST BUTTON FOR SHAKE
     shakeSuccess() {
+      this.$root.triesCount++;
+      this.$router.push("/home/shake-and-win/animation");
+
       //if (this.$root.triesCount < this.$root.numTries) {
-      if (this.$root.triesCount < this.$root.numTries) {
-        this.$root.triesCount++;
-        //this.$root.triesCount += 1;
-        //alert("shaken !! : try " + this.$root.triesCount);
-        this.$router.push("/home/shake-and-win/animation");
-      } else if (this.$root.triesCount <= this.$root.numTries) {
-        this.$root.triesCount = 0;
-        this.$root.numTries = 0;
-        // alert("Finish shake");
-        this.$router.push("/home/shake-and-win/animation");
-      } else {
-        alert("No shake left");
-        this.$router.push("/home/shake-and-win/prizes");
-      }
+      // if (this.$root.triesCount < this.$root.numTries) {
+      //   this.$root.triesCount++;
+      //   //this.$root.triesCount += 1;
+      //   //alert("shaken !! : try " + this.$root.triesCount);
+      //   this.$router.push("/home/shake-and-win/animation");
+      // } else if (this.$root.triesCount <= this.$root.numTries) {
+      //   this.$root.triesCount = 0;
+      //   this.$root.numTries = 0;
+      //   alert("Finish shake");
+      //   this.$router.push("/home/shake-and-win/animation");
+      // }
 
       //}
 

@@ -75,13 +75,20 @@ export default defineComponent({
     };
   },
 
+  computed() {
+    triesCountAdjusted - 1;
+  },
+
   created() {
     setTimeout(() => {
       // this.$router.go(-1);
       this.$router.push("/home/shake-and-win");
       // alert("go to /home/shake-and-win");
 
-      if (this.$root.triesCount == this.$root.numTries) {
+      let triesCountAdjusted = this.$root.triesCount - 1;
+
+      if (triesCountAdjusted == this.$root.numTries) {
+        window.removeEventListener("devicemotion", false);
         this.$router.push("/home/shake-and-win/prizes");
       }
     }, 3000);
