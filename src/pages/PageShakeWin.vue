@@ -167,25 +167,40 @@ export default defineComponent({
               shakethreshold ||
             Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
           ) {
-            if (this.$root.triesCount < this.$root.numTries) {
-              this.$root.triesCount++;
-              //this.$root.triesCount += 1;
-              console.log("shaken !! : try " + this.$root.triesCount);
-              //this.$router.push("/home/shake-and-win/animation");
-              // this.$root.triesCount += 1;
-            } else if (this.$root.triesCount == this.$root.numTries) {
-              this.$root.triesCount = 0;
-              this.$root.numTries = 0;
-              console.log("Finish shake");
-              this.$router.push("/home/shake-and-win/animation");
-            }
+            // this.$router.push("/home/shake-and-win/animation");
+            // this.$root.triesCount++;
+            this.question++;
+            this.$root.triesCount++;
+
+            // if (this.$root.triesCount < this.$root.numTries) {
+            //   this.$root.triesCount++;
+            //   //this.$root.triesCount += 1;
+            //   console.log("shaken !! : try " + this.$root.triesCount);
+            //   //this.$router.push("/home/shake-and-win/animation");
+            //   // this.$root.triesCount += 1;
+            // } //else if (this.$root.triesCount == this.$root.numTries) {
+            // //   // this.$root.triesCount = 0;
+            // //   // this.$root.numTries = 0;
+            // //   console.log("Finish shake");
+            // //   //this.$router.push("/home/shake-and-win/animation");
+            // // }
           }
           oldx = Math.round(accel.x);
           oldy = Math.round(accel.y);
         },
         true
       );
+
+      //window.removeEventListener("devicemotion", event, false);
+      // shakeDetector.stop();
+      //}
     },
+
+    // stopShake() {
+    //   window.removeEventListener("devicemotion", shakeDetector, false);
+
+    //   shakeDetector.stop();
+    // },
 
     //TEST BUTTON FOR SHAKE
     shakeSuccess() {
