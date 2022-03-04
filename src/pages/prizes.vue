@@ -26,7 +26,7 @@
           <q-form @submit="onSubmit" @reset="onReset" class="q-gutter-md">
             <q-input
               outlined
-              v-model="name"
+              v-model="this.$root.name"
               label="Name"
               :rules="[(val) => (val && val.length > 0) || 'Enter receipt No.']"
             />
@@ -34,7 +34,7 @@
             <div>
               <q-input
                 outlined
-                v-model="receipt"
+                v-model="this.$root.receipt"
                 label="Receipt No."
                 :rules="[
                   (val) => (val && val.length > 0) || 'Enter receipt No.',
@@ -71,8 +71,8 @@ export default defineComponent({
 
   data() {
     return {
-      name: ref(""),
-      receipt: ref(""),
+      // name: ref(""),
+      // receipt: ref(""),
     };
   },
 });

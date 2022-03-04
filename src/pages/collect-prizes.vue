@@ -28,9 +28,11 @@
           <br />
           <div class="text-body1">Entry: 1</div>
           <hr />
-          <div class="text-body1">Cartons Purchased: 4</div>
+          <div class="text-body1">Cartons Purchased: 6</div>
           <hr />
-          <div class="text-body1">Receipt: 154654654654654</div>
+          <div class="text-body1">Name: {{ this.$root.name }}</div>
+          <hr />
+          <div class="text-body1">Receipt: {{ this.$root.receipt }}</div>
           <hr />
         </q-card-section>
       </q-card>

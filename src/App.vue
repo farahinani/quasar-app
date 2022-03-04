@@ -12,6 +12,8 @@ export default defineComponent({
       numTries: 0, // customer's strial
       //triesCount: 0,
       triesCount: 1,
+      name: "",
+      receipt: "",
     };
   },
 });
