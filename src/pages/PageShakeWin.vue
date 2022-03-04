@@ -130,10 +130,6 @@ export default defineComponent({
     }
   },
 
-  unmounted() {
-    PageShakeWin.unmounted();
-  },
-
   methods: {
     //DETECT PERMISSION FOR DEVICE MOTION WHEN CLICK BUTTON 'START SHAKE'
     requestPermission() {
