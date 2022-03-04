@@ -171,9 +171,13 @@ export default defineComponent({
               alert("No shake left");
               this.$router.replace("/home/shake-and-win/prizes");
             }
+
+            return;
           }
-          oldx = Math.round(accel.x);
-          oldy = Math.round(accel.y);
+
+          return;
+          // oldx = Math.round(accel.x);
+          // oldy = Math.round(accel.y);
         }
         // true
       );
