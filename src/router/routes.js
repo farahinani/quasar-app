@@ -14,6 +14,7 @@ const routes = [
       { path: '/home/shake-and-win/prizes/collect-prizes', component: () => import('src/pages/collect-prizes.vue') },
       { path: '/test', component: () => import('src/pages/test.vue') },
       { path: '/test2', component: () => import('src/pages/test2.vue') },
+      { path: '/test3', component: () => import('src/pages/test3.vue') },
     ]
   },
 

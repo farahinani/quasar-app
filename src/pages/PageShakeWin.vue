@@ -166,8 +166,13 @@ export default defineComponent({
               this.$root.triesCount++;
               alert("shaken !! : try " + this.$root.triesCount);
               this.$router.push("/home/shake-and-win/animation");
-            } else {
+            } else if (this.$root.triesCount <= this.$root.numTries) {
+              this.$root.triesCount = 0;
+              this.$root.numTries = 0;
               alert("Finish shake");
+              this.$router.push("/home/shake-and-win/animation");
+            } else {
+              alert("No shake left");
               this.$router.push("/home/shake-and-win/prizes");
             }
           }
@@ -184,11 +189,12 @@ export default defineComponent({
       //if (this.$root.triesCount < this.$root.numTries) {
       if (this.$root.triesCount < this.$root.numTries) {
         this.$root.triesCount++;
-        //alert("shaken !! : try " + this.$root.triesCount);
+        alert("shaken !! : try " + this.$root.triesCount);
         this.$router.push("/home/shake-and-win/animation");
-      } else if (this.$root.triesCount == this.$root.numTries) {
+      } else if (this.$root.triesCount <= this.$root.numTries) {
         this.$root.triesCount = 0;
-        //alert("Finish shake");
+        this.$root.numTries = 0;
+        alert("Finish shake");
         this.$router.push("/home/shake-and-win/animation");
       } else {
         alert("No shake left");
@@ -207,6 +213,15 @@ export default defineComponent({
       // }
     },
   },
+
+  // created() {
+  //   if (this.$root.triesCount == 0) {
+  //     setTimeout(() => {
+  //       this.$router.push("/home/shake-and-win/prizes");
+  //       console.log("go to /home/shake-and-win");
+  //     }, 3000);
+  //   }
+  // },
 
   destroyed() {
     console.log("Destroyed hook: Component is destroyed");

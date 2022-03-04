@@ -48,14 +48,14 @@
 
           <!-- BACK BUTTON -->
           <!-- router.go(n) where n can be + or -   -->
-          <q-btn
+          <!-- <q-btn
             to="/home/shake-and-win"
             type="submit"
             fullwidth
             label="back"
             color="primary"
             class="full-width"
-          />
+          /> -->
         </q-card-section>
       </q-card>
     </div>
@@ -75,7 +75,21 @@ export default defineComponent({
     };
   },
 
-  methods() {
+  created() {
+    setTimeout(() => {
+      this.$router.push("/home/shake-and-win");
+      // alert("go to /home/shake-and-win");
+    }, 3000);
+
+    if (this.$root.triesCount == 0) {
+      setTimeout(() => {
+        this.$router.push("/home/shake-and-win/prizes");
+        //alert("go to /home/shake-and-win");
+      }, 3000);
+    }
+  },
+
+  methods: {
     // function makeEaseOut(timing) {
     //   return function (timeFraction) {
     //     return 1 - timing(1 - timeFraction);
