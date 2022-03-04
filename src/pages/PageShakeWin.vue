@@ -178,7 +178,14 @@ export default defineComponent({
         },
         true
       );
+
       //}
+    },
+
+    stopShake() {
+      window.removeEventListener("devicemotion", shakeDetector, false);
+
+      shakeDetector.stop();
     },
 
     //TEST BUTTON FOR SHAKE

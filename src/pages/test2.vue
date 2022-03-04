@@ -22,8 +22,8 @@
 import { useQuasar } from "quasar";
 import { defineComponent } from "vue";
 import test3 from "src/pages/test3.vue";
-import { Shake } from "src/pages/shake.js";
-//var Shake = require("src/pages/shake.js");
+//import { Shake } from "src/pages/shake.js";
+var Shake = require("src/pages/shake.js");
 
 export default defineComponent({
   name: "test2",
@@ -51,9 +51,9 @@ export default defineComponent({
   //       console.log("Called on OK or Cancel");
   //     });
   // },
-  mounted() {
-    shakeAlex();
-  },
+  // mounted() {
+  //   shakeAlex();
+  // },
 
   methods: {
     shakeAlex() {
