@@ -53,7 +53,7 @@ export default defineComponent({
   // },
 
   mounted() {
-    shakeAlex();
+    this.shakeAlex();
   },
 
   methods: {

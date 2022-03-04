@@ -9,9 +9,9 @@ export default defineComponent({
 
   data() {
     return {
-      numTries: 0, // customer's trial
+      numTries: 0, // customer's strial
       //triesCount: 0,
-      triesCount: 0,
+      triesCount: 1,
     };
   },
 });
