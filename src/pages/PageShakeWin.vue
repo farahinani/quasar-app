@@ -63,6 +63,8 @@
             class="full-width"
             @click="shakeSuccess()"
           />
+
+          test: {{ this.$root.triesCount }}
         </q-card-section>
       </q-card>
     </div>
