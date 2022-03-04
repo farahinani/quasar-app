@@ -20,7 +20,6 @@
             </div>
             <br />
             <div class="text-h5 text-center">
-              <!-- <b>Try {{ this.$root.triesCount }}</b> -->
               <!-- <b>Try {{ trialNumber }}</b> -->
               <b>Try {{ this.$root.triesCount }}</b>
             </div>
@@ -86,9 +85,6 @@ export default defineComponent({
   },
 
   computed() {
-    // trialNumber() {
-    //   return (this.$root.triesCount = 1);
-    // },
     return this.$root.triesCount;
   },
 
@@ -162,8 +158,8 @@ export default defineComponent({
             Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
           ) {
             if (this.$root.triesCount < this.$root.numTries) {
-              //this.$root.triesCount++;
-              this.$root.triesCount += 1;
+              this.$root.triesCount++;
+              //this.$root.triesCount += 1;
               alert("shaken !! : try " + this.$root.triesCount);
               this.$router.push("/home/shake-and-win/animation");
             } else if (this.$root.triesCount <= this.$root.numTries) {
@@ -188,8 +184,8 @@ export default defineComponent({
     shakeSuccess() {
       //if (this.$root.triesCount < this.$root.numTries) {
       if (this.$root.triesCount < this.$root.numTries) {
-        //this.$root.triesCount++;
-        this.$root.triesCount += 1;
+        this.$root.triesCount++;
+        // this.$root.triesCount += 1;
         alert("shaken !! : try " + this.$root.triesCount);
         this.$router.push("/home/shake-and-win/animation");
       } else if (this.$root.triesCount <= this.$root.numTries) {
