@@ -174,8 +174,8 @@ export default defineComponent({
           }
           oldx = Math.round(accel.x);
           oldy = Math.round(accel.y);
-        },
-        true
+        }
+        // true
       );
       //}
     },
