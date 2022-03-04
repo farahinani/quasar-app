@@ -158,7 +158,7 @@ export default defineComponent({
             Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
           ) {
             this.$router.push("/home/shake-and-win/animation");
-
+            this.$root.triesCount++;
             // if (this.$root.triesCount < this.$root.numTries) {
             //   this.$root.triesCount++;
             //   //this.$root.triesCount += 1;
