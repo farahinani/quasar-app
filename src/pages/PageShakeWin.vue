@@ -109,25 +109,12 @@ export default defineComponent({
       });
     },
 
-    //CODE FROM ALEXGIBSON
     shakeDetector() {
-      //create a new instance of shake.js.
-      var myShakeEvent = new Shake({
-        threshold: 10,
+      const shake = new Shake({ threshold: 15 });
+
+      shake.addEventListener("shake", (ev) => {
+        console.log("Shake!", ev.detail.timeStamp, ev.detail.acceleration);
       });
-
-      // start listening to device motion
-      myShakeEvent.start();
-
-      // register a shake event
-      window.addEventListener("shake", shakeEventDidOccur, false);
-
-      //shake event callback
-      function shakeEventDidOccur() {
-        if ($root.triesCount < $root.numTries) {
-          alert("call $root.triesCount");
-        }
-      }
     },
 
     //TEST BUTTON FOR SHAKE
