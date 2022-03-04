@@ -115,29 +115,27 @@ export default defineComponent({
     },
 
     shakeAlex() {
-      window.onload = function () {
-        //create a new instance of shake.js.
-        var myShakeEvent = new Shake({
-          threshold: 15,
-        });
+      //create a new instance of shake.js.
+      var myShakeEvent = new Shake({
+        threshold: 15,
+      });
 
-        // start listening to device motion
-        myShakeEvent.start();
+      // start listening to device motion
+      myShakeEvent.start();
 
-        // register a shake event
-        window.addEventListener("shake", shakeEventDidOccur, false);
+      // register a shake event
+      window.addEventListener("shake", shakeEventDidOccur, false);
 
-        //shake event callback
-        function shakeEventDidOccur() {
-          //put your own code here etc.
-          alert("Shake!");
-          this.$router.push("/home/shake-and-win/animation");
-        }
+      //shake event callback
+      function shakeEventDidOccur() {
+        //put your own code here etc.
+        alert("Shake!");
+        this.$router.push("/home/shake-and-win/animation");
+      }
 
-        // window.removeEventListener("shake", shakeEventDidOccur, false);
+      // window.removeEventListener("shake", shakeEventDidOccur, false);
 
-        // myShakeEvent.stop();
-      };
+      // myShakeEvent.stop();
     },
   },
 });
