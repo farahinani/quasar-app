@@ -77,9 +77,9 @@ export default defineComponent({
           this.$router.push("/home/shake-and-win/animation");
         }
 
-        window.removeEventListener("shake", shakeEventDidOccur, false);
+        // window.removeEventListener("shake", shakeEventDidOccur, false);
 
-        myShakeEvent.stop();
+        // myShakeEvent.stop();
       };
     },
   },
