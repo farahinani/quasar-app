@@ -80,7 +80,8 @@ export default defineComponent({
       // this.$router.go(-1);
       this.$router.push("/home/shake-and-win");
       // alert("go to /home/shake-and-win");
-      if (this.$root.triesCount == 0) {
+
+      if (this.$root.triesCount == this.$root.numTries) {
         this.$router.push("/home/shake-and-win/prizes");
       }
     }, 3000);
