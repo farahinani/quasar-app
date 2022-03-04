@@ -126,7 +126,8 @@ export default defineComponent({
     $q.platform.is.ios;
 
     if ($q.platform.is.ios) {
-      this.requestPermission();
+      //this.requestPermission();
+      this.shakeDetector();
     } else if ($q.platform.is.android) {
       this.shakeDetector();
     } else {
@@ -145,7 +146,6 @@ export default defineComponent({
       });
     },
 
-    //old name is getAccel()
     shakeDetector() {
       var oldx = 0;
       var oldy = 0;
@@ -213,15 +213,6 @@ export default defineComponent({
       // }
     },
   },
-
-  // created() {
-  //   if (this.$root.triesCount == 0) {
-  //     setTimeout(() => {
-  //       this.$router.push("/home/shake-and-win/prizes");
-  //       console.log("go to /home/shake-and-win");
-  //     }, 3000);
-  //   }
-  // },
 
   destroyed() {
     shakeSuccess();
