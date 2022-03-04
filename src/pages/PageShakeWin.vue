@@ -94,86 +94,63 @@ export default defineComponent({
     if ($q.platform.is.ios) {
       this.requestPermission();
     } else if ($q.platform.is.android) {
-      this.shakeEventDidOccur();
+      this.shakeDetector();
     } else {
       console.log("this is dekstop!");
     }
   },
 
-  methods() {
-    function requestPermission() {
+  methods: {
+    requestPermission() {
       DeviceMotionEvent.requestPermission().then((response) => {
         if (response == "granted") {
-          this.shakeEventDidOccur();
+          this.shakeDetector();
         }
       });
-    }
-
-    var myShakeEvent = new Shake({
-      threshold: 15,
-    });
-
-    myShakeEvent.start();
-
-    window.addEventListener("shake", shakeEventDidOccur, false);
-
-    function shakeEventDidOccur() {
-      alert("Shake!");
-      this.$router.push("/home/shake-and-win/animation");
-
-      // if (this.$root.triesCount < this.$root.numTries) {
-      //   this.$root.triesCount++;
-      //   alert("shaken ! : try " + this.$root.triesCount);
-      // } else if (this.$root.triesCount == this.$root.numTries) {
-      //   alert("Finish shake");
-      //   this.$router.push("/home/shake-and-win/animation");
-      // }
-    }
+    },
 
     //CODE FROM ALEXGIBSON
-    // shakeDetector() {
-    //   //create a new instance of shake.js.
-    //   var myShakeEvent = new Shake({
-    //     threshold: 15,
-    //   });
+    shakeDetector() {
+      //create a new instance of shake.js.
+      var myShakeEvent = new Shake({
+        threshold: 10,
+      });
 
-    //   // start listening to device motion
-    //   myShakeEvent.start();
+      // start listening to device motion
+      myShakeEvent.start();
 
-    //   // register a shake event
-    //   window.addEventListener("shake", shakeEventDidOccur, false);
+      // register a shake event
+      window.addEventListener("shake", shakeEventDidOccur, false);
 
-    //   //shake event callback
-    //   function shakeEventDidOccur() {
-    //     //put your own code here etc.
-    //     // alert("Shake!");
-    //     // this.$router.push("/home/shake-and-win/animation");
+      //shake event callback
+      function shakeEventDidOccur() {
+        //put your own code here etc.
+        alert("Shake!");
+        shakeSuccess();
+        // this.$router.push("/home/shake-and-win/animation");
 
-    //     if (this.$root.triesCount < this.$root.numTries) {
-    //       this.$root.triesCount++;
-    //       alert("shaken ! : try " + this.$root.triesCount);
-    //     } else if (this.$root.triesCount == this.$root.numTries) {
-    //       alert("Finish shake");
-    //       this.$router.push("/home/shake-and-win/animation");
-    //     }
-    //   }
-    // }
-
-    return {
-      requestPermission,
-      shakeEventDidOccur,
-    };
+        // if (this.$root.triesCount < this.$root.numTries) {
+        //   this.$root.triesCount++;
+        //   alert("shaken ! : try " + this.$root.triesCount);
+        // } else if (this.$root.triesCount == this.$root.numTries) {
+        //   alert("Finish shake");
+        //   this.$router.push("/home/shake-and-win/animation");
+        // }
+      }
+    },
 
     //TEST BUTTON FOR SHAKE
-    // shakeSuccess() {
-    //   if (this.$root.triesCount < this.$root.numTries) {
-    //     this.$root.triesCount++;
-    //     alert("shaken ! : try " + this.$root.triesCount);
-    //   } else if (this.$root.triesCount == this.$root.numTries) {
-    //     alert("Finish shake");
-    //     this.$router.push("/home/shake-and-win/animation");
-    //   }
-    // }
+    shakeSuccess() {
+      alert("call shakesuccess()");
+      // if (this.$root.triesCount < this.$root.numTries) {
+      //   //this.$root.triesCount++;
+      //   alert("this.$root.triesCount : " + this.$root.triesCount)
+      //   //this.$router.push("/home/shake-and-win/animation");
+      // } else if (this.$root.triesCount == this.$root.numTries) {
+      //   alert("test shake");
+      //   //this.$router.push("/home/shake-and-win/animation");
+      // }
+    },
   },
 });
 </script>
