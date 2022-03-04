@@ -125,7 +125,7 @@ export default defineComponent({
 
         function shakeEventDidOccur() {
           //put your own code here etc.
-          alert("Shake!");
+          //alert("Shake!");
           alert("Shake!!!!" + this.$root.triesCount);
         }
       }
