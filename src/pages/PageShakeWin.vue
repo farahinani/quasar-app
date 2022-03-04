@@ -118,12 +118,9 @@ export default defineComponent({
       if (this.$root.triesCount < this.$root.numTries) {
         // start listening to device motion
         myShakeEvent.start();
-        // register a shake event
-        window.addEventListener("shake", shakeEventDidOccur, false);
 
-        function shakeEventDidOccur() {
-          alert("shaken !! : try " + this.$root.triesCount);
-        }
+        alert("shaken !! : try " + this.$root.triesCount);
+
         this.$root.triesCount++;
       }
 
