@@ -75,10 +75,6 @@ export default defineComponent({
     };
   },
 
-  computed() {
-    triesCountAdjusted - 1;
-  },
-
   created() {
     setTimeout(() => {
       // this.$router.go(-1);
