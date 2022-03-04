@@ -154,7 +154,7 @@ export default defineComponent({
     shakeDetector() {
       var oldx = 0;
       var oldy = 0;
-      var shakethreshold = 40;
+      var shakethreshold = 25;
 
       //CALCULATE TRIESCOUNT THEN SHAKE
       //if (this.$root.triesCount < this.$root.numTries) {
