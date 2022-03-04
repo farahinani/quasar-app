@@ -81,7 +81,7 @@ export default defineComponent({
       this.$router.push("/home/shake-and-win");
       // alert("go to /home/shake-and-win");
       if (this.$root.triesCount == 0) {
-        this.$router.replace("/home/shake-and-win/prizes");
+        this.$router.push("/home/shake-and-win/prizes");
       }
     }, 3000);
 
