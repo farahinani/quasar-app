@@ -74,8 +74,12 @@ export default defineComponent({
         function shakeEventDidOccur() {
           //put your own code here etc.
           alert("Shake!");
-          cnosole.log("Shake");
+          this.$router.push("/home/shake-and-win/animation");
         }
+
+        window.removeEventListener("shake", shakeEventDidOccur, false);
+
+        myShakeEvent.stop();
       };
     },
   },
