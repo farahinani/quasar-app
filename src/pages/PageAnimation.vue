@@ -115,6 +115,11 @@ export default defineComponent({
     //   });
     // };
   },
+
+  destroyed() {
+    shakeSuccess();
+    shakeDetector();
+  },
 });
 </script>
 

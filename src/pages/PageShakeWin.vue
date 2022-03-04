@@ -224,7 +224,8 @@ export default defineComponent({
   // },
 
   destroyed() {
-    console.log("Destroyed hook: Component is destroyed");
+    shakeSuccess();
+    shakeDetector();
   },
 });
 </script>
