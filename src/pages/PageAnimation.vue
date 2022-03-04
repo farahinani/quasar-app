@@ -88,6 +88,14 @@ export default defineComponent({
       }
     }, 3000);
 
+    setTimeout(() => {
+      this.$router.push("/home/shake-and-win");
+
+      if (triesCountAdjusted == 0) {
+        this.$router.push("/home/shake-and-win/prizes");
+      }
+    }, 3000);
+
     // if (this.$root.triesCount == 0) {
     //   setTimeout(() => {
     //     this.$router.push("/home/shake-and-win/prizes");
