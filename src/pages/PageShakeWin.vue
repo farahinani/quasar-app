@@ -166,14 +166,11 @@ export default defineComponent({
               alert("shaken !! : try " + this.$root.triesCount);
               this.$router.push("/home/shake-and-win/animation");
               // this.$root.triesCount += 1;
-            } else if (this.$root.triesCount <= this.$root.numTries) {
+            } else if (this.$root.triesCount == this.$root.numTries) {
               // this.$root.triesCount = 0;
               // this.$root.numTries = 0;
               alert("Finish shake");
               this.$router.push("/home/shake-and-win/animation");
-            } else {
-              //alert("No shake left");
-              this.$router.replace("/home/shake-and-win/prizes");
             }
           }
           oldx = Math.round(accel.x);
