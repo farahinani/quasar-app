@@ -54,14 +54,6 @@
                 color="primary"
               />
             </div>
-            <q-btn
-              type="submit"
-              fullwidth
-              label="shakeSuccess()"
-              color="secondary"
-              class="full-width"
-              @click="shakeSuccess()"
-            />
           </q-form>
         </q-card-section>
       </q-card>
@@ -82,11 +74,6 @@ export default defineComponent({
       name: ref(""),
       receipt: ref(""),
     };
-  },
-
-  destroyed() {
-    shakeSuccess();
-    shakeDetector();
   },
 });
 </script>

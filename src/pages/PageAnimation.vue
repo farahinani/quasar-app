@@ -79,14 +79,17 @@ export default defineComponent({
     setTimeout(() => {
       this.$router.push("/home/shake-and-win");
       // alert("go to /home/shake-and-win");
+      if (this.$root.triesCount == 0) {
+        this.$router.push("/home/shake-and-win/prizes");
+      }
     }, 3000);
 
-    if (this.$root.triesCount == 0) {
-      setTimeout(() => {
-        this.$router.push("/home/shake-and-win/prizes");
-        //alert("go to /home/shake-and-win");
-      }, 3000);
-    }
+    // if (this.$root.triesCount == 0) {
+    //   setTimeout(() => {
+    //     this.$router.push("/home/shake-and-win/prizes");
+    //     //alert("go to /home/shake-and-win");
+    //   }, 3000);
+    // }
   },
 
   methods: {
@@ -114,11 +117,6 @@ export default defineComponent({
     //     },
     //   });
     // };
-  },
-
-  destroyed() {
-    shakeSuccess();
-    shakeDetector();
   },
 });
 </script>
