@@ -125,7 +125,7 @@ export default defineComponent({
       //shake event callback
       function shakeEventDidOccur() {
         //put your own code here etc.
-        alert("Shake!");
+        // alert("Shake!");
         shakeSuccess();
         // this.$router.push("/home/shake-and-win/animation");
 
