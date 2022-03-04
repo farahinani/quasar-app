@@ -75,9 +75,5 @@ export default defineComponent({
       receipt: ref(""),
     };
   },
-
-  unmounted() {
-    PageShakeWin.unmounted();
-  },
 });
 </script>
