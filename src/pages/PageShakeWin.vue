@@ -63,10 +63,6 @@
             class="full-width"
             @click="shakeSuccess()"
           />
-
-          test: {{ this.$root.triesCount }} <br />
-          question: {{ this.question }} <br />
-          shake Count: {{ this.shakeCount }}
         </q-card-section>
       </q-card>
     </div>
@@ -77,7 +73,8 @@
 import { defineComponent } from "vue";
 import { useQuasar } from "quasar";
 import { event } from "quasar";
-// var Shake = require("shake.js");
+
+var Shake = require("shake.js");
 
 export default defineComponent({
   name: "PageShakeWin",
@@ -85,45 +82,8 @@ export default defineComponent({
   data() {
     return {
       hide: true,
-      question: 0,
-      shakeCount: 0,
     };
   },
-
-  watch: {
-    // whenever question changes, this function will run
-    question: function () {
-      //alert("test");
-      this.question++;
-    },
-  },
-
-  // ---------------- OLD CODE [WORKING INSIDE SETUP()] --------------------- //
-  // setup() {
-  //   const $q = useQuasar();
-  //   $q.platform.is.desktop;
-  //   $q.platform.is.android;
-  //   $q.platform.is.ios;
-
-  //   if ($q.platform.is.ios) {
-  //     //DETECT PERMISSION FOR DEVICE MOTION WHEN CLICK BUTTON 'START SHAKE'
-  //     function requestPermission() {
-  //       //IF PERMISSION IS GRANTED, EXECUTE getAccel()
-  //       DeviceMotionEvent.requestPermission().then((response) => {
-  //         if (response == "granted") {
-  //           this.shakeDetector();
-  //         }
-  //       });
-  //     }
-  //     return {
-  //       requestPermission,
-  //     };
-  //   } else if ($q.platform.is.android) {
-  //     this.shakeDetector();
-  //   } else {
-  //     console.log("this is dekstop!");
-  //   }
-  // },
 
   mounted() {
     const $q = useQuasar();
@@ -141,9 +101,7 @@ export default defineComponent({
   },
 
   methods: {
-    //DETECT PERMISSION FOR DEVICE MOTION WHEN CLICK BUTTON 'START SHAKE'
     requestPermission() {
-      //IF PERMISSION IS GRANTED, EXECUTE shakeDetector()
       DeviceMotionEvent.requestPermission().then((response) => {
         if (response == "granted") {
           this.shakeDetector();
@@ -151,85 +109,31 @@ export default defineComponent({
       });
     },
 
+    //CODE FROM ALEXGIBSON
     shakeDetector() {
-      var oldx = 0;
-      var oldy = 0;
-      var shakethreshold = 25;
+      //create a new instance of shake.js.
+      var myShakeEvent = new Shake({
+        threshold: 15,
+      });
 
-      //CALCULATE TRIESCOUNT THEN SHAKE
-      //if (this.$root.triesCount < this.$root.numTries) {
-      //LISTEN TO SHAKE MOTION
-      window.addEventListener(
-        "devicemotion",
-        (event) => {
-          if (
-            Math.abs(oldx - Math.round(event.acceleration.x)) >
-              shakethreshold ||
-            Math.abs(oldy - Math.round(event.acceleration.y)) > shakethreshold
-          ) {
-            // this.$router.push("/home/shake-and-win/animation");
-            // this.$root.triesCount++;
-            this.question++;
-            this.$root.triesCount++;
+      // start listening to device motion
+      myShakeEvent.start();
 
-            // if (this.$root.triesCount < this.$root.numTries) {
-            //   this.$root.triesCount++;
-            //   //this.$root.triesCount += 1;
-            //   console.log("shaken !! : try " + this.$root.triesCount);
-            //   //this.$router.push("/home/shake-and-win/animation");
-            //   // this.$root.triesCount += 1;
-            // } //else if (this.$root.triesCount == this.$root.numTries) {
-            // //   // this.$root.triesCount = 0;
-            // //   // this.$root.numTries = 0;
-            // //   console.log("Finish shake");
-            // //   //this.$router.push("/home/shake-and-win/animation");
-            // // }
-          }
-          oldx = Math.round(accel.x);
-          oldy = Math.round(accel.y);
-        },
-        true
-      );
+      // register a shake event
+      window.addEventListener("shake", shakeEventDidOccur, false);
 
-      //window.removeEventListener("devicemotion", event, false);
-      // shakeDetector.stop();
-      //}
+      //shake event callback
+      function shakeEventDidOccur() {
+        //put your own code here etc.
+        alert("Shake!");
+        this.$router.push("/home/shake-and-win/animation");
+      }
     },
-
-    // stopShake() {
-    //   window.removeEventListener("devicemotion", shakeDetector, false);
-
-    //   shakeDetector.stop();
-    // },
 
     //TEST BUTTON FOR SHAKE
     shakeSuccess() {
       this.$root.triesCount++;
       this.$router.push("/home/shake-and-win/animation");
-
-      //if (this.$root.triesCount < this.$root.numTries) {
-      // if (this.$root.triesCount < this.$root.numTries) {
-      //   this.$root.triesCount++;
-      //   //this.$root.triesCount += 1;
-      //   //alert("shaken !! : try " + this.$root.triesCount);
-      //   this.$router.push("/home/shake-and-win/animation");
-      // } else if (this.$root.triesCount <= this.$root.numTries) {
-      //   this.$root.triesCount = 0;
-      //   this.$root.numTries = 0;
-      //   alert("Finish shake");
-      //   this.$router.push("/home/shake-and-win/animation");
-      // }
-
-      //}
-
-      // if (this.$root.triesCount < this.$root.numTries) {
-      //   this.$root.triesCount++;
-      //   alert("shaken !! : try " + this.$root.triesCount);
-      //   this.$router.push("/home/shake-and-win/animation");
-      // } else {
-      //   alert("Finish shake");
-      //   this.$router.push("/home/shake-and-win/prizes");
-      // }
     },
   },
 });
