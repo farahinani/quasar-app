@@ -55,6 +55,10 @@ export default defineComponent({
   //   shakeAlex();
   // },
 
+  mounted() {
+    shakeAlex();
+  },
+
   methods: {
     shakeAlex() {
       window.onload = function () {
