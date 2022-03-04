@@ -5,38 +5,14 @@
         page test 2
 
         <q-card-section>
-          <q-btn label="Auto Closing" color="primary" @click="autoClose" />
-          <!-- <div v-if="seen" class="q-py-lg q-px-md">test 2 page</div> -->
-          <!-- <q-btn label="Alert" color="primary" @click="alert = true" />
-
-          <q-dialog v-model="alert">
-            <q-card>
-              <q-card-section>
-                <div class="text-h6">alert</div>
-              </q-card-section>
-
-              <q-card-section>
-                <div class="q-pt-none">
-                  orem Ipsum is simply dummy text of the printing and
-                  typesetting industry. Lorem Ipsum has been the industry's
-                  standard dummy text ever since the 1500s, when an unknown
-                  printer took a galley of type and scrambled it to make a type
-                  specimen book. It has survived not only five centuries, but
-                  also the leap into electronic typesetting, remaining
-                  essentially unchanged. It was popularised in the 1960s with
-                  the release of Letraset sheets containing Lorem Ipsum
-                  passages, and more recently with desktop publishing software
-                  like Aldus PageMaker including versions of Lorem Ipsum.
-                </div>
-              </q-card-section>
-
-              <q-card-actions align="right">
-                <q-btn flat label="ok" color="primary" v-close-popup />
-              </q-card-actions>
-            </q-card>
-          </q-dialog> -->
-          <test3 />
-        </q-card-section>
+          <q-btn
+            type="submit"
+            fullwidth
+            label="shakeSuccess()"
+            color="secondary"
+            class="full-width"
+            @click="shakeAlex()"
+        /></q-card-section>
       </q-card>
     </div>
   </q-page>
@@ -46,6 +22,8 @@
 import { useQuasar } from "quasar";
 import { defineComponent } from "vue";
 import test3 from "src/pages/test3.vue";
+import { Shake } from "src/pages/shake.js";
+//var Shake = require("src/pages/shake.js");
 
 export default defineComponent({
   name: "test2",
@@ -57,34 +35,44 @@ export default defineComponent({
     };
   },
 
-  setup() {
-    const $q = useQuasar();
+  // setup() {
+  //   const $q = useQuasar();
 
-    $q.dialog({
-      component: test3,
-    })
-      .onOk(() => {
-        console.log("OK");
-      })
-      .onCancel(() => {
-        console.log("Cancel");
-      })
-      .onDismiss(() => {
-        console.log("Called on OK or Cancel");
-      });
+  //   $q.dialog({
+  //     component: test3,
+  //   })
+  //     .onOk(() => {
+  //       console.log("OK");
+  //     })
+  //     .onCancel(() => {
+  //       console.log("Cancel");
+  //     })
+  //     .onDismiss(() => {
+  //       console.log("Called on OK or Cancel");
+  //     });
+  // },
+  mounted() {
+    shakeAlex();
   },
 
-  methods() {
-    // shakeSuccess() {
-    //   if (this.$root.triesCount < this.$root.numTries) {
-    //     this.$root.triesCount++;
-    //     if (this.$root.triesCount < this.$root.numTries) {
-    //       alert("shaken !! : try " + this.$root.triesCount);
-    //     } else {
-    //       alert("Last Shake");
-    //     }
-    //   }
-    // },
+  methods: {
+    shakeAlex() {
+      var myShakeEvent = new Shake({
+        threshold: 15,
+      });
+
+      // start listening to device motion
+      myShakeEvent.start();
+
+      // register a shake event
+      window.addEventListener("shake", shakeEventDidOccur, false);
+
+      //shake event callback
+      function shakeEventDidOccur() {
+        //put your own code here etc.
+        alert("Shake alex!");
+      }
+    },
   },
 });
 </script>
