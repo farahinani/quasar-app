@@ -116,26 +116,21 @@ export default defineComponent({
         threshold: 10,
       });
 
-      // start listening to device motion
-      myShakeEvent.start();
+      // // start listening to device motion
+      // myShakeEvent.start();
 
-      // register a shake event
-      window.addEventListener("shake", shakeEventDidOccur, false);
+      // // register a shake event
+      // window.addEventListener("shake", shakeEventDidOccur, false);
 
-      //shake event callback
-      function shakeEventDidOccur() {
-        //put your own code here etc.
-        // alert("Shake!");
-        this.shakeSuccess();
-        // this.$router.push("/home/shake-and-win/animation");
+      if (this.$root.triesCount < this.$root.numTries) {
+        //start listening to device motion
+        myShakeEvent.start();
+        // register a shake event
+        window.addEventListener("shake", shakeEventDidOccur, false);
 
-        // if (this.$root.triesCount < this.$root.numTries) {
-        //   this.$root.triesCount++;
-        //   alert("shaken ! : try " + this.$root.triesCount);
-        // } else if (this.$root.triesCount == this.$root.numTries) {
-        //   alert("Finish shake");
-        //   this.$router.push("/home/shake-and-win/animation");
-        // }
+        function shakeEventDidOccur() {
+          alert("shaken ! try : " + this.$root.triesCount);
+        }
       }
     },
 
