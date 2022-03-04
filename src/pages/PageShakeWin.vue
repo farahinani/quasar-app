@@ -141,15 +141,15 @@ export default defineComponent({
 
     //TEST BUTTON FOR SHAKE
     shakeSuccess() {
-      alert("shakeeeee");
-      // if (this.$root.triesCount < this.$root.numTries) {
-      //   this.$root.triesCount++;
-      //   alert("this.$root.triesCount : " + this.$root.triesCount);
-      //   //this.$router.push("/home/shake-and-win/animation");
-      // } else if (this.$root.triesCount == this.$root.numTries) {
-      //   alert("finish shake");
-      //   //this.$router.push("/home/shake-and-win/animation");
-      // }
+      //alert("shakeeeee");
+      if (this.$root.triesCount < this.$root.numTries) {
+        this.$root.triesCount++;
+        alert("this.$root.triesCount : " + this.$root.triesCount);
+        //this.$router.push("/home/shake-and-win/animation");
+      } else if (this.$root.triesCount == this.$root.numTries) {
+        alert("finish shake");
+        //this.$router.push("/home/shake-and-win/animation");
+      }
     },
   },
 });
