@@ -125,8 +125,16 @@ export default defineComponent({
       //shake event callback
       function shakeEventDidOccur() {
         //put your own code here etc.
-        alert("Shake!");
-        this.$router.push("/home/shake-and-win/animation");
+        // alert("Shake!");
+        // this.$router.push("/home/shake-and-win/animation");
+
+        if (this.$root.triesCount < this.$root.numTries) {
+          this.$root.triesCount++;
+          alert("shaken ! : try " + this.$root.triesCount);
+        } else if (this.$root.triesCount == this.$root.numTries) {
+          alert("Finish shake");
+          this.$router.push("/home/shake-and-win/animation");
+        }
       }
     },
 
