@@ -126,7 +126,7 @@ export default defineComponent({
       function shakeEventDidOccur() {
         //put your own code here etc.
         // alert("Shake!");
-        shakeSuccess();
+        this.shakeSuccess();
         // this.$router.push("/home/shake-and-win/animation");
 
         // if (this.$root.triesCount < this.$root.numTries) {
