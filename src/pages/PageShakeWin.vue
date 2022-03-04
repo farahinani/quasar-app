@@ -94,7 +94,7 @@ export default defineComponent({
     if ($q.platform.is.ios) {
       this.requestPermission();
     } else if ($q.platform.is.android) {
-      this.shakeDetector();
+      this.shakeEventDidOccur();
     } else {
       console.log("this is dekstop!");
     }
@@ -104,7 +104,7 @@ export default defineComponent({
     function requestPermission() {
       DeviceMotionEvent.requestPermission().then((response) => {
         if (response == "granted") {
-          this.shakeDetector();
+          this.shakeEventDidOccur();
         }
       });
     }
@@ -161,6 +161,7 @@ export default defineComponent({
 
     return {
       requestPermission,
+      shakeEventDidOccur,
     };
 
     //TEST BUTTON FOR SHAKE
