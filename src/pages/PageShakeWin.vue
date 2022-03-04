@@ -126,8 +126,7 @@ export default defineComponent({
     $q.platform.is.ios;
 
     if ($q.platform.is.ios) {
-      //this.requestPermission();
-      this.shakeDetector();
+      this.requestPermission();
     } else if ($q.platform.is.android) {
       this.shakeDetector();
     } else {
@@ -182,6 +181,8 @@ export default defineComponent({
         true
       );
       //}
+
+      return;
     },
 
     //TEST BUTTON FOR SHAKE
