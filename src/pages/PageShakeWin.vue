@@ -122,7 +122,7 @@ export default defineComponent({
         window.addEventListener("shake", shakeEventDidOccur, false);
 
         function shakeEventDidOccur() {
-          alert("shaken !! : try ");
+          alert("shaken !! : try " + this.$root.triesCount);
         }
         this.$root.triesCount++;
       }
