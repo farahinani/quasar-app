@@ -43,6 +43,30 @@
               </q-btn>
             </p>
           </div>
+          <q-btn label="Auto Closing" color="primary" @click="autoClose" />
+          <!-- 
+          <q-btn label="Auto Closing" color="primary" @click="autoClose" />
+
+          <q-dialog v-model="alert" ref="dialog">
+            <q-card>
+              <q-card-section>
+                <div class="text-h6">Alert</div>
+              </q-card-section>
+
+              <q-card-section class="q-pt-none">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum
+                repellendus sit voluptate voluptas eveniet porro. Rerum
+                blanditiis perferendis totam, ea at omnis vel numquam
+                exercitationem aut, natus minima, porro labore.
+              </q-card-section>
+
+              <q-card-actions align="right">
+                <q-btn flat label="OK" color="primary" v-close-popup />
+              </q-card-actions>
+            </q-card>
+          </q-dialog> -->
+
+          <!-- <q-btn label="Alert" color="primary" @click="alert = true" /> -->
 
           <!-- NEXT BUTTON -->
           <!-- <q-btn
@@ -73,6 +97,7 @@
 import { defineComponent } from "vue";
 import { useQuasar } from "quasar";
 import { event } from "quasar";
+import test2 from "src/pages/test2.vue";
 
 var Shake = require("shake.js");
 
@@ -81,7 +106,58 @@ export default defineComponent({
 
   data() {
     return {
+      alert: false,
       hide: true,
+    };
+  },
+
+  setup() {
+    const $q = useQuasar();
+
+    function autoClose() {
+      let seconds = 3;
+
+      const dialog = $q
+
+        .dialog({
+          component: test2,
+          // title: "Alert",
+          // message: `Autoclosing in ${seconds} seconds.`,
+
+          componentProps: {
+            //text: "something",
+            // ...more..props...
+          },
+        })
+        .onOk(() => {
+          // console.log('OK')
+        })
+        .onCancel(() => {
+          // console.log('Cancel')
+        })
+        .onDismiss(() => {
+          clearTimeout(timer);
+          // console.log('I am triggered on both OK and Cancel')
+        });
+
+      const timer = setInterval(() => {
+        seconds--;
+
+        if (seconds > 0) {
+          dialog.update({
+            message: `Autoclosing in ${seconds} second${
+              seconds > 1 ? "s" : ""
+            }.`,
+          });
+        } else {
+          clearInterval(timer);
+          dialog.hide();
+        }
+      }, 1000);
+    }
+
+    return {
+      autoClose,
     };
   },
 
@@ -124,6 +200,7 @@ export default defineComponent({
           // this.shakeSuccess(); // works
           if (this.$root.triesCount < this.$root.numTries) {
             this.$root.triesCount++;
+            this.autoClose();
             //alert("this.$root.triesCount : " + this.$root.triesCount);
             //this.$router.push("/home/shake-and-win/animation");
           } else if (this.$root.triesCount == this.$root.numTries) {
@@ -139,17 +216,23 @@ export default defineComponent({
       // myShakeEvent.stop();
     },
 
+    // show() {
+    //   this.$refs.dialog.show();
+    // },
+
     //TEST BUTTON FOR SHAKE
     shakeSuccess() {
       //alert("shakeeeee");
-      // if (this.$root.triesCount < this.$root.numTries) {
-      //   this.$root.triesCount++;
-      //   alert("this.$root.triesCount : " + this.$root.triesCount);
-      //   //this.$router.push("/home/shake-and-win/animation");
-      // } else if (this.$root.triesCount == this.$root.numTries) {
-      //   alert("finish shake");
-      //   //this.$router.push("/home/shake-and-win/animation");
-      // }
+      if (this.$root.triesCount < this.$root.numTries) {
+        this.$root.triesCount++;
+        this.autoClose();
+        // alert("this.$root.triesCount : " + this.$root.triesCount);
+        //this.$refs.dialog.show();
+        //this.$router.push("/home/shake-and-win/animation");
+      } else if (this.$root.triesCount == this.$root.numTries) {
+        alert("finish shake");
+        //this.$router.push("/home/shake-and-win/animation");
+      }
     },
   },
 });

@@ -1,141 +1,134 @@
 <template>
-  <q-page class="flex flex-center">
-    <div class="q-pa-md row items-start q-gutter-md">
-      <q-card class="my-card">
-        <q-card-section>
-          <div class="text-center">
-            <span class="text-h4"
-              >SHAKE & WIN <br />
-              <span class="text-h5">WITH FLORIDA'S NATURAL</span>
-            </span>
-            <hr />
-            <br />
-          </div>
-          <div class="q-py-lg q-px-md">
-            <div class="text-h5 text-center">
-              You have {{ this.$root.numTries }} tries
-              <q-badge color="teal-10" align="middle">
-                {{ this.$root.triesCount }}/{{ this.$root.numTries }}
-              </q-badge>
-            </div>
-            <br />
-            <div class="text-h5 text-center">
-              <!-- <b>Try {{ trialNumber }}</b> -->
-              <b>Try {{ this.$root.triesCount }}</b>
-            </div>
-            <br />
-            <div class="body-text1 text-center">
-              Shake your device <br />
-              to see what you get!
-            </div>
-          </div>
+  <q-dialog ref="dialog" @hide="onDialogHide">
+    <q-card class="q-dialog-plugin">
+      <q-card-section>
+        <div class="text-center">
+          test modal from test2
+          <br />
+        </div>
+        <div class="q-py-lg q-px-md"></div>
+      </q-card-section>
 
-          <!-- START SHAKE IOS BUTTON -->
-          <div v-if="$q.platform.is.ios" v-on:click="hide = !hide">
-            <p>
-              <q-btn
-                class="full-width"
-                v-if="hide"
-                color="primary"
-                @click.once="requestPermission()"
-                label="Start Shake"
-              >
-              </q-btn>
-            </p>
-          </div>
+      <q-card-actions align="right">
+        <q-btn color="primary" label="OK" @click="onOKClick" />
+        <q-btn color="primary" label="Cancel" @click="onCancelClick" />
+      </q-card-actions>
+    </q-card>
+  </q-dialog>
 
-          <!-- NEXT BUTTON -->
-          <!-- <q-btn
-            to="/home/shake-and-win/prizes"
-            type="submit"
-            fullwidth
-            label="NEXT"
-            color="primary"
-            class="full-width"
-          /> -->
+  <!-- <q-dialog v-model="alert">
+    <q-card>
+      <q-card-section>
+        <div class="text-h6">Alert</div>
+      </q-card-section>
 
-          <!-- SHAKESUCCESS() BUTTON -->
-          <q-btn
-            type="submit"
-            fullwidth
-            label="shakeSuccess()"
-            color="secondary"
-            class="full-width"
-            @click="shakeSuccess()"
-          />
+      <q-card-section class="q-pt-none">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum
+        repellendus sit voluptate voluptas eveniet porro. Rerum blanditiis
+        perferendis totam, ea at omnis vel numquam exercitationem aut, natus
+        minima, porro labore.
+      </q-card-section>
 
-          test: {{ this.$root.triesCount }} <br />
-          question: {{ this.question }} <br />
-          shake Count: {{ this.shakeCount }}
-        </q-card-section>
-      </q-card>
-    </div>
-  </q-page>
+      <q-card-actions align="right">
+        <q-btn flat label="OK" color="primary" v-close-popup />
+      </q-card-actions>
+    </q-card>
+  </q-dialog> -->
 </template>
 
 <script>
-import { useQuasar } from "quasar";
 import { defineComponent } from "vue";
+import { useDialogPluginComponent } from "quasar";
 
 var Shake = require("src/pages/shake.js");
 
 export default defineComponent({
   name: "test2",
 
+  props: {
+    // ...your custom props
+    // text: "something",
+  },
+
+  emits: [
+    // REQUIRED
+    "ok",
+    "hide",
+  ],
+
+  setup() {
+    //let seconds = 3;
+    //   // REQUIRED; must be called inside of setup()
+    //   const { dialogRef, onDialogHide, onDialogOK, onDialogCancel } =
+    //     useDialogPluginComponent();
+    //   // dialogRef      - Vue ref to be applied to QDialog
+    //   // onDialogHide   - Function to be used as handler for @hide on QDialog
+    //   // onDialogOK     - Function to call to settle dialog with "ok" outcome
+    //   //                    example: onDialogOK() - no payload
+    //   //                    example: onDialogOK({ /*.../* }) - with payload
+    //   // onDialogCancel - Function to call to settle dialog with "cancel" outcome
+    //   return {
+    //     // This is REQUIRED;
+    //     // Need to inject these (from useDialogPluginComponent() call)
+    //     // into the vue scope for the vue html template
+    //     dialogRef,
+    //     onDialogHide,
+    //     // other methods that we used in our vue html template;
+    //     // these are part of our example (so not required)
+    //     onOKClick() {
+    //       // on OK, it is REQUIRED to
+    //       // call onDialogOK (with optional payload)
+    //       onDialogOK();
+    //       // or with payload: onDialogOK({ ... })
+    //       // ...and it will also hide the dialog automatically
+    //     },
+    //     // we can passthrough onDialogCancel directly
+    //     onCancelClick: onDialogCancel,
+    //   };
+  },
+
   data() {
     return {
-      alert: false,
-      seen: true,
-      hide: true,
+      //testDisplay: false,
+      //alert: false,
+      // seen: true,
+      // hide: true,
     };
   },
 
-  mounted() {
-    const $q = useQuasar();
-    $q.platform.is.desktop;
-    $q.platform.is.android;
-    $q.platform.is.ios;
-
-    if ($q.platform.is.ios) {
-      this.requestPermission();
-    } else if ($q.platform.is.android) {
-      this.shakeAlex();
-    } else {
-      console.log("this is dekstop!");
-    }
-  },
-
   methods: {
-    requestPermission() {
-      DeviceMotionEvent.requestPermission().then((response) => {
-        if (response == "granted") {
-          this.shakeAlex();
-        }
-      });
+    // following method is REQUIRED
+    // (don't change its name --> "show")
+    show() {
+      this.$refs.dialog.show();
     },
 
-    shakeAlex() {
-      //create a new instance of shake.js.
-      var myShakeEvent = new Shake({
-        threshold: 15,
-      });
+    // following method is REQUIRED
+    // (don't change its name --> "hide")
+    hide() {
+      this.$refs.dialog.hide();
+    },
 
-      // start listening to device motion
-      myShakeEvent.start();
+    onDialogHide() {
+      // required to be emitted
+      // when QDialog emits "hide" event
+      this.$emit("hide");
+    },
 
-      // register a shake event
-      window.addEventListener("shake", shakeEventDidOccur, false);
+    onOKClick() {
+      // on OK, it is REQUIRED to
+      // emit "ok" event (with optional payload)
+      // before hiding the QDialog
+      this.$emit("ok");
+      // or with payload: this.$emit('ok', { ... })
 
-      //shake event callback
-      function shakeEventDidOccur() {
-        //put your own code here etc.
-        alert("Shake!");
-        this.$router.push("/home/shake-and-win/animation");
-      }
+      // then hiding dialog
+      this.hide();
+    },
 
-      // window.removeEventListener("shake", shakeEventDidOccur, false);
-
-      // myShakeEvent.stop();
+    onCancelClick() {
+      // we just need to hide the dialog
+      this.hide();
     },
   },
 });
