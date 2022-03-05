@@ -104,6 +104,10 @@ var Shake = require("shake.js");
 export default defineComponent({
   name: "PageShakeWin",
 
+  computed() {
+    return this.$root.triesCount;
+  },
+
   data() {
     return {
       alert: false,
@@ -204,7 +208,13 @@ export default defineComponent({
             //alert("this.$root.triesCount : " + this.$root.triesCount);
             //this.$router.push("/home/shake-and-win/animation");
           } else if (this.$root.triesCount == this.$root.numTries) {
-            alert("finish shake");
+            this.$root.triesCount = 0;
+            this.$root.numTries = 0;
+            this.autoClose();
+            setTimeout(() => {
+              this.$router.push("/home/shake-and-win/prizes");
+            }, 3000);
+            // alert("finish shake");
             //this.$router.push("/home/shake-and-win/animation");
           }
         },
@@ -221,19 +231,28 @@ export default defineComponent({
     // },
 
     //TEST BUTTON FOR SHAKE
-    shakeSuccess() {
-      //alert("shakeeeee");
-      if (this.$root.triesCount < this.$root.numTries) {
-        this.$root.triesCount++;
-        this.autoClose();
-        // alert("this.$root.triesCount : " + this.$root.triesCount);
-        //this.$refs.dialog.show();
-        //this.$router.push("/home/shake-and-win/animation");
-      } else if (this.$root.triesCount == this.$root.numTries) {
-        alert("finish shake");
-        //this.$router.push("/home/shake-and-win/animation");
-      }
-    },
+    // shakeSuccess() {
+    //   //alert("shakeeeee");
+    //   if (this.$root.triesCount < this.$root.numTries) {
+    //     this.$root.triesCount++;
+    //     this.autoClose();
+    //     // alert("this.$root.triesCount : " + this.$root.triesCount);
+    //     //this.$refs.dialog.show();
+    //     //this.$router.push("/home/shake-and-win/animation");
+    //   } else if (this.$root.triesCount == this.$root.numTries) {
+    //     this.$root.triesCount = 0;
+    //     this.$root.numTries = 0;
+    //     this.autoClose();
+
+    //     setTimeout(() => {
+    //       this.$router.push("/home/shake-and-win/prizes");
+    //     }, 3000);
+
+    //     //alert("finish shake");
+    //   } else {
+    //     alert("no shake");
+    //   }
+    // },
   },
 });
 </script>
