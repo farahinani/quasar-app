@@ -43,7 +43,9 @@
               </q-btn>
             </p>
           </div>
-          <q-btn label="Auto Closing" color="primary" @click="autoClose" />
+
+          <!-- DIALOG ALERT BUTTON -->
+          <!-- <q-btn label="Auto Closing" color="primary" @click="autoClosePopup" /> -->
 
           <!-- SHAKESUCCESS() BUTTON -->
           <q-btn
@@ -64,7 +66,7 @@
 import { defineComponent } from "vue";
 import { useQuasar } from "quasar";
 import { event } from "quasar";
-import test2 from "src/pages/test2.vue";
+import PageAutoClosePopup from "src/pages/test2.vue";
 
 var Shake = require("shake.js");
 
@@ -78,20 +80,20 @@ export default defineComponent({
   data() {
     return {
       alert: false,
-      hide: true,
     };
   },
 
   setup() {
+    //FUNCTION FOR AUTO CLOSE POP-UP, CALLING FROM PAGE TEST2.VUE
     const $q = useQuasar();
 
-    function autoClose() {
+    function autoClosePopup() {
       let seconds = 3;
 
       const dialog = $q
 
         .dialog({
-          component: test2,
+          component: PageAutoClosePopup,
           // title: "Alert",
           // message: `Autoclosing in ${seconds} seconds.`,
 
@@ -128,11 +130,12 @@ export default defineComponent({
     }
 
     return {
-      autoClose,
+      autoClosePopup,
     };
   },
 
   mounted() {
+    //DETECT USER PLATFORM
     const $q = useQuasar();
     $q.platform.is.desktop;
     $q.platform.is.android;
@@ -170,16 +173,14 @@ export default defineComponent({
         "shake",
         () => {
           if (this.$root.triesCount < this.$root.numTries) {
+            // Display pop up
+            this.autoClosePopup();
+            // update tries count
             this.$root.triesCount++;
-            //show pop up orange
-            this.autoClose();
-          } else if (this.$root.triesCount == this.$root.numTries) {
-            //set everything to 0
-            this.$root.triesCount = 0;
-            this.$root.numTries = 0;
-            //show pop up orange
-            this.autoClose();
-            //after finish shake, set time to go to next page
+          } else {
+            // Display pop up (final)
+            this.autoClosePopup();
+            //after shake, go to next page in 3secs
             setTimeout(() => {
               this.$router.push("/home/shake-and-win/prizes");
             }, 3000);
@@ -198,23 +199,22 @@ export default defineComponent({
     shakeSuccess() {
       //alert("shakeeeee");
       if (this.$root.triesCount < this.$root.numTries) {
+        this.autoClosePopup();
+
+        console.log("shake : " + this.$root.triesCount);
+
         this.$root.triesCount++;
-        this.autoClose();
-        // alert("this.$root.triesCount : " + this.$root.triesCount);
-        //this.$refs.dialog.show();
-        //this.$router.push("/home/shake-and-win/animation");
-      } else if (this.$root.triesCount == this.$root.numTries) {
-        this.$root.triesCount = 0;
-        this.$root.numTries = 0;
-        this.autoClose();
+      } else {
+        this.autoClosePopup();
+
+        console.log("final shake ! : " + this.$root.triesCount);
+
+        // this.$root.triesCount = 0;
+        // this.$root.numTries = 0;
 
         setTimeout(() => {
           this.$router.push("/home/shake-and-win/prizes");
-        }, 3000);
-
-        //alert("finish shake");
-      } else {
-        alert("no shake");
+        }, 2000);
       }
     },
   },

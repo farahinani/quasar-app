@@ -2,14 +2,7 @@
   <q-dialog ref="dialog" @hide="onDialogHide">
     <q-card class="q-dialog-plugin">
       <q-card-section>
-        <!-- <div class="text-center">
-          test modal from test2
-          <br />
-        </div> -->
-
         <div class="text-center">
-          <!-- <span class="text-h4">SHAKE & WIN ANIMATION </span>
-          <hr /> -->
           <div class="flex flex-center" style="height: 250px">
             <transition-group
               appear
@@ -45,25 +38,6 @@
       </q-card-actions> -->
     </q-card>
   </q-dialog>
-
-  <!-- <q-dialog v-model="alert">
-    <q-card>
-      <q-card-section>
-        <div class="text-h6">Alert</div>
-      </q-card-section>
-
-      <q-card-section class="q-pt-none">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum
-        repellendus sit voluptate voluptas eveniet porro. Rerum blanditiis
-        perferendis totam, ea at omnis vel numquam exercitationem aut, natus
-        minima, porro labore.
-      </q-card-section>
-
-      <q-card-actions align="right">
-        <q-btn flat label="OK" color="primary" v-close-popup />
-      </q-card-actions>
-    </q-card>
-  </q-dialog> -->
 </template>
 
 <script>
@@ -73,7 +47,7 @@ import { useDialogPluginComponent } from "quasar";
 var Shake = require("src/pages/shake.js");
 
 export default defineComponent({
-  name: "test2",
+  name: "PageAutoClosePopup",
 
   props: {
     // ...your custom props
