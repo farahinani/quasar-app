@@ -214,10 +214,6 @@ export default defineComponent({
             setTimeout(() => {
               this.$router.push("/home/shake-and-win/prizes");
             }, 3000);
-
-            window.removeEventListener("shake", () => {}, false);
-
-            myShakeEvent.stop();
             // alert("finish shake");
             //this.$router.push("/home/shake-and-win/animation");
           }
@@ -225,9 +221,9 @@ export default defineComponent({
         false
       );
 
-      // window.removeEventListener("shake", shakeEventDidOccur, false);
+      window.removeEventListener("shake", () => {}, false);
 
-      // myShakeEvent.stop();
+      myShakeEvent.stop();
     },
 
     // show() {
