@@ -75,26 +75,26 @@ export default defineComponent({
     };
   },
 
-  created() {
-    setTimeout(() => {
-      // this.$router.go(-1);
-      this.$router.push("/home/shake-and-win");
+  // created() {
+  //   setTimeout(() => {
+  //     // this.$router.go(-1);
+  //     this.$router.push("/home/shake-and-win");
 
-      let triesCountAdjusted = this.$root.triesCount - 1;
+  //     let triesCountAdjusted = this.$root.triesCount - 1;
 
-      if (triesCountAdjusted == this.$root.numTries) {
-        //window.removeEventListener("devicemotion", false);
-        this.$router.push("/home/shake-and-win/prizes");
-      }
-    }, 3000);
+  //     if (triesCountAdjusted == this.$root.numTries) {
+  //       //window.removeEventListener("devicemotion", false);
+  //       this.$router.push("/home/shake-and-win/prizes");
+  //     }
+  //   }, 3000);
 
-    // if (this.$root.triesCount == 0) {
-    //   setTimeout(() => {
-    //     this.$router.push("/home/shake-and-win/prizes");
-    //     //alert("go to /home/shake-and-win");
-    //   }, 3000);
-    // }
-  },
+  //   // if (this.$root.triesCount == 0) {
+  //   //   setTimeout(() => {
+  //   //     this.$router.push("/home/shake-and-win/prizes");
+  //   //     //alert("go to /home/shake-and-win");
+  //   //   }, 3000);
+  //   // }
+  // },
 
   methods: {
     // function makeEaseOut(timing) {

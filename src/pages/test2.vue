@@ -2,10 +2,40 @@
   <q-dialog ref="dialog" @hide="onDialogHide">
     <q-card class="q-dialog-plugin">
       <q-card-section>
-        <div class="text-center">
+        <!-- <div class="text-center">
           test modal from test2
           <br />
+        </div> -->
+
+        <div class="text-center">
+          <span class="text-h4">SHAKE & WIN ANIMATION </span>
+          <hr />
+          <div class="flex flex-center" style="height: 250px">
+            <transition-group
+              appear
+              enter-active-class="animated bounceInDown"
+              leave-active-class="animated zoomOutDown"
+            >
+              <q-img
+                width="30%"
+                key="ball-card"
+                v-show="show"
+                src="~assets/orange.png"
+              />
+            </transition-group>
+          </div>
         </div>
+
+        <br />
+        <q-btn
+          type="submit"
+          fullwidth
+          class="full-width"
+          color="secondary"
+          label="Show / Hide"
+          v-on:click="show = !show"
+        /><br /><br />
+
         <div class="q-py-lg q-px-md"></div>
       </q-card-section>
 

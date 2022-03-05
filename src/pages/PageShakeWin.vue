@@ -44,39 +44,6 @@
             </p>
           </div>
           <q-btn label="Auto Closing" color="primary" @click="autoClose" />
-          <!-- 
-          <q-btn label="Auto Closing" color="primary" @click="autoClose" />
-
-          <q-dialog v-model="alert" ref="dialog">
-            <q-card>
-              <q-card-section>
-                <div class="text-h6">Alert</div>
-              </q-card-section>
-
-              <q-card-section class="q-pt-none">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum
-                repellendus sit voluptate voluptas eveniet porro. Rerum
-                blanditiis perferendis totam, ea at omnis vel numquam
-                exercitationem aut, natus minima, porro labore.
-              </q-card-section>
-
-              <q-card-actions align="right">
-                <q-btn flat label="OK" color="primary" v-close-popup />
-              </q-card-actions>
-            </q-card>
-          </q-dialog> -->
-
-          <!-- <q-btn label="Alert" color="primary" @click="alert = true" /> -->
-
-          <!-- NEXT BUTTON -->
-          <!-- <q-btn
-            to="/home/shake-and-win/prizes"
-            type="submit"
-            fullwidth
-            label="NEXT"
-            color="primary"
-            class="full-width"
-          /> -->
 
           <!-- SHAKESUCCESS() BUTTON -->
           <q-btn
@@ -181,6 +148,7 @@ export default defineComponent({
   },
 
   methods: {
+    //REQUEST PERMISSION FOR IOS TO LISTEN TO DEVICEMOTION
     requestPermission() {
       DeviceMotionEvent.requestPermission().then((response) => {
         if (response == "granted") {
@@ -189,6 +157,7 @@ export default defineComponent({
       });
     },
 
+    //SHAKE FUNCTION -- ALEXGIBSON.IO
     shakeDetector() {
       //create a new instance of shake.js.
       var myShakeEvent = new Shake({
@@ -200,59 +169,54 @@ export default defineComponent({
       window.addEventListener(
         "shake",
         () => {
-          // alert("shaken !! : try ");
-          // this.shakeSuccess(); // works
           if (this.$root.triesCount < this.$root.numTries) {
             this.$root.triesCount++;
+            //show pop up orange
             this.autoClose();
-            //alert("this.$root.triesCount : " + this.$root.triesCount);
-            //this.$router.push("/home/shake-and-win/animation");
           } else if (this.$root.triesCount == this.$root.numTries) {
+            //set everything to 0
             this.$root.triesCount = 0;
             this.$root.numTries = 0;
+            //show pop up orange
             this.autoClose();
+            //after finish shake, set time to go to next page
             setTimeout(() => {
               this.$router.push("/home/shake-and-win/prizes");
             }, 3000);
-            // alert("finish shake");
-            //this.$router.push("/home/shake-and-win/animation");
+
+            // stop listening for shake events
+            window.removeEventListener("shake", () => {}, false);
+            //stop listening to device motion
+            myShakeEvent.stop();
           }
         },
         false
       );
-
-      window.removeEventListener("shake", () => {}, false);
-
-      myShakeEvent.stop();
     },
 
-    // show() {
-    //   this.$refs.dialog.show();
-    // },
-
     //TEST BUTTON FOR SHAKE
-    // shakeSuccess() {
-    //   //alert("shakeeeee");
-    //   if (this.$root.triesCount < this.$root.numTries) {
-    //     this.$root.triesCount++;
-    //     this.autoClose();
-    //     // alert("this.$root.triesCount : " + this.$root.triesCount);
-    //     //this.$refs.dialog.show();
-    //     //this.$router.push("/home/shake-and-win/animation");
-    //   } else if (this.$root.triesCount == this.$root.numTries) {
-    //     this.$root.triesCount = 0;
-    //     this.$root.numTries = 0;
-    //     this.autoClose();
+    shakeSuccess() {
+      //alert("shakeeeee");
+      if (this.$root.triesCount < this.$root.numTries) {
+        this.$root.triesCount++;
+        this.autoClose();
+        // alert("this.$root.triesCount : " + this.$root.triesCount);
+        //this.$refs.dialog.show();
+        //this.$router.push("/home/shake-and-win/animation");
+      } else if (this.$root.triesCount == this.$root.numTries) {
+        this.$root.triesCount = 0;
+        this.$root.numTries = 0;
+        this.autoClose();
 
-    //     setTimeout(() => {
-    //       this.$router.push("/home/shake-and-win/prizes");
-    //     }, 3000);
+        setTimeout(() => {
+          this.$router.push("/home/shake-and-win/prizes");
+        }, 3000);
 
-    //     //alert("finish shake");
-    //   } else {
-    //     alert("no shake");
-    //   }
-    // },
+        //alert("finish shake");
+      } else {
+        alert("no shake");
+      }
+    },
   },
 });
 </script>
