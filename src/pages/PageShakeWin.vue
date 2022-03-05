@@ -48,14 +48,14 @@
           <!-- <q-btn label="Auto Closing" color="primary" @click="autoClosePopup" /> -->
 
           <!-- SHAKESUCCESS() BUTTON -->
-          <q-btn
+          <!-- <q-btn
             type="submit"
             fullwidth
             label="shakeSuccess()"
             color="secondary"
             class="full-width"
             @click="shakeSuccess()"
-          />
+          /> -->
         </q-card-section>
       </q-card>
     </div>
@@ -80,6 +80,7 @@ export default defineComponent({
   data() {
     return {
       alert: false,
+      hide: true,
     };
   },
 
@@ -160,7 +161,7 @@ export default defineComponent({
       });
     },
 
-    //SHAKE FUNCTION -- ALEXGIBSON.IO
+    //SHAKE FUNCTION USE SHAKE.JS LIBRARY -- ALEXGIBSON.IO
     shakeDetector() {
       //create a new instance of shake.js.
       var myShakeEvent = new Shake({
@@ -196,27 +197,27 @@ export default defineComponent({
     },
 
     //TEST BUTTON FOR SHAKE
-    shakeSuccess() {
-      //alert("shakeeeee");
-      if (this.$root.triesCount < this.$root.numTries) {
-        this.autoClosePopup();
+    // shakeSuccess() {
+    //   //alert("shakeeeee");
+    //   if (this.$root.triesCount < this.$root.numTries) {
+    //     this.autoClosePopup();
 
-        console.log("shake : " + this.$root.triesCount);
+    //     console.log("shake : " + this.$root.triesCount);
 
-        this.$root.triesCount++;
-      } else {
-        this.autoClosePopup();
+    //     this.$root.triesCount++;
+    //   } else {
+    //     this.autoClosePopup();
 
-        console.log("final shake ! : " + this.$root.triesCount);
+    //     console.log("final shake ! : " + this.$root.triesCount);
 
-        // this.$root.triesCount = 0;
-        // this.$root.numTries = 0;
+    //     // this.$root.triesCount = 0;
+    //     // this.$root.numTries = 0;
 
-        setTimeout(() => {
-          this.$router.push("/home/shake-and-win/prizes");
-        }, 2000);
-      }
-    },
+    //     setTimeout(() => {
+    //       this.$router.push("/home/shake-and-win/prizes");
+    //     }, 2000);
+    //   }
+    // },
   },
 });
 </script>
