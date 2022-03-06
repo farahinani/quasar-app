@@ -50,10 +50,10 @@
         </q-card-section>
       </q-card> -->
 
-      <q-card class="q-dialog-plugin">
+      <q-card class="my-card">
         <q-card-section>
           <div class="text-center">
-            <div class="flex flex-center" style="height: 350px">
+            <div class="flex flex-center" style="height: 450px">
               <transition-group
                 appear
                 name="nested"
@@ -166,8 +166,8 @@ export default defineComponent({
 } */
 .inner {
   background: white;
-  width: 50%;
-  height: 50%;
+  width: 150px;
+  height: 150px;
   border: 10px solid orange;
   border-radius: 100%;
   position: absolute;

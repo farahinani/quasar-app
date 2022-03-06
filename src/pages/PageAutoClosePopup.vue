@@ -3,7 +3,7 @@
     <q-card class="q-dialog-plugin">
       <q-card-section>
         <div class="text-center">
-          <div class="flex flex-center" style="height: 350px">
+          <div class="flex flex-center" style="height: 450px">
             <!-- <transition-group
               appear
               enter-active-class="animated bounceInDown"
