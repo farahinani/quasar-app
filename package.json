@@ -15,6 +15,7 @@
     "@capacitor/motion": "^1.0.5",
     "@quasar/extras": "^1.0.0",
     "animate-js": "^0.3.2",
+    "animate.css": "^4.1.1",
     "animate.js": "^2.0.2",
     "core-js": "^3.6.5",
     "quasar": "^2.0.0",

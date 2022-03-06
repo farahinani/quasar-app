@@ -124,7 +124,7 @@ export default defineComponent({
           clearInterval(timer);
           dialog.hide();
         }
-      }, 1000);
+      }, 2500); //close in Xsecs
     }
 
     return {
@@ -162,7 +162,7 @@ export default defineComponent({
     shakeDetector() {
       //create a new instance of shake.js.
       var myShakeEvent = new Shake({
-        threshold: 15,
+        threshold: 20,
       });
       // start listening to device motion
       myShakeEvent.start();
@@ -181,7 +181,7 @@ export default defineComponent({
             //after shake, go to next page in 3secs
             setTimeout(() => {
               this.$router.push("/home/shake-and-win/prizes");
-            }, 3000);
+            }, 5000);
 
             // stop listening for shake events
             window.removeEventListener("shake", () => {}, false);
@@ -212,7 +212,7 @@ export default defineComponent({
 
         setTimeout(() => {
           this.$router.push("/home/shake-and-win/prizes");
-        }, 2000);
+        }, 5000);
       }
     },
   },

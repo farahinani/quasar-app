@@ -3,8 +3,8 @@
     <q-card class="q-dialog-plugin">
       <q-card-section>
         <div class="text-center">
-          <div class="flex flex-center" style="height: 250px">
-            <transition-group
+          <div class="flex flex-center" style="height: 350px">
+            <!-- <transition-group
               appear
               enter-active-class="animated bounceInDown"
               leave-active-class="animated zoomOutDown"
@@ -15,7 +15,31 @@
                 v-show="show"
                 src="~assets/orange.png"
               />
-            </transition-group>
+            </transition-group> -->
+
+            <transition
+              appear
+              name="nested"
+              enter-active-class="animate__animated animate__bounceInDown"
+              leave-active-class="animate__animated animate__bounceOutDown"
+            >
+              <div v-if="show">
+                <!-- <q-img width="70%" v-show="show" src="~assets/orange.png" />
+                     -->
+                <img
+                  style="width: 40%"
+                  v-bind:src="require('assets/orange.png')"
+                />
+
+                <transition
+                  name="nested"
+                  enter-active-class="animate__animated animate__bounce"
+                  leave-active-class="animate__animated animate__bounceOutDown"
+                >
+                  <div v-if="show" class="inner"></div>
+                </transition>
+              </div>
+            </transition>
           </div>
         </div>
         <q-btn
@@ -42,8 +66,7 @@
 <script>
 import { defineComponent } from "vue";
 import { useDialogPluginComponent } from "quasar";
-
-var Shake = require("src/pages/shake.js");
+import "animate.css";
 
 export default defineComponent({
   name: "PageAutoClosePopup",
@@ -62,7 +85,7 @@ export default defineComponent({
   setup() {},
 
   data() {
-    return {};
+    return { showContent: false, showModal: false };
   },
 
   methods: {
@@ -102,3 +125,29 @@ export default defineComponent({
   },
 });
 </script>
+
+<style>
+.inner {
+  background: white;
+  width: 150px;
+  height: 150px;
+  border: 10px solid orange;
+  border-radius: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition-delay: 2s;
+}
+.nested-enter-from .inner,
+.nested-leave-to .inner {
+  transform: translateX(30px);
+
+  /*
+  	Hack around a Chrome 96 bug in handling nested opacity transitions.
+    This is not needed in other browsers or Chrome 99+ where the bug
+    has been fixed.
+  */
+  opacity: 0.001;
+}
+</style>

@@ -1,55 +1,104 @@
 <template>
   <q-page class="flex flex-center">
     <div class="q-pa-md row items-start q-gutter-md">
-      <q-card class="my-card">
+      <!-- <q-card class="my-card">
         <q-card-section>
           <div class="q-py-lg q-px-md">test page</div>
-          <!-- <q-btn
+
+          <Transition
+            appear
+            name="nested"
+            enter-active-class="animate__animated animate__bounceInDown"
+            leave-active-class="animate__animated animate__bounceOut"
+          >
+            <div v-if="show" class="outer">
+              orange
+              <Transition
+                :duration="1000"
+                name="nested"
+                enter-active-class="animate__animated animate__bounce"
+                leave-active-class="animate__animated animate__zoomOutDown"
+              >
+                <div class="inner">popup</div>
+              </Transition>
+            </div>
+          </Transition>
+
+
+          <transition
+            :duration="1550"
+            appear
+            name="nested"
+            enter-active-class="animate__animated animate__bounceInDown"
+            leave-active-class="animate__animated animate__zoomOutDown"
+          >
+            <div v-if="show" class="outer">
+              orange
+
+              <transition
+                name="fade"
+                enter-active-class="animate__animated animate__bounce"
+                leave-active-class="animate__animated animate__zoomOutDown"
+              >
+                <div v-if="show" class="inner">orange popup</div>
+              </transition>
+            </div>
+          </transition>
+
+          <modal v-if="showModal" @close="showModal = false"></modal>
+          <button class="button" @click="showModal = true">Show Modal</button>
+        </q-card-section>
+      </q-card> -->
+
+      <q-card class="q-dialog-plugin">
+        <q-card-section>
+          <div class="text-center">
+            <div class="flex flex-center" style="height: 350px">
+              <transition-group
+                appear
+                name="nested"
+                enter-active-class="animate__animated animate__bounceInDown"
+                leave-active-class="animate__animated animate__bounceOutDown"
+              >
+                <div v-if="show">
+                  <!-- <q-img width="70%" v-show="show" src="~assets/orange.png" />
+                     -->
+                  <img
+                    style="width: 40%"
+                    v-bind:src="require('assets/orange.png')"
+                  />
+
+                  <transition-group
+                    name="nested"
+                    enter-active-class="animate__animated animate__bounce"
+                    leave-active-class="animate__animated animate__bounceOutDown"
+                  >
+                    <div v-if="show" class="inner"></div>
+                  </transition-group>
+                </div>
+              </transition-group>
+            </div>
+          </div>
+          <q-btn
             type="submit"
-            label="SHAKE"
-            color="primary"
+            fullwidth
             class="full-width"
-            @click="shakeSuccess()"
-          /> -->
-          <!-- <button id="start" onclick="button">Approve</button> -->
+            color="secondary"
+            label="Show / Hide"
+            v-on:click="show = !show"
+          />
         </q-card-section>
       </q-card>
     </div>
-    <q-btn
-      class="q-ma-xl"
-      color="primary"
-      label="Show / Hide"
-      v-on:click="show = !show"
-    />
-    <transition-group
-      appear
-      enter-active-class="animated bounceInDown"
-      leave-active-class="animated flipOutY"
-      :duration="9000"
-    >
-      <q-card
-        key="text"
-        v-show="show"
-        style="
-          position: absolute;
-          top: 100px;
-          left: 100px;
-          background-color: Salmon;
-          width: 200px;
-          height: 200px;
-        "
-        >Hello</q-card
-      >
-    </transition-group>
+    <br />
+    <!-- <button @click="show = !show">Toggle</button> -->
   </q-page>
 </template>
 
 <script>
 import { defineComponent } from "vue";
-//import { Shake } from "src/router/shake.js";
 import { animate } from "src/pages/animate";
-// var Shake = require("shake.js");
-// var animate = require("animate.js");
+import "animate.css";
 
 export default defineComponent({
   name: "test",
@@ -57,14 +106,10 @@ export default defineComponent({
   data() {
     return {
       show: true,
+      showContent: false,
+      showModal: false,
     };
   },
-
-  // setup() {},
-
-  // mounted() {
-  //   this.onLoad();
-  // },
 
   methods() {
     function makeEaseOut(timing) {
@@ -95,18 +140,82 @@ export default defineComponent({
       });
     };
 
-    // onLoad() {
-    //   var myShakeEvent = new Shake({
-    //     threshold: 15,
+    // ball.onclick = function() {
+
+    //   let to = field.clientHeight - ball.clientHeight;
+
+    //   animate({
+    //     duration: 2000,
+    //     timing: makeEaseOut(bounce),
+    //     draw(progress) {
+    //       ball.style.top = to * progress + 'px'
+    //     }
     //   });
-    //   myShakeEvent.start();
-    //   window.addEventListener("shake", shakeEventDidOccur, false);
-    //   function shakeEventDidOccur() {
-    //     alert("Shake!");
-    //   }
-    // },
+
+    // };
   },
 });
 </script>
 
+<style>
+/* .outer {
+  background: salmon;
+  width: 70px;
+  height: 70px;
+  border-radius: 100%;
+} */
+.inner {
+  background: white;
+  width: 50%;
+  height: 50%;
+  border: 10px solid orange;
+  border-radius: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition-delay: 2.5s;
+}
+
+.nested-enter-active {
+  transition: all 0.3s ease-in-out;
+}
+
+.nested-leave-active {
+  transition: all 0.3s ease-in-out;
+}
+/* delay leave of parent element */
+.nested-leave-active {
+  transition-delay: 0.25s;
+}
+
+.nested-enter-from,
+.nested-leave-to {
+  transform: translateY(30px);
+  opacity: 0;
+}
+
+/* we can also transition nested elements using nested selectors */
+.nested-enter-active .inner {
+  transition: all 0.3s ease-in-out;
+}
+.nested-leave-active .inner {
+  transition: all 0.3s ease-in-out;
+}
+/* delay enter of nested element */
+.nested-enter-active .inner {
+  transition-delay: 0.25s;
+}
+
+.nested-enter-from .inner,
+.nested-leave-to .inner {
+  transform: translateX(30px);
+  /*
+  	Hack around a Chrome 96 bug in handling nested opacity transitions.
+    This is not needed in other browsers or Chrome 99+ where the bug
+    has been fixed.
+  */
+  opacity: 0.001;
+}
+</style>
 
