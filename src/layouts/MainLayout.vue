@@ -26,9 +26,9 @@
         <img v-bind:src="require('assets/ff-top-icon.png')" />
       </div>
 
-      <div class="img-carton">
+      <!-- <div class="img-carton">
         <img v-bind:src="require('assets/carton-crate.png')" />
-      </div>
+      </div> -->
     </q-page-container>
 
     <q-footer elevated>
