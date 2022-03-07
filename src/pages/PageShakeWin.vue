@@ -161,9 +161,7 @@ export default defineComponent({
         DeviceMotionEvent.requestPermission()
           .then((permissionState) => {
             if (permissionState === "granted") {
-              window.addEventListener("devicemotion", () => {
-                this.shakeDetector();
-              });
+              this.shakeDetector();
             }
           })
           .catch(console.error);
