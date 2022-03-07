@@ -162,7 +162,7 @@ export default defineComponent({
     shakeDetector() {
       //create a new instance of shake.js.
       var myShakeEvent = new Shake({
-        threshold: 20,
+        threshold: 15,
       });
       // start listening to device motion
       myShakeEvent.start();
