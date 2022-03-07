@@ -149,18 +149,28 @@ export default defineComponent({
   methods: {
     //REQUEST PERMISSION FOR IOS TO LISTEN TO DEVICEMOTION
     requestPermission() {
-      DeviceMotionEvent.requestPermission()
-        .then((response) => {
-          if (response == "granted") {
-            console.log(response);
-            this.shakeDetector();
-          }
-        })
-        .catch(function (error) {
-          console.log("error");
-          // Trigger modal to ask for permissions
-          $("#askForPermission").modal("toggle");
-        });
+      // DeviceMotionEvent.requestPermission()
+      //   .then((response) => {
+      //     if (response == "granted") {
+      //       console.log(response);
+      //       this.shakeDetector();
+      //     }
+      //   })
+      //   .catch(console.error)
+      if (typeof DeviceMotionEvent.requestPermission === "function") {
+        DeviceMotionEvent.requestPermission()
+          .then((permissionState) => {
+            if (permissionState === "granted") {
+              window.addEventListener("devicemotion", () => {
+                this.shakeDetector();
+              });
+            }
+          })
+          .catch(console.error);
+        //catch error
+      } else {
+        this.shakeDetector();
+      }
     },
 
     //SHAKE FUNCTION -- ALEXGIBSON.IO
