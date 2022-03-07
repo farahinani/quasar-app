@@ -3,20 +3,13 @@
     <div class="q-pa-md row items-start q-gutter-md">
       <q-card class="my-card">
         <q-card-section>
-          <div class="text-center">
-            <span class="text-h4"
-              >SHAKE & WIN <br />
-              <span class="text-h5">WITH FLORIDA'S NATURAL</span>
-            </span>
-            <hr />
-          </div>
+          <div class="text-center"></div>
           <div class="q-py-lg q-px-md">
-            <div class="text-h5 text-center">
+            <div class="text-h6 text-center text-primary">
               Please enter how many cartons you have purchased in
               your&nbsp;receipt*
             </div>
-
-            <div class="text-subtitle1 text-center">
+            <div class="text-body2 text-center text-primary">
               *Redemption is determined by purchases within a single receipt
             </div>
 
@@ -39,34 +32,12 @@
                   to="/home/shake-and-win"
                   type="submit"
                   label="Submit"
-                  color="primary"
-                  class="full-width"
+                  color="secondary"
+                  class="full-width text-h5 text-weight-bold"
                   push
                   :disable="!formData.cartonInput"
                   @click="submitForm()"
                 />
-                <!-- <q-btn
-                  v-if="$q.platform.is.ios"
-                  to="/home/shake-and-win-ios"
-                  type="submit"
-                  label="Submit"
-                  color="primary"
-                  class="full-width"
-                  push
-                  :disable="!formData.cartonInput"
-                  @click="submitForm()"
-                />
-                <q-btn
-                  v-if="$q.platform.is.android"
-                  to="/home/shake-and-win-android"
-                  type="submit"
-                  label="Submit"
-                  color="primary"
-                  class="full-width"
-                  push
-                  :disable="!formData.cartonInput"
-                  @click="submitForm()"
-                /> -->
               </div>
 
               <!-- <div>tries: {{ $root.numTries }}</div> -->

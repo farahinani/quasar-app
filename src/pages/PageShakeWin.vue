@@ -1,32 +1,30 @@
 <template>
   <q-page class="flex flex-center">
     <div class="q-pa-md row items-start q-gutter-md">
-      <q-card class="my-card">
+      <q-card class="my-card bg-transparent">
         <q-card-section>
-          <div class="text-center">
-            <span class="text-h4"
-              >SHAKE & WIN <br />
-              <span class="text-h5">WITH FLORIDA'S NATURAL</span>
-            </span>
-            <hr />
-            <br />
-          </div>
           <div class="q-py-lg q-px-md">
-            <div class="text-h5 text-center">
+            <div class="text-body1 text-center text-primary text-weight-bold">
               You have {{ this.$root.numTries }} tries
-              <q-badge color="teal-10" align="middle">
+              <q-badge color="primary" align="middle">
                 {{ this.$root.triesCount }}/{{ this.$root.numTries }}
               </q-badge>
             </div>
             <br />
-            <div class="text-h5 text-center">
+            <div class="text-h4 text-center text-primary">
               <!-- <b>Try {{ trialNumber }}</b> -->
-              <b>Try {{ this.$root.triesCount }}</b>
+              <b>TRY {{ this.$root.triesCount }}</b>
             </div>
-            <br />
-            <div class="body-text1 text-center">
+            <div class="text-h5 text-center text-primary">
               Shake your device <br />
               to see what you get!
+            </div>
+            <br />
+            <div class="icon-shake">
+              <img
+                id="icon-phone-shake"
+                v-bind:src="require('assets/icon-phone-shake.png')"
+              />
             </div>
           </div>
 
@@ -219,7 +217,17 @@ export default defineComponent({
 });
 </script>
 
-
+<style>
+.icon-shake {
+  position: relative;
+}
+#icon-phone-shake {
+  width: 30%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
 
 
 

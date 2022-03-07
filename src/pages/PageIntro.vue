@@ -3,17 +3,12 @@
     <div class="q-pa-md row items-start q-gutter-md">
       <q-card class="my-card">
         <q-card-section>
-          <div class="text-center">
-            <span class="text-h4"
-              >SHAKE & WIN <br />
-              <span class="text-h5">WITH FLORIDA'S NATURAL</span>
-            </span>
-            <hr />
-            <br />
-            <div class="text-h5 text-center">Purchase, Play and Win !</div>
+          <div class="text-h5 text-center text-primary">
+            Purchase, Play and Win !
           </div>
+
           <br />
-          <p class="text-center">
+          <p class="text-center text-primary">
             It's simple, every purchase of 2<br />
             1.5l packs of Florida's Natural<br />
             Not From Concentrate Juices<br />
@@ -37,27 +32,9 @@
             type="submit"
             fullwidth
             label="I have made my purchase & have my receipt ready"
-            color="primary"
+            color="secondary"
             class="full-width"
           />
-          <!-- <q-btn
-            v-if="$q.platform.is.ios"
-            to="/home"
-            type="submit"
-            fullwidth
-            label="I have made my purchase & have my receipt ready"
-            color="primary"
-            class="full-width"
-          />
-          <q-btn
-            v-if="$q.platform.is.android"
-            to="/home"
-            type="submit"
-            fullwidth
-            label="I have made my purchase & have my receipt ready"
-            color="primary"
-            class="full-width"
-          /> -->
         </q-card-section>
       </q-card>
     </div>
@@ -71,3 +48,6 @@ export default defineComponent({
   name: "PageIntro",
 });
 </script>
+
+<style>
+</style>

@@ -1,22 +1,9 @@
 <template>
   <q-dialog ref="dialog" @hide="onDialogHide">
-    <q-card class="q-dialog-plugin">
+    <q-card class="q-dialog-plugin bg-transparent">
       <q-card-section>
         <div class="text-center">
           <div class="flex flex-center" style="height: 450px">
-            <!-- <transition-group
-              appear
-              enter-active-class="animated bounceInDown"
-              leave-active-class="animated zoomOutDown"
-            >
-              <q-img
-                width="30%"
-                key="ball-card"
-                v-show="show"
-                src="~assets/orange.png"
-              />
-            </transition-group> -->
-
             <transition
               appear
               name="nested"
@@ -24,11 +11,9 @@
               leave-active-class="animate__animated animate__bounceOutDown"
             >
               <div v-if="show">
-                <!-- <q-img width="70%" v-show="show" src="~assets/orange.png" />
-                     -->
                 <img
-                  style="width: 40%"
-                  v-bind:src="require('assets/orange.png')"
+                  style="width: 60%"
+                  v-bind:src="require('assets/ff-orange.png')"
                 />
 
                 <transition
@@ -42,14 +27,14 @@
             </transition>
           </div>
         </div>
-        <q-btn
+        <!-- <q-btn
           type="submit"
           fullwidth
           class="full-width"
           color="secondary"
           label="Show / Hide"
           v-on:click="show = !show"
-        />
+        /> -->
 
         <div class="q-py-lg q-px-md"></div>
       </q-card-section>
@@ -129,8 +114,8 @@ export default defineComponent({
 <style>
 .inner {
   background: white;
-  width: 150px;
-  height: 150px;
+  width: 200px;
+  height: 200px;
   border: 10px solid orange;
   border-radius: 100%;
   position: absolute;
