@@ -1,4 +1,5 @@
 <template>
+  <!-- <q-page class="flex justify-center item-center"> -->
   <q-page class="flex flex-center">
     <div class="q-pa-md row items-start q-gutter-md">
       <q-card class="my-card">

@@ -17,18 +17,22 @@
     </q-header>
 
     <q-page-container class="page-container">
-      <div class="img-container">
-        <img id="ff-icon-top" v-bind:src="require('assets/ff-top-icon.png')" />
-      </div>
-      <router-view />
-    </q-page-container>
+      <div>
+        <div class="img-top-oranges">
+          <img v-bind:src="require('assets/ff-top-oranges.png')" />
+        </div>
 
-    <div class="img-carton">
-      <img
-        id="ff-carton-bottom"
-        v-bind:src="require('assets/carton-crate.png')"
-      />
-    </div>
+        <div class="img-logo">
+          <img v-bind:src="require('assets/ff-top-icon.png')" />
+        </div>
+      </div>
+
+      <router-view />
+
+      <div class="img-carton">
+        <img v-bind:src="require('assets/carton-crate.png')" />
+      </div>
+    </q-page-container>
 
     <q-footer elevated>
       <q-toolbar>
@@ -61,19 +65,29 @@ export default {
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
+  top: 0;
+  left: 0;
 }
 
-.img-container {
-  position: fixed;
-  /* top: 0; */
+.img-top-oranges img {
   width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
-#ff-icon-top {
-  width: 75%;
-  display: table;
-  position: relative;
-  margin: auto;
+/* .img-logo {
+  position: fixed;
+  top: 0;
+  width: 100%;
+} */
+
+.img-logo img {
+  width: 80%;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
 }
 
 .img-carton {
@@ -82,7 +96,7 @@ export default {
   width: 100%;
 }
 
-#ff-carton-bottom {
+.img-carton img {
   display: table;
   position: relative;
   margin: auto;
