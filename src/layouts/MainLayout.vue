@@ -17,17 +17,14 @@
     </q-header>
 
     <q-page-container class="page-container">
-      <div>
-        <div class="img-top-oranges">
-          <img v-bind:src="require('assets/ff-top-oranges.png')" />
-        </div>
-
-        <div class="img-logo">
-          <img v-bind:src="require('assets/ff-top-icon.png')" />
-        </div>
+      <div class="img-top-oranges">
+        <img v-bind:src="require('assets/ff-top-oranges.png')" />
       </div>
-
       <router-view />
+
+      <div class="img-logo">
+        <img v-bind:src="require('assets/ff-top-icon.png')" />
+      </div>
 
       <div class="img-carton">
         <img v-bind:src="require('assets/carton-crate.png')" />
@@ -36,9 +33,12 @@
 
     <q-footer elevated>
       <q-toolbar>
-        <q-toolbar-title class="text-body2"
-          >*Prizes available while stocks last</q-toolbar-title
-        >
+        <q-toolbar-title>
+          <div class="footer">
+            <div class="left-text">*Prizes available while stocks last</div>
+            <div class="right-text text-secondary">Terms & Consditions</div>
+          </div>
+        </q-toolbar-title>
       </q-toolbar>
     </q-footer>
   </q-layout>
@@ -103,8 +103,24 @@ export default {
   width: 100%;
 }
 
+.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
 .footer.q-footer.q-layout__section--marginal.fixed-bottom {
   background: #1a6305;
+}
+
+.left-text {
+  float: left;
+  font-size: 0.6em;
+}
+.right-text {
+  float: right;
+  font-size: 0.6em;
 }
 
 .q-card.my-card {

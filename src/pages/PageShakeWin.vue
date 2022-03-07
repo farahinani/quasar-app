@@ -149,11 +149,18 @@ export default defineComponent({
   methods: {
     //REQUEST PERMISSION FOR IOS TO LISTEN TO DEVICEMOTION
     requestPermission() {
-      DeviceMotionEvent.requestPermission().then((response) => {
-        if (response == "granted") {
-          this.shakeDetector();
-        }
-      });
+      DeviceMotionEvent.requestPermission()
+        .then((response) => {
+          if (response == "granted") {
+            console.log(response);
+            this.shakeDetector();
+          }
+        })
+        .catch(function (error) {
+          console.log("error");
+          // Trigger modal to ask for permissions
+          $("#askForPermission").modal("toggle");
+        });
     },
 
     //SHAKE FUNCTION -- ALEXGIBSON.IO

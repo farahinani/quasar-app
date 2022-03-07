@@ -19,11 +19,10 @@
               <q-input
                 min="0"
                 type="number"
-                placeholder="Enter cartons purchased"
                 outlined
                 bottom-slots
                 clearable
-                v-model="formData.cartonInput"
+                v-model="this.$root.cartonInput"
                 :rules="[(val) => !!val || 'Please enter cartons']"
               />
 
@@ -35,7 +34,7 @@
                   color="secondary"
                   class="full-width text-h5 text-weight-bold"
                   push
-                  :disable="!formData.cartonInput"
+                  :disable="!this.$root.cartonInput"
                   @click="submitForm()"
                 />
               </div>
@@ -57,9 +56,10 @@ export default defineComponent({
 
   data() {
     return {
-      formData: {
-        cartonInput: "",
-      },
+      // formData: {
+      //   cartonInput: "",
+      // },
+      cartonInput: "",
       numTries: "",
     };
   },
@@ -67,7 +67,7 @@ export default defineComponent({
   methods: {
     //CALCULATE NUMBER OF TRIES
     submitForm() {
-      let numPacks = this.formData.cartonInput;
+      let numPacks = this.$root.cartonInput;
       let numTries = numPacks / 2;
 
       if (numTries < 1) {
@@ -82,3 +82,4 @@ export default defineComponent({
   },
 });
 </script>
+

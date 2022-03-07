@@ -14,7 +14,9 @@ export default defineComponent({
       triesCount: 1,
       name: "",
       receipt: "",
+      cartonInput: "",
     };
   },
 });
 </script>
+

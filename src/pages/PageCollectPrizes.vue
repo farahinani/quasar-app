@@ -24,7 +24,9 @@
 
           <div class="text-body1 text-primary">Entry: 1</div>
           <hr />
-          <div class="text-body1 text-primary">Cartons Purchased: 6</div>
+          <div class="text-body1 text-primary">
+            Cartons Purchased: {{ this.$root.cartonInput }}
+          </div>
           <hr />
           <div class="text-body1 text-primary">Name: {{ this.$root.name }}</div>
           <hr />
