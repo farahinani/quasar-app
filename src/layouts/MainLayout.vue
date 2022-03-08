@@ -26,9 +26,9 @@
         <img v-bind:src="require('assets/ff-top-icon.png')" />
       </div>
 
-      <!-- <div class="img-carton">
+      <div class="img-carton">
         <img v-bind:src="require('assets/carton-crate.png')" />
-      </div> -->
+      </div>
     </q-page-container>
 
     <q-footer elevated>
@@ -59,6 +59,10 @@ export default {
 </script>
 
 <style>
+header.q-header {
+  opacity: 0.5;
+}
+
 .page-container {
   background-image: url("~assets/ff-background.jpg");
   background-position: center;
@@ -93,7 +97,8 @@ export default {
 .img-carton {
   position: fixed;
   bottom: 0;
-  width: 100%;
+  /* width: 100%; */
+  width: 100vw;
 }
 
 .img-carton img {
@@ -126,4 +131,24 @@ export default {
 .q-card.my-card {
   background: rgba(255, 255, 255, 0.8);
 }
+
+/**MEDIA QUERY LANDSCAPE */
+@media only screen and (orientation: landscape) {
+  body {
+    background: #1a6305;
+  }
+  #q-app {
+    min-height: 100vh;
+  }
+  .page-container {
+    width: 30vw;
+    height: 100vh;
+    margin: auto;
+  }
+  .img-carton {
+    width: 30vw;
+    position: fixed;
+  }
+}
+/**END MEDIA QUERY LANDSCAPE */
 </style>

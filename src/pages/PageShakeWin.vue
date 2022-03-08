@@ -166,8 +166,6 @@ export default defineComponent({
           })
           .catch(console.error);
         //catch error
-      } else {
-        this.shakeDetector();
       }
     },
 
