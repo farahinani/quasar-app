@@ -151,4 +151,153 @@ header.q-header {
   }
 }
 /**END MEDIA QUERY LANDSCAPE */
+
+@media only screen and (max-width: 400px) {
+  body {
+    background: #1a6305;
+  }
+  #q-app {
+    min-height: 100vh;
+  }
+  .page-container {
+    width: 100vw;
+    height: 100vh;
+    margin: auto;
+  }
+  .img-carton {
+    width: 100vw;
+    position: fixed;
+  }
+}
+
+@media only screen and (min-width: 540px) {
+  body {
+    background: #1a6305;
+  }
+  #q-app {
+    min-height: 100vh;
+  }
+  .page-container {
+    width: 70vw;
+    height: 100vh;
+    margin: auto;
+  }
+  .img-carton {
+    width: 70vw;
+    position: fixed;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  body {
+    background: #1a6305;
+  }
+  #q-app {
+    min-height: 100vh;
+  }
+  .page-container {
+    width: 70vw;
+    height: 100vh;
+    margin: auto;
+  }
+  .img-carton {
+    width: 70vw;
+    position: fixed;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  body {
+    background: #1a6305;
+  }
+  #q-app {
+    min-height: 100vh;
+  }
+  .page-container {
+    width: 60vw;
+    height: 100vh;
+    margin: auto;
+  }
+  .img-carton {
+    width: 60vw;
+    position: fixed;
+  }
+}
+
+/* Large devices (laptops/desktops, 900px and up) */
+@media only screen and (min-width: 900px) {
+  body {
+    background: #1a6305;
+  }
+  #q-app {
+    min-height: 100vh;
+  }
+  .page-container {
+    width: 50vw;
+    height: 100vh;
+    margin: auto;
+  }
+  .img-carton {
+    width: 50vw;
+    position: fixed;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  body {
+    background: #1a6305;
+  }
+  #q-app {
+    min-height: 100vh;
+  }
+  .page-container {
+    width: 40vw;
+    height: 100vh;
+    margin: auto;
+  }
+  .img-carton {
+    width: 40vw;
+    position: fixed;
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  body {
+    background: #1a6305;
+  }
+  #q-app {
+    min-height: 100vh;
+  }
+  .page-container {
+    width: 30vw;
+    height: 100vh;
+    margin: auto;
+  }
+  .img-carton {
+    width: 30vw;
+    position: fixed;
+  }
+}
+
+/* Super extra large devices (large laptops and desktops, 1400px and up) */
+@media only screen and (min-width: 1400px) {
+  body {
+    background: #1a6305;
+  }
+  #q-app {
+    min-height: 100vh;
+  }
+  .page-container {
+    width: 25vw;
+    height: 100vh;
+    margin: auto;
+  }
+  .img-carton {
+    width: 25vw;
+    position: fixed;
+  }
+}
 </style>
