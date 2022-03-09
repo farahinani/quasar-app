@@ -36,6 +36,14 @@
                   push
                   :disable="!this.$root.cartonInput"
                   @click="submitForm()"
+                /><br /><br />
+                <q-btn
+                  type="submit"
+                  fullwidth
+                  label="checkInventory"
+                  color="info"
+                  class="full-width"
+                  @click="checkInventory()"
                 />
               </div>
 
@@ -78,7 +86,21 @@ export default defineComponent({
 
         this.$root.numTries = numTriesInt;
       }
+
+      //this.checkInventory();
     },
+
+    // checkInventory() {
+    //   this.$root.inventoryAvaliable = [];
+
+    //   for (let i = 0; i < this.$root.inventory.length; i++) {
+    //     let a = this.$root.inventory[i];
+    //     console.log(a);
+    //     if (a.quantity > 0) {
+    //       this.$root.inventoryAvaliable.push(a);
+    //     }
+    //   }
+    // },
   },
 });
 </script>

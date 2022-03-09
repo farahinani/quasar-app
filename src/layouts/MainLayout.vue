@@ -1,6 +1,6 @@
 <template>
   <q-layout view="hHh LpR fFf">
-    <q-header elevated class="bg-primary text-white">
+    <!-- <q-header elevated class="bg-primary text-white">
       <q-toolbar>
         <q-toolbar-title class="text-weight-bold">
           Fresh From Florida: <br />Shake & Win Test
@@ -14,7 +14,7 @@
           value="restart"
         />
       </q-toolbar>
-    </q-header>
+    </q-header> -->
 
     <q-page-container class="page-container">
       <div class="img-top-oranges">
@@ -22,16 +22,16 @@
       </div>
       <router-view />
 
-      <div class="img-logo">
+      <!-- <div class="img-logo">
         <img v-bind:src="require('assets/ff-top-icon.png')" />
-      </div>
+      </div> -->
 
-      <div class="img-carton">
+      <!-- <div class="img-carton">
         <img v-bind:src="require('assets/carton-crate.png')" />
-      </div>
+      </div> -->
     </q-page-container>
 
-    <q-footer elevated>
+    <!-- <q-footer elevated>
       <q-toolbar>
         <q-toolbar-title>
           <div class="footer">
@@ -40,7 +40,7 @@
           </div>
         </q-toolbar-title>
       </q-toolbar>
-    </q-footer>
+    </q-footer> -->
   </q-layout>
 </template>
 
@@ -97,8 +97,7 @@ header.q-header {
 .img-carton {
   position: fixed;
   bottom: 0;
-  /* width: 100%; */
-  width: 100vw;
+  width: 100%;
 }
 
 .img-carton img {
@@ -190,12 +189,8 @@ header.q-header {
     width: 100vw;
     position: fixed;
   }
-
-  /* .img-carton img {
-    width: 100%;
-  } */
 }
-@media only screen and (max-height: 720px) {
+@media only screen and (max-height: 750px) {
   .img-carton img {
     width: 88%;
   }
@@ -213,16 +208,10 @@ header.q-header {
     height: 100vh;
     margin: auto;
   }
-  /* .img-logo img {
-    width: 65%;
-  } */
   .img-carton {
     width: 100vw;
     position: fixed;
   }
-  /* .img-carton img {
-    width: 100%;
-  } */
 }
 
 @media only screen and (min-width: 500px) {
@@ -233,7 +222,6 @@ header.q-header {
     min-height: 100vh;
   }
   .page-container {
-    /* width: 70vw; */
     height: 100vh;
     margin: auto;
   }
@@ -333,24 +321,6 @@ header.q-header {
   }
 }
 
-/* @media only screen and (min-width: 1000px) {
-  body {
-    background: #1a6305;
-  }
-  #q-app {
-    min-height: 100vh;
-  }
-  .page-container {
-    width: 40vw;
-    height: 100vh;
-    margin: auto;
-  }
-  .img-carton {
-    width: 40vw;
-    position: fixed;
-  }
-} */
-
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
   body {
@@ -370,8 +340,8 @@ header.q-header {
   }
 }
 
-/* Super extra large devices (large laptops and desktops, 1400px and up) */
-/* @media only screen and (min-width: 1400px) {
+/* Smartphones (landscape) ----------- */
+/* @media only screen and (min-width: 321px) and (orientation: landscape) {
   body {
     background: #1a6305;
   }
@@ -379,13 +349,34 @@ header.q-header {
     min-height: 100vh;
   }
   .page-container {
-    width: 25vw;
+    width: 30vw;
     height: 100vh;
     margin: auto;
   }
+  .img-logo img {
+    width: 60%;
+  }
+
   .img-carton {
-    width: 25vw;
+    width: 30vw;
     position: fixed;
   }
-} */
-</style>
+  .img-carton img {
+    width: 90%;
+  }
+  .q-card.my-card {
+    height: 45vh;
+  }
+  .text-h5 {
+    font-size: 1.1rem;
+    line-height: 1rem;
+  }
+  p.text-center.text-primary {
+    font-size: 0.75em;
+  }
+  span.q-btn__content.text-center.col.items-center.q-anchor--skip.justify-center.row {
+    font-size: 0.7em;
+    line-height: 2em;
+  }
+}*/
+</style> 

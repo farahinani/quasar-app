@@ -21,7 +21,13 @@
                   enter-active-class="animate__animated animate__bounce"
                   leave-active-class="animate__animated animate__bounceOutDown"
                 >
-                  <div v-if="show" class="inner"></div>
+                  <!-- <div v-if="show" class="inner"></div> -->
+                  <div v-if="show">
+                    <img
+                      v-if="this.$root.inventory"
+                      v-bind:src="this.itemType"
+                    />
+                  </div>
                 </transition>
               </div>
             </transition>
@@ -55,6 +61,10 @@ import "animate.css";
 
 export default defineComponent({
   name: "PageAutoClosePopup",
+
+  computed() {
+    return this.itemType;
+  },
 
   props: {
     // ...your custom props

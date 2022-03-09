@@ -10,6 +10,7 @@ const routes = [
       { path: '/home/shake-and-win/prizes', component: () => import('src/pages/PagePrizes.vue') },
       { path: '/home/shake-and-win/prizes/collect-prizes', component: () => import('src/pages/PageCollectPrizes.vue') },
       { path: '/auto-close-popup', component: () => import('src/pages/PageAutoClosePopup.vue') },
+      { path: '/inventory', component: () => import('src/pages/PrizeInventory.vue') },
 
       { path: '/test', component: () => import('src/pages/test.vue') },
       { path: '/test2', component: () => import('src/pages/test2.vue') },

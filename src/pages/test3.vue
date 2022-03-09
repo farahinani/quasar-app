@@ -1,15 +1,32 @@
 <template>
-  <q-dialog ref="dialog" @hide="onDialogHide">
-    <q-card class="q-dialog-plugin">
-      <q-card-section> test 3 page </q-card-section>
-    </q-card>
-  </q-dialog>
+  <q-page class="flex flex-center">
+    <div class="q-pa-md row items-start q-gutter-md">
+      <q-card class="my-card">
+        <q-card-section>
+          <h3>Test 3 parent</h3>
+          from test2: {{ image }}
+          <test2 />
+        </q-card-section>
+      </q-card>
+    </div>
+  </q-page>
 </template>
 
 <script>
 import { defineComponent } from "vue";
+import test2 from "./test2.vue";
 
 export default defineComponent({
   name: "test3",
+
+  data() {
+    return {
+      image: "",
+    };
+  },
+
+  components: {
+    test2,
+  },
 });
 </script>

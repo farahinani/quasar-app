@@ -50,7 +50,21 @@
             color="secondary"
             class="full-width"
             @click="shakeSuccess()"
+          /><br /><br />
+          <q-btn
+            type="submit"
+            fullwidth
+            label="Select prizes"
+            color="info"
+            class="full-width"
+            @click="selectPrizeRandom()"
           />
+          item you get:
+          <!-- <p>{{ this.itemType }}</p> -->
+          <br />
+          images:
+          <br />
+          <img v-if="$root.inventory" :src="this.itemType" />
         </q-card-section>
       </q-card>
     </div>
@@ -68,11 +82,12 @@ var Shake = require("shake.js");
 export default defineComponent({
   name: "PageShakeWin",
 
-  computed() {
-    return this.$root.triesCount;
+  computed: {
+    // return this.$root.triesCount;
   },
 
   data() {
+    // this.$root.inventory;
     return {
       alert: false,
       hide: true,
@@ -204,22 +219,64 @@ export default defineComponent({
       );
     },
 
+    checkInventory() {
+      this.$root.inventoryAvaliable = [];
+
+      for (let i = 0; i < this.$root.inventory.length; i++) {
+        let a = this.$root.inventory[i];
+        console.log(a);
+        if (a.quantity > 0) {
+          this.$root.inventoryAvaliable.push(a);
+        }
+      }
+    },
+
+    selectPrizeRandom() {
+      this.checkInventory();
+
+      let itemsAvaliable = this.$root.inventoryAvaliable.length;
+      let item = Math.floor(Math.random() * itemsAvaliable); //random calculation
+      let itemType = this.$root.inventoryAvaliable[item].type;
+
+      console.log("you won ! id:" + item + " = " + itemType);
+
+      //reduce inventory
+
+      if (itemType == "Cooler Bag") {
+        this.$root.inventory[item].quantity--;
+        this.$root.prizesWon[0].quantity++;
+      } else if (itemType == "Mason Jar") {
+        this.$root.inventory[item].quantity--;
+        this.$root.prizesWon[1].quantity++;
+      } else if (itemType == "Coin Pouch") {
+        this.$root.inventory[item].quantity--;
+        this.$root.prizesWon[2].quantity++;
+      } else if (itemType == "Orange Juice") {
+        this.$root.inventory[item].quantity--;
+        this.$root.prizesWon[3].quantity++;
+      } else {
+        return;
+      }
+      //display on HTML
+      this.itemType = this.$root.inventory[item].image;
+    },
+
     //TEST BUTTON FOR SHAKE
     shakeSuccess() {
-      //alert("shakeeeee");
       if (this.$root.triesCount < this.$root.numTries) {
+        this.selectPrizeRandom();
+
         this.autoClosePopup();
 
         console.log("shake : " + this.$root.triesCount);
 
         this.$root.triesCount++;
       } else {
+        this.selectPrizeRandom();
+
         this.autoClosePopup();
 
         console.log("final shake ! : " + this.$root.triesCount);
-
-        // this.$root.triesCount = 0;
-        // this.$root.numTries = 0;
 
         setTimeout(() => {
           this.$router.push("/home/shake-and-win/prizes");
