@@ -4,8 +4,8 @@
       <q-card class="my-card">
         <q-card-section>
           <h3>Test 3 parent</h3>
-          from test2: {{ image }}
-          <test2 />
+          from test2:
+          <test2 :username="user.username" />
         </q-card-section>
       </q-card>
     </div>
@@ -21,7 +21,9 @@ export default defineComponent({
 
   data() {
     return {
-      image: "",
+      user: {
+        username: "matt",
+      },
     };
   },
 

@@ -197,11 +197,15 @@ export default defineComponent({
         "shake",
         () => {
           if (this.$root.triesCount < this.$root.numTries) {
+            this.selectPrizeRandom();
+
             // Display pop up
             this.autoClosePopup();
             // update tries count
             this.$root.triesCount++;
           } else {
+            this.selectPrizeRandom();
+
             // Display pop up (final)
             this.autoClosePopup();
             //after shake, go to next page in 3secs

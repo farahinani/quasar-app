@@ -37,14 +37,14 @@
                   :disable="!this.$root.cartonInput"
                   @click="submitForm()"
                 /><br /><br />
-                <q-btn
+                <!-- <q-btn
                   type="submit"
                   fullwidth
                   label="checkInventory"
                   color="info"
                   class="full-width"
                   @click="checkInventory()"
-                />
+                /> -->
               </div>
 
               <!-- <div>tries: {{ $root.numTries }}</div> -->

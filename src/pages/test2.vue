@@ -4,7 +4,7 @@
       <q-card class="my-card">
         <q-card-section>
           <h3>Test 2 child</h3>
-          <button>send to test 3 parent</button>
+          {{ username }}
         </q-card-section>
       </q-card>
     </div>
@@ -19,7 +19,7 @@ export default defineComponent({
 
   data() {
     return {
-      image: "prizes",
+      props: ["username"],
     };
   },
 });
