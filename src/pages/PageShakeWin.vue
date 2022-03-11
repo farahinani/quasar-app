@@ -134,7 +134,7 @@ export default defineComponent({
           clearInterval(timer);
           dialog.hide();
         }
-      }, 2500); //close in Xsecs
+      }, 2500); //close in 2500secs
     }
 
     return {
@@ -238,7 +238,7 @@ export default defineComponent({
             //after shake, go to next page in 3secs
             setTimeout(() => {
               this.$router.push("/prizes");
-            }, 3000);
+            }, 3500);
 
             // stop listening for shake events
             window.removeEventListener("shake", () => {}, false);
