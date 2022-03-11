@@ -52,10 +52,6 @@
                     (val) => (val && val.length > 0) || 'Enter receipt No.',
                   ]"
                 />
-                <!-- <p class="text-left text-primary">
-                if you are unsure of how to find this please approach our
-                promoter
-              </p> -->
                 <div class="text-center text-primary">
                   Uncertain about where to find your Receipt Number?
                   <a color="primary" @click="alert = true">Click here</a>
