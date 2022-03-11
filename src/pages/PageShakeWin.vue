@@ -42,7 +42,7 @@
           </div>
 
           <!-- SHAKESUCCESS() BUTTON -->
-          <!-- <div v-if="$q.platform.is.desktop" v-on:click="hide = !hide">
+          <div v-if="$q.platform.is.desktop" v-on:click="hide = !hide">
             <q-btn
               type="submit"
               fullwidth
@@ -51,15 +51,7 @@
               class="full-width"
               @click="shakeSuccess()"
             />
-          </div> -->
-          <q-btn
-            type="submit"
-            fullwidth
-            label="shakeSuccess()"
-            color="secondary"
-            class="full-width"
-            @click="shakeSuccess()"
-          />
+          </div>
         </q-card-section>
       </q-card>
     </div>

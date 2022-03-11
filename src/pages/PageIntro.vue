@@ -40,7 +40,11 @@
             class="full-width"
           />
           <br /><br />
-          <div class="text-left text-primary">
+
+          <div
+            v-if="$q.platform.is.ios || $q.platform.is.android"
+            class="text-left text-primary"
+          >
             Uncertain about where to find your Receipt Number?
             <a color="primary" @click="alert = true">Click here</a>
           </div>
