@@ -1,7 +1,7 @@
 <template>
   <q-page class="flex flex-center">
     <div class="q-pa-md row items-start q-gutter-md">
-      <q-card class="my-card bg-transparent">
+      <q-card class="my-card bg-transparent no-border no-box-shadow">
         <q-card-section v-bind:class="{ dialogHide: this.$root.dialogOpen }">
           <div class="q-py-lg q-px-md">
             <div class="text-body1 text-center text-primary text-weight-bold">
@@ -52,6 +52,14 @@
               @click="shakeSuccess()"
             />
           </div>
+          <q-btn
+            type="submit"
+            fullwidth
+            label="shakeSuccess()"
+            color="secondary"
+            class="full-width"
+            @click="shakeSuccess()"
+          />
         </q-card-section>
       </q-card>
     </div>

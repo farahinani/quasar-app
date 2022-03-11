@@ -1,9 +1,9 @@
 <template>
   <q-dialog ref="dialog" @hide="onDialogHide">
-    <q-card class="q-dialog-plugin bg-transparent">
+    <q-card class="bg-transparent no-border no-box-shadow">
       <q-card-section>
         <div class="text-center">
-          <div class="flex flex-center" style="height: 80vh">
+          <div class="flex flex-center" style="height: 60vh; width: 90vw">
             <transition
               appear
               name="nested"
