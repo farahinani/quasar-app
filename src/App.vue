@@ -1,14 +1,5 @@
 <template>
   <router-view />
-  <!-- <div class="img-top-oranges">
-    <img v-bind:src="require('assets/ff-top-oranges.png')" />
-  </div> -->
-  <!-- <div class="img-logo">
-    <img v-bind:src="require('assets/ff-top-icon.png')" />
-  </div> -->
-  <!-- <div class="img-carton">
-    <img v-bind:src="require('assets/carton-crate.png')" />
-  </div> -->
 </template>
 <script>
 import { defineComponent } from "vue";
@@ -144,8 +135,9 @@ header.q-header {
   }
 
   .img-carton {
-    width: 30vw;
-    margin: auto;
+    /* width: 30vw;
+    margin: auto; */
+    position: absolute;
   }
   .img-carton img {
     position: relative;
@@ -168,6 +160,44 @@ header.q-header {
 /**-------------- END MEDIA QUERY LANDSCAPE -----------*/
 
 /**-------------- MEDIA QUERY  -----------*/
+@media only screen and (max-width: 600px) {
+  body {
+    background: #1a6305;
+  }
+  #q-app {
+    min-height: 100vh;
+  }
+  .page-container {
+    width: 60vw;
+    height: 100vh;
+    margin: auto;
+  }
+
+  .img-top-oranges {
+    position: relative;
+    width: 60vw;
+  }
+
+  .img-top-oranges img {
+    width: 60vw;
+    position: absolute;
+    top: 0%;
+  }
+
+  .img-logo img {
+    width: 60%;
+  }
+
+  .img-carton {
+    width: 60vw;
+    position: absolute;
+  }
+
+  .img-carton img {
+    width: 100%;
+  }
+}
+
 @media only screen and (min-width: 600px) {
   body {
     background: #1a6305;
@@ -193,12 +223,12 @@ header.q-header {
   }
 
   .img-logo img {
-    width: 50vw;
+    width: 60%;
   }
 
   .img-carton {
     width: 60vw;
-    position: relative;
+    position: absolute;
   }
 
   .img-carton img {
@@ -236,7 +266,7 @@ header.q-header {
 
   .img-carton {
     width: 30vw;
-    position: relative;
+    position: absolute;
   }
 
   .img-carton img {
