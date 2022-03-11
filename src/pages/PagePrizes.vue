@@ -56,7 +56,7 @@
                 if you are unsure of how to find this please approach our
                 promoter
               </p> -->
-              <div class="text-left text-primary">
+              <div class="text-center text-primary">
                 Uncertain about where to find your Receipt Number?
                 <a color="primary" @click="alert = true">Click here</a>
               </div>
@@ -91,11 +91,19 @@
           perferendis totam, ea at omnis vel numquam exercitationem aut, natus
           minima, porro labore.
           <br />
-          <img style="width: 60vw" v-bind:src="require('assets/receipt.png')" />
+          <img
+            style="
+              width: 60vw;
+              display: block;
+              margin-left: auto;
+              margin-right: auto;
+            "
+            v-bind:src="require('assets/receipt.png')"
+          />
         </q-card-section>
 
         <q-card-actions align="right">
-          <q-btn flat label="OK" color="primary" v-close-popup />
+          <q-btn class="full-width" label="OK" color="primary" v-close-popup />
         </q-card-actions>
       </q-card>
     </q-dialog>

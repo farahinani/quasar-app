@@ -43,7 +43,7 @@
 
           <div
             v-if="$q.platform.is.ios || $q.platform.is.android"
-            class="text-left text-primary"
+            class="text-center text-primary"
           >
             Uncertain about where to find your Receipt Number?
             <a color="primary" @click="alert = true">Click here</a>
@@ -62,13 +62,23 @@
                 exercitationem aut, natus minima, porro labore.
                 <br />
                 <img
-                  style="width: 60vw"
+                  style="
+                    width: 60vw;
+                    display: block;
+                    margin-left: auto;
+                    margin-right: auto;
+                  "
                   v-bind:src="require('assets/receipt.png')"
                 />
               </q-card-section>
 
               <q-card-actions align="right">
-                <q-btn flat label="OK" color="primary" v-close-popup />
+                <q-btn
+                  class="full-width"
+                  label="OK"
+                  color="primary"
+                  v-close-popup
+                />
               </q-card-actions>
             </q-card>
           </q-dialog>

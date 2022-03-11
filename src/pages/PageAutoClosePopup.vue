@@ -34,7 +34,7 @@
           <q-btn
             class="full-width"
             color="primary"
-            label="Cancel"
+            label="OK"
             @click="onCancelClick"
           />
         </div>
