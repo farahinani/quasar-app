@@ -39,6 +39,35 @@
             color="secondary"
             class="full-width"
           />
+          <br /><br />
+          <div class="text-left text-primary">
+            Uncertain about where to find your Receipt Number?
+            <a color="primary" @click="alert = true">Click here</a>
+          </div>
+
+          <q-dialog v-model="alert">
+            <q-card>
+              <q-card-section>
+                <div class="text-h6">Receipt example</div>
+              </q-card-section>
+
+              <q-card-section class="q-pt-none">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum
+                repellendus sit voluptate voluptas eveniet porro. Rerum
+                blanditiis perferendis totam, ea at omnis vel numquam
+                exercitationem aut, natus minima, porro labore.
+                <br />
+                <img
+                  style="width: 60vw"
+                  v-bind:src="require('assets/receipt.png')"
+                />
+              </q-card-section>
+
+              <q-card-actions align="right">
+                <q-btn flat label="OK" color="primary" v-close-popup />
+              </q-card-actions>
+            </q-card>
+          </q-dialog>
         </q-card-section>
       </q-card>
     </div>
@@ -50,6 +79,12 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "PageIntro",
+
+  data() {
+    return {
+      alert: false,
+    };
+  },
 });
 </script>
 

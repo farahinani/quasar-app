@@ -78,6 +78,7 @@
         </q-card-section>
       </q-card>
     </div>
+
     <q-dialog v-model="alert">
       <q-card>
         <q-card-section>

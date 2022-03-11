@@ -27,16 +27,17 @@
                 </transition>
               </div>
             </transition>
-            <!-- <q-btn color="primary" label="Cancel" @click="onCancelClick" /> -->
           </div>
         </div>
-        <q-btn
-          class="full-width"
-          color="primary"
-          label="Cancel"
-          @click="onCancelClick"
-        />
-        <!-- <div class="q-py-lg q-px-md"></div> -->
+
+        <div class="q-py-lg q-px-md">
+          <q-btn
+            class="full-width"
+            color="primary"
+            label="Cancel"
+            @click="onCancelClick"
+          />
+        </div>
       </q-card-section>
     </q-card>
   </q-dialog>
