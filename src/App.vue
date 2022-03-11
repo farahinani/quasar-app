@@ -168,18 +168,18 @@ header.q-header {
     min-height: 100vh;
   }
   .page-container {
-    width: 60vw;
+    width: 100vw;
     height: 100vh;
     margin: auto;
   }
 
   .img-top-oranges {
     position: relative;
-    width: 60vw;
+    width: 100vw;
   }
 
   .img-top-oranges img {
-    width: 60vw;
+    width: 100vw;
     position: absolute;
     top: 0%;
   }
@@ -189,7 +189,7 @@ header.q-header {
   }
 
   .img-carton {
-    width: 60vw;
+    width: 100vw;
     position: absolute;
   }
 
