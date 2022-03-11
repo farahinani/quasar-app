@@ -135,14 +135,14 @@ header.q-header {
   }
 
   .img-carton {
-    /* width: 30vw;
-    margin: auto; */
-    position: absolute;
+    width: 30vw;
+    margin: auto;
+    position: relative;
   }
   .img-carton img {
-    position: relative;
-    margin: auto;
+    position: fixed;
     width: 30vw;
+    bottom: 0;
   }
 
   .img-logo {
@@ -190,11 +190,13 @@ header.q-header {
 
   .img-carton {
     width: 100vw;
-    position: absolute;
+    position: relative;
   }
 
   .img-carton img {
-    width: 100%;
+    width: 100vw;
+    position: fixed;
+    bottom: 0;
   }
 }
 
@@ -228,11 +230,13 @@ header.q-header {
 
   .img-carton {
     width: 60vw;
-    position: absolute;
+    position: relative;
   }
 
   .img-carton img {
-    width: 100%;
+    width: 60vw;
+    position: fixed;
+    bottom: 0;
   }
 }
 
@@ -266,11 +270,13 @@ header.q-header {
 
   .img-carton {
     width: 30vw;
-    position: absolute;
+    position: relative;
   }
 
   .img-carton img {
     width: 30vw;
+    position: fixed;
+    bottom: 0;
   }
 }
 </style>

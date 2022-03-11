@@ -19,62 +19,63 @@
                 <img :src="prize" />
               </div>
             </div>
-          </div>
-          <div>
-            <p class="text-h6 text-center text-primary text-weight-regular">
-              Please complete the form <br />below to redeem the prizes
-            </p>
-          </div>
-          <br />
-          <q-form @submit="onSubmit" @reset="onReset" class="q-gutter-md">
+
             <div>
-              <span class="text-weight-bold text-primary text-subtitle1"
-                >Name</span
-              >
-              <q-input
-                outlined
-                v-model="this.$root.name"
-                label="Name"
-                :rules="[
-                  (val) => (val && val.length > 0) || 'Enter receipt No.',
-                ]"
-              />
+              <p class="text-h6 text-center text-primary text-weight-regular">
+                Please complete the form <br />below to redeem the prizes
+              </p>
             </div>
-            <div>
-              <span class="text-weight-bold text-primary text-subtitle1">
-                Receipt No.
-              </span>
-              <q-input
-                outlined
-                v-model="this.$root.receipt"
-                label="Receipt No."
-                :rules="[
-                  (val) => (val && val.length > 0) || 'Enter receipt No.',
-                ]"
-              />
-              <!-- <p class="text-left text-primary">
+            <br />
+            <q-form @submit="onSubmit" @reset="onReset" class="q-gutter-md">
+              <div>
+                <span class="text-weight-bold text-primary text-subtitle1"
+                  >Name</span
+                >
+                <q-input
+                  outlined
+                  v-model="this.$root.name"
+                  label="Name"
+                  :rules="[
+                    (val) => (val && val.length > 0) || 'Enter receipt No.',
+                  ]"
+                />
+              </div>
+              <div>
+                <span class="text-weight-bold text-primary text-subtitle1">
+                  Receipt No.
+                </span>
+                <q-input
+                  outlined
+                  v-model="this.$root.receipt"
+                  label="Receipt No."
+                  :rules="[
+                    (val) => (val && val.length > 0) || 'Enter receipt No.',
+                  ]"
+                />
+                <!-- <p class="text-left text-primary">
                 if you are unsure of how to find this please approach our
                 promoter
               </p> -->
-              <div class="text-center text-primary">
-                Uncertain about where to find your Receipt Number?
-                <a color="primary" @click="alert = true">Click here</a>
+                <div class="text-center text-primary">
+                  Uncertain about where to find your Receipt Number?
+                  <a color="primary" @click="alert = true">Click here</a>
+                </div>
               </div>
-            </div>
-            <br />
+              <br />
 
-            <div class="button-submit">
-              <q-btn
-                to="/collect-prizes"
-                v-on:click="postInventory()"
-                class="full-width text-h5 text-weight-bold"
-                label="Submit"
-                type="submit"
-                color="secondary"
-              />
-            </div>
-            <br />
-          </q-form>
+              <div class="button-submit">
+                <q-btn
+                  to="/collect-prizes"
+                  v-on:click="postInventory()"
+                  class="full-width text-h5 text-weight-bold"
+                  label="Submit"
+                  type="submit"
+                  color="secondary"
+                />
+              </div>
+              <br />
+            </q-form>
+          </div>
         </q-card-section>
 
         <q-dialog v-model="alert">
@@ -215,5 +216,10 @@ export default defineComponent({
 
 .prizes img {
   width: 100%;
+}
+
+.q-py-lg.q-px-md {
+  max-height: 70vh;
+  overflow: auto;
 }
 </style>

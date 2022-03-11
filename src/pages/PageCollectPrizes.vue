@@ -18,21 +18,23 @@
                 <img :src="prize" />
               </div>
             </div>
-          </div>
 
-          <div class="text-body1 text-primary">Entry number: 1</div>
-          <hr />
-          <div class="text-body1 text-primary">
-            Cartons purchased:
-            {{ this.$root.cartonInput }}
+            <div class="text-body1 text-primary">Entry number: 1</div>
+            <hr />
+            <div class="text-body1 text-primary">
+              Cartons purchased:
+              {{ this.$root.cartonInput }}
+            </div>
+            <hr />
+            <div class="text-body1 text-primary">
+              Name: {{ this.$root.name }}
+            </div>
+            <hr />
+            <div class="text-body1 text-primary">
+              Receipt no.: {{ this.$root.receipt }}
+            </div>
+            <br />
           </div>
-          <hr />
-          <div class="text-body1 text-primary">Name: {{ this.$root.name }}</div>
-          <hr />
-          <div class="text-body1 text-primary">
-            Receipt no.: {{ this.$root.receipt }}
-          </div>
-          <br />
         </q-card-section>
       </q-card>
     </div>
@@ -77,5 +79,10 @@ export default defineComponent({
   height: 80px;
   display: inline-block;
   margin: 3px;
+}
+
+.q-py-lg.q-px-md {
+  max-height: 70vh;
+  overflow: auto;
 }
 </style>
