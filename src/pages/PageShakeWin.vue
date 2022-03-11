@@ -52,14 +52,14 @@
               @click="shakeSuccess()"
             />
           </div>
-          <q-btn
+          <!-- <q-btn
             type="submit"
             fullwidth
             label="shakeSuccess()"
             color="secondary"
             class="full-width"
             @click="shakeSuccess()"
-          />
+          /> -->
         </q-card-section>
       </q-card>
     </div>
@@ -343,6 +343,9 @@ export default defineComponent({
 }
 .dialogHide {
   display: none;
+}
+.text-body1.text-center.text-primary.text-weight-bold {
+  background: rgba(255, 255, 255, 0.8);
 }
 </style>
 

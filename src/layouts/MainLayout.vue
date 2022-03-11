@@ -1,6 +1,6 @@
 <template>
   <q-layout view="hHh LpR fFf">
-    <q-header elevated class="bg-primary text-white">
+    <!-- <q-header elevated class="bg-primary text-white">
       <q-toolbar>
         <q-toolbar-title class="text-weight-bold">
           Fresh From Florida: <br />Shake & Win Test
@@ -14,7 +14,7 @@
           value="restart"
         />
       </q-toolbar>
-    </q-header>
+    </q-header> -->
 
     <q-page-container class="page-container">
       <div class="img-top-oranges">
