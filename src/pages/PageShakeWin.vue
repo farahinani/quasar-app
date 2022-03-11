@@ -52,14 +52,14 @@
               @click="shakeSuccess()"
             />
           </div>
-          <q-btn
+          <!-- <q-btn
             type="submit"
             fullwidth
             label="shakeSuccess()"
             color="secondary"
             class="full-width"
             @click="shakeSuccess()"
-          />
+          /> -->
         </q-card-section>
       </q-card>
     </div>

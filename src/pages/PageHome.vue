@@ -40,13 +40,6 @@
               <div class="text-left text-primary">
                 Uncertain about where to find your Receipt Number?
                 <a color="primary" @click="alert = true">Click here</a>
-                <!-- <q-btn
-                  no-caps
-                  flat
-                  label="Click here"
-                  color="primary"
-                  @click="card = true"
-                />-->
               </div>
             </q-form>
           </div>
