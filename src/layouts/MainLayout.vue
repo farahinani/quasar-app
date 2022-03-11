@@ -53,6 +53,10 @@ export default {
       // location.reload.push("/");
       // this.$forceUpdate();
 
+      var myShakeEvent = new Shake({
+        threshold: 15,
+      });
+
       window.removeEventListener("shake", () => {}, false);
       myShakeEvent.stop();
     },
