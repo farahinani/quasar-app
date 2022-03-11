@@ -11,8 +11,11 @@
           <br />
           <p class="text-center text-primary">
             It's simple, every purchase of 2<br />
-            1.5l packs of Florida's Natural<br />
-            Not From Concentrate Juices<br />
+            1.5l packs of
+            <b
+              >Florida's Natural<br />
+              Not From Concentrate Juices</b
+            ><br />
             gives you a chance to win great prizes!
           </p>
 

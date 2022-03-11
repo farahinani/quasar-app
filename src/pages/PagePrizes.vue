@@ -5,7 +5,7 @@
         <q-card-section>
           <div class="q-py-lg q-px-md">
             <div class="text-h5 text-center text-bold text-primary">
-              YOU HAVE WON
+              Congrats! <br />You’ve won the following:
             </div>
 
             <br />
@@ -52,10 +52,14 @@
                   (val) => (val && val.length > 0) || 'Enter receipt No.',
                 ]"
               />
-              <p class="text-left text-primary">
+              <!-- <p class="text-left text-primary">
                 if you are unsure of how to find this please approach our
                 promoter
-              </p>
+              </p> -->
+              <div class="text-left text-primary">
+                Uncertain about where to find your Receipt Number?
+                <a color="primary" @click="alert = true">Click here</a>
+              </div>
             </div>
             <br />
 
@@ -74,6 +78,26 @@
         </q-card-section>
       </q-card>
     </div>
+    <q-dialog v-model="alert">
+      <q-card>
+        <q-card-section>
+          <div class="text-h6">Receipt example</div>
+        </q-card-section>
+
+        <q-card-section class="q-pt-none">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum
+          repellendus sit voluptate voluptas eveniet porro. Rerum blanditiis
+          perferendis totam, ea at omnis vel numquam exercitationem aut, natus
+          minima, porro labore.
+          <br />
+          <img style="width: 60vw" v-bind:src="require('assets/receipt.png')" />
+        </q-card-section>
+
+        <q-card-actions align="right">
+          <q-btn flat label="OK" color="primary" v-close-popup />
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
   </q-page>
 </template>
 
@@ -88,6 +112,7 @@ export default defineComponent({
   data() {
     return {
       serverResponse: null,
+      alert: false,
     };
   },
   computed: {

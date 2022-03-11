@@ -34,8 +34,10 @@
       <q-toolbar>
         <q-toolbar-title>
           <div class="footer">
-            <div class="left-text">*Prizes available while stocks last</div>
-            <div class="right-text text-secondary">Terms & Consditions</div>
+            <div class="left-text">
+              *Prizes available only while stocks last
+            </div>
+            <!-- <div class="right-text text-secondary">Terms & Conditions</div> -->
           </div>
         </q-toolbar-title>
       </q-toolbar>
@@ -52,10 +54,6 @@ export default {
       window.location.replace("/");
       // location.reload.push("/");
       // this.$forceUpdate();
-
-      var myShakeEvent = new Shake({
-        threshold: 15,
-      });
 
       window.removeEventListener("shake", () => {}, false);
       myShakeEvent.stop();

@@ -5,11 +5,8 @@
         <q-card-section>
           <div class="q-py-lg q-px-md">
             <div class="text-h6 text-center text-primary text-weight-regular">
-              Please approach our <br />promoter and
-              <span class="text-weight-bold"
-                >show them this page and your receipt
-              </span>
-              to collect your prizes*
+              Please show this page with your receipt to our staff to collect
+              your prizes*
             </div>
             <br />
             <div class="circle-prizes">
@@ -23,16 +20,17 @@
             </div>
           </div>
 
-          <div class="text-body1 text-primary">Entry: 1</div>
+          <div class="text-body1 text-primary">Entry number: 1</div>
           <hr />
           <div class="text-body1 text-primary">
-            Cartons Purchased: {{ this.$root.cartonInput }}
+            Cartons purchased:
+            {{ this.$root.cartonInput }}
           </div>
           <hr />
           <div class="text-body1 text-primary">Name: {{ this.$root.name }}</div>
           <hr />
           <div class="text-body1 text-primary">
-            Receipt: {{ this.$root.receipt }}
+            Receipt no.: {{ this.$root.receipt }}
           </div>
           <br />
         </q-card-section>
