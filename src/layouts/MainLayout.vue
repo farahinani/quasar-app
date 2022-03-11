@@ -52,6 +52,9 @@ export default {
       window.location.replace("/");
       // location.reload.push("/");
       // this.$forceUpdate();
+
+      window.removeEventListener("shake", () => {}, false);
+      myShakeEvent.stop();
     },
   },
 };
