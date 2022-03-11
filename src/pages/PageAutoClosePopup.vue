@@ -3,7 +3,7 @@
     <q-card class="q-dialog-plugin bg-transparent">
       <q-card-section>
         <div class="text-center">
-          <div class="flex flex-center" style="height: 450px">
+          <div class="flex flex-center" style="height: 80vh">
             <transition
               appear
               name="nested"
@@ -21,35 +21,17 @@
                   enter-active-class="animate__animated animate__bounce"
                   leave-active-class="animate__animated animate__bounceOutDown"
                 >
-                  <!-- <div v-if="show" class="inner"></div> -->
-                  <div v-if="show">
-                    <img
-                      v-if="this.$root.inventory"
-                      v-bind:src="this.itemType"
-                    />
+                  <div v-if="$attrs.text" class="inner">
+                    <img :src="$attrs.text" />
                   </div>
                 </transition>
               </div>
             </transition>
           </div>
         </div>
-        <!-- <q-btn
-          type="submit"
-          fullwidth
-          class="full-width"
-          color="secondary"
-          label="Show / Hide"
-          v-on:click="show = !show"
-        /> -->
 
         <div class="q-py-lg q-px-md"></div>
       </q-card-section>
-
-      <!-- ACTION BUTTON TO CLOSE POP UP -->
-      <!-- <q-card-actions align="right">
-        <q-btn color="primary" label="OK" @click="onOKClick" />
-        <q-btn color="primary" label="Cancel" @click="onCancelClick" />
-      </q-card-actions> -->
     </q-card>
   </q-dialog>
 </template>
@@ -61,10 +43,6 @@ import "animate.css";
 
 export default defineComponent({
   name: "PageAutoClosePopup",
-
-  computed() {
-    return this.itemType;
-  },
 
   props: {
     // ...your custom props
@@ -132,17 +110,17 @@ export default defineComponent({
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  transition-delay: 2s;
+  transition-delay: 1.5s;
+  overflow: hidden;
 }
+
+.inner img {
+  width: 100%;
+}
+
 .nested-enter-from .inner,
 .nested-leave-to .inner {
   transform: translateX(30px);
-
-  /*
-  	Hack around a Chrome 96 bug in handling nested opacity transitions.
-    This is not needed in other browsers or Chrome 99+ where the bug
-    has been fixed.
-  */
   opacity: 0.001;
 }
 </style>

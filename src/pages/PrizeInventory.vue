@@ -35,30 +35,17 @@
 
           <br />
 
-          <!-- test image:
-          <img :src="require(`assets/${this.inventory.image}`)" /> -->
-
-          image:
-
           <ul>
-            <li v-for="inventory in inventory" v-bind:key="inventory.image">
-              <img v-bind:src="inventory.image" alt="picture text" />
-              <!-- <p>{{ inventory.type }}</p> -->
+            <li v-for="prize in prizesWon" :key="prize.type">
+              {{ prize.type }}
             </li>
           </ul>
 
-          <!-- MODAL POPUP -->
+          image:
 
-          <!-- BACK BUTTON -->
-          <!-- router.go(n) where n can be + or -   -->
-          <!-- <q-btn
-            to="/home/shake-and-win"
-            type="submit"
-            fullwidth
-            label="back"
-            color="primary"
-            class="full-width"
-          /> -->
+          <div id="res"></div>
+
+          <button @click="myFunction()">click</button>
         </q-card-section>
       </q-card>
     </div>
@@ -71,17 +58,10 @@ import axios from "axios";
 import { defineComponent } from "vue";
 export default defineComponent({
   name: "PrizeInventory",
-
   data() {
     return {
       obj: null,
       info: null,
-      // inventory: [
-      //   { type: "Cooler Bag", quantity: 50 },
-      //   { type: "Mason Jar", quantity: 100 },
-      //   { type: "Coin Pouch", quantity: 100 },
-      //   { type: "Orange Juice", quantity: 100 },
-      // ],
       inventory: [
         {
           type: "Cooler Bag",
@@ -106,10 +86,10 @@ export default defineComponent({
       ],
       inventoryAvaliable: [],
       prizesWon: [
-        { type: "Cooler Bag", quantity: 0 },
-        { type: "Mason Jar", quantity: 0 },
-        { type: "Coin Pouch", quantity: 0 },
-        { type: "Orange Juice", quantity: 0 },
+        { type: "Cooler Bag" },
+        { type: "Mason Jar" },
+        { type: "Coin Pouch" },
+        { type: "Orange Juice" },
       ],
     };
   },

@@ -1,6 +1,6 @@
 <template>
   <q-layout view="hHh LpR fFf">
-    <!-- <q-header elevated class="bg-primary text-white">
+    <q-header elevated class="bg-primary text-white">
       <q-toolbar>
         <q-toolbar-title class="text-weight-bold">
           Fresh From Florida: <br />Shake & Win Test
@@ -14,7 +14,7 @@
           value="restart"
         />
       </q-toolbar>
-    </q-header> -->
+    </q-header>
 
     <q-page-container class="page-container">
       <div class="img-top-oranges">
@@ -22,16 +22,16 @@
       </div>
       <router-view />
 
-      <!-- <div class="img-logo">
+      <div class="img-logo">
         <img v-bind:src="require('assets/ff-top-icon.png')" />
-      </div> -->
+      </div>
 
-      <!-- <div class="img-carton">
+      <div class="img-carton">
         <img v-bind:src="require('assets/carton-crate.png')" />
-      </div> -->
+      </div>
     </q-page-container>
 
-    <!-- <q-footer elevated>
+    <q-footer elevated>
       <q-toolbar>
         <q-toolbar-title>
           <div class="footer">
@@ -40,7 +40,7 @@
           </div>
         </q-toolbar-title>
       </q-toolbar>
-    </q-footer> -->
+    </q-footer>
   </q-layout>
 </template>
 
@@ -59,6 +59,22 @@ export default {
 </script>
 
 <style>
+body,
+.q-btn__content,
+.text-h6 {
+  line-height: 1.3em;
+  color: #1a6305 !important;
+}
+
+.text-h6,
+.text-h5 {
+  font-weight: normal;
+}
+
+.text-h6 {
+  margin-bottom: 1em;
+}
+
 header.q-header {
   opacity: 0.5;
 }
@@ -379,4 +395,4 @@ header.q-header {
     line-height: 2em;
   }
 }*/
-</style> 
+</style>

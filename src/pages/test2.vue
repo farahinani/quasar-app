@@ -1,14 +1,38 @@
 <template>
-  <q-page class="flex flex-center">
-    <div class="q-pa-md row items-start q-gutter-md">
-      <q-card class="my-card">
-        <q-card-section>
-          <h3>Test 2 child</h3>
-          {{ username }}
-        </q-card-section>
-      </q-card>
-    </div>
-  </q-page>
+  <q-dialog ref="dialog" @hide="onDialogHide">
+    <q-card class="q-dialog-plugin bg-transparent">
+      <q-card-section>
+        <div class="text-center">
+          <div class="flex flex-center" style="height: 450px">
+            <!-- <transition
+              appear
+              name="nested"
+              enter-active-class="animate__animated animate__bounceInDown"
+              leave-active-class="animate__animated animate__bounceOutDown"
+            >
+              <div v-if="show">
+                <img
+                  style="width: 60%"
+                  v-bind:src="require('assets/ff-orange.png')"
+                />
+
+                <transition
+                  name="nested"
+                  enter-active-class="animate__animated animate__bounce"
+                  leave-active-class="animate__animated animate__bounceOutDown"
+                >
+                  <div v-if="show" class="inner"></div>
+               
+                </transition>
+              </div>
+            </transition> -->
+          </div>
+        </div>
+
+        <div class="q-py-lg q-px-md"></div>
+      </q-card-section>
+    </q-card>
+  </q-dialog>
 </template>
 
 <script>
@@ -19,7 +43,9 @@ export default defineComponent({
 
   data() {
     return {
-      props: ["username"],
+      props: {
+        msg: String,
+      },
     };
   },
 });

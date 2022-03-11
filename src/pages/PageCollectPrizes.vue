@@ -13,13 +13,14 @@
             </div>
             <br />
             <div class="circle-prizes">
-              <span class="prizes"></span>
-              <span class="prizes"></span>
-              <span class="prizes"></span>
+              <div
+                v-for="prize in prizesArray"
+                :key="prize.prizesArray"
+                class="prizes"
+              >
+                <img :src="prize" />
+              </div>
             </div>
-            <!-- <q-icon name="print" color="teal" size="6em" />
-            <q-icon name="today" class="text-orange" size="6em" />
-            <q-icon name="style" size="6em" /> -->
           </div>
 
           <div class="text-body1 text-primary">Entry: 1</div>
@@ -42,12 +43,30 @@
 
 <script>
 import { defineComponent } from "vue";
-import { useQuasar } from "quasar";
 
 export default defineComponent({
   name: "PageCollectPrizes",
+  computed: {
+    // a computed getter
+    prizesArray() {
+      // `this` points to the component instance
+      let prizes = this.$root.prizesWon;
+      let prizeArray = [];
+
+      for (let i = 0; i < prizes.length; i++) {
+        if (prizes[i].quantity > 0) {
+          for (let e = 0; e < prizes[i].quantity; e++) {
+            prizeArray.push(prizes[i].image);
+          }
+        }
+      }
+
+      return prizeArray;
+    },
+  },
 });
 </script>
+
 <style>
 .circle-prizes {
   text-align: center;

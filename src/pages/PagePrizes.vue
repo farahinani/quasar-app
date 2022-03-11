@@ -7,14 +7,17 @@
             <div class="text-h5 text-center text-bold text-primary">
               YOU HAVE WON
             </div>
+
             <br />
+
             <div class="circle-prizes">
-              <span class="prizes"></span>
-              <span class="prizes"></span>
-              <span class="prizes"></span>
-              <!-- <q-icon name="print" color="teal" size="6em" />
-              <q-icon name="today" class="text-orange" size="6em" />
-              <q-icon name="style" size="6em" /> -->
+              <div
+                v-for="prize in prizesArray"
+                :key="prize.prizesArray"
+                class="prizes"
+              >
+                <img :src="prize" />
+              </div>
             </div>
           </div>
           <div>
@@ -58,7 +61,8 @@
 
             <div class="button-submit">
               <q-btn
-                to="/home/shake-and-win/prizes/collect-prizes"
+                to="/collect-prizes"
+                v-on:click="postInventory()"
                 class="full-width text-h5 text-weight-bold"
                 label="Submit"
                 type="submit"
@@ -75,17 +79,81 @@
 
 <script>
 import { defineComponent } from "vue";
-import { useQuasar } from "quasar";
-import { ref } from "vue";
+import axios from "axios";
+import { date } from "quasar";
 
 export default defineComponent({
   name: "PagePrizes",
 
   data() {
     return {
-      // name: ref(""),
-      // receipt: ref(""),
+      serverResponse: null,
     };
+  },
+  computed: {
+    // a computed getter
+    prizesArray() {
+      let prizes = this.$root.prizesWon;
+      let prizeArray = [];
+
+      for (let i = 0; i < prizes.length; i++) {
+        if (prizes[i].quantity > 0) {
+          for (let e = 0; e < prizes[i].quantity; e++) {
+            prizeArray.push(prizes[i].image);
+          }
+        }
+      }
+
+      return prizeArray;
+    },
+
+    prizesArrayNames() {
+      let prizes = this.$root.prizesWon;
+      let prizeArray = [];
+
+      for (let i = 0; i < prizes.length; i++) {
+        if (prizes[i].quantity > 0) {
+          for (let e = 0; e < prizes[i].quantity; e++) {
+            prizeArray.push(prizes[i].type);
+          }
+        }
+      }
+      return prizeArray;
+    },
+  },
+
+  methods: {
+    postInventory() {
+      const timeStamp = Date.now();
+      const formattedTime = date.formatDate(
+        timeStamp,
+        "YYYY-MM-DDTHH:mm:ss.SSSZ"
+      );
+
+      let params = new URLSearchParams();
+
+      for (let i = 0; i < this.$root.inventory.length; i++) {
+        let item = this.$root.inventory[i].type;
+        let itemNew = item.concat("Num");
+        let quantity = this.$root.inventory[i].quantity;
+
+        params.append(itemNew, quantity);
+      }
+
+      params.append("timestamp", formattedTime);
+      params.append("name", this.$root.name);
+      params.append("receipt", this.$root.receipt);
+      params.append("prizes", JSON.stringify(this.prizesArrayNames));
+      params.append("packs", this.$root.cartonInput);
+
+      axios
+        .post("https://swapi.lightningpress.studio/postinventory.php", params)
+        .then((response) => (this.serverResponse = response))
+        .catch((error) => {
+          this.errorMessage = error.message;
+          console.error("There was an error!", error);
+        });
+    },
   },
 });
 </script>
@@ -94,6 +162,7 @@ export default defineComponent({
 .circle-prizes {
   text-align: center;
 }
+
 .prizes {
   background: white;
   border: 5px solid #fa911e;
@@ -102,5 +171,10 @@ export default defineComponent({
   height: 80px;
   display: inline-block;
   margin: 3px;
+  overflow: hidden;
+}
+
+.prizes img {
+  width: 100%;
 }
 </style>

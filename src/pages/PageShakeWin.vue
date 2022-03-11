@@ -2,7 +2,7 @@
   <q-page class="flex flex-center">
     <div class="q-pa-md row items-start q-gutter-md">
       <q-card class="my-card bg-transparent">
-        <q-card-section>
+        <q-card-section v-bind:class="{ dialogHide: this.$root.dialogOpen }">
           <div class="q-py-lg q-px-md">
             <div class="text-body1 text-center text-primary text-weight-bold">
               You have {{ this.$root.numTries }} tries
@@ -12,7 +12,6 @@
             </div>
             <br />
             <div class="text-h4 text-center text-primary">
-              <!-- <b>Try {{ trialNumber }}</b> -->
               <b>TRY {{ this.$root.triesCount }}</b>
             </div>
             <div class="text-h5 text-center text-primary">
@@ -50,21 +49,7 @@
             color="secondary"
             class="full-width"
             @click="shakeSuccess()"
-          /><br /><br />
-          <q-btn
-            type="submit"
-            fullwidth
-            label="Select prizes"
-            color="info"
-            class="full-width"
-            @click="selectPrizeRandom()"
           />
-          item you get:
-          <!-- <p>{{ this.itemType }}</p> -->
-          <br />
-          images:
-          <br />
-          <img v-if="$root.inventory" :src="this.itemType" />
         </q-card-section>
       </q-card>
     </div>
@@ -74,7 +59,9 @@
 <script>
 import { defineComponent } from "vue";
 import { useQuasar } from "quasar";
-import { event } from "quasar";
+import axios from "axios";
+import { date } from "quasar";
+
 import PageAutoClosePopup from "src/pages/PageAutoClosePopup.vue";
 
 var Shake = require("shake.js");
@@ -82,15 +69,12 @@ var Shake = require("shake.js");
 export default defineComponent({
   name: "PageShakeWin",
 
-  computed: {
-    // return this.$root.triesCount;
-  },
-
   data() {
-    // this.$root.inventory;
     return {
       alert: false,
       hide: true,
+      info: null,
+      itemTypeImage: "test",
     };
   },
 
@@ -99,7 +83,9 @@ export default defineComponent({
     const $q = useQuasar();
 
     function autoClosePopup() {
-      let seconds = 3;
+      this.$root.dialogOpen = true;
+
+      let seconds = 2;
 
       const dialog = $q
 
@@ -109,7 +95,7 @@ export default defineComponent({
           // message: `Autoclosing in ${seconds} seconds.`,
 
           componentProps: {
-            //text: "something",
+            text: this.itemTypeImage,
             // ...more..props...
           },
         })
@@ -122,6 +108,7 @@ export default defineComponent({
         .onDismiss(() => {
           clearTimeout(timer);
           // console.log('I am triggered on both OK and Cancel')
+          this.$root.dialogOpen = false;
         });
 
       const timer = setInterval(() => {
@@ -146,6 +133,8 @@ export default defineComponent({
   },
 
   mounted() {
+    this.getData();
+
     //DETECT USER PLATFORM
     const $q = useQuasar();
     $q.platform.is.desktop;
@@ -162,16 +151,42 @@ export default defineComponent({
   },
 
   methods: {
+    getData() {
+      axios
+        .get("https://swapi.lightningpress.studio/getinventory.php")
+        .then((response) => {
+          this.info = response;
+        })
+        .catch((error) => {
+          console.log(error);
+          this.errored = true;
+        })
+        .finally(() => {
+          this.loading = false;
+          this.parseData();
+        });
+    },
+    parseData() {
+      let str = this.info.data;
+      let rawData = str.split(" ", 4);
+
+      let inventoryData = [];
+
+      for (let i = 0; i < rawData.length; i++) {
+        let text = rawData[i];
+        let result = text.replace(/'/g, '"');
+        let a = JSON.parse(result);
+
+        inventoryData.push(a);
+
+        inventoryData[i].quantity = parseInt(inventoryData[i].quantity);
+      }
+
+      this.$root.inventory = inventoryData;
+    },
+
     //REQUEST PERMISSION FOR IOS TO LISTEN TO DEVICEMOTION
     requestPermission() {
-      // DeviceMotionEvent.requestPermission()
-      //   .then((response) => {
-      //     if (response == "granted") {
-      //       console.log(response);
-      //       this.shakeDetector();
-      //     }
-      //   })
-      //   .catch(console.error)
       if (typeof DeviceMotionEvent.requestPermission === "function") {
         DeviceMotionEvent.requestPermission()
           .then((permissionState) => {
@@ -201,6 +216,7 @@ export default defineComponent({
 
             // Display pop up
             this.autoClosePopup();
+
             // update tries count
             this.$root.triesCount++;
           } else {
@@ -208,10 +224,11 @@ export default defineComponent({
 
             // Display pop up (final)
             this.autoClosePopup();
+
             //after shake, go to next page in 3secs
             setTimeout(() => {
-              this.$router.push("/home/shake-and-win/prizes");
-            }, 5000);
+              this.$router.push("/prizes");
+            }, 3000);
 
             // stop listening for shake events
             window.removeEventListener("shake", () => {}, false);
@@ -242,34 +259,37 @@ export default defineComponent({
       let item = Math.floor(Math.random() * itemsAvaliable); //random calculation
       let itemType = this.$root.inventoryAvaliable[item].type;
 
-      console.log("you won ! id:" + item + " = " + itemType);
+      console.log(item, itemType);
+
+      this.itemTypeImage = this.$root.prizesWon[0].image;
 
       //reduce inventory
 
-      if (itemType == "Cooler Bag") {
+      if (itemType == "coolerBag") {
         this.$root.inventory[item].quantity--;
         this.$root.prizesWon[0].quantity++;
-      } else if (itemType == "Mason Jar") {
+        this.itemTypeImage = this.$root.prizesWon[0].image;
+      } else if (itemType == "masonJar") {
         this.$root.inventory[item].quantity--;
         this.$root.prizesWon[1].quantity++;
-      } else if (itemType == "Coin Pouch") {
+        this.itemTypeImage = this.$root.prizesWon[1].image;
+      } else if (itemType == "coinPouch") {
         this.$root.inventory[item].quantity--;
         this.$root.prizesWon[2].quantity++;
-      } else if (itemType == "Orange Juice") {
+        this.itemTypeImage = this.$root.prizesWon[2].image;
+      } else if (itemType == "orangeJuice") {
         this.$root.inventory[item].quantity--;
         this.$root.prizesWon[3].quantity++;
+        this.itemTypeImage = this.$root.prizesWon[3].image;
       } else {
         return;
       }
-      //display on HTML
-      this.itemType = this.$root.inventory[item].image;
     },
 
     //TEST BUTTON FOR SHAKE
     shakeSuccess() {
       if (this.$root.triesCount < this.$root.numTries) {
         this.selectPrizeRandom();
-
         this.autoClosePopup();
 
         console.log("shake : " + this.$root.triesCount);
@@ -283,8 +303,8 @@ export default defineComponent({
         console.log("final shake ! : " + this.$root.triesCount);
 
         setTimeout(() => {
-          this.$router.push("/home/shake-and-win/prizes");
-        }, 5000);
+          this.$router.push("/prizes");
+        }, 3500);
       }
     },
   },
@@ -300,6 +320,19 @@ export default defineComponent({
   display: block;
   margin-left: auto;
   margin-right: auto;
+}
+.q-dialog__inner--minimized {
+  padding: 0;
+}
+.q-dialog__backdrop {
+  background: none;
+}
+.q-card.q-dialog-plugin.bg-transparent {
+  height: 100vh;
+  max-height: 100vh !important;
+}
+.dialogHide {
+  display: none;
 }
 </style>
 

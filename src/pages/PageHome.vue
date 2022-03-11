@@ -28,7 +28,6 @@
 
               <div>
                 <q-btn
-                  to="/home/shake-and-win"
                   type="submit"
                   label="Submit"
                   color="secondary"
@@ -37,17 +36,7 @@
                   :disable="!this.$root.cartonInput"
                   @click="submitForm()"
                 /><br /><br />
-                <!-- <q-btn
-                  type="submit"
-                  fullwidth
-                  label="checkInventory"
-                  color="info"
-                  class="full-width"
-                  @click="checkInventory()"
-                /> -->
               </div>
-
-              <!-- <div>tries: {{ $root.numTries }}</div> -->
             </q-form>
           </div>
         </q-card-section>
@@ -64,9 +53,6 @@ export default defineComponent({
 
   data() {
     return {
-      // formData: {
-      //   cartonInput: "",
-      // },
       cartonInput: "",
       numTries: "",
     };
@@ -80,27 +66,13 @@ export default defineComponent({
 
       if (numTries < 1) {
         alert("please purchase at least 2 packs");
-      } else if (numTries >= 1) {
+      } else {
         let numTriesInt = Math.floor(numTries);
-        // alert("Number of Tries:" + " " + numTriesInt);
 
         this.$root.numTries = numTriesInt;
+        this.$router.push("/shake-and-win");
       }
-
-      //this.checkInventory();
     },
-
-    // checkInventory() {
-    //   this.$root.inventoryAvaliable = [];
-
-    //   for (let i = 0; i < this.$root.inventory.length; i++) {
-    //     let a = this.$root.inventory[i];
-    //     console.log(a);
-    //     if (a.quantity > 0) {
-    //       this.$root.inventoryAvaliable.push(a);
-    //     }
-    //   }
-    // },
   },
 });
 </script>
